@@ -1,0 +1,12 @@
+Descrizione dei temi che abbiamo finora
+
+### Ricettario di drinks:
+L'utente può inserire una lista di ingredienti che ha a disposizione (vodka, ghiaccio, tequila...) e ottenere così una lista di drink che può prepararsi. Ogni drink ha un nome, una presentazione, una lista di ingredienti e la preparazione. Il sito funziona anche da semplice ricettario, senza che si debbano inserire gli ingredienti a disposizione ma semplicemente navigando tra i vari drink.
+
+### Negozio di virus & malware
+Negozio del deep web che vende virus e altro malware a pirati. L'utente è un pirata che cerca tra le varie categorie (worms, ransomware, trojan, keyloggers...) e seleziona il virus che più gli aggrada, basandosi sulle informazioni del virus: nome, autore, categoria, qualità, prezzo... [bisogna pensare a come verrà fatto l'acquisto]
+
+### Wiki di un videogioco
+[...]
+
+### [altro]
