@@ -118,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `Band` (
   `Nome` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idBand`))
 ENGINE = InnoDB
-COMMENT = 'Tabella dati generici di una band\n';
+COMMENT = 'Tabella dati generici di una band';
 
 
 -- -----------------------------------------------------
@@ -129,7 +129,7 @@ DROP TABLE IF EXISTS `UtenteMembroBand` ;
 CREATE TABLE IF NOT EXISTS `UtenteMembroBand` (
   `idUtente` INT UNSIGNED NOT NULL,
   `idBand` INT UNSIGNED NOT NULL,
-  `StrumentoSuonato` VARCHAR(45) NULL,
+  `StrumentoSuonato` VARCHAR(45),
   PRIMARY KEY (`idUtente`, `idBand`),
   INDEX `fk_idBand_idx` (`idBand` ASC),
   INDEX `fk_Ruolo_idx` (`StrumentoSuonato` ASC),
