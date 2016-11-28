@@ -18,3 +18,22 @@
 .content {
     padding: 1em;
 }
+
+label {
+    text-align: right;
+    clear: both;
+    float: left;
+    margin-right: 15px;
+}
+
+input {
+    float: left;
+}
+
+select {
+    float: left;
+}
+
+textarea {
+    float: left;
+}
