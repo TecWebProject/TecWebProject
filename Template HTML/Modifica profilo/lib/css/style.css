@@ -1,0 +1,20 @@
+.header {
+    height: 2.5em;
+}
+
+.nav {
+    display: none;
+}
+
+.content #modFotoProfilo {
+    height: 5em;
+    width: 5em;
+}
+
+.content #modFotoProfilo img {
+    width: 100%;
+}
+
+.content {
+    padding: 1em;
+}
