@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it">
+
+<head>
+    <!-- TODO: correggere head per il sito corretto -->
+    <!-- Specifico il charset -->
+    <meta http-equiv="Content-Type" content="txt/html" ; charset="utf-8">
+    <!-- Titolo -->
+    <!-- TODO: IMPOSTARE I NOMI CON PHP-->
+    <title>Modifica profilo - NOME SITO</title>
+    <!-- Titolo esteso dentro un meta -->
+    <!-- TODO: IMPOSTARE I NOMI CON PHP-->
+    <meta name="title" content="Modifica del profilo utente - NOME SITO" />
+    <!-- Descrizione del sito -->
+    <!-- TODO: INSERIRE DESCRIZIONE DELLA PAGINA-->
+    <meta name="description" content="DESCRIZIONE" />
+    <!-- Keyword principali del sito -->
+    <!-- TODO: INSERIRE KEYWORD ADATTE-->
+    <meta name="keywords" content="modifica, profilo, aggiornamento, NOME_SITO" />
+    <!-- Icona del bookmark -->
+    <!-- TODO: IMPOSTARE LINK ICONA-->
+    <link rel="shortcut icon" href="images/icon.ico" />
+    <!--miniReset-->
+    <link rel="stylesheet" href="../lib/css/minireset.min.css" />
+    <!-- link al CSS -->
+    <link rel="stylesheet" href="../lib/css/style.css" /> </head>
+
+<body>
+    <div class="header">Header standard</div>
+    <div class="breadcrump">Modifica il tuo profilo</div>
+    <div class="nav">
+        <ul>
+            <li>Home</li>
+            <li>Cerca utenti</li>
+            <li>Cerca gruppi</li>
+            <!--<li>Modifica profilo</li>-->
+            <li>Le tue band</li>
+        </ul>
+    </div>
+    <div class="content">
+        <div id="modFotoProfilo">
+            <!--TODO: Usare div con background image--><img src="../images/fotoProfilo.jpg"></div>
+        <div>
+            <form action="processer.php" method="post">
+                <label for="modUsername">Username</label>
+                <input id="modUsername" placeholder="username" />
+                <label for="modEmail">Email</label>
+                <input id="modEmail" type="email" placeholder="email" />
+                <label for="modDataNascita">Data di nascita</label>
+                <input id="modDataNascita" type="date" />
+                <label for="modTextAreaBio"> Bio</label>
+                <textarea id="modTextAreaBio" cols="40" rows="4" placeholder="Scrivi una breve descrizione di te..."></textarea>
+                <input type="submit" value="Salva"> </form>
+        </div>
+    </div>
+    <div class="footer "></div>
+</body>
+
+</html>
