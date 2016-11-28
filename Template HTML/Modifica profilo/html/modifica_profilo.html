@@ -43,15 +43,67 @@
             <!--TODO: Usare div con background image--><img src="../images/fotoProfilo.jpg"></div>
         <div>
             <form action="processer.php" method="post">
-                <label for="modUsername">Username</label>
-                <input id="modUsername" placeholder="username" />
-                <label for="modEmail">Email</label>
-                <input id="modEmail" type="email" placeholder="email" />
-                <label for="modDataNascita">Data di nascita</label>
-                <input id="modDataNascita" type="date" />
-                <label for="modTextAreaBio"> Bio</label>
-                <textarea id="modTextAreaBio" cols="40" rows="4" placeholder="Scrivi una breve descrizione di te..."></textarea>
-                <input type="submit" value="Salva"> </form>
+                <fieldset>
+                    <legend>Dati obbligatori</legend>
+                    <label for="modUsername">Username</label>
+                    <input id="modUsername" placeholder="username" />
+                    <label for="modEmail">Email</label>
+                    <input id="modEmail" type="email" placeholder="email" />
+                    <label for="modDataNascita">Data di nascita</label>
+                    <input id="modDataNascita" type="date" /> </fieldset>
+                <fieldset>
+                    <legend>Dati informativi</legend>
+                    <label for="modSelectRegione">Seleziona regione</label>
+                    <select id="modSelectRegione">
+                        <option value="VALORE">Valore selezionato</option>
+                    </select>
+                    <label for="modSelectProvincia">Seleziona regione</label>
+                    <select id="modSelectProvincia">
+                        <option value="VALORE">Valore selezionato</option>
+                    </select>
+                    <label for="modTextAreaBio"> Bio</label>
+                    <textarea id="modTextAreaBio" cols="40" rows="4" placeholder="Scrivi una breve descrizione di te..."></textarea>
+                </fieldset>
+                <fieldset>
+                    <legend>Contatti</legend>
+                    <input type="button" value="Aggiungi campo" />
+                    <label for="contatto1tipo">Tipo contatto</label>
+                    <select id="contatto1tipo">
+                        <option>Telefono (cellulare)</option>
+                        <option>Telefono (casa)</option>
+                        <option>Facebook</option>
+                        <option>Telegram</option>
+                        <option>Skype</option>
+                    </select>
+                    <label for="contatto2campo">Valore</label>
+                    <input id="contatto2campo" />
+                    <label for="contatto2tipo">Tipo contatto</label>
+                    <select id="contatto2tipo">
+                        <option>Telefono (cellulare)</option>
+                        <option>Telefono (casa)</option>
+                        <option>Facebook</option>
+                        <option>Telegram</option>
+                        <option>Skype</option>
+                    </select>
+                    <label for="contatto1campo">Valore</label>
+                    <input id="contatto1campo" /> </fieldset>
+                <fieldset>
+                    <legend>Generi preferiti</legend>
+                    <label for="genereRock"> Rock </label>
+                    <input id="genereRock" type="checkbox" />
+                    <label for="generePop"> Pop </label>
+                    <input id="generePop" type="checkbox" />
+                    <label for="genereAcustica"> Acustica </label>
+                    <input id="genereAcustica" type="checkbox" />
+                    <label for="genereBluse"> Blues </label>
+                    <input id="genereBluse" type="checkbox" />
+                    <label for="genereMetal"> Metal </label>
+                    <input id="genereMetal" type="checkbox" />
+                    <label for="generePunk"> Punk </label>
+                    <input id="generePunk" type="checkbox" />
+                    <!-- La lista può essere estesa dinamicamente -->
+                </fieldset>
+                <input type="submit" value="Salva modifiche" /> </form>
         </div>
     </div>
     <div class="footer "></div>
