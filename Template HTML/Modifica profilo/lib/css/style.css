@@ -1,9 +1,25 @@
-.header {
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+li .header {
     height: 2.5em;
+    background: rgb(250, 150, 0);
+    text-align: center;
+    padding: 0.5em;
+    margin: 0.5em;
+    margin-bottom: 1em;
+    box-shadow: 0em 1em 1em #999;
 }
 
 .nav {
-    display: none;
+    display: inline-block;
+}
+
+.nav>* {
+    display: inline-block;
 }
 
 .content #modFotoProfilo {
