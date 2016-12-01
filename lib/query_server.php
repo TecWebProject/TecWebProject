@@ -7,7 +7,7 @@
 /* FUNZIONE DI PROVA PER ESEMPIO*/
 TEST();
 function TEST(){
-   $query = 'SHOW TABLES';
+   $query = 'SELECT * FROM Regione';
    $connectionData = new dbConnectionData(
       array('hostname' => 'localhost',
       'username' => 'root',
@@ -25,12 +25,19 @@ function getResults($query, $connectionData, $resulttype = MYSQLI_ASSOC)
    $data = $connectionData->getData();
    /* Istantiate mysqli object using connection data */
    $mysqli = new mysqli($data['hostname'], $data['username'], $data['password'], $data['dbName'], $data['port']);
-   /*TODO Check for errors*/
+   /* Check for errors*/
+   if($mysqli->connect_errno){
+      printf("<p>Connection error: (%u) %s</p>",$mysqli->connect_errno,$mysqli->connect_error);
+   }
    /* Escape query */
    $escapedQuery = $mysqli->escape_string($query);
    /* Query server */
    $res = $mysqli->query($escapedQuery);
-   /* TODO Check for errors */
+   /* Check for errors */
+   if($mysqli->error){
+      printf("<p>Error: %s</p>",$mysqli->error);
+      return null;
+   }
    /* Fetch results */
    $result = $res->fetch_all(MYSQLI_ASSOC);
    /* Free resources and close the connection */
