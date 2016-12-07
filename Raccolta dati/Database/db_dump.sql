@@ -160,8 +160,8 @@ CREATE TABLE IF NOT EXISTS `ContattoUtente` (
   CONSTRAINT `fk_idUtente_ContattoUtente`
     FOREIGN KEY (`Username`)
     REFERENCES `Utente` (`Username`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE NO ACTION -- CASCADE?
+    ON UPDATE NO ACTION, -- CASCADE?
   CONSTRAINT `fk_tipoContatto_ContattoUtente`
     FOREIGN KEY (`TipoContatto`)
     REFERENCES `TipoContatto` (`Nome`)
@@ -197,12 +197,12 @@ CREATE TABLE IF NOT EXISTS `GenereBand` (
   CONSTRAINT `fk_Genere_GenereBand`
     FOREIGN KEY (`Genere`)
     REFERENCES `GenereMusicale` (`Nome`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE NO ACTION -- CASCADE?
+    ON UPDATE NO ACTION, -- CASCADE?
   CONSTRAINT `fk_idBand_GenereBand`
     FOREIGN KEY (`idBand`)
     REFERENCES `Band` (`idBand`)
-    ON DELETE NO ACTION
+    ON DELETE NO ACTION -- CASCADE?
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
@@ -221,12 +221,12 @@ CREATE TABLE IF NOT EXISTS `GenereUtente` (
   CONSTRAINT `fk_Genere_GenereUtente`
     FOREIGN KEY (`Genere`)
     REFERENCES `GenereMusicale` (`Nome`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE NO ACTION -- CASCADE?
+    ON UPDATE NO ACTION, -- CASCADE?
   CONSTRAINT `fk_usernameUtente_GenereUtente`
     FOREIGN KEY (`UsernameUtente`)
     REFERENCES `Utente` (`Username`)
-    ON DELETE NO ACTION
+    ON DELETE NO ACTION -- CASCADE?
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
@@ -289,7 +289,7 @@ CREATE TABLE IF NOT EXISTS `RichiestaPartecipazione` (
   CONSTRAINT `fk_usernameUtente_RichiestaPartecipazione`
     FOREIGN KEY (`usernameUtente`)
     REFERENCES `Utente` (`Username`)
-    ON DELETE NO ACTION
+    ON DELETE NO ACTION -- così un utente non può eliminare il proprio profilo (?)
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
@@ -320,7 +320,7 @@ CREATE TABLE IF NOT EXISTS `UtenteMembroBand` (
   CONSTRAINT `fk_usernameUtente_UtenteMembroBand`
     FOREIGN KEY (`UsernameUtente`)
     REFERENCES `Utente` (`Username`)
-    ON DELETE NO ACTION
+    ON DELETE NO ACTION -- così un utente non può eliminare il proprio profilo (?)
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
