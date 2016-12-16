@@ -5,7 +5,7 @@
 /*TODO: get query from POST*/
 
 /* FUNZIONE DI PROVA PER ESEMPIO*/
-TEST();
+//TEST();
 function TEST()
 {
     $query = 'SELECT * FROM Regione';
