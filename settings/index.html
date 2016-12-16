@@ -24,7 +24,30 @@
     <!--miniReset-->
     <!--    <link rel="stylesheet" href="../lib/css/minireset.min.css" />-->
     <!-- link al CSS -->
-    <link rel="stylesheet" href="../lib/css/style.css" /> </head>
+    <link rel="stylesheet" href="../lib/css/style.css" /> 
+
+    <script>
+        
+        
+        
+        function showProvince (str) {
+            if(str = ""){
+                document.getElementById("modSelectProvincia").innerHTML = '<option value="VALORE">Seleziona prima la regione</option>'
+            } else {
+                // IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+                xmlhttp .onreadystatechange = function(){
+                    if(this.readyState == 4 && this.status == 200){
+                        document.getElementById("modSelectProvincia").innerHTML =  this.responseText;
+                    }
+                };
+                xmlhttp.open("GET","/lib/php/select_provincia.php?q="+str,true);
+                xmlhttp.send();
+            }
+        }
+    </script>
+    
+</head>
 
 <body>
     <div class="header">Header standard</div>
