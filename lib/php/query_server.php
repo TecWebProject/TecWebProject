@@ -6,43 +6,44 @@
 
 /* FUNZIONE DI PROVA PER ESEMPIO*/
 TEST();
-function TEST(){
-   $query = 'SELECT * FROM Regione';
-   $connectionData = new dbConnectionData(
+function TEST()
+{
+    $query = 'SELECT * FROM Regione';
+    $connectionData = new dbConnectionData(
       array('hostname' => 'localhost',
       'username' => 'root',
       'password' => 'temp_pwd',
       'dbName' => 'database_artisti',
       'port' => 3360, )
    );
-   var_dump(getResults($query, $connectionData));
+    var_dump(getResults($query, $connectionData));
 }
 
 /* FUNZIONE DI RICERCA */
 function getResults($query, $connectionData, $resulttype = MYSQLI_ASSOC)
 {
-   /* Recover connection data */
+    /* Recover connection data */
    $data = $connectionData->getData();
    /* Istantiate mysqli object using connection data */
    $mysqli = new mysqli($data['hostname'], $data['username'], $data['password'], $data['dbName'], $data['port']);
    /* Check for errors*/
-   if($mysqli->connect_errno){
-      printf("<p>Connection error: (%u) %s</p>",$mysqli->connect_errno,$mysqli->connect_error);
+   if ($mysqli->connect_errno) {
+       printf("<p>Connection error: (%u) %s</p>", $mysqli->connect_errno, $mysqli->connect_error);
    }
    /* Escape query */
-   $escapedQuery = $mysqli->escape_string($query);
+   $escapedQuery = $mysqli->real_escape_string($query);
    /* Query server */
    $res = $mysqli->query($escapedQuery);
    /* Check for errors */
-   if($mysqli->error){
-      printf("<p>Error: %s</p>",$mysqli->error);
-      return null;
+   if ($mysqli->error) {
+       printf("<p>Error: %s</p>", $mysqli->error);
+       return null;
    }
    /* Fetch results */
    $result = $res->fetch_all(MYSQLI_ASSOC);
    /* Free resources and close the connection */
    $res->free();
-   $mysqli->close();
+    $mysqli->close();
    /* Return the results*/
    return $result;
 }
