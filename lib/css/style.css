@@ -1,0 +1,64 @@
+/*RESET*/
+
+html, body, h1, h2, h3, h4, h5, h6, p {
+    padding: 0;
+    margin: 0;
+}
+
+#menu_check {
+    position: absolute;
+    top: 0;
+    right: 0;
+/*    display: none;*/
+}
+
+#menu_button, .nav {
+    position: fixed;
+    /*    left: -100%;*/
+}
+
+#menu_check:checked+.nav {
+    background: #666;
+}
+
+.nav {
+    /*TODO modificare max-width in caso di testo più lungo*/
+    list-style: none;
+    background: #555;
+    max-width: 80%;
+    width: 12em;
+    
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+}
+
+label[for="menu_check"] {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 2;
+    
+}
+
+#menu_check:checked + label {
+    left: 215px;
+}
+
+#menu_check:checked ~ .content {
+    left: 215px;
+}
+
+.content{
+    min-width: 100%;
+    min-height: 100%;
+    background: #fff;
+    position: relative;
+    top: 0;
+    bottom: 100%;
+    left: 0;
+    z-index: 1;
+}
