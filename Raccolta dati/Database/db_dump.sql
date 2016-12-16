@@ -223,7 +223,7 @@ CREATE TABLE IF NOT EXISTS Formazione (
 					ON UPDATE NO ACTION,
 	Ruolo			VARCHAR(45) NOT NULL COMMENT 'Ruolo all\'interno del gruppo'
 					REFERENCES Conoscenza (idConoscenza)
-					ON DELETE NO CASCADE
+					ON DELETE CASCADE
 					ON UPDATE NO ACTION,
 	PRIMARY KEY (idGruppo, Ruolo)
 )
