@@ -3,7 +3,7 @@
 
    $relPath = realpath(dirname(__FILE__));
 
-   require_once($relPath . '/mysqliConnection.php');
+   require_once($relPath . '/query_server.php');
 
    /*
       Restituisce le province della regione data,
@@ -13,42 +13,28 @@
    */
    function getProvince($regione = null)
    {
-       $query = "SELECT Nome FROM Provincia WHERE Regione = ";
-
-       $mysqli = new mysqli("localhost", "root", "root", "database_artisti");
+       $query = "SELECT Nome FROM Provincia";
 
        if (!is_null($regione)) {
            $regione = substr(strtoupper($regione), 0, 3);
 
-           //TODO debug
-           echo "$regione\n";
-
-           $where = $regione;
+           $where = " WHERE Regione = " . $regione;
        } else {
-           $where = "*";
+           $where = "";
        }
 
        $query = $query . $where;
+       $connection = new dbConnectionData(array('localhost', 'root', 'root', 'database_artisti'));
+       $queryResults = getResults($query, $connection);
 
-       if (!$result = $mysqli->query($query)) {
-           // Oh no! The query failed.
-          echo "Sorry, the website is experiencing problems.";
+       $results = array_fill(0, count($queryResults), "");
 
-          // Again, do not do this on a public site, but we'll show you how
-          // to get the error information
-          echo "Error: Our query failed to execute and here is why: \n";
-           echo "Query: " . $sql . "\n";
-           echo "Errno: " . $mysqli->errno . "\n";
-           echo "Error: " . $mysqli->error . "\n";
-           exit;
+       for ($i=0; $i < count($queryResults); ++$i) {
+           $results[$i] = $queryResults[$i]['Nome'];
        }
 
-       $result =
-
-           //TODO debug
-           var_dump($result);
-
-       $stmt->close();
+       return $results;
    }
 
-   getProvince($_GET['q']);
+
+   var_dump(getProvince(isset($_GET['q'])?$_GET['q']:null));
