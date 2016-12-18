@@ -5,36 +5,44 @@
 
    require_once($relPath . '/query_server.php');
 
-   /*
-      Restituisce le province della regione data,
-      se la regione è null restituisce tutte le province,
-      la regione va inserita usando solo i primi 3 caratteri e
-      in maiuscolo ES: VEN per Veneto
+   /**
+   *
    */
-   function getProvince($regione = null)
+   class SelectProvincia
    {
-       $query = "SELECT Nome FROM Provincia";
+       //TODO sostituire con oggetto dalla nuova libreria
+      private static $_mysqli;
 
-       if (!is_null($regione)) {
-           $regione = substr(strtoupper($regione), 0, 3);
+      /*
+         DESC: Ritorna un array con i nomi delle province legate alla regione in input.
+         INPUT: Nome della regione abbreviato a 3 caratteri e in maiuscolo
+         OUTPUT: Array di stringhe ordinato alfabeticamente;
+      */
+       public static function getProvince($regione)
+       {
+           $result = null;
 
-           $where = " WHERE Regione = " . $regione;
-       } else {
-           $where = "";
+           if (SelectProvincia::$_mysqli == null) {
+               $_mysqli = new mysqli('localhost', 'root', 'root', 'database_artisti');
+           }
+
+           //Escape dell'input
+           $abbRegione = preg_replace('/[^A-Z]+/', "", strtoupper(substr($regione, 0, 3)));
+
+           //Check lunghezza stringa
+           if (strlen($abbRegione) != 3) {
+               //TODO finire
+               throw new LogicException([$message, $code, $previous]);
+           }
+
+
+
+           //TODO debug
+           var_dump($abbRegione);
+
+
+           return $result;
        }
-
-       $query = $query . $where;
-       $connection = new dbConnectionData(array('localhost', 'root', 'root', 'database_artisti'));
-       $queryResults = getResults($query, $connection);
-
-       $results = array_fill(0, count($queryResults), "");
-
-       for ($i=0; $i < count($queryResults); ++$i) {
-           $results[$i] = $queryResults[$i]['Nome'];
-       }
-
-       return $results;
    }
 
-
-   var_dump(getProvince(isset($_GET['q'])?$_GET['q']:null));
+   var_dump(SelectProvincia::getProvince("ve3"));
