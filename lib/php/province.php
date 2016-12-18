@@ -7,15 +7,13 @@
    /**
    *  Classe per la richiesta delle province di una regione
    *  Usare il metodo statico getProvince
-   *  INPUT: stringa contentente le prime tre lettere del nome della regione in maiuscolo.
    *  OUTPUT: Array associativo delle province di tale regione
    */
    class Province
    {
        /*
-         DESC: Ritorna un array con i nomi delle province legate alla regione in input.
-         INPUT: Nome della regione abbreviato a 3 caratteri e in maiuscolo
-         OUTPUT: Array di stringhe ordinato alfabeticamente;
+         DESC: Ritorna un array con i nomi delle province
+         OUTPUT: Array associativo ordinato alfabeticamente;
       */
        public static function getProvince()
        {
