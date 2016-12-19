@@ -1,3 +1,8 @@
+<?php
+require_once(realpath(dirname(__FILE__)) . '/../lib/php/select_provincia.php');
+require_once(realpath(dirname(__FILE__)) . '/../lib/php/regioni.php');
+require_once(realpath(dirname(__FILE__)) . '/../lib/php/province.php');
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it">
@@ -83,15 +88,27 @@
                             <label for="modLoadImage">Carica immagine profilo</label><input type="file" title="Carica immagine">
                         </li>
                         <li>
-                            <label for="modSelectRegione">Seleziona regione</label>
+                            <label for="modSelectRegione">Regione di provenienza</label>
                             <select id="modSelectRegione">
-                                <option value="VALORE">Valore selezionato</option>
+                               <option value="NULL">Seleziona regione</option>
+                                <?php
+                                $regioni = Regioni::getRegioni();
+                                foreach ($regioni as $key => $regione) {
+                                    printf("<option value='%s'>%s</option>", $regione['AbbNome'], $regione['Nome']);
+                                }
+                                ?>
                             </select>
                         </li>
                         <li>
                             <label for="modSelectProvincia">Seleziona provincia</label>
                             <select id="modSelectProvincia">
-                                <option value="VALORE">Valore selezionato</option>
+                               <option value="NULL">Seleziona provincia</option>
+                               <?php
+                               $province = Province::getProvince();
+                               foreach ($province as $key => $provincia) {
+                                   printf("<option value='%s'>%s</option>", $provincia['Sigla'], $provincia['Nome']);
+                               }
+                               ?>
                             </select>
                         </li>
                         <li>
