@@ -24,34 +24,34 @@
     <!--miniReset-->
     <!--    <link rel="stylesheet" href="../lib/css/minireset.min.css" />-->
     <!-- link al CSS -->
-    <link rel="stylesheet" href="../lib/css/style.css" /> 
+    <link rel="stylesheet" href="../lib/css/style.css" />
 
     <script>
-        
-        
-        
-        function showProvince (str) {
-            if(str = ""){
+        function showProvince(str) {
+            if (str = "") {
                 document.getElementById("modSelectProvincia").innerHTML = '<option value="VALORE">Seleziona prima la regione</option>'
             } else {
                 // IE7+, Firefox, Chrome, Opera, Safari
                 xmlhttp = new XMLHttpRequest();
-                xmlhttp .onreadystatechange = function(){
-                    if(this.readyState == 4 && this.status == 200){
-                        document.getElementById("modSelectProvincia").innerHTML =  this.responseText;
+                xmlhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("modSelectProvincia").innerHTML = this.responseText;
                     }
                 };
-                xmlhttp.open("GET","/lib/php/select_provincia.php?q="+str,true);
+                xmlhttp.open("GET", "/lib/php/select_provincia.php?q=" + str, true);
                 xmlhttp.send();
             }
         }
     </script>
-    
+
 </head>
+
+<!-- TODO sostituire head con quella autogenerata -->
 
 <body>
     <div class="header">Header standard</div>
     <div class="breadcrump">Modifica il tuo profilo</div>
+    <!-- TODO sostituire menu con quello autogenerato -->
     <div class="nav">
         <ul>
             <li><a href="../index.html">Home</a></li>
@@ -70,20 +70,18 @@
             <form action="processer.php" method="post">
                 <fieldset>
                     <legend>Dati obbligatori</legend>
-                    <label for="modUsername">Username</label>
-                    <input id="modUsername" placeholder="username" />
-                    <label for="modEmail">Email</label>
-                    <input id="modEmail" type="email" placeholder="email" />
-                    <label for="modDataNascita">Data di nascita</label>
-                    <input id="modDataNascita" type="date" /> </fieldset>
+                    <ul>
+                        <li><label for="modUsername">Username</label><input id="modUsername" placeholder="username" /></li>
+                        <li><label for="modEmail">Email</label><input id="modEmail" type="email" placeholder="email" /></li>
+                        <li><label for="modDataNascita">Data di nascita</label><input id="modDataNascita" type="date" /></li>
+                    </ul>
+                </fieldset>
                 <fieldset>
                     <legend>Dati informativi</legend>
                     <ul>
                         <li>
-                            <label for="modLoadImage">Carica immagine profilo</label>
-                            <input type="file" title="Carica immagine">
+                            <label for="modLoadImage">Carica immagine profilo</label><input type="file" title="Carica immagine">
                         </li>
-
                         <li>
                             <label for="modSelectRegione">Seleziona regione</label>
                             <select id="modSelectRegione">
@@ -97,8 +95,7 @@
                             </select>
                         </li>
                         <li>
-                            <label for="modTextAreaBio"> Bio</label>
-                            <textarea id="modTextAreaBio" cols="40" rows="4" placeholder="Scrivi una breve descrizione di te..."></textarea>
+                            <label for="modTextAreaBio"> Bio</label><textarea id="modTextAreaBio" cols="40" rows="4" placeholder="Scrivi una breve descrizione di te..."></textarea>
                         </li>
                     </ul>
                 </fieldset>
