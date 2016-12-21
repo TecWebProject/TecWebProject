@@ -391,6 +391,9 @@ INSERT INTO Provincie (nome, sigla, regione) VALUES
 ('Verona', 'VR', 'Veneto'),
 ('Vicenza', 'VI', 'Veneto');
 
+
+
+# GENERIMUSICALI
 INSERT INTO GeneriMusicali (nome) VALUES
 ('Rock'),
 ('Pop'),
@@ -421,6 +424,9 @@ INSERT INTO GeneriMusicali (nome) VALUES
 ('Psychedelic'),
 ('Britpop');
 
+
+
+# TIPICONTATTI
 INSERT INTO TipiContatti VALUES
 ('email'),
 ('whatsapp'),
