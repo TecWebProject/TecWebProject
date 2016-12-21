@@ -1,64 +1,62 @@
-/*RESET*/
-
-html, body, h1, h2, h3, h4, h5, h6, p {
-    padding: 0;
-    margin: 0;
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
 }
 
 #menu_check {
-    position: absolute;
-    top: 0;
-    right: 0;
-/*    display: none;*/
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: none;
 }
 
-#menu_button, .nav {
-    position: fixed;
-    /*    left: -100%;*/
+#menu_check:checked + div {
+  left: 0;
 }
 
-#menu_check:checked+.nav {
-    background: #666;
+#menu_check:checked + div > label {
+  left: 10em;
+}
+
+#menu_button {
+  color: #666;
+  position: fixed;
+  left: 0;
+  margin: 1em 0 0 1em;
+}
+
+#menu_button a {
+  font-size: 150%;
 }
 
 .nav {
-    /*TODO modificare max-width in caso di testo più lungo*/
-    list-style: none;
-    background: #555;
-    max-width: 80%;
-    width: 12em;
-    
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 0;
+  font-family: "Ubuntu",sans-serif;
+  background: #333;
+  position: fixed;
+  right: 100%;
+  width: 10em;
+  height: 100%;
+  -webkit-transition: width 2s;
+  transition: width 2s;
 }
 
-label[for="menu_check"] {
-    position: fixed;
-    top: 15px;
-    left: 15px;
-    z-index: 2;
-    
+.nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-#menu_check:checked + label {
-    left: 215px;
+.nav ul li {
+  margin: 1em;
 }
 
-#menu_check:checked ~ .content {
-    left: 215px;
+.nav ul a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
 }
 
-.content{
-    min-width: 100%;
-    min-height: 100%;
-    background: #fff;
-    position: relative;
-    top: 0;
-    bottom: 100%;
-    left: 0;
-    z-index: 1;
+.nav ul a:hover {
+  color: white;
 }
