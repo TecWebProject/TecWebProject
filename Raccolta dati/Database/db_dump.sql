@@ -184,12 +184,13 @@ COMMENT = 'Conoscenza di uno strumento musicale da parte di un utente';
 # Annuncio
 DROP TABLE IF EXISTS Annuncio;
 CREATE TABLE IF NOT EXISTS Annuncio (
-	idGruppo		INT(10) UNSIGNED PRIMARY KEY REFERENCES Gruppo (idGruppo)
+	idGruppo		INT(10) UNSIGNED REFERENCES Gruppo (idGruppo)
 					ON DELETE NO ACTION
 					ON UPDATE NO ACTION,
-	RuoloRichiesto	VARCHAR(45) NOT NULL REFERENCES Strumento (Nome)
+	RuoloRichiesto	VARCHAR(45) REFERENCES Strumento (Nome)
 					ON DELETE CASCADE
-					ON UPDATE CASCADE
+					ON UPDATE CASCADE,
+	PRIMARY KEY (idGruppo, RuoloRichiesto)
 )
 ENGINE = InnoDB
 COMMENT = 'Annunci dei gruppi che hanno bisogno di un particolare strumento';
@@ -377,10 +378,10 @@ INSERT INTO Gruppo (idGruppo, Nome, Provincia, Immagine, DataIscrizione) VALUES
 (NULL, 'Passive Attack', 'GR', NULL, '2004-09-30'),
 (NULL, 'Perl Jam', 'PD', NULL, '2012-03-21'),
 (NULL, 'Radiobread', 'GR', NULL, '2012-06-24'),
-(NULL, 'Foxy Music', 'BR', NULL, '2016-12-17');
+(NULL, 'Proxy Music', 'BR', NULL, '2016-12-17');
 
 INSERT INTO TipoContatto VALUES
-('email'),
+('email_pubblica'), # diversa dal campo Email di Utente (che è privato)
 ('whatsapp'),
 ('telegram'),
 ('youtube'),
@@ -400,6 +401,7 @@ INSERT INTO Utente (Username, Email, DataNascita, Provincia, DataIscrizione, Imm
 ('McPaul42', 'paulmcc@theleatles.lsd', '1942-06-18', 'PD', '2001-02-18', NULL, SHA1('user')),
 ('SuperPippo', 'super.pippo@example.com', '1992-12-21', 'PD', '2014-10-31', NULL, SHA1('user')),
 ('giorgio', 'giorgio.giuffre@studenti.unipd.it', '1994-02-23', 'PD', '2016-12-19', NULL, SHA1('user')),
+('rob_wyatt', 'robert@softmachine.org', '1945-01-28', 'LU', '1997-10-08', NULL, SHA1('user')),
 ('millenium_bug', 'milbug@ctime.org', '1970-01-01', 'AG', '1999-12-31', NULL, SHA1('user')),
 ('ennesimo', 'ennesimo.utente@popolamento.db', '1995-12-02', 'EN', '2012-04-04', NULL, SHA1('user'));
 
@@ -464,14 +466,40 @@ INSERT INTO Strumento (Nome) VALUES
 ('Tromba'),
 ('Computer');
 
-INSERT INTO Conoscenza (Utente, Strumento) VALUES
-('miles26', 'Tromba'),
-('millenium_bug', 'Computer'),
-('ennesimo', 'Chitarra Elettrica'),
-('ennesimo', 'Organo'),
-('giorgio', 'Pianoforte'),
-('ennesimo', 'Batteria'),
-('McPaul42', 'Chitarra Acustica'),
-('McPaul42', 'Chitarra Elettrica');
+INSERT INTO Conoscenza (idConoscenza, Utente, Strumento) VALUES
+(NULL, 'miles26', 'Tromba'),
+(NULL, 'millenium_bug', 'Computer'),
+(NULL, 'ennesimo', 'Chitarra Elettrica'),
+(NULL, 'ennesimo', 'Organo'),
+(NULL, 'giorgio', 'Pianoforte'),
+(NULL, 'ennesimo', 'Batteria'),
+(NULL, 'rob_wyatt', 'Batteria'),
+(NULL, 'rob_wyatt', 'Voce'),
+(NULL, 'McPaul42', 'Chitarra Acustica'),
+(NULL, 'McPaul42', 'Chitarra Elettrica');
 
-# TODO: riempire Annuncio, RichiestaPartecipazione e Formazione
+INSERT INTO Annuncio (idGruppo, RuoloRichiesto) VALUES
+(1, 'Organo'),
+(4, 'Chitarra Elettrica'),
+(2, 'Sassofono'),
+(4, 'Voce'),
+(7, 'Computer');
+
+INSERT INTO RichiestaPartecipazione (Utente, idGruppo, RichiestaDaGruppo) VALUES
+('ennesimo', 2, 0),
+('miles26', 3, 1),
+('giorgio', 7, 0);
+
+INSERT INTO Formazione (idGruppo, Ruolo) VALUES
+(1, 9),
+(1, 10),
+(2, 3),
+(3, 4),
+(4, 4),
+(4, 3),
+(5, 8),
+(6, 7),
+(7, 10),
+(8, 9),
+(9, 3),
+(10, 8);
