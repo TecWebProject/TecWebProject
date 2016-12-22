@@ -44,6 +44,7 @@ class Menu
     <!-- Descrizione del sito -->
     <!-- TODO: INSERIRE DESCRIZIONE DELLA PAGINA-->
     <meta name="description" content="DESCRIZIONE" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Keyword principali del sito -->
     <!-- TODO: INSERIRE KEYWORD ADATTE-->
     <meta name="keywords" content="modifica, profilo, aggiornamento, NOME_SITO" />
@@ -60,6 +61,6 @@ class Menu
 <body>
 <?php
 //TODO TEST
-Menu::getMenu(array("<a href='pagina.html'>Home</a>","<a href='pagina.html'>Profilo</a>","<a href='pagina.html'>Cerca</a>","<a href='pagina.html'>Band</a>"));
+Menu::getMenu(array("Home","<a href='pagina.html'>Profilo</a>","<a href='pagina.html'>Cerca</a>","<a href='pagina.html'>Band</a>"));
 ?>
 </body>
