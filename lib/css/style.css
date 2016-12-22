@@ -9,6 +9,7 @@ html, body {
   position: absolute;
   top: 0;
   right: 0;
+  display: none;
 }
 
 #menu_check:checked + div {
@@ -49,15 +50,15 @@ html, body {
 
 .nav ul li {
   font-weight: bold;
-  margin: 1em;
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.nav ul li:hover {
   color: white;
+  margin: 1em;
 }
 
-.nav ul a {
-  color: inherit;
+.nav ul li a {
+  color: rgba(255, 255, 255, 0.5);
   text-decoration: none;
+}
+
+.nav ul li a:hover {
+  color: rgba(255, 255, 255, 0.8);
 }
