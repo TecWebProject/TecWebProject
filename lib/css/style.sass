@@ -29,16 +29,18 @@ html, body
    right: 100%
    width: 10em
    height: 100%
-   -webkit-transition: width 2s /* Safari */
-   transition: width 2s
+   -webkit-transition: left 2s, right 2s /* Safari */
+   transition: left 2s, right 2s
    ul
       margin: 0
       padding: 0
       list-style: none
       li
+         font-weight: bold
          margin: 1em
-      a
          color: rgba(255, 255, 255, 0.8)
-         text-decoration: none
          &:hover
             color: rgba(255, 255, 255, 1)
+      a
+         color: inherit
+         text-decoration: none
