@@ -44,6 +44,10 @@ class Head
        #META name="keywords"
        Head::getMetaKeywords($contesto);
 
+       #META name="viewport"
+       printf("%s\n", "<meta name='viewport' content='width=device-width, initial-scale=1.0'>");
+
+
        #ICONA BOOKMARK
        printf("%s\n", "<link rel='shortcut icon' href='images/icon.ico' />");
 
