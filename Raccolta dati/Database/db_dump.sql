@@ -19,9 +19,9 @@ COMMENT = 'Elenco delle regioni d\'Italia';
 
 
 
-# PROVINCIE
-DROP TABLE IF EXISTS Provincie;
-CREATE TABLE IF NOT EXISTS Provincie (
+# PROVINCE
+DROP TABLE IF EXISTS Province;
+CREATE TABLE IF NOT EXISTS Province (
 	sigla			CHAR(2) PRIMARY KEY,
 	nome			VARCHAR(30) NOT NULL,
 	regione			VARCHAR(25) NOT NULL COMMENT 'Regione di appartenenza',
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS Provincie (
 		ON UPDATE CASCADE
 )
 ENGINE = InnoDB
-COMMENT = 'Elenco delle provincie d\'Italia, con regione di appartenenza';
+COMMENT = 'Elenco delle province d\'Italia, con regione di appartenenza';
 
 
 
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS Gruppi (
 	descrizione     VARCHAR(200) DEFAULT NULL COMMENT 'Descrizione del gruppo',
 	dataIscrizione	DATETIME NOT NULL,
 	provincia		CHAR(2) NOT NULL,
-	FOREIGN KEY (provincia) REFERENCES Provincie (sigla)
+	FOREIGN KEY (provincia) REFERENCES Province (sigla)
 	    ON DELETE NO ACTION
 	    ON UPDATE CASCADE
 )
@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS Utenti (
 	descrizione     VARCHAR(200) DEFAULT NULL COMMENT 'Descrizione dell\'utente',
 	dataIscrizione	DATETIME NOT NULL,
 	provincia		CHAR(2) NOT NULL COMMENT 'Provincia di residenza',
-	FOREIGN KEY (provincia) REFERENCES Provincie (sigla)
+	FOREIGN KEY (provincia) REFERENCES Province (sigla)
 	    ON DELETE NO ACTION
 	    ON UPDATE CASCADE
 )
@@ -279,7 +279,7 @@ INSERT INTO Regioni (nome) VALUES
 
 
 # PROVINCIE
-INSERT INTO Provincie (nome, sigla, regione) VALUES
+INSERT INTO Province (nome, sigla, regione) VALUES
 ('Chieti', 'CH', 'Abruzzo'),
 ('L\'Aquila', 'AQ', 'Abruzzo'),
 ('Pescara', 'PE', 'Abruzzo'),
