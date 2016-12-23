@@ -278,7 +278,7 @@ INSERT INTO Regioni (nome) VALUES
 
 
 
-# PROVINCIE
+# PROVINCE
 INSERT INTO Province (nome, sigla, regione) VALUES
 ('Chieti', 'CH', 'Abruzzo'),
 ('L\'Aquila', 'AQ', 'Abruzzo'),
