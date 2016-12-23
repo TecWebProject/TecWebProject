@@ -1,240 +1,259 @@
-### CREAZIONE DATABASE:
+### CREAZIONE DATABASE: ###
 
-# Schema database_artisti
+# SCHEMA DATABASE_ARTISTI
 DROP SCHEMA IF EXISTS database_artisti;
 CREATE SCHEMA IF NOT EXISTS database_artisti DEFAULT CHARACTER SET utf8;
 USE database_artisti;
 
 
 
-### CREAZIONE SCHEMA:
+### CREAZIONE SCHEMA: ###
 
-# Regione
-DROP TABLE IF EXISTS Regione;
-CREATE TABLE IF NOT EXISTS Regione (
-	Nome			VARCHAR(25) PRIMARY KEY COMMENT 'Nome completo'
+# REGIONI
+DROP TABLE IF EXISTS Regioni;
+CREATE TABLE IF NOT EXISTS Regioni (
+	nome			VARCHAR(25) PRIMARY KEY
 )
 ENGINE = InnoDB
 COMMENT = 'Elenco delle regioni d\'Italia';
 
 
 
-# Provincia
-DROP TABLE IF EXISTS Provincia;
-CREATE TABLE IF NOT EXISTS Provincia (
-	Sigla			CHAR(2) PRIMARY KEY COMMENT 'Sigla',
-	Nome			VARCHAR(30) NOT NULL COMMENT 'Nome completo',
-	Regione			VARCHAR(25) NOT NULL COMMENT 'Regione di appartenenza'
-					REFERENCES Regione (Nome)
-					ON DELETE NO ACTION
-					ON UPDATE NO ACTION
+# PROVINCE
+DROP TABLE IF EXISTS Province;
+CREATE TABLE IF NOT EXISTS Province (
+	sigla			CHAR(2) PRIMARY KEY,
+	nome			VARCHAR(30) NOT NULL,
+	regione			VARCHAR(25) NOT NULL COMMENT 'Regione di appartenenza',
+	FOREIGN KEY	(regione) REFERENCES Regioni (nome)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE
 )
 ENGINE = InnoDB
-COMMENT = 'Elenco delle provincie d\'Italia, con regione di appartenenza';
+COMMENT = 'Elenco delle province d\'Italia, con regione di appartenenza';
 
 
 
-# Gruppo
-DROP TABLE IF EXISTS Gruppo;
-CREATE TABLE IF NOT EXISTS Gruppo (
+# GRUPPI
+DROP TABLE IF EXISTS Gruppi;
+CREATE TABLE IF NOT EXISTS Gruppi (
 	idGruppo		INT(10) UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-	Nome			VARCHAR(45) NOT NULL COMMENT 'Nome del gruppo; possono esserci più gruppi con lo stesso nome (sono distinti grazie a idGruppo)',
-	Provincia		CHAR(2) NOT NULL REFERENCES Provincia (Sigla)
-					ON DELETE NO ACTION
-					ON UPDATE NO ACTION,
-	Immagine		VARCHAR(45) DEFAULT NULL COMMENT 'Immagine profilo; NULL implica immagine di default',
-	DataIscrizione	DATETIME NOT NULL
+	nome			VARCHAR(45) NOT NULL,
+	immagine		VARCHAR(45) DEFAULT NULL COMMENT 'Immagine profilo; NULL implica immagine di default',
+	descrizione     VARCHAR(200) DEFAULT NULL COMMENT 'Descrizione del gruppo',
+	dataIscrizione	DATETIME NOT NULL,
+	provincia		CHAR(2) NOT NULL,
+	FOREIGN KEY (provincia) REFERENCES Province (sigla)
+	    ON DELETE NO ACTION
+	    ON UPDATE CASCADE
 )
 ENGINE = InnoDB
 COMMENT = 'Dati generici dei gruppi';
 
 
 
-# TipoContatto
-DROP TABLE IF EXISTS TipoContatto;
-CREATE TABLE IF NOT EXISTS TipoContatto (
-	Nome			VARCHAR(20) PRIMARY KEY
+# TIPICONTATTI
+DROP TABLE IF EXISTS TipiContatti;
+CREATE TABLE IF NOT EXISTS TipiContatti (
+	nome			VARCHAR(20) PRIMARY KEY
 )
 ENGINE = InnoDB
 COMMENT = 'Elenco delle tipologie di contatto: mail, facebook, whatsapp, ecc...';
 
 
 
-# ContattoGruppo
-DROP TABLE IF EXISTS ContattoGruppo;
-CREATE TABLE IF NOT EXISTS ContattoGruppo (
+# CONTATTIGRUPPI
+DROP TABLE IF EXISTS ContattiGruppi;
+CREATE TABLE IF NOT EXISTS ContattiGruppi (
 	idContatto		INT(10) UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-	idGruppo		INT(10) UNSIGNED NOT NULL REFERENCES Gruppo (idGruppo)
-					ON DELETE CASCADE
-					ON UPDATE NO ACTION,
-	TipoContatto	VARCHAR(20) NOT NULL REFERENCES TipoContatto (Nome)
-					ON DELETE CASCADE
-					ON UPDATE NO ACTION,
-	Contatto		VARCHAR(100) NOT NULL COMMENT 'Stringa contenente il recapito'
+	gruppo		    INT(10) UNSIGNED NOT NULL,
+	tipoContatto	VARCHAR(20) NOT NULL,
+	contatto		VARCHAR(100) NOT NULL COMMENT 'Stringa contenente il recapito',
+	FOREIGN KEY (gruppo) REFERENCES Gruppi (idGruppo)
+	    ON DELETE CASCADE
+	    ON UPDATE CASCADE,
+    FOREIGN KEY (tipoContatto) REFERENCES TipiContatti (nome)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 )
 ENGINE = InnoDB
 COMMENT = 'Recapiti dei gruppi';
 
 
 
-# Utente
-DROP TABLE IF EXISTS Utente;
-CREATE TABLE IF NOT EXISTS Utente (
-	Username		VARCHAR(25) PRIMARY KEY COMMENT 'Username',
-	Email			VARCHAR(45) NOT NULL UNIQUE COMMENT 'Email',
-	DataNascita		DATE NOT NULL COMMENT 'Anno di nascita',
-	Provincia		CHAR(2) NOT NULL COMMENT 'Provincia di abitazione'
-					REFERENCES Provincia (Sigla)
-					ON DELETE NO ACTION
-					ON UPDATE NO ACTION,
-	DataIscrizione	DATE NOT NULL,
-	Immagine		VARCHAR(45) DEFAULT NULL COMMENT 'Immagine profilo; NULL implica immagine di default',
-	HashedPassword	VARCHAR(45) DEFAULT NULL COMMENT 'Password criptata'
+# UTENTI
+DROP TABLE IF EXISTS Utenti;
+CREATE TABLE IF NOT EXISTS Utenti (
+	username		VARCHAR(25) PRIMARY KEY,
+	password	    VARCHAR(45) DEFAULT NULL,
+	email			VARCHAR(45) NOT NULL UNIQUE,
+	nome            VARCHAR(20) DEFAULT NULL,
+	cognome         VARCHAR(20) DEFAULT NULL,
+	dataNascita		DATE NOT NULL,
+	immagine		VARCHAR(45) DEFAULT NULL COMMENT 'Immagine profilo; NULL implica immagine di default',
+	descrizione     VARCHAR(200) DEFAULT NULL COMMENT 'Descrizione dell\'utente',
+	dataIscrizione	DATETIME NOT NULL,
+	provincia		CHAR(2) NOT NULL COMMENT 'Provincia di residenza',
+	FOREIGN KEY (provincia) REFERENCES Province (sigla)
+	    ON DELETE NO ACTION
+	    ON UPDATE CASCADE
 )
 ENGINE = InnoDB
 COMMENT = 'Dati generici degli utenti';
 
 
 
-# ContattoUtente
-DROP TABLE IF EXISTS ContattoUtente;
-CREATE TABLE IF NOT EXISTS ContattoUtente (
-	idContatto		INT(10) UNSIGNED PRIMARY KEY AUTO_INCREMENT COMMENT 'ID univoco del contatto',
-	Username		VARCHAR(25) NOT NULL REFERENCES Utente (Username)
-					ON DELETE CASCADE
-					ON UPDATE CASCADE,
-	TipoContatto	VARCHAR(20) NOT NULL REFERENCES TipoContatto (Nome)
-					ON DELETE CASCADE
-					ON UPDATE NO ACTION,
-	Contatto		VARCHAR(45) NOT NULL COMMENT 'Stringa contenente il recapito'
+# CONTATTIUTENTI
+DROP TABLE IF EXISTS ContattiUtenti;
+CREATE TABLE IF NOT EXISTS ContattiUtenti (
+	idContatto		INT(10) UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+	utente  		VARCHAR(25) NOT NULL,
+	tipoContatto	VARCHAR(20) NOT NULL,
+	contatto		VARCHAR(45) NOT NULL COMMENT 'Stringa contenente il recapito',
+	FOREIGN KEY (utente) REFERENCES Utenti (username)
+	    ON DELETE CASCADE
+	    ON UPDATE CASCADE,
+    FOREIGN KEY (tipoContatto) REFERENCES TipiContatti (nome)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 )
 ENGINE = InnoDB
 COMMENT = 'Recapiti degli utenti';
 
 
 
-# GenereMusicale
-DROP TABLE IF EXISTS GenereMusicale;
-CREATE TABLE IF NOT EXISTS GenereMusicale (
-	Nome			VARCHAR(45) PRIMARY KEY COMMENT 'Nome completo del genere musicale'
+# GENERIMUSICALI
+DROP TABLE IF EXISTS GeneriMusicali;
+CREATE TABLE IF NOT EXISTS GeneriMusicali (
+	nome			VARCHAR(45) PRIMARY KEY
 )
 ENGINE = InnoDB
 COMMENT = 'Elenco dei generi musicali riconosciuti dal sito';
 
 
 
-# GenereGruppo
-DROP TABLE IF EXISTS GenereGruppo;
-CREATE TABLE IF NOT EXISTS GenereGruppo (
-	idGruppo		INT(10) UNSIGNED NOT NULL REFERENCES Gruppo (idGruppo)
-					ON DELETE CASCADE
-					ON UPDATE NO ACTION,
-	Genere			VARCHAR(45) NOT NULL REFERENCES GenereMusicale (Nome)
-					ON DELETE CASCADE
-					ON UPDATE CASCADE,
-	PRIMARY KEY (idGruppo, Genere)
+# GENERIGRUPPI
+DROP TABLE IF EXISTS GeneriGruppi;
+CREATE TABLE IF NOT EXISTS GeneriGruppi (
+	gruppo		    INT(10) UNSIGNED NOT NULL,
+	genere			VARCHAR(45) NOT NULL,
+	PRIMARY KEY (gruppo, genere),
+	FOREIGN KEY (gruppo) REFERENCES Gruppi (idGruppo)
+	    ON DELETE CASCADE
+	    ON UPDATE CASCADE,
+    FOREIGN KEY (genere) REFERENCES GeneriMusicali (nome)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 )
 ENGINE = InnoDB
 COMMENT = 'Preferenze musicali dei gruppi';
 
 
 
-# GenereUtente
-DROP TABLE IF EXISTS GenereUtente;
-CREATE TABLE IF NOT EXISTS GenereUtente (
-	Utente			VARCHAR(25) NOT NULL REFERENCES Utente (Username)
-					ON DELETE CASCADE
-					ON UPDATE NO ACTION,
-	Genere			VARCHAR(45) NOT NULL REFERENCES GenereMusicale (Nome)
-					ON DELETE CASCADE
-					ON UPDATE CASCADE,
-	PRIMARY KEY (Utente, Genere)
+# GENERIUTENTI
+DROP TABLE IF EXISTS GeneriUtenti;
+CREATE TABLE IF NOT EXISTS GeneriUtenti (
+	utente			VARCHAR(25) NOT NULL,
+	genere			VARCHAR(45) NOT NULL,
+	PRIMARY KEY (utente, genere),
+	FOREIGN KEY (utente) REFERENCES Utenti (username)
+	    ON DELETE CASCADE
+	    ON UPDATE CASCADE,
+	FOREIGN KEY (genere) REFERENCES GeneriMusicali (nome)
+	    ON DELETE CASCADE
+	    ON UPDATE CASCADE
 )
 ENGINE = InnoDB
 COMMENT = 'Preferenze musicali degli utenti';
 
 
 
-# Strumento
-DROP TABLE IF EXISTS Strumento;
-CREATE TABLE IF NOT EXISTS Strumento (
-	Nome			VARCHAR(45) PRIMARY KEY
+# STRUMENTI
+DROP TABLE IF EXISTS Strumenti;
+CREATE TABLE IF NOT EXISTS Strumenti (
+	nome			VARCHAR(45) PRIMARY KEY
 )
 ENGINE = InnoDB
 COMMENT = 'Elenco degli strumenti musicali (comprendente anche la voce)';
 
 
 
-# Conoscenza
-DROP TABLE IF EXISTS Conoscenza;
-CREATE TABLE IF NOT EXISTS Conoscenza (
-	idConoscenza	INT(10) UNSIGNED PRIMARY KEY AUTO_INCREMENT COMMENT 'ID univoco',
-	Utente			VARCHAR(25) NOT NULL REFERENCES Utente (Username)
-					ON DELETE CASCADE
-					ON UPDATE CASCADE,
-	Strumento		VARCHAR(45) NOT NULL REFERENCES Strumento (Nome)
-					ON DELETE CASCADE
-					ON UPDATE CASCADE
+# CONOSCENZE
+DROP TABLE IF EXISTS Conoscenze;
+CREATE TABLE IF NOT EXISTS Conoscenze (
+	idConoscenza	INT(10) UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+	utente			VARCHAR(25) NOT NULL,
+	strumento		VARCHAR(45) NOT NULL,
+	FOREIGN KEY (utente) REFERENCES Utenti (username)
+	    ON DELETE CASCADE
+	    ON UPDATE CASCADE,
+    FOREIGN KEY (strumento) REFERENCES Strumenti (nome)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 )
 ENGINE = InnoDB
 COMMENT = 'Conoscenza di uno strumento musicale da parte di un utente';
 
 
 
-# Annuncio
-DROP TABLE IF EXISTS Annuncio;
-CREATE TABLE IF NOT EXISTS Annuncio (
-	idGruppo		INT(10) UNSIGNED REFERENCES Gruppo (idGruppo)
-					ON DELETE NO ACTION
-					ON UPDATE NO ACTION,
-	RuoloRichiesto	VARCHAR(45) REFERENCES Strumento (Nome)
-					ON DELETE CASCADE
-					ON UPDATE CASCADE,
-	PRIMARY KEY (idGruppo, RuoloRichiesto)
+# ANNUNCI
+DROP TABLE IF EXISTS Annunci;
+CREATE TABLE IF NOT EXISTS Annunci (
+	gruppo		    INT(10) UNSIGNED,
+	ruoloRichiesto	VARCHAR(45),
+	PRIMARY KEY (gruppo, ruoloRichiesto),
+	FOREIGN KEY (gruppo) REFERENCES Gruppi (idGruppo)
+	    ON DELETE CASCADE
+	    ON UPDATE CASCADE,
+    FOREIGN KEY (ruoloRichiesto) REFERENCES Strumenti (nome)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 )
 ENGINE = InnoDB
 COMMENT = 'Annunci dei gruppi che hanno bisogno di un particolare strumento';
 
 
 
-# RichiestaPartecipazione
-DROP TABLE IF EXISTS RichiestaPartecipazione;
-CREATE TABLE IF NOT EXISTS RichiestaPartecipazione (
-	Utente			VARCHAR(25) NOT NULL REFERENCES Utente (Username)
-					ON DELETE NO ACTION
-					ON UPDATE NO ACTION,
-	idGruppo		INT(10) UNSIGNED NOT NULL REFERENCES Gruppo (idGruppo)
-					ON DELETE CASCADE
-					ON UPDATE NO ACTION,
-	RichiestaDaGruppo TINYINT(1) NOT NULL COMMENT 'Vero se il gruppo ha chiesto all\'utente; falso se l\'utente ha chiesto al gruppo',
-	PRIMARY KEY (Utente, idGruppo)
+# RICHIESTEPARTECIPAZIONE
+DROP TABLE IF EXISTS RichiestePartecipazione;
+CREATE TABLE IF NOT EXISTS RichiestePartecipazione (
+	utente		    VARCHAR(25),
+	gruppo		    INT(10) UNSIGNED,
+	richiestaDaGruppo TINYINT(1) NOT NULL COMMENT '1 se il gruppo ha chiesto all\'utente; 0 se l\'utente ha chiesto al gruppo',
+	PRIMARY KEY (utente, gruppo),
+	FOREIGN KEY (utente) REFERENCES Utenti (username)
+	    ON DELETE CASCADE
+	    ON UPDATE CASCADE,
+    FOREIGN KEY (gruppo) REFERENCES Gruppi (idGruppo)
+	    ON DELETE CASCADE
+	    ON UPDATE CASCADE
 )
 ENGINE = InnoDB
 COMMENT = 'Richieste di partecipazione ad un gruppo (da parte dell\'utente o su invito del gruppo stesso)';
 
 
 
-# Formazione
-DROP TABLE IF EXISTS Formazione;
-CREATE TABLE IF NOT EXISTS Formazione (
-	idGruppo		INT(10) UNSIGNED NOT NULL COMMENT 'ID gruppo a cui partecipa l\'utente in Ruolo'
-					REFERENCES Gruppo (idGruppo)
-					ON DELETE CASCADE
-					ON UPDATE NO ACTION,
-	Ruolo			VARCHAR(45) NOT NULL COMMENT 'Ruolo all\'interno del gruppo'
-					REFERENCES Conoscenza (idConoscenza)
-					ON DELETE CASCADE
-					ON UPDATE NO ACTION,
-	PRIMARY KEY (idGruppo, Ruolo)
+# FORMAZIONI
+DROP TABLE IF EXISTS Formazioni;
+CREATE TABLE IF NOT EXISTS Formazioni (
+	gruppo		    INT(10) UNSIGNED COMMENT 'Gruppo a cui partecipa l\'utente in Ruolo',
+	ruolo		    INT(10) UNSIGNED COMMENT 'Ruolo all\'interno del gruppo',
+	PRIMARY KEY (gruppo, ruolo),
+	FOREIGN KEY (gruppo) REFERENCES Gruppi (idGruppo)
+	    ON DELETE CASCADE
+	    ON UPDATE CASCADE,
+    FOREIGN KEY (ruolo) REFERENCES Conoscenze (idConoscenza)
+	    ON DELETE CASCADE
+	    ON UPDATE CASCADE
 )
 ENGINE = InnoDB
 COMMENT = 'Legami tra gli utenti e i gruppi (cioè come i gruppi sono formati)';
 
 
 
-### POPOLAMENTO:
+### POPOLAMENTO: ###
 
-INSERT INTO Regione (Nome) VALUES
+INSERT INTO Regioni (nome) VALUES
 ('Abruzzo'),
 ('Basilicata'),
 ('Calabria'),
@@ -256,7 +275,7 @@ INSERT INTO Regione (Nome) VALUES
 ('Valle d\'Aosta'),
 ('Veneto');
 
-INSERT INTO Provincia (Nome, Sigla, Regione) VALUES
+INSERT INTO Province (nome, sigla, regione) VALUES
 ('Chieti', 'CH', 'Abruzzo'),
 ('L\'Aquila', 'AQ', 'Abruzzo'),
 ('Pescara', 'PE', 'Abruzzo'),
@@ -368,26 +387,26 @@ INSERT INTO Provincia (Nome, Sigla, Regione) VALUES
 ('Verona', 'VR', 'Veneto'),
 ('Vicenza', 'VI', 'Veneto');
 
-INSERT INTO Gruppo (idGruppo, Nome, Provincia, Immagine, DataIscrizione) VALUES
-(NULL, 'The Leatles', 'PD', NULL, '2007-02-21'),
-(NULL, 'Pintura Sekka', 'VE', NULL, '2002-03-20'),
-(NULL, 'The Sailers', 'CA', NULL, '2003-04-12'),
-(NULL, 'Left Zeppelin', 'VS', NULL, '2003-12-01'),
-(NULL, 'De La Troll', 'AG', NULL, '2012-02-28'),
-(NULL, 'Miles Travis Quintet', 'FI', NULL, '2004-10-31'),
-(NULL, 'Passive Attack', 'GR', NULL, '2004-09-30'),
-(NULL, 'Perl Jam', 'PD', NULL, '2012-03-21'),
-(NULL, 'Radiobread', 'GR', NULL, '2012-06-24'),
-(NULL, 'Proxy Music', 'BR', NULL, '2016-12-17');
+INSERT INTO Gruppi (idGruppo, nome, immagine, descrizione, dataIscrizione, provincia) VALUES
+(NULL, 'The Leatles', NULL, 'La nostra musica fa bene all\'anima!', '2007-02-21', 'PD'),
+(NULL, 'Pintura Sekka', NULL, 'Molti anni di esperienza alle spalle, con un sacco di esibizioni dal vivo.', '2002-03-20', 'VE'),
+(NULL, 'The Sailers', NULL, NULL, '2003-04-12', 'CA'),
+(NULL, 'Left Zeppelin', NULL, 'Cover band (e grandi fan) dei Right Zeppelin.', '2003-12-01', 'VS'),
+(NULL, 'De La Troll', NULL, 'Do re mi fa troll', '2012-02-28', 'AG'),
+(NULL, 'Miles Travis Quintet', NULL, 'Il grande Miles Travis conta su di noi. Non lo abbiamo mai deluso!', '2004-10-31', 'FI'),
+(NULL, 'Passive Attack', NULL, NULL, '2004-09-30', 'GR'),
+(NULL, 'Perl Jam', NULL, 'Evviva Perl!', '2012-03-21', 'PD'),
+(NULL, 'Radiobox', NULL, NULL, '2012-06-24', 'GR'),
+(NULL, 'Proxy Music', NULL, 'Ci sarà sempre bisogno di un proxy...', '2016-12-17', 'BR');
 
-INSERT INTO TipoContatto VALUES
-('email_pubblica'), # diversa dal campo Email di Utente (che è privato)
+INSERT INTO TipiContatti (nome) VALUES
+('email_pubblica'), # diversa dal campo email di Utenti (che è privato)
 ('whatsapp'),
 ('telegram'),
 ('youtube'),
 ('facebook');
 
-INSERT INTO ContattoGruppo (idContatto, idGruppo, TipoContatto, Contatto) VALUES
+INSERT INTO ContattiGruppi (idContatto, gruppo, tipoContatto, contatto) VALUES
 (NULL, 4, 'facebook', 'https://www.facebook.com/ledzeppelin'),
 (NULL, 4, 'youtube', 'https://www.youtube.com/user/ledzeppelin'),
 (NULL, 3, 'facebook', 'https://www.facebook.com/wailers'),
@@ -396,19 +415,19 @@ INSERT INTO ContattoGruppo (idContatto, idGruppo, TipoContatto, Contatto) VALUES
 (NULL, 8, 'youtube', 'https://www.youtube.com/user/PearljamVEVO'),
 (NULL, 9, 'youtube', 'https://www.youtube.com/user/radiohead');
 
-INSERT INTO Utente (Username, Email, DataNascita, Provincia, DataIscrizione, Immagine, HashedPassword) VALUES
-('miles26', 'miles@milesinthesky.jazz', '1926-05-26', 'FI', '1998-11-04', NULL, SHA1('user')),
-('McPaul42', 'paulmcc@theleatles.lsd', '1942-06-18', 'PD', '2001-02-18', NULL, SHA1('user')),
-('SuperPippo', 'super.pippo@example.com', '1992-12-21', 'PD', '2014-10-31', NULL, SHA1('user')),
-('giorgio', 'giorgio.giuffre@studenti.unipd.it', '1994-02-23', 'PD', '2016-12-19', NULL, SHA1('user')),
-('rob_wyatt', 'robert@softmachine.org', '1945-01-28', 'LU', '1997-10-08', NULL, SHA1('user')),
-('millenium_bug', 'milbug@ctime.org', '1970-01-01', 'AG', '1999-12-31', NULL, SHA1('user')),
-('ennesimo', 'ennesimo.utente@popolamento.db', '1995-12-02', 'EN', '2012-04-04', NULL, SHA1('user'));
+INSERT INTO Utenti (username, password, email, nome, cognome, dataNascita, immagine, descrizione, dataIscrizione, provincia) VALUES
+('miles26', NULL, 'miles@milesinthesky.jazz', 'Miles', 'Travis', '1926-05-26', NULL, 'Jazz e Blues nel sangue dalla nascita.' ,'1998-11-04', 'FI'),
+('McPaul42', NULL, 'paulmcc@theleatles.lsd', 'Paul', 'McCartney', '1942-06-18', NULL, NULL,'2001-02-18', 'PD'),
+('SuperPippo', NULL, 'super.pippo@example.com', 'Pippo', 'Super', '1992-12-21', NULL, NULL,'2014-10-31', 'PD'),
+('giorgio', NULL, 'giorgio.giuffre@studenti.unipd.it', 'Giorgio', 'Giuffrè', '1994-02-23', NULL, 'Suonatore di pianoforte... Ascoltatore eclettico.' ,'2016-12-19', 'PD'),
+('rob_wyatt', NULL, 'robert@softmachine.org', 'Robert', 'Wyatt', '1945-01-28', NULL, NULL,'1997-10-08', 'LU'),
+('millenium_bug', NULL, 'milbug@ctime.h', 'Milly', 'Bug', '1970-01-01', NULL, 'Ormai in pensione ma sempre sul pezzo.','1999-12-31', 'AG'),
+('ennesimo', NULL, 'ennesimo.utente@popolamento.db', 'Enrico', 'Nesimo', '1995-12-02', NULL, NULL,'2012-04-04', 'EN');
 
-INSERT INTO ContattoUtente (idContatto, Username, TipoContatto, Contatto) VALUES
+INSERT INTO ContattiUtenti (idContatto, utente, tipoContatto, contatto) VALUES
 (NULL, 'giorgio', 'telegram', 'telegram.me/ggiuffre');
 
-INSERT INTO GenereMusicale (Nome) VALUES
+INSERT INTO GeneriMusicali (nome) VALUES
 ('Hard Rock'),
 ('Pop Rock'),
 ('Pop'),
@@ -433,7 +452,7 @@ INSERT INTO GenereMusicale (Nome) VALUES
 ('Progressive'),
 ('Psychedelic');
 
-INSERT INTO GenereGruppo (idGruppo, Genere) VALUES
+INSERT INTO GeneriGruppi (gruppo, genere) VALUES
 (1, 'Pop Rock'),
 (1, 'Pop'),
 (7, 'Hip Hop'),
@@ -443,7 +462,7 @@ INSERT INTO GenereGruppo (idGruppo, Genere) VALUES
 (10, 'Pop Rock'),
 (3, 'Reggae');
 
-INSERT INTO GenereUtente (Utente, Genere) VALUES
+INSERT INTO GeneriUtenti (utente, genere) VALUES
 ('miles26', 'Jazz'),
 ('miles26', 'Blues'),
 ('McPaul42', 'Pop Rock'),
@@ -453,7 +472,7 @@ INSERT INTO GenereUtente (Utente, Genere) VALUES
 ('millenium_bug', 'Disco'),
 ('ennesimo', 'Country');
 
-INSERT INTO Strumento (Nome) VALUES
+INSERT INTO Strumenti (nome) VALUES
 ('Chitarra Elettrica'),
 ('Chitarra Acustica'),
 ('Basso Elettrico'),
@@ -466,7 +485,7 @@ INSERT INTO Strumento (Nome) VALUES
 ('Tromba'),
 ('Computer');
 
-INSERT INTO Conoscenza (idConoscenza, Utente, Strumento) VALUES
+INSERT INTO Conoscenze (idConoscenza, utente, strumento) VALUES
 (NULL, 'miles26', 'Tromba'),
 (NULL, 'millenium_bug', 'Computer'),
 (NULL, 'ennesimo', 'Chitarra Elettrica'),
@@ -478,19 +497,19 @@ INSERT INTO Conoscenza (idConoscenza, Utente, Strumento) VALUES
 (NULL, 'McPaul42', 'Chitarra Acustica'),
 (NULL, 'McPaul42', 'Chitarra Elettrica');
 
-INSERT INTO Annuncio (idGruppo, RuoloRichiesto) VALUES
+INSERT INTO Annunci (gruppo, ruoloRichiesto) VALUES
 (1, 'Organo'),
 (4, 'Chitarra Elettrica'),
 (2, 'Sassofono'),
 (4, 'Voce'),
 (7, 'Computer');
 
-INSERT INTO RichiestaPartecipazione (Utente, idGruppo, RichiestaDaGruppo) VALUES
+INSERT INTO RichiestePartecipazione (utente, gruppo, richiestaDaGruppo) VALUES
 ('ennesimo', 2, 0),
 ('miles26', 3, 1),
 ('giorgio', 7, 0);
 
-INSERT INTO Formazione (idGruppo, Ruolo) VALUES
+INSERT INTO Formazioni (gruppo, ruolo) VALUES
 (1, 9),
 (1, 10),
 (2, 3),
