@@ -389,7 +389,7 @@ INSERT INTO Province (nome, sigla, regione) VALUES
 
 INSERT INTO Gruppi (idGruppo, nome, immagine, descrizione, dataIscrizione, provincia) VALUES
 (NULL, 'The Leatles', NULL, 'La nostra musica fa bene all\'anima!', '2007-02-21', 'PD'),
-(NULL, 'Pintura Sekka', NULL, 'Molti anni di esperienza alle spalle, con un sacco di esibizioni dal vivo.', '2002-03-20', 'VE'),
+(NULL, 'Pitura Sekka', NULL, 'Molti anni di esperienza alle spalle, con un sacco di esibizioni dal vivo.', '2002-03-20', 'VE'),
 (NULL, 'The Sailers', NULL, NULL, '2003-04-12', 'CA'),
 (NULL, 'Left Zeppelin', NULL, 'Cover band (e grandi fan) dei Right Zeppelin.', '2003-12-01', 'VS'),
 (NULL, 'De La Troll', NULL, 'Do re mi fa troll', '2012-02-28', 'AG'),
