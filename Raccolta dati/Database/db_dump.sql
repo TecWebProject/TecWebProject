@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS ContattiGruppi (
 	idContatto		INT(10) UNSIGNED PRIMARY KEY AUTO_INCREMENT,
 	gruppo		    INT(10) UNSIGNED NOT NULL,
 	tipoContatto	VARCHAR(20) NOT NULL,
-	contatto		VARCHAR(45) NOT NULL COMMENT 'Stringa contenente il recapito',
+	contatto		VARCHAR(100) NOT NULL COMMENT 'Stringa contenente il recapito',
 	FOREIGN KEY (gruppo) REFERENCES Gruppi (idGruppo)
 	    ON DELETE CASCADE
 	    ON UPDATE CASCADE,
@@ -253,7 +253,6 @@ COMMENT = 'Legami tra gli utenti e i gruppi (cioè come i gruppi sono formati)';
 
 ### POPOLAMENTO: ###
 
-# REGIONI
 INSERT INTO Regioni (nome) VALUES
 ('Abruzzo'),
 ('Basilicata'),
@@ -276,9 +275,6 @@ INSERT INTO Regioni (nome) VALUES
 ('Valle d\'Aosta'),
 ('Veneto');
 
-
-
-# PROVINCE
 INSERT INTO Province (nome, sigla, regione) VALUES
 ('Chieti', 'CH', 'Abruzzo'),
 ('L\'Aquila', 'AQ', 'Abruzzo'),
@@ -391,23 +387,57 @@ INSERT INTO Province (nome, sigla, regione) VALUES
 ('Verona', 'VR', 'Veneto'),
 ('Vicenza', 'VI', 'Veneto');
 
+INSERT INTO Gruppi (idGruppo, nome, immagine, descrizione, dataIscrizione, provincia) VALUES
+(NULL, 'The Leatles', NULL, 'La nostra musica fa bene all\'anima!', '2007-02-21', 'PD'),
+(NULL, 'Pitura Sekka', NULL, 'Molti anni di esperienza alle spalle, con un sacco di esibizioni dal vivo.', '2002-03-20', 'VE'),
+(NULL, 'The Sailers', NULL, NULL, '2003-04-12', 'CA'),
+(NULL, 'Left Zeppelin', NULL, 'Cover band (e grandi fan) dei Right Zeppelin.', '2003-12-01', 'VS'),
+(NULL, 'De La Troll', NULL, 'Do re mi fa troll', '2012-02-28', 'AG'),
+(NULL, 'Miles Travis Quintet', NULL, 'Il grande Miles Travis conta su di noi. Non lo abbiamo mai deluso!', '2004-10-31', 'FI'),
+(NULL, 'Passive Attack', NULL, NULL, '2004-09-30', 'GR'),
+(NULL, 'Perl Jam', NULL, 'Evviva Perl!', '2012-03-21', 'PD'),
+(NULL, 'Radiobox', NULL, NULL, '2012-06-24', 'GR'),
+(NULL, 'Proxy Music', NULL, 'Ci sarà sempre bisogno di un proxy...', '2016-12-17', 'BR');
 
+INSERT INTO TipiContatti (nome) VALUES
+('email_pubblica'), # diversa dal campo email di Utenti (che è privato)
+('whatsapp'),
+('telegram'),
+('youtube'),
+('facebook');
 
-# GENERIMUSICALI
+INSERT INTO ContattiGruppi (idContatto, gruppo, tipoContatto, contatto) VALUES
+(NULL, 4, 'facebook', 'https://www.facebook.com/ledzeppelin'),
+(NULL, 4, 'youtube', 'https://www.youtube.com/user/ledzeppelin'),
+(NULL, 3, 'facebook', 'https://www.facebook.com/wailers'),
+(NULL, 1, 'facebook', 'https://www.facebook.com/thebeatles'),
+(NULL, 7, 'youtube', 'https://www.youtube.com/user/MassiveAttackVEVO'),
+(NULL, 8, 'youtube', 'https://www.youtube.com/user/PearljamVEVO'),
+(NULL, 9, 'youtube', 'https://www.youtube.com/user/radiohead');
+
+INSERT INTO Utenti (username, password, email, nome, cognome, dataNascita, immagine, descrizione, dataIscrizione, provincia) VALUES
+('miles26', NULL, 'miles@milesinthesky.jazz', 'Miles', 'Travis', '1926-05-26', NULL, 'Jazz e Blues nel sangue dalla nascita.' ,'1998-11-04', 'FI'),
+('McPaul42', NULL, 'paulmcc@theleatles.lsd', 'Paul', 'McCartney', '1942-06-18', NULL, NULL,'2001-02-18', 'PD'),
+('SuperPippo', NULL, 'super.pippo@example.com', 'Pippo', 'Super', '1992-12-21', NULL, NULL,'2014-10-31', 'PD'),
+('giorgio', NULL, 'giorgio.giuffre@studenti.unipd.it', 'Giorgio', 'Giuffrè', '1994-02-23', NULL, 'Suonatore di pianoforte... Ascoltatore eclettico.' ,'2016-12-19', 'PD'),
+('rob_wyatt', NULL, 'robert@softmachine.org', 'Robert', 'Wyatt', '1945-01-28', NULL, NULL,'1997-10-08', 'LU'),
+('millenium_bug', NULL, 'milbug@ctime.h', 'Milly', 'Bug', '1970-01-01', NULL, 'Ormai in pensione ma sempre sul pezzo.','1999-12-31', 'AG'),
+('ennesimo', NULL, 'ennesimo.utente@popolamento.db', 'Enrico', 'Nesimo', '1995-12-02', NULL, NULL,'2012-04-04', 'EN');
+
+INSERT INTO ContattiUtenti (idContatto, utente, tipoContatto, contatto) VALUES
+(NULL, 'giorgio', 'telegram', 'telegram.me/ggiuffre');
+
 INSERT INTO GeneriMusicali (nome) VALUES
-('Rock'),
-('Pop'),
+('Hard Rock'),
 ('Pop Rock'),
+('Pop'),
 ('Metal'),
 ('Blues'),
 ('Classica'),
 ('Jazz'),
-('Acustica'),
-('Minimal'),
-('Hip-hop'),
+('Hip Hop'),
 ('Reggae'),
 ('Punk'),
-('Goth'),
 ('Country'),
 ('Disco'),
 ('Funk'),
@@ -419,18 +449,76 @@ INSERT INTO GeneriMusicali (nome) VALUES
 ('Gospel'),
 ('Soul'),
 ('Hardcore'),
-('Polka'),
 ('Progressive'),
-('Psychedelic'),
-('Britpop');
+('Psychedelic');
 
+INSERT INTO GeneriGruppi (gruppo, genere) VALUES
+(1, 'Pop Rock'),
+(1, 'Pop'),
+(7, 'Hip Hop'),
+(6, 'Jazz'),
+(2, 'Reggae'),
+(4, 'Hard Rock'),
+(10, 'Pop Rock'),
+(3, 'Reggae');
 
+INSERT INTO GeneriUtenti (utente, genere) VALUES
+('miles26', 'Jazz'),
+('miles26', 'Blues'),
+('McPaul42', 'Pop Rock'),
+('McPaul42', 'Blues'),
+('SuperPippo', 'Soul'),
+('giorgio', 'Psychedelic'),
+('millenium_bug', 'Disco'),
+('ennesimo', 'Country');
 
-# TIPICONTATTI
-INSERT INTO TipiContatti VALUES
-('email'),
-('whatsapp'),
-('telegram'),
-('youtube'),
-('facebook');
+INSERT INTO Strumenti (nome) VALUES
+('Chitarra Elettrica'),
+('Chitarra Acustica'),
+('Basso Elettrico'),
+('Batteria'),
+('Organo'),
+('Pianoforte'),
+('Sassofono'),
+('Voce'),
+('Violino'),
+('Tromba'),
+('Computer');
 
+INSERT INTO Conoscenze (idConoscenza, utente, strumento) VALUES
+(NULL, 'miles26', 'Tromba'),
+(NULL, 'millenium_bug', 'Computer'),
+(NULL, 'ennesimo', 'Chitarra Elettrica'),
+(NULL, 'ennesimo', 'Organo'),
+(NULL, 'giorgio', 'Pianoforte'),
+(NULL, 'ennesimo', 'Batteria'),
+(NULL, 'rob_wyatt', 'Batteria'),
+(NULL, 'rob_wyatt', 'Voce'),
+(NULL, 'McPaul42', 'Chitarra Acustica'),
+(NULL, 'McPaul42', 'Chitarra Elettrica');
+
+INSERT INTO Annunci (gruppo, ruoloRichiesto) VALUES
+(1, 'Organo'),
+(4, 'Chitarra Elettrica'),
+(2, 'Sassofono'),
+(4, 'Voce'),
+(7, 'Computer');
+
+INSERT INTO RichiestePartecipazione (utente, gruppo, richiestaDaGruppo) VALUES
+('ennesimo', 2, 0),
+('miles26', 3, 1),
+('giorgio', 7, 0);
+
+INSERT INTO Formazioni (gruppo, ruolo) VALUES
+(1, 9),
+(1, 10),
+(2, 3),
+(3, 4),
+(4, 4),
+(4, 3),
+(5, 8),
+(6, 7),
+(7, 10),
+(8, 9),
+(9, 3),
+(10, 8);
