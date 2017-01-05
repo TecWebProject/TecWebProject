@@ -18,7 +18,7 @@ class Head
       'DescrizioneBreve' => "TODO Descrizione breve",
       'Descrizione' => "TODO Descrizione pagina",
       'Keywords' => array("TODO KEYWORD SITO", "TODO KEYWORD 2", "TODO KEYWORD 3"),
-      'BookmarkIcon' => 'icon.png',
+      'BookmarkIcon' => 'missing_icon.png',
       'Stylesheets' => array("wrong_path_style.css")
    );
 
