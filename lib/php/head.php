@@ -20,7 +20,8 @@ var_dump(
             "PASS TODO KEYWORD 2",
             "PASS TODO KEYWORD 3"
          ),
-         'Stylesheets' => array("style.css", "oldStyle.css"),
+         'BookmarkIcon' => 'icon.png',
+         'Stylesheets' => array("style.css"),
          'Extra' => array(
             "<link type='text/css' rel='stylesheet' href='lib/css/styleStampa.css' />",
             "<link type='text/css' rel='stylesheet' href='lib/css/styleSmartphone.css' />"
@@ -65,7 +66,7 @@ class Head
        $MetaViewport = "<meta name='viewport' content='width=device-width, initial-scale=1.0'>";
 
        #ICONA BOOKMARK
-       $BookmarkIcon = Head::getIcon($contesto);//"<link rel='icon' type='img/png' href='images/icon.ico' />";
+       $BookmarkIcon = Head::getIcon($contesto);
 
        #STYLESHEETS
        $Stylesheets = Head::getStylesheets($contesto);
@@ -78,7 +79,7 @@ class Head
     }
 
     #Genera il tag <title>
-    private function getTitle($contesto)
+    private static function getTitle($contesto)
     {
         return isset($contesto) && isset($contesto['Titolo']) ?
             "<title>".$contesto['Titolo']."</title>" :
@@ -86,7 +87,7 @@ class Head
     }
 
     #Genera il tag <meta name="title">
-    private function getMetaTitle($contesto)
+    private static function getMetaTitle($contesto)
     {
         return isset($contesto) && isset($contesto['DescrizioneBreve']) ?
             "<meta name='title' content='".$contesto['DescrizioneBreve']."' />" :
@@ -94,27 +95,69 @@ class Head
     }
 
     #Genera il tag <meta name="description">
-    private function getMetaDescription($contesto)
+    private static function getMetaDescription($contesto)
     {
         return isset($contesto) && isset($contesto['Descrizione']) ?
         "<meta name='description' content='".$contesto['Descrizione']."' />" :
         Head::$contestoDefault['Descrizione'];
     }
 
-    #Genera il tag <meta name="keywords">
-    private function getMetaKeywords($contesto)
+    # Genera il tag <meta name="keywords">
+    private static function getMetaKeywords($contesto)
     {
         $keywords = isset($contesto) && isset($contesto['Keywords']) ? $contesto['Keywords'] : Head::$contestoDefault['Keywords'];
-        return "<meta name='keywords' content='".implode(", ", $keywords)."' />";
+        if (count($keywords) > 0) {
+            return "<meta name='keywords' content='".implode(", ", $keywords)."' />";
+        } else {
+            return null;
+        }
     }
 
-    private function getIcon($contesto)
+    # Genera il tag link per la feedicon
+    private static function getIcon($contesto)
     {
-        isset($contesto) && isset($contesto['BookmarkIcon']) ? $contesto['BookmarkIcon'] : Head::$contestoDefault['BookmarkIcon'];
-        return "<link rel='icon' type='img/png' href='images/".$contesto['BookmarkIcon']."' />";
+      # Get icon from contesto
+        if (isset($contesto) && isset($contesto['BookmarkIcon'])) {
+            $iconName = $contesto['BookmarkIcon'];
+        } elseif (isset($contestoDefault) && isset($contestoDefault['BookmarkIcon'])) {
+            $iconName = $contestoDefault['BookmarkIcon'];
+        } else {
+            $iconName = null;
+        }
+
+        # Abbsolute path to images folder
+        $relImagesPath = realpath(dirname(__FILE__, 3))."/images/";
+
+        # Find icon type
+        switch (pathinfo($relImagesPath.$iconName, PATHINFO_EXTENSION)) {
+           case 'png':
+            $iconType = "img/png";
+              break;
+           case 'jpg':
+           case 'jpeg':
+              $iconType = "img/jpg";
+              break;
+           case 'gif':
+               $iconType = "img/gif";
+               break;
+           default:
+              $iconType = null;
+              break;
+        }
+
+        # If all necessary data is found generates the string, else report error
+        if (isset($iconName) && isset($iconType)) {
+            if (!file_exists($relImagesPath.$iconName)) {
+                error_log("Icon $iconName missing");
+            } else {
+                return "<link rel='icon' type='".$iconType."' href='".$relImagesPath.$iconName."' />";
+            }
+        } else {
+            return null;
+        }
     }
 
-    private function getStylesheets($contesto)
+    private static function getStylesheets($contesto)
     {
         $fileNames = isset($contesto) && isset($contesto['Stylesheets']) ? $contesto['Stylesheets'] : (isset(Head::$contestoDefault) && isset(Head::$contestoDefault['Stylesheets']) ? Head::$contestoDefault['Stylesheets'] : array());
 
@@ -143,7 +186,7 @@ class Head
     }
 
     #Gerena i tag aggiuntivi passati come Extra
-    private function getExtraTags($contesto)
+    private static function getExtraTags($contesto)
     {
         return isset($contesto) && isset($contesto['Extra']) ? $contesto['Extra'] : null;
     }
