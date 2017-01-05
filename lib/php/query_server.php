@@ -6,13 +6,13 @@
 
 /* FUNZIONE DI PROVA PER ESEMPIO*/
 //TEST();
-function TEST()
+/*function TEST()
 {
     $query = 'SELECT * FROM Regione';
     $mysqli = dbConnectionData::getMysqli();
     $stmt = $mysqli->query($query);
     var_dump($stmt->fetch_all(MYSQLI_ASSOC));
-}
+}*/
 
 /* CLASSE DATI CONNESSIONE */
 class dbConnectionData
