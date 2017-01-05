@@ -36,6 +36,7 @@ class Head
       'DescrizioneBreve' => "TODO Descrizione breve",
       'Descrizione' => "TODO Descrizione pagina",
       'Keywords' => array("TODO KEYWORD SITO", "TODO KEYWORD 2", "TODO KEYWORD 3"),
+      'BookmarkIcon' => 'icon.png',
       'Stylesheets' => array("wrong_path_style.css")
    );
 
@@ -64,7 +65,7 @@ class Head
        $MetaViewport = "<meta name='viewport' content='width=device-width, initial-scale=1.0'>";
 
        #ICONA BOOKMARK
-       $BookmarkIcon = "<link rel='icon' type='img/png' href='images/icon.ico' />";
+       $BookmarkIcon = Head::getIcon($contesto);//"<link rel='icon' type='img/png' href='images/icon.ico' />";
 
        #STYLESHEETS
        $Stylesheets = Head::getStylesheets($contesto);
@@ -105,6 +106,12 @@ class Head
     {
         $keywords = isset($contesto) && isset($contesto['Keywords']) ? $contesto['Keywords'] : Head::$contestoDefault['Keywords'];
         return "<meta name='keywords' content='".implode(", ", $keywords)."' />";
+    }
+
+    private function getIcon($contesto)
+    {
+        isset($contesto) && isset($contesto['BookmarkIcon']) ? $contesto['BookmarkIcon'] : Head::$contestoDefault['BookmarkIcon'];
+        return "<link rel='icon' type='img/png' href='images/".$contesto['BookmarkIcon']."' />";
     }
 
     private function getStylesheets($contesto)
