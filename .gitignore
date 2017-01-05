@@ -98,4 +98,6 @@ bh_unicode_properties.cache
 # https://packagecontrol.io/packages/sublime-github
 GitHub.sublime-settings
 
+# PHP CS FIXER (Beautifier per PHP)
+.php_cs.cache
 
