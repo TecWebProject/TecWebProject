@@ -9,7 +9,25 @@
         Keyowrds            -   Nel meta keywords
 */
 // ESEMPIO
-//Head::getHead(array('Titolo' => "PASS TODO Nome Sito", 'DescrizioneBreve' => "PASS TODO Descrizione breve", 'Descrizione' => "PASS TODO Descrizione pagina", 'Keywords' => array("PASS TODO KEYWORD SITO", "PASS TODO KEYWORD 2", "PASS TODO KEYWORD 3"), 'Extra' => array("<link rel='stylesheet' href='/lib/css/styleStampa.css' />", "<link rel='stylesheet' href='/lib/css/styleSmartphone.css' />")));
+var_dump(
+   Head::getHead(
+      array(
+         'Titolo' => "PASS TODO Nome Sito",
+         'DescrizioneBreve' => "PASS TODO Descrizione breve",
+         'Descrizione' => "PASS TODO Descrizione pagina",
+         'Keywords' => array(
+            "PASS TODO KEYWORD SITO",
+            "PASS TODO KEYWORD 2",
+            "PASS TODO KEYWORD 3"
+         ),
+         'Stylesheets' => array("style.css"),
+         'Extra' => array(
+            "<link type='text/css' rel='stylesheet' href='lib/css/styleStampa.css' />",
+            "<link type='text/css' rel='stylesheet' href='lib/css/styleSmartphone.css' />"
+         )
+      )
+   )
+);
 
 class Head
 {
@@ -17,80 +35,102 @@ class Head
       'Titolo' => "TODO Nome Sito",
       'DescrizioneBreve' => "TODO Descrizione breve",
       'Descrizione' => "TODO Descrizione pagina",
-      'Keywords' => array("TODO KEYWORD SITO", "TODO KEYWORD 2", "TODO KEYWORD 3")
+      'Keywords' => array("TODO KEYWORD SITO", "TODO KEYWORD 2", "TODO KEYWORD 3"),
+      'Stylesheets' => array("lib/css/wrong_path_style.css")
    );
 
     public static function getHead($contesto)
     {
 
        #DOCTYPE
-       printf("%s\n", "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>");
-
-       #INIZIO HEAD
-       printf("%s\n", "<head>");
+       $Doctype = "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>";
 
        #CHARSET
-       printf("%s\n", "<meta http-equiv='Content-Type' content='txt/html' charset='utf-8'>");
+       $Charset = "<meta http-equiv='Content-Type' content='txt/html' charset='utf-8'>";
 
        #TAG TITLE
-       Head::getTitle($contesto);
+       $TagTitle = Head::getTitle($contesto);
 
        #META name="title"
-       Head::getMetaTitle($contesto);
+       $MetaTitle = Head::getMetaTitle($contesto);
 
        #META name="description"
-       Head::getMetaDescription($contesto);
+       $MetaName = Head::getMetaDescription($contesto);
 
        #META name="keywords"
-       Head::getMetaKeywords($contesto);
+       $MetaKeywords = Head::getMetaKeywords($contesto);
 
        #META name="viewport"
-       printf("%s\n", "<meta name='viewport' content='width=device-width, initial-scale=1.0'>");
-
+       $MetaViewport = "<meta name='viewport' content='width=device-width, initial-scale=1.0'>";
 
        #ICONA BOOKMARK
-       printf("%s\n", "<link rel='shortcut icon' href='images/icon.ico' />");
+       $BookmarkIcon = "<link rel='icon' type='img/png' href='images/icon.ico' />";
 
        #STYLESHEETS
-       printf("%s\n", "<link rel='stylesheet' href='/lib/css/style.css' />");
+       $Stylesheets = Head::getStylesheets($contesto);
 
        #PARAMETRI AGGIUNTIVI
        #Attenzione! Stampa tutto il contenuto di $contesto['Extra'] con "\n" alla fine di ogni elemento
-       Head::getExtraTags($contesto);
+       $Extra = Head::getExtraTags($contesto);
 
-       #FINE HEAD
-       printf("%s\n", "</head>");
+        return array('Doctype' => $Doctype, 'Charset' => $Charset, 'TagTitle' => $TagTitle, 'MetaTitle' => $MetaTitle, 'MetaName' => $MetaName, 'MetaKeywords' => $MetaKeywords, 'MetaViewport' => $MetaViewport, 'BookmarkIcon' => $BookmarkIcon, 'Stylesheets' => $MainStylesheet, 'Extra' => $Extra);
     }
 
     #Genera il tag <title>
     private function getTitle($contesto)
     {
-        printf("<title>%s</title>\n", isset($contesto) && isset($contesto['Titolo'])?$contesto['Titolo']:Head::$contestoDefault['Titolo']);
+        return isset($contesto) && isset($contesto['Titolo']) ?
+            "<title>".$contesto['Titolo']."</title>" :
+            Head::$contestoDefault['Titolo'];
     }
 
     #Genera il tag <meta name="title">
     private function getMetaTitle($contesto)
     {
-        printf("<meta name='title' content='%s' />\n", isset($contesto) && isset($contesto['DescrizioneBreve']) ? $contesto['DescrizioneBreve'] : Head::$contestoDefault['DescrizioneBreve']);
+        return isset($contesto) && isset($contesto['DescrizioneBreve']) ?
+            "<meta name='title' content='".$contesto['DescrizioneBreve']."' />" :
+            Head::$contestoDefault['DescrizioneBreve'];
     }
 
     #Genera il tag <meta name="description">
     private function getMetaDescription($contesto)
     {
-        printf("<meta name='description' content='%s' />\n", isset($contesto) && isset($contesto['Descrizione']) ? $contesto['Descrizi../lib/cssone'] : Head::$contestoDefault['Descrizione']);
+        return isset($contesto) && isset($contesto['Descrizione']) ?
+        "<meta name='description' content='".$contesto['Descrizione']."' />" :
+        Head::$contestoDefault['Descrizione'];
     }
 
     #Genera il tag <meta name="keywords">
     private function getMetaKeywords($contesto)
     {
         $keywords = isset($contesto) && isset($contesto['Keywords']) ? $contesto['Keywords'] : Head::$contestoDefault['Keywords'];
-        $string = implode(", ", $keywords);
-        printf("<meta name='keywords' content='%s' />\n", $string);
+        return "<meta name='keywords' content='".implode(", ", $keywords)."' />";
+    }
+
+    private function getStylesheets($contesto)
+    {
+        var_dump(isset($contesto) && isset($contesto['Stylesheets']));
+
+        $fileNames = isset($contesto) && isset($contesto['Stylesheets']) ? $contesto['Stylesheets'] : (isset(Head::$contestoDefault) && isset(Head::$contestoDefault['Stylesheets']) ? Head::$contestoDefault['Stylesheets'] : array());
+
+        $relStylesheetPath = realpath(dirname(__FILE__, 2))."/";
+        $results = array();
+
+        var_dump($fileNames);
+
+        foreach ($fileNames as $key => $fileName) {
+            array_push($results, "<link type='text/css' rel='stylesheet' href='" . $relStylesheetPath . $fileName . "' />");
+        }
+
+        //TODO debug
+        var_dump($results);
+
+        return $results;
     }
 
     #Gerena i tag aggiuntivi passati come Extra
     private function getExtraTags($contesto)
     {
-        printf(isset($contesto) && isset($contesto['Extra']) ? implode("\n", $contesto['Extra'])."\n" : "");
+        return isset($contesto) && isset($contesto['Extra']) ? $contesto['Extra'] : null;
     }
 }
