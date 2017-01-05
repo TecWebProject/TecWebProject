@@ -115,7 +115,7 @@ class Head
 
         if (!is_array($fileNames)) {
             if (!file_exists($relStylesheetPath . $fileNames)) {
-                error_log("Stylesheet not found");
+                error_log("Stylesheet $fileNames not found");
                 $results =  null;
             } else {
                 $results = array("<link type='text/css' rel='stylesheet' href='" . $relStylesheetPath . $fileNames . "' />");
@@ -124,10 +124,14 @@ class Head
             $results = array();
 
             foreach ($fileNames as $key => $fileName) {
-                array_push($results, "<link type='text/css' rel='stylesheet' href='" . $relStylesheetPath . $fileName . "' />");
+                if (!file_exists($relStylesheetPath . $fileName)) {
+                    error_log("Stylesheet $fileName not found");
+                } else {
+                    array_push($results, "<link type='text/css' rel='stylesheet' href='" . $relStylesheetPath . $fileName . "' />");
+                }
             }
         }
-        
+
         return $results;
     }
 
