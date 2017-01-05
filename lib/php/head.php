@@ -9,26 +9,7 @@
         Keyowrds            -   Nel meta keywords
 */
 // ESEMPIO
-var_dump(
-   Head::getHead(
-      array(
-         'Titolo' => "PASS TODO Nome Sito",
-         'DescrizioneBreve' => "PASS TODO Descrizione breve",
-         'Descrizione' => "PASS TODO Descrizione pagina",
-         'Keywords' => array(
-            "PASS TODO KEYWORD SITO",
-            "PASS TODO KEYWORD 2",
-            "PASS TODO KEYWORD 3"
-         ),
-         'BookmarkIcon' => 'icon.png',
-         'Stylesheets' => array("style.css"),
-         'Extra' => array(
-            "<link type='text/css' rel='stylesheet' href='lib/css/styleStampa.css' />",
-            "<link type='text/css' rel='stylesheet' href='lib/css/styleSmartphone.css' />"
-         )
-      )
-   )
-);
+//var_dump(Head::getHead(array('Titolo' => "PASS TODO Nome Sito", 'DescrizioneBreve' => "PASS TODO Descrizione breve", 'Descrizione' => "PASS TODO Descrizione pagina", 'Keywords' => array( "PASS TODO KEYWORD SITO", "PASS TODO KEYWORD 2", "PASS TODO KEYWORD 3" ), 'BookmarkIcon' => 'icon.png', 'Stylesheets' => array("style.css"), 'Extra' => array( "<link type='text/css' rel='stylesheet' href='lib/css/styleStampa.css' />", "<link type='text/css' rel='stylesheet' href='lib/css/styleSmartphone.css' />" ))));
 
 class Head
 {
@@ -116,7 +97,7 @@ class Head
     # Genera il tag link per la feedicon
     private static function getIcon($contesto)
     {
-      # Get icon from contesto
+        # Get icon from contesto
         if (isset($contesto) && isset($contesto['BookmarkIcon'])) {
             $iconName = $contesto['BookmarkIcon'];
         } elseif (isset($contestoDefault) && isset($contestoDefault['BookmarkIcon'])) {
@@ -159,35 +140,52 @@ class Head
 
     private static function getStylesheets($contesto)
     {
+        # Get all file names
         $fileNames = isset($contesto) && isset($contesto['Stylesheets']) ? $contesto['Stylesheets'] : (isset(Head::$contestoDefault) && isset(Head::$contestoDefault['Stylesheets']) ? Head::$contestoDefault['Stylesheets'] : array());
 
+        # Get realpath
         $relStylesheetPath = realpath(dirname(__FILE__, 2))."/";
 
+        # Check if array or silngle string
         if (!is_array($fileNames)) {
-            if (!file_exists($relStylesheetPath . $fileNames)) {
-                error_log("Stylesheet $fileNames not found");
-                $results =  null;
-            } else {
-                $results = array("<link type='text/css' rel='stylesheet' href='" . $relStylesheetPath . $fileNames . "' />");
-            }
+
+           # String
+           if (!file_exists($relStylesheetPath . $fileNames)) {
+               # File missing
+               error_log("Stylesheet $fileNames not found");
+               $results =  null;
+           } else {
+               # File found
+               $results = array("<link type='text/css' rel='stylesheet' href='" . $relStylesheetPath . $fileNames . "' />");
+           }
         } else {
+
+            # Array
             $results = array();
 
             foreach ($fileNames as $key => $fileName) {
+
+                # For each file
                 if (!file_exists($relStylesheetPath . $fileName)) {
+
+                    # File missing
                     error_log("Stylesheet $fileName not found");
                 } else {
+
+                    # File founds
                     array_push($results, "<link type='text/css' rel='stylesheet' href='" . $relStylesheetPath . $fileName . "' />");
                 }
             }
         }
 
+        # Return all strings generated
         return $results;
     }
 
     #Gerena i tag aggiuntivi passati come Extra
     private static function getExtraTags($contesto)
     {
+        # Returns all extra tags found
         return isset($contesto) && isset($contesto['Extra']) ? $contesto['Extra'] : null;
     }
 }
