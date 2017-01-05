@@ -1,15 +1,19 @@
 <?php
 
 /*
-    Stampa l'head delle pagine in base al contesto passato come parametro.
-    Contesto è un array asociativo con i seguenti parametri:
-        Titolo              -   Nel tag title
-        DescrizioneBreve    -   Nel meta title
-        Descrizione         -   Nel meta description
-        Keyowrds            -   Nel meta keywords
+   Ritorna l'array delle stringhe dell'head delle pagine in base al contesto passato come
+   parametro. Contesto è un array asociativo con i seguenti parametri:
+      Titolo               -  Testo nel tag title
+      DescrizioneBreve     -  Testo nel tag meta title
+      Descrizione          -  Testo nel tag meta description
+      Keywords             -  Array di stringhe delle keyword nel tag meta keywords
+      BookmarkIcon         -  Nome del file dell'icona
+      Stylesheets          -  Array di stringhe (o singola stringa) dei file stylesheet del documento
+   Se non viene passato uno degli argomenti, il relativo risultato sarà NULL
 */
+
 // ESEMPIO
-//var_dump(Head::getHead(array('Titolo' => "PASS TODO Nome Sito", 'DescrizioneBreve' => "PASS TODO Descrizione breve", 'Descrizione' => "PASS TODO Descrizione pagina", 'Keywords' => array( "PASS TODO KEYWORD SITO", "PASS TODO KEYWORD 2", "PASS TODO KEYWORD 3" ), 'BookmarkIcon' => 'icon.png', 'Stylesheets' => array("style.css"), 'Extra' => array( "<link type='text/css' rel='stylesheet' href='lib/css/styleStampa.css' />", "<link type='text/css' rel='stylesheet' href='lib/css/styleSmartphone.css' />" ))));
+//var_dump(Head::getHead(array('Titolo' => "PASS TODO Nome Sito", 'DescrizioneBreve' => "PASS TODO Descrizione breve", 'Descrizione' => "PASS TODO Descrizione pagina", 'Keywords' => array("PASS TODO KEYWORD 1","PASS TODO KEYWORD 2","PASS TODO KEYWORD 3"), 'BookmarkIcon' => 'icon.png', 'Stylesheets' => array("style.css"), 'Extra' => array( "<link type='text/css' rel='stylesheet' href='lib/css/styleStampa.css' />", "<link type='text/css' rel='stylesheet' href='lib/css/styleSmartphone.css' />" ))));
 
 class Head
 {
@@ -87,9 +91,14 @@ class Head
     private static function getMetaKeywords($contesto)
     {
         $keywords = isset($contesto) && isset($contesto['Keywords']) ? $contesto['Keywords'] : Head::$contestoDefault['Keywords'];
-        if (count($keywords) > 0) {
+        if (!is_array($keywords)) {
+            # String
+            return "<meta name='keywords' content='".$keywords."' />";
+        } elseif (count($keywords) > 0) {
+            # Array of strings
             return "<meta name='keywords' content='".implode(", ", $keywords)."' />";
         } else {
+            # None
             return null;
         }
     }
