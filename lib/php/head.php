@@ -20,7 +20,7 @@ var_dump(
             "PASS TODO KEYWORD 2",
             "PASS TODO KEYWORD 3"
          ),
-         'Stylesheets' => array("style.css"),
+         'Stylesheets' => array("style.css", "oldStyle.css"),
          'Extra' => array(
             "<link type='text/css' rel='stylesheet' href='lib/css/styleStampa.css' />",
             "<link type='text/css' rel='stylesheet' href='lib/css/styleSmartphone.css' />"
@@ -36,7 +36,7 @@ class Head
       'DescrizioneBreve' => "TODO Descrizione breve",
       'Descrizione' => "TODO Descrizione pagina",
       'Keywords' => array("TODO KEYWORD SITO", "TODO KEYWORD 2", "TODO KEYWORD 3"),
-      'Stylesheets' => array("lib/css/wrong_path_style.css")
+      'Stylesheets' => array("wrong_path_style.css")
    );
 
     public static function getHead($contesto)
@@ -73,7 +73,7 @@ class Head
        #Attenzione! Stampa tutto il contenuto di $contesto['Extra'] con "\n" alla fine di ogni elemento
        $Extra = Head::getExtraTags($contesto);
 
-        return array('Doctype' => $Doctype, 'Charset' => $Charset, 'TagTitle' => $TagTitle, 'MetaTitle' => $MetaTitle, 'MetaName' => $MetaName, 'MetaKeywords' => $MetaKeywords, 'MetaViewport' => $MetaViewport, 'BookmarkIcon' => $BookmarkIcon, 'Stylesheets' => $MainStylesheet, 'Extra' => $Extra);
+        return array('Doctype' => $Doctype, 'Charset' => $Charset, 'TagTitle' => $TagTitle, 'MetaTitle' => $MetaTitle, 'MetaName' => $MetaName, 'MetaKeywords' => $MetaKeywords, 'MetaViewport' => $MetaViewport, 'BookmarkIcon' => $BookmarkIcon, 'Stylesheets' => $Stylesheets, 'Extra' => $Extra);
     }
 
     #Genera il tag <title>
@@ -109,22 +109,25 @@ class Head
 
     private function getStylesheets($contesto)
     {
-        var_dump(isset($contesto) && isset($contesto['Stylesheets']));
-
         $fileNames = isset($contesto) && isset($contesto['Stylesheets']) ? $contesto['Stylesheets'] : (isset(Head::$contestoDefault) && isset(Head::$contestoDefault['Stylesheets']) ? Head::$contestoDefault['Stylesheets'] : array());
 
         $relStylesheetPath = realpath(dirname(__FILE__, 2))."/";
-        $results = array();
 
-        var_dump($fileNames);
+        if (!is_array($fileNames)) {
+            if (!file_exists($relStylesheetPath . $fileNames)) {
+                error_log("Stylesheet not found");
+                $results =  null;
+            } else {
+                $results = array("<link type='text/css' rel='stylesheet' href='" . $relStylesheetPath . $fileNames . "' />");
+            }
+        } else {
+            $results = array();
 
-        foreach ($fileNames as $key => $fileName) {
-            array_push($results, "<link type='text/css' rel='stylesheet' href='" . $relStylesheetPath . $fileName . "' />");
+            foreach ($fileNames as $key => $fileName) {
+                array_push($results, "<link type='text/css' rel='stylesheet' href='" . $relStylesheetPath . $fileName . "' />");
+            }
         }
-
-        //TODO debug
-        var_dump($results);
-
+        
         return $results;
     }
 
