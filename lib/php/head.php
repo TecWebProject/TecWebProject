@@ -29,6 +29,20 @@ class Head
 		'Stylesheets' => array("wrong_path_style.css")
 	);
 
+	public static function getString($contesto) {
+		$string = '';
+		$array = getHead($contesto);
+		foreach ($array as $value) {
+			if (!is_array($val)) {
+				$string .= $val;
+			} else {
+				foreach ($val as $el) {
+					$string .= $el;
+			}
+		}
+		return $string;
+	}
+
 	public static function getHead($contesto) {
 
 		# DOCTYPE
