@@ -44,6 +44,7 @@ class Start
 			} else {
 				foreach ($val as $el) {
 					$string .= $el;
+				}
 			}
 		}
 		return $string;
