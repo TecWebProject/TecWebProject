@@ -87,28 +87,46 @@ class Start
 		# Attenzione! Stampa tutto il contenuto di $contesto['Extra'] con "\n" alla fine di ogni elemento
 		$Extra = Start::getExtraTags($contesto);
 
+		# RETURN RESULTS
 		return array('Doctype' => $Doctype, 'Charset' => $Charset, 'TagTitle' => $TagTitle, 'MetaTitle' => $MetaTitle, 'MetaDescription' => $MetaDescription, 'MetaAuthor' => $MetaAuthor, 'MetaKeywords' => $MetaKeywords, 'MetaViewport' => $MetaViewport, 'BookmarkIcon' => $BookmarkIcon, 'Stylesheets' => $Stylesheets, 'Extra' => $Extra);
 	}
 
 	# Genera il tag <title>
 	private static function getTitle($contesto) {
-		return isset($contesto) && isset($contesto['Titolo']) ?
-			"<title>".$contesto['Titolo']."</title>" :
-			$contestoDefault['Titolo'];
+		$title = isset($contesto) && isset($contesto['Titolo']) ? $contesto['Titolo'] : (isset($contestoDefault) && isset($contestoDefault['Titolo']) ? $contestoDefault['Titolo'] : null);
+
+		 if($title == null){
+			 error_log("Missing Titolo");
+			 return $title;
+		 }
+
+		 return "<title>".$title."</title>";
 	}
 
 	# Genera il tag <meta name="title">
 	private static function getMetaTitle($contesto) {
-		return isset($contesto) && isset($contesto['DescrizioneBreve']) ?
-			"<meta name='title' content='".$contesto['DescrizioneBreve']."' />" :
-			$contestoDefault['DescrizioneBreve'];
+
+		$title = isset($contesto) && isset($contesto['DescrizioneBreve']) ? $contesto['DescrizioneBreve'] : (isset($contestoDefault) && isset($contestoDefault['DescrizioneBreve']) ? $contestoDefault['DescrizioneBreve'] : null);
+
+		 if($title == null){
+			 error_log("Missing DescrizioneBreve");
+			 return $title;
+		 }
+
+		 return "<meta name='title' content='".$title."' />";
 	}
 
 	# Genera il tag <meta name="description">
 	private static function getMetaDescription($contesto) {
-		return isset($contesto) && isset($contesto['Descrizione']) ?
-			"<meta name='description' content='".$contesto['Descrizione']."' />" :
-			$contestoDefault['Descrizione'];
+
+		$description = isset($contesto) && isset($contesto['Descrizione']) ? $contesto['Descrizione'] : (isset($contestoDefault) && isset($contestoDefault['Descrizione']) ? $contestoDefault['Descrizione'] : null);
+
+		 if($description == null){
+			 error_log("Missing Descrizione");
+			 return $description;
+		 }
+
+		 return "<meta name='description' content='".$description."' />";
 	}
 
 	# Genera il tag <meta name="author">
@@ -125,13 +143,14 @@ class Start
 			return "<meta name='author' content='".implode(", ", $authors)."' />";
 		} else {
 			# None
+			error_log("Missing Author");
 			return null;
 		}
 	}
 
 	# Genera il tag <meta name="keywords">
 	private static function getMetaKeywords($contesto) {
-		$keywords = isset($contesto) && isset($contesto['Keywords']) ? $contesto['Keywords'] : $contestoDefault['Keywords'];
+		$keywords = isset($contesto) && isset($contesto['Keywords']) ? $contesto['Keywords'] : (isset($contestoDefault) && isset($contestoDefault['Keywords']) ? $contestoDefault['Keywords'] : null);
 		if (!is_array($keywords)) {
 			# String
 			return "<meta name='keywords' content='".$keywords."' />";
@@ -140,6 +159,7 @@ class Start
 			return "<meta name='keywords' content='".implode(", ", $keywords)."' />";
 		} else {
 			# None
+			error_log("Missing Keywords");
 			return null;
 		}
 	}
