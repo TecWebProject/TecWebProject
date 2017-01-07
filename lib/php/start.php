@@ -32,18 +32,18 @@ class Start
 
 	# fornisce l'intestazione
 	public static function getHead($contesto) {
-		$string = '';
-		$array = Start::getArray($contesto);
-		foreach ($array as $value) {
-			if (!is_array($val)) {
-				$string .= $val;
+		return Start::printArrayRec(Start::getArray($contesto));
+	}
+
+	private static function printArrayRec($array){
+		$resut = "";
+		foreach ($array as $key => $value) {
+			if(is_array($value)){
+				Start::printArrayRec($value);
 			} else {
-				foreach ($val as $el) {
-					$string .= $el;
-				}
+				$resut .= $value . "\n";
 			}
 		}
-		return $string;
 	}
 
 	# fornisce un array associativo con Doctype + head
@@ -89,7 +89,7 @@ class Start
 
 	# Genera il tag <title>
 	private static function getTitle($contesto) {
-		$title = isset($contesto) && isset($contesto['Titolo']) ? $contesto['Titolo'] : (isset($contestoDefault) && isset($contestoDefault['Titolo']) ? $contestoDefault['Titolo'] : null);
+		$title = isset($contesto) && isset($contesto['Titolo']) ? $contesto['Titolo'] : (isset(Start::$contestoDefault) && isset(Start::$contestoDefault['Titolo']) ? Start::$contestoDefault['Titolo'] : null);
 
 		 if($title == null){
 			 error_log("Missing Titolo");
@@ -102,7 +102,7 @@ class Start
 	# Genera il tag <meta name="title">
 	private static function getMetaTitle($contesto) {
 
-		$title = isset($contesto) && isset($contesto['DescrizioneBreve']) ? $contesto['DescrizioneBreve'] : (isset($contestoDefault) && isset($contestoDefault['DescrizioneBreve']) ? $contestoDefault['DescrizioneBreve'] : null);
+		$title = isset($contesto) && isset($contesto['DescrizioneBreve']) ? $contesto['DescrizioneBreve'] : (isset(Start::$contestoDefault) && isset(Start::$contestoDefault['DescrizioneBreve']) ? Start::$contestoDefault['DescrizioneBreve'] : null);
 
 		 if($title == null){
 			 error_log("Missing DescrizioneBreve");
@@ -115,7 +115,7 @@ class Start
 	# Genera il tag <meta name="description">
 	private static function getMetaDescription($contesto) {
 
-		$description = isset($contesto) && isset($contesto['Descrizione']) ? $contesto['Descrizione'] : (isset($contestoDefault) && isset($contestoDefault['Descrizione']) ? $contestoDefault['Descrizione'] : null);
+		$description = isset($contesto) && isset($contesto['Descrizione']) ? $contesto['Descrizione'] : (isset(Start::$contestoDefault) && isset(Start::$contestoDefault['Descrizione']) ? Start::$contestoDefault['Descrizione'] : null);
 
 		 if($description == null){
 			 error_log("Missing Descrizione");
@@ -129,7 +129,7 @@ class Start
 	private static function getMetaAuthor($contesto) {
 
 		# Get authors
-		$authors = isset($contesto) && isset($contesto['Author']) ? $contesto['Author'] : (isset($contestoDefault) && isset($contestoDefault['Author']) ? $contestoDefault['Author'] : null);
+		$authors = isset($contesto) && isset($contesto['Author']) ? $contesto['Author'] : (isset(Start::$contestoDefault) && isset(Start::$contestoDefault['Author']) ? Start::$contestoDefault['Author'] : null);
 
 		if (!is_array($authors)) {
 			# String
@@ -146,7 +146,7 @@ class Start
 
 	# Genera il tag <meta name="keywords">
 	private static function getMetaKeywords($contesto) {
-		$keywords = isset($contesto) && isset($contesto['Keywords']) ? $contesto['Keywords'] : (isset($contestoDefault) && isset($contestoDefault['Keywords']) ? $contestoDefault['Keywords'] : null);
+		$keywords = isset($contesto) && isset($contesto['Keywords']) ? $contesto['Keywords'] : (isset(Start::$contestoDefault) && isset(Start::$contestoDefault['Keywords']) ? Start::$contestoDefault['Keywords'] : null);
 		if (!is_array($keywords)) {
 			# String
 			return "<meta name='keywords' content='".$keywords."' />";
@@ -163,7 +163,7 @@ class Start
 	# Genera il tag link per la feedicon
 	private static function getIcon($contesto) {
 		# Get icon from contesto
-		$iconName = isset($contesto) && isset($contesto['BookmarkIcon']) ? $contesto['BookmarkIcon'] : (isset($contestoDefault) && isset($contestoDefault['BookmarkIcon']) ? $contestoDefault['BookmarkIcon'] : null);
+		$iconName = isset($contesto) && isset($contesto['BookmarkIcon']) ? $contesto['BookmarkIcon'] : (isset(Start::$contestoDefault) && isset(Start::$contestoDefault['BookmarkIcon']) ? Start::$contestoDefault['BookmarkIcon'] : null);
 
 		# Abbsolute path to the file which called this script
 		$stack = debug_backtrace();
@@ -207,7 +207,7 @@ class Start
 	# Genera i fogli di stile
 	private static function getStylesheets($contesto) {
 		# Get all file names
-		$fileNames = isset($contesto) && isset($contesto['Stylesheets']) ? $contesto['Stylesheets'] : (isset($contestoDefault) && isset($contestoDefault['Stylesheets']) ? $contestoDefault['Stylesheets'] : array());
+		$fileNames = isset($contesto) && isset($contesto['Stylesheets']) ? $contesto['Stylesheets'] : (isset(Start::$contestoDefault) && isset(Start::$contestoDefault['Stylesheets']) ? Start::$contestoDefault['Stylesheets'] : array());
 
 		# Abbsolute path to the file which called this script
 		$stack = debug_backtrace();
