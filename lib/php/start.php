@@ -214,20 +214,27 @@ class Start
 		# Get all file names
 		$fileNames = isset($contesto) && isset($contesto['Stylesheets']) ? $contesto['Stylesheets'] : (isset($contestoDefault) && isset($contestoDefault['Stylesheets']) ? $contestoDefault['Stylesheets'] : array());
 
-		# Get realpath
-		$relStylesheetPath = realpath(dirname(__FILE__, 2)) . "/";
+		# Abbsolute path to the file which called this script
+		$stack = debug_backtrace();
+		$executionFilePath = $stack[count($stack) - 1]["file"];
+
+		# Abbsolute path to stylesheets folder
+		$absCSSPath = realpath(dirname(__FILE__,2))."/css/";
+
+		# Relative path to images folder
+		$relativePathToCSS = Paths::getRelativePath($executionFilePath,$absCSSPath);
 
 		# Check if array or single string
 		if (!is_array($fileNames)) {
 
 			# String
-			if (!file_exists($relStylesheetPath . $fileNames)) {
+			if (!file_exists($absCSSPath . $fileNames)) {
 				# File missing
 				error_log("Stylesheet $fileNames not found");
 				$results =  null;
 			} else {
 				# File found
-				$results = array("<link type='text/css' rel='stylesheet' href='" . $relStylesheetPath . $fileNames . "' />");
+				$results = array("<link type='text/css' rel='stylesheet' href='" . $relativePathToCSS . $fileNames . "' />");
 			}
 		} else {
 
@@ -237,14 +244,14 @@ class Start
 			foreach ($fileNames as $key => $fileName) {
 
 				# For each file
-				if (!file_exists($relStylesheetPath . $fileName)) {
+				if (!file_exists($absCSSPath . $fileName)) {
 
 					# File missing
 					error_log("Stylesheet $fileName not found");
 				} else {
 
 					# File found
-					array_push($results, "<link type='text/css' rel='stylesheet' href='" . $relStylesheetPath . $fileName . "' />");
+					array_push($results, "<link type='text/css' rel='stylesheet' href='" . $relativePathToCSS . $fileName . "' />");
 				}
 			}
 		}
