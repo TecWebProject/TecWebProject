@@ -1,5 +1,6 @@
 <?php
 
+require_once(realpath(dirname(__FILE__))."/paths.php");
 /*
 	Ritorna l'array delle stringhe dell'head delle pagine in base
 	al contesto passato come parametro. Contesto è un array
@@ -167,19 +168,20 @@ class Start
 	# Genera il tag link per la feedicon
 	private static function getIcon($contesto) {
 		# Get icon from contesto
-		if (isset($contesto) && isset($contesto['BookmarkIcon'])) {
-			$iconName = $contesto['BookmarkIcon'];
-		} elseif (isset($contestoDefault) && isset($contestoDefault['BookmarkIcon'])) {
-			$iconName = $contestoDefault['BookmarkIcon'];
-		} else {
-			$iconName = null;
-		}
+		$iconName = isset($contesto) && isset($contesto['BookmarkIcon']) ? $contesto['BookmarkIcon'] : (isset($contestoDefault) && isset($contestoDefault['BookmarkIcon']) ? $contestoDefault['BookmarkIcon'] : null);
+
+		# Abbsolute path to the file which called this script
+		$stack = debug_backtrace();
+		$executionFilePath = $stack[count($stack) - 1]["file"];
 
 		# Abbsolute path to images folder
-		$relImagesPath = realpath(dirname(__FILE__, 3))."/images/";
+		$absImagesPath = realpath(dirname(__FILE__, 3))."/images/";
+
+		# Relative path to images folder
+		$relativePathToImages = Paths::getRelativePath($executionFilePath,$absImagesPath);
 
 		# Find icon type
-		switch (pathinfo($relImagesPath.$iconName, PATHINFO_EXTENSION)) {
+		switch (pathinfo($absImagesPath.$iconName, PATHINFO_EXTENSION)) {
 			case 'png':
 				$iconType = "img/png";
 				break;
@@ -197,10 +199,10 @@ class Start
 
 		# If all necessary data is found generates the string, else report error
 		if (isset($iconName) && isset($iconType)) {
-			if (!file_exists($relImagesPath.$iconName)) {
+			if (!file_exists($absImagesPath.$iconName)) {
 				error_log("Icon $iconName missing");
 			} else {
-				return "<link rel='icon' type='".$iconType."' href='".$relImagesPath.$iconName."' />";
+				return "<link rel='icon' type='".$iconType."' href='".$relativePathToImages.$iconName."' />";
 			}
 		} else {
 			return null;
