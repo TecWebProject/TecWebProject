@@ -21,13 +21,8 @@ require_once(realpath(dirname(__FILE__))."/paths.php");
 class Start
 {
 	private static $contestoDefault = array(
-		'Titolo' => "TODO Nome Sito",
-		'DescrizioneBreve' => "TODO Descrizione breve",
-		'Descrizione' => "TODO Descrizione pagina",
-		'Author' => array("Derek Toninato", "Filippo Berto", "Francesco Pezzuto", "Giorgio Giuffrè"),
-		'Keywords' => array("TODO KEYWORD SITO", "TODO KEYWORD 2", "TODO KEYWORD 3"),
-		'BookmarkIcon' => 'missing_icon.png',
-		'Stylesheets' => array("wrong_path_style.css")
+		'Titolo' => "BandBoard",
+		'Author' => array("Derek Toninato", "Filippo Berto", "Francesco Pezzuto", "Giorgio Giuffrè")
 	);
 
 	# fornisce il Doctype
