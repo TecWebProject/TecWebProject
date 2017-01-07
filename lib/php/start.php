@@ -37,7 +37,7 @@ class Start
 	# fornisce l'intestazione
 	public static function getHead($contesto) {
 		$string = '';
-		$array = getArray($contesto);
+		$array = Start::getArray($contesto);
 		foreach ($array as $value) {
 			if (!is_array($val)) {
 				$string .= $val;
@@ -54,38 +54,38 @@ class Start
 	public static function getArray($contesto) {
 
 		# DOCTYPE
-		$Doctype = getDoctype();
+		$Doctype = Start::getDoctype();
 
 		# CHARSET
 		$Charset = "<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />";
 
 		# TITLE
-		$TagTitle = getTitle($contesto);
+		$TagTitle = Start::getTitle($contesto);
 
 		# META name="title"
-		$MetaTitle = getMetaTitle($contesto);
+		$MetaTitle = Start::getMetaTitle($contesto);
 
 		# META name="description"
-		$MetaDescription = getMetaDescription($contesto);
+		$MetaDescription = Start::getMetaDescription($contesto);
 
 		# META name="author"
-		$MetaAuthor = getMetaAuthor($contesto);
+		$MetaAuthor = Start::getMetaAuthor($contesto);
 
 		# META name="keywords"
-		$MetaKeywords = getMetaKeywords($contesto);
+		$MetaKeywords = Start::getMetaKeywords($contesto);
 
 		# META name="viewport"
 		$MetaViewport = "<meta name='viewport' content='width=device-width, initial-scale=1.0' />";
 
 		# ICONA BOOKMARK
-		$BookmarkIcon = getIcon($contesto);
+		$BookmarkIcon = Start::getIcon($contesto);
 
 		# STYLESHEETS
-		$Stylesheets = getStylesheets($contesto);
+		$Stylesheets = Start::getStylesheets($contesto);
 
 		# PARAMETRI AGGIUNTIVI
 		# Attenzione! Stampa tutto il contenuto di $contesto['Extra'] con "\n" alla fine di ogni elemento
-		$Extra = getExtraTags($contesto);
+		$Extra = Start::getExtraTags($contesto);
 
 		return array('Doctype' => $Doctype, 'Charset' => $Charset, 'TagTitle' => $TagTitle, 'MetaTitle' => $MetaTitle, 'MetaDescription' => $MetaDescription, 'MetaAuthor' => $MetaAuthor, 'MetaKeywords' => $MetaKeywords, 'MetaViewport' => $MetaViewport, 'BookmarkIcon' => $BookmarkIcon, 'Stylesheets' => $Stylesheets, 'Extra' => $Extra);
 	}
