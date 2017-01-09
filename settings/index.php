@@ -58,9 +58,9 @@ require_once realpath(dirname(__FILE__)) . '/../lib/php/menu.php';
                 <fieldset>
                     <legend>Dati obbligatori</legend>
                     <ul>
-                        <li><label for="modUsername">Username</label><input id="modUsername" placeholder="username" /><p id="errorModUsername"></p></li>
-                        <li><label for="modEmail">Email</label><input id="modEmail" type="email" placeholder="email" /><p id="errorModEmail"></p></li>
-                        <li><label for="modDataNascita">Data di nascita</label><input id="modDataNascita" type="date" placeholder="gg/mm/aaaa" /><p id="errorModDataNascita"></p></li>
+                        <li><label for="modUsername">Username</label><input id="modUsername" placeholder="username" onblur="checkUsername(this.value,document)" onkeypress="clearError('username')"/><p id="errorModUsername"></p></li>
+                        <li><label for="modEmail">Email</label><input id="modEmail" type="email" placeholder="email" onblur="checkEmail(this.value)" onkeypress="clearError('email')"/><p id="errorModEmail"></p></li>
+                        <li><label for="modDataNascita">Data di nascita</label><input id="modDataNascita" placeholder="gg/mm/aaaa" onchange="checkBDay(this.value)" /><p id="errorModDataNascita"></p></li>
                     </ul>
                 </fieldset>
                 <fieldset>
@@ -84,7 +84,7 @@ require_once realpath(dirname(__FILE__)) . '/../lib/php/menu.php';
                         </li>
                         <li>
                             <label for="modSelectProvincia">Seleziona provincia</label>
-                            <select id="modSelectProvincia" onload="hideProvince()">
+                            <select id="modSelectProvincia">
                                <option value="">Seleziona provincia</option>
                                 <?php
                                 $province = Province::getProvince();
@@ -93,7 +93,7 @@ require_once realpath(dirname(__FILE__)) . '/../lib/php/menu.php';
                                 }
                                 ?>
                             </select>
-                            <script> hideProvince(document); </script>
+                            <script type="text/javascript">clearProvince();</script>
                         </li>
                         <li>
                             <label for="modTextAreaBio">Bio</label><textarea id="modTextAreaBio" cols="40" rows="4" placeholder="Scrivi una breve descrizione di te..."></textarea>
