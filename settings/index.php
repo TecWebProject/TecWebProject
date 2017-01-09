@@ -35,22 +35,23 @@ require_once realpath(dirname(__FILE__)) . '/../lib/php/province.php';
       function showProvince(str) {
          console.log(str);
          if (str == "") {
-            console.log('<option value="">Seleziona provincia</option>');
-            document.getElementById("modSelectProvincia").innerHTML = '<option value="">Seleziona provincia</option>'
+            console.log('str == ""');
+            document.getElementById("modSelectProvincia").innerHTML = '<option value="">Seleziona provincia</option>';
+            document.getElementById("modSelectProvincia").disabled = true;
          } else {
             // IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function() {
                if (this.readyState == 4 && this.status == 200) {
-                  document.getElementById("modSelectProvincia").innerHTML = this.responseText;
+                  document.getElementById("modSelectProvincia").innerHTML = '<option value="">Seleziona provincia</option>' + this.responseText;
+                  document.getElementById("modSelectProvincia").disabled = false;
              }
           };
           xmlhttp.open("GET", "/settings/script_select_provincia.php?regione=" + str, true);
           xmlhttp.send();
+
+          document.getElementById("modSelectProvincia").innerHTML = xmlhttp.response
       }
-
-      document.getElementById("modSelectProvincia").innerHTML = 'xmlhttp.response'
-
    }
     </script>
 
@@ -83,7 +84,7 @@ require_once realpath(dirname(__FILE__)) . '/../lib/php/province.php';
                     <ul>
                         <li><label for="modUsername">Username</label><input id="modUsername" placeholder="username" /></li>
                         <li><label for="modEmail">Email</label><input id="modEmail" type="email" placeholder="email" /></li>
-                        <li><label for="modDataNascita">Data di nascita</label><input id="modDataNascita" type="date" /></li>
+                        <li><label for="modDataNascita">Data di nascita</label><input id="modDataNascita" type="date" placeholder="gg/mm/aaaa" /></li>
                     </ul>
                 </fieldset>
                 <fieldset>
@@ -118,7 +119,8 @@ require_once realpath(dirname(__FILE__)) . '/../lib/php/province.php';
                             </select>
                             <script>
                                (function hideProvince(){
-                                  document.getElementById("modSelectProvincia").innerHTML = '<option value="">Seleziona provincia</option>'
+                                  document.getElementById("modSelectProvincia").innerHTML = '<option value="">Seleziona provincia</option>';
+                                  document.getElementById("modSelectProvincia").disabled = true;
                                })();
                             </script>
                         </li>
