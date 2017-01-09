@@ -1,7 +1,7 @@
 <?php
-require_once(realpath(dirname(__FILE__)) . '/../lib/php/select_provincia.php');
-require_once(realpath(dirname(__FILE__)) . '/../lib/php/regioni.php');
-require_once(realpath(dirname(__FILE__)) . '/../lib/php/province.php');
+require_once realpath(dirname(__FILE__)) . '/../lib/php/select_provincia.php';
+require_once realpath(dirname(__FILE__)) . '/../lib/php/regioni.php';
+require_once realpath(dirname(__FILE__)) . '/../lib/php/province.php';
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -32,21 +32,26 @@ require_once(realpath(dirname(__FILE__)) . '/../lib/php/province.php');
     <link rel="stylesheet" href="../lib/css/style.css" />
 
     <script>
-        function showProvince(str) {
-            if (str = "") {
-                document.getElementById("modSelectProvincia").innerHTML = '<option value="VALORE">Seleziona prima la regione</option>'
-            } else {
-                // IE7+, Firefox, Chrome, Opera, Safari
-                xmlhttp = new XMLHttpRequest();
-                xmlhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                        document.getElementById("modSelectProvincia").innerHTML = this.responseText;
-                    }
-                };
-                xmlhttp.open("GET", "/lib/php/select_provincia.php?q=" + str, true);
-                xmlhttp.send();
-            }
-        }
+      function showProvince(str) {
+         console.log(str);
+         if (str == "") {
+            console.log('<option value="">Seleziona provincia</option>');
+            document.getElementById("modSelectProvincia").innerHTML = '<option value="">Seleziona provincia</option>'
+         } else {
+            // IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+               if (this.readyState == 4 && this.status == 200) {
+                  document.getElementById("modSelectProvincia").innerHTML = this.responseText;
+             }
+          };
+          xmlhttp.open("GET", "/settings/script_select_provincia.php?regione=" + str, true);
+          xmlhttp.send();
+      }
+
+      document.getElementById("modSelectProvincia").innerHTML = 'xmlhttp.response'
+
+   }
     </script>
 
 </head>
@@ -89,8 +94,8 @@ require_once(realpath(dirname(__FILE__)) . '/../lib/php/province.php');
                         </li>
                         <li>
                             <label for="modSelectRegione">Regione di provenienza</label>
-                            <select id="modSelectRegione">
-                               <option value="NULL">Seleziona regione</option>
+                            <select id="modSelectRegione" onchange="showProvince(this.value)">
+                               <option value="">Seleziona regione</option>
                                 <?php
                                 $regioni = Regioni::getRegioni();
 
@@ -102,15 +107,20 @@ require_once(realpath(dirname(__FILE__)) . '/../lib/php/province.php');
                         </li>
                         <li>
                             <label for="modSelectProvincia">Seleziona provincia</label>
-                            <select id="modSelectProvincia">
-                               <option value="NULL">Seleziona provincia</option>
-                               <?php
-                               $province = Province::getProvince();
-                               foreach ($province as $key => $provincia) {
-                                   printf("<option value='%s'>%s</option>", $provincia['sigla'], $provincia['nome']);
-                               }
-                               ?>
+                            <select id="modSelectProvincia" onload="hideProvince()">
+                               <option value="">Seleziona provincia</option>
+                                <?php
+                                $province = Province::getProvince();
+                                foreach ($province as $key => $provincia) {
+                                    printf("<option value='%s'>%s</option>", $provincia['sigla'], $provincia['nome']);
+                                }
+                                ?>
                             </select>
+                            <script>
+                               (function hideProvince(){
+                                  document.getElementById("modSelectProvincia").innerHTML = '<option value="">Seleziona provincia</option>'
+                               })();
+                            </script>
                         </li>
                         <li>
                             <label for="modTextAreaBio"> Bio</label><textarea id="modTextAreaBio" cols="40" rows="4" placeholder="Scrivi una breve descrizione di te..."></textarea>
