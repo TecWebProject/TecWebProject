@@ -2,6 +2,7 @@
 require_once realpath(dirname(__FILE__)) . '/../lib/php/select_provincia.php';
 require_once realpath(dirname(__FILE__)) . '/../lib/php/regioni.php';
 require_once realpath(dirname(__FILE__)) . '/../lib/php/province.php';
+require_once realpath(dirname(__FILE__)) . '/../lib/php/menu.php';
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -40,14 +41,9 @@ require_once realpath(dirname(__FILE__)) . '/../lib/php/province.php';
     <div class="breadcrump">Modifica il tuo profilo</div>
     <!-- TODO sostituire menu con quello autogenerato -->
     <div class="nav">
-        <ul>
-            <li><a href="../index.html">Home</a></li>
-            <li><a href="../search_user/index.html">Cerca utenti</a></li>
-            <li><a href="../search_group/index.html">Cerca gruppi</a></li>
-            <li class="modMenuActualPage">Modifica profilo</li>
-            <!-- TODO codice autogenerato per l'indirizzo -->
-            <li><a href="../user/index.html?user=USER">Mio profilo</a></li>
-        </ul>
+        <?php
+         Menu::getMenu(array("Home","<a href='pagina.html'>Profilo</a>","<a href='pagina.html'>Cerca</a>","<a href='pagina.html'>Band</a>"));
+        ?>
     </div>
     <div class="content">
         <div id="modFotoProfilo">
