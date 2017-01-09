@@ -30,31 +30,7 @@ require_once realpath(dirname(__FILE__)) . '/../lib/php/province.php';
     <!--    <link rel="stylesheet" href="../lib/css/minireset.min.css" />-->
     <!-- link al CSS -->
     <link rel="stylesheet" href="../lib/css/style.css" />
-
-    <script>
-      function showProvince(str) {
-         console.log(str);
-         if (str == "") {
-            console.log('str == ""');
-            document.getElementById("modSelectProvincia").innerHTML = '<option value="">Seleziona provincia</option>';
-            document.getElementById("modSelectProvincia").disabled = true;
-         } else {
-            // IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-            xmlhttp.onreadystatechange = function() {
-               if (this.readyState == 4 && this.status == 200) {
-                  document.getElementById("modSelectProvincia").innerHTML = '<option value="">Seleziona provincia</option>' + this.responseText;
-                  document.getElementById("modSelectProvincia").disabled = false;
-             }
-          };
-          xmlhttp.open("GET", "/settings/script_select_provincia.php?regione=" + str, true);
-          xmlhttp.send();
-
-          document.getElementById("modSelectProvincia").innerHTML = xmlhttp.response
-      }
-   }
-    </script>
-
+    <script src="settings.js" type="text/javascript"></script>
 </head>
 
 <!-- TODO sostituire head con quella autogenerata -->
@@ -117,12 +93,7 @@ require_once realpath(dirname(__FILE__)) . '/../lib/php/province.php';
                                 }
                                 ?>
                             </select>
-                            <script>
-                               (function hideProvince(){
-                                  document.getElementById("modSelectProvincia").innerHTML = '<option value="">Seleziona provincia</option>';
-                                  document.getElementById("modSelectProvincia").disabled = true;
-                               })();
-                            </script>
+                            <script> hideProvince(document); </script>
                         </li>
                         <li>
                             <label for="modTextAreaBio"> Bio</label><textarea id="modTextAreaBio" cols="40" rows="4" placeholder="Scrivi una breve descrizione di te..."></textarea>
