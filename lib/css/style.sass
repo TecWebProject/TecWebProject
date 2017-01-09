@@ -4,6 +4,10 @@ html, body
    height: 100%
    width: 100%
 
+// Menu
+$sfondoMenu: #333
+$coloreScritte: #fff
+
 #menu_check
    position: absolute
    top: 0
@@ -24,7 +28,7 @@ html, body
 
 .nav
    font-family: "Ubuntu",sans-serif
-   background: #333
+   background: $sfondoMenu
    position: fixed
    top: 0
    right: 100%
@@ -39,10 +43,21 @@ html, body
 
       li
          font-weight: bold
-         color: rgba(255, 255, 255, 1)
+         color: $coloreScritte
          margin: 1em
          a
-            color: rgba(255, 255, 255, 0.5)
+            color: transparentize($coloreScritte, 0.5)
             text-decoration: none
             &:hover
-               color: rgba(255, 255, 255, 0.8)
+               color: transparentize($coloreScritte, 0.2)
+
+// Generale
+.content
+   margin: 0 3em
+
+.breadcrump
+   margin: 0 3em
+
+#modSaveButton
+   margin: 0.5em 0.5em
+   float: right
