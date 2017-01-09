@@ -21,7 +21,7 @@
            try {
                mysqli_report(MYSQLI_REPORT_STRICT);
 
-               $query = "SELECT * FROM Provincia ORDER BY Nome";
+               $query = "SELECT * FROM Province ORDER BY Nome";
 
                $_mysqli = dbConnectionData::getMysqli();
 

@@ -93,8 +93,9 @@ require_once(realpath(dirname(__FILE__)) . '/../lib/php/province.php');
                                <option value="NULL">Seleziona regione</option>
                                 <?php
                                 $regioni = Regioni::getRegioni();
+
                                 foreach ($regioni as $key => $regione) {
-                                    printf("<option value='%s'>%s</option>", $regione['AbbNome'], $regione['Nome']);
+                                    printf("<option value='%s'>%s</option>", $regione['nome'], $regione['nome']);
                                 }
                                 ?>
                             </select>
@@ -106,7 +107,7 @@ require_once(realpath(dirname(__FILE__)) . '/../lib/php/province.php');
                                <?php
                                $province = Province::getProvince();
                                foreach ($province as $key => $provincia) {
-                                   printf("<option value='%s'>%s</option>", $provincia['Sigla'], $provincia['Nome']);
+                                   printf("<option value='%s'>%s</option>", $provincia['sigla'], $provincia['nome']);
                                }
                                ?>
                             </select>

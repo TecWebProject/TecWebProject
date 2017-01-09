@@ -23,7 +23,7 @@
            try {
                mysqli_report(MYSQLI_REPORT_STRICT);
 
-               $query = "SELECT Sigla,Nome FROM Provincia WHERE Regione = ? ORDER BY Nome";
+               $query = "SELECT sigla,nome FROM Province WHERE regione = ? ORDER BY Nome";
 
                #Escape dell'input
                $abbRegione = preg_replace('/[^A-Z]+/', "", strtoupper(substr($regione, 0, 3)));
