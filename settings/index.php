@@ -38,7 +38,7 @@ require_once realpath(dirname(__FILE__)) . '/../lib/php/menu.php';
 
 <body>
     <div class="header">Header standard</div>
-    <div class="breadcrump">Modifica il tuo profilo</div>
+    <div class="breadcrump"><h1>Modifica il tuo profilo</h1></div>
     <!-- TODO sostituire menu con quello autogenerato -->
     <div class="nav">
         <?php
@@ -47,23 +47,27 @@ require_once realpath(dirname(__FILE__)) . '/../lib/php/menu.php';
     </div>
     <div class="content">
         <div id="modFotoProfilo">
-            <!-- TODO: Caricare immagine dinamicamente --><img src="../images/fotoProfilo.jpg">
+            <!-- TODO: Caricare immagine dinamicamente -->
+            <label for="modLoadImage">
+               <img src="../images/fotoProfilo.jpg">
+            </label>
         </div>
-        <div>
+        <div id="mod">
             <form action="processer.php" method="post">
+               <fieldset>
                 <fieldset>
                     <legend>Dati obbligatori</legend>
                     <ul>
-                        <li><label for="modUsername">Username</label><input id="modUsername" placeholder="username" /></li>
-                        <li><label for="modEmail">Email</label><input id="modEmail" type="email" placeholder="email" /></li>
-                        <li><label for="modDataNascita">Data di nascita</label><input id="modDataNascita" type="date" placeholder="gg/mm/aaaa" /></li>
+                        <li><label for="modUsername">Username</label><input id="modUsername" placeholder="username" /><p id="errorModUsername"></p></li>
+                        <li><label for="modEmail">Email</label><input id="modEmail" type="email" placeholder="email" /><p id="errorModEmail"></p></li>
+                        <li><label for="modDataNascita">Data di nascita</label><input id="modDataNascita" type="date" placeholder="gg/mm/aaaa" /><p id="errorModDataNascita"></p></li>
                     </ul>
                 </fieldset>
                 <fieldset>
                     <legend>Dati informativi</legend>
                     <ul>
                         <li>
-                            <label for="modLoadImage">Carica immagine profilo</label><input type="file" title="Carica immagine">
+                            <label for="modLoadImage">Carica immagine profilo</label><input id="modLoadImage" type="file" title="Carica immagine"><p id="errorModLoadImage"></p>
                         </li>
                         <li>
                             <label for="modSelectRegione">Regione di provenienza</label>
@@ -92,13 +96,14 @@ require_once realpath(dirname(__FILE__)) . '/../lib/php/menu.php';
                             <script> hideProvince(document); </script>
                         </li>
                         <li>
-                            <label for="modTextAreaBio"> Bio</label><textarea id="modTextAreaBio" cols="40" rows="4" placeholder="Scrivi una breve descrizione di te..."></textarea>
+                            <label for="modTextAreaBio">Bio</label><textarea id="modTextAreaBio" cols="40" rows="4" placeholder="Scrivi una breve descrizione di te..."></textarea>
                         </li>
                     </ul>
                 </fieldset>
                 <fieldset>
                     <legend>Contatti</legend>
-                    <li>
+                  <ul>
+                     <li>
                         <input type="button" value="Aggiungi campo" />
                     </li>
                     <li>
@@ -129,6 +134,7 @@ require_once realpath(dirname(__FILE__)) . '/../lib/php/menu.php';
                         <label for="contatto1campo">Valore</label>
                         <input id="contatto1campo" /> </fieldset>
                 </li>
+                  </ul>
                 <fieldset>
                     <legend>Generi preferiti</legend>
                     <label for="modGenereRock"> Rock </label>
@@ -146,6 +152,7 @@ require_once realpath(dirname(__FILE__)) . '/../lib/php/menu.php';
                     <!-- La lista può essere estesa dinamicamente -->
                 </fieldset>
                 <input id="modSaveButton" type="submit" value="Salva modifiche" />
+             </fieldset>
             </form>
         </div>
     </div>

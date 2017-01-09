@@ -51,7 +51,7 @@ html, body {
 
 .nav ul li {
   font-weight: bold;
-  color: white;
+  color: #fff;
   margin: 1em;
 }
 
@@ -62,4 +62,17 @@ html, body {
 
 .nav ul li a:hover {
   color: rgba(255, 255, 255, 0.8);
+}
+
+.content {
+  margin: 0 3em;
+}
+
+.breadcrump {
+  margin: 0 3em;
+}
+
+#modSaveButton {
+  margin: 0.5em 0.5em;
+  float: right;
 }
