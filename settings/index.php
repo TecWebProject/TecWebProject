@@ -14,6 +14,10 @@ if(!isset($_SESSION['datiUtente'])) {
     $_SESSION['datiUtente'] = Utenti::getDatiUtente($_SESSION['username']);
 }
 
+if(!isset($_SESSION['campiDati'])){
+   $_SESSION['campiDati'] = count($_SESSION['datiUtente']['contatti']);
+}
+
 // var_dump($_SESSION['datiUtente']);
 
 ?>
@@ -71,13 +75,15 @@ if(!isset($_SESSION['datiUtente'])) {
                 <fieldset>
                     <legend>Dati obbligatori</legend>
                     <ul>
-                        <li>Username: <?php echo $_SESSION['datiUtente']['username']?></li>
+                        <li><p>
+                           Username: <?php echo $_SESSION['datiUtente']['username']?>
+                        </p></li>
                         <!-- TODO Nome -->
-                        <!-- <li><label for="modEmail">Nome</label><input id="modEmail" type="email" placeholder="email" onblur="checkEmail(this.value)" onkeypress="clearError('email')"/><p id="errorModEmail"></p></li> -->
+                        <li><label for="modNome">Nome</label><input id="modNome" placeholder="Nome" onblur="checkNome(this.value)" onkeypress="clearError('nome')"/><p id="errorModNome"></p></li>
                         <!-- TODO Cognome -->
-                        <!-- <li><label for="modEmail">Email</label><input id="modEmail" type="email" placeholder="email" onblur="checkEmail(this.value)" onkeypress="clearError('email')"/><p id="errorModEmail"></p></li> -->
+                        <li><label for="modCognome">Cognome</label><input id="modCognome" placeholder="Cognome" onblur="checkCognome(this.value)" onkeypress="clearError('cognome')"/><p id="errorModCognome"></p></li>
                         <li><label for="modEmail">Email</label><input id="modEmail" type="email" placeholder="email" onblur="checkEmail(this.value)" onkeypress="clearError('email')"/><p id="errorModEmail"></p></li>
-                        <li><label for="modDataNascita">Data di nascita</label><input id="modDataNascita" placeholder="gg/mm/aaaa" onchange="checkBDay(this.value)" /><p id="errorModDataNascita"></p></li>
+                        <li><label for="modDataNascita">Data di nascita</label><input id="modDataNascita" placeholder="gg/mm/aaaa" onchange="clearError('data')" onblur="checkBDay(this.value)" /><p id="errorModDataNascita"></p></li>
                     </ul>
                 </fieldset>
                 <fieldset>
