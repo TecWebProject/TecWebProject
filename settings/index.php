@@ -3,6 +3,19 @@ require_once realpath(dirname(__FILE__)) . '/../lib/php/select_provincia.php';
 require_once realpath(dirname(__FILE__)) . '/../lib/php/regioni.php';
 require_once realpath(dirname(__FILE__)) . '/../lib/php/province.php';
 require_once realpath(dirname(__FILE__)) . '/../lib/php/menu.php';
+require_once realpath(dirname(__FILE__)) . '/../lib/php/datiUtente.php';
+
+//TODO dati temporanei, ho bisogno di un array di dati in session (o almeno dell'username)
+session_start();
+
+$_SESSION['username'] = "giorgio";
+
+if(!isset($_SESSION['datiUtente'])) {
+    $_SESSION['datiUtente'] = Utenti::getDatiUtente($_SESSION['username']);
+}
+
+// var_dump($_SESSION['datiUtente']);
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -58,7 +71,11 @@ require_once realpath(dirname(__FILE__)) . '/../lib/php/menu.php';
                 <fieldset>
                     <legend>Dati obbligatori</legend>
                     <ul>
-                        <li><label for="modUsername">Username</label><input id="modUsername" placeholder="username" onblur="checkUsername(this.value,document)" onkeypress="clearError('username')"/><p id="errorModUsername"></p></li>
+                        <li>Username: <?php echo $_SESSION['datiUtente']['username']?></li>
+                        <!-- TODO Nome -->
+                        <!-- <li><label for="modEmail">Nome</label><input id="modEmail" type="email" placeholder="email" onblur="checkEmail(this.value)" onkeypress="clearError('email')"/><p id="errorModEmail"></p></li> -->
+                        <!-- TODO Cognome -->
+                        <!-- <li><label for="modEmail">Email</label><input id="modEmail" type="email" placeholder="email" onblur="checkEmail(this.value)" onkeypress="clearError('email')"/><p id="errorModEmail"></p></li> -->
                         <li><label for="modEmail">Email</label><input id="modEmail" type="email" placeholder="email" onblur="checkEmail(this.value)" onkeypress="clearError('email')"/><p id="errorModEmail"></p></li>
                         <li><label for="modDataNascita">Data di nascita</label><input id="modDataNascita" placeholder="gg/mm/aaaa" onchange="checkBDay(this.value)" /><p id="errorModDataNascita"></p></li>
                     </ul>
