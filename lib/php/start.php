@@ -36,14 +36,15 @@ class Start
 	}
 
 	private static function printArrayRec($array){
-		$resut = "";
+		$result = "";
 		foreach ($array as $key => $value) {
 			if(is_array($value)){
-				Start::printArrayRec($value);
+				$result .= Start::printArrayRec($value);
 			} else {
-				$resut .= $value . "\n";
+				$result .= $value . "\n";
 			}
 		}
+		return $result;
 	}
 
 	# fornisce un array associativo con Doctype + head
