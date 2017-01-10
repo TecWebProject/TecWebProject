@@ -55,6 +55,24 @@ function checkUsername(username) {
 
 }
 
+function checkNome(nome) {
+    var valid = /^[a-zA-Z\ ]+$/.test(nome);
+    if (valid) {
+        document.getElementById("errorModNome").innerHTML = "Nome valido.";
+    } else {
+        document.getElementById("errorModNome").innerHTML = "Nome non valido. Usare solo lettere e spazi.";
+    }
+}
+
+function checkCognome(conome) {
+    var valid = /^[a-zA-Z\ ]+$/.test(conome);
+    if (valid) {
+        document.getElementById("errorModCognome").innerHTML = "Cognome valido.";
+    } else {
+        document.getElementById("errorModCognome").innerHTML = "Cognome non valido. Usare solo lettere e spazi.";
+    }
+}
+
 // Controllo email
 function checkEmail(email) {
     // Controllo offline con regex basato su RFC822
@@ -66,20 +84,30 @@ function checkEmail(email) {
     }
 }
 
-// Controllo etò
+// Controllo età
 function checkBDay(bDay) {
     var date = new Date(bDay);
-    // Accetta dd/mm/yyyy, dd-mm-yyyy e dd.mm.yyyy
-    var valid = (/^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/.test(bDay));
-    if(valid){
-      if(new Date() > date){
-         document.getElementById("errorModDataNascita").innerHTML = "Data di nascita valida.";
-      } else {
-         document.getElementById("errorModDataNascita").innerHTML = "Data di nascita nel futuro.";
-      }
-   } else {
-      document.getElementById("errorModDataNascita").innerHTML = "Formato data non valido.";
-   }
+    var valid;
+    //  if (bDay == "") {
+    //      valid = false;
+    //  } else
+    if (/^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/.test(bDay)) {
+        // Accetta dd/mm/yyyy, dd-mm-yyyy e dd.mm.yyyy
+        valid = true;
+    } else {
+        valid = false;
+    }
+
+    if (valid) {
+        var today = new Date()
+        if (today >= date) {
+            document.getElementById("errorModDataNascita").innerHTML = "Data di nascita valida.";
+        } else {
+            document.getElementById("errorModDataNascita").innerHTML = "Data di nascita nel futuro.";
+        }
+    } else {
+        document.getElementById("errorModDataNascita").innerHTML = "Formato data non valido.";
+    }
 }
 
 function clearError(str) {
@@ -91,7 +119,16 @@ function clearError(str) {
         case 'email':
             document.getElementById("errorModEmail").innerHTML = "";
             break;
+        case 'nome':
+            document.getElementById("errorModNome").innerHTML = "";
+            break;
+        case 'cognome':
+            document.getElementById("errorModCognome").innerHTML = "";
+            break;
+        case 'data':
+            document.getElementById("errorModDataNascita").innerHTML = "";
+            break;
         default:
-
+            console.error("passato: " + str);
     }
 }
