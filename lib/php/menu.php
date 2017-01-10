@@ -27,9 +27,3 @@ class Menu
    }
 }
 ?>
-<?php
-//TODO TEST
-/*
-Menu::getMenu(array("Home","<a href='pagina.html'>Profilo</a>","<a href='pagina.html'>Cerca</a>","<a href='pagina.html'>Band</a>"));
-*/
-?>

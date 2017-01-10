@@ -3,6 +3,7 @@ require_once realpath(dirname(__FILE__)) . '/../lib/php/select_provincia.php';
 require_once realpath(dirname(__FILE__)) . '/../lib/php/regioni.php';
 require_once realpath(dirname(__FILE__)) . '/../lib/php/province.php';
 require_once realpath(dirname(__FILE__)) . '/../lib/php/menu.php';
+require_once realpath(dirname(__FILE__)) . '/../lib/php/start.php';
 require_once realpath(dirname(__FILE__)) . '/../lib/php/datiUtente.php';
 
 //TODO dati temporanei, ho bisogno di un array di dati in session (o almeno dell'username)
@@ -26,29 +27,14 @@ if(!isset($_SESSION['campiDati'])){
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it">
 
 <head>
-    <!-- TODO: correggere head per il sito corretto -->
-    <!-- Specifico il charset -->
-    <meta http-equiv="Content-Type" content="txt/html" ; charset="utf-8">
-    <!-- Titolo -->
-    <!-- TODO: IMPOSTARE I NOMI CON PHP-->
-    <title>Modifica profilo - NOME SITO</title>
-    <!-- Titolo esteso dentro un meta -->
-    <!-- TODO: IMPOSTARE I NOMI CON PHP-->
-    <meta name="title" content="Modifica del profilo utente - NOME SITO" />
-    <!-- Descrizione del sito -->
-    <!-- TODO: INSERIRE DESCRIZIONE DELLA PAGINA-->
-    <meta name="description" content="DESCRIZIONE" />
-    <!-- Keyword principali del sito -->
-    <!-- TODO: INSERIRE KEYWORD ADATTE-->
-    <meta name="keywords" content="modifica, profilo, aggiornamento, NOME_SITO" />
-    <!-- Icona del bookmark -->
-    <!-- TODO: IMPOSTARE LINK ICONA-->
-    <link rel="shortcut icon" href="images/icon.ico" />
-    <!--miniReset-->
-    <!--    <link rel="stylesheet" href="../lib/css/minireset.min.css" />-->
-    <!-- link al CSS -->
-    <link rel="stylesheet" href="../lib/css/style.css" />
-    <script src="settings.js" type="text/javascript"></script>
+
+   <?php
+      var_dump(Start::getHead(
+         array(
+            'Titolo' => "Modifica profilo - BandBoard", 'DescrizioneBreve' => "Pannello di modifica delle informazioni personali", 'Descrizione' => "Pagina per la modifica delle informazioni personali, dei contatti e della biografia del proprio profilo", 'Keywords' => array("Modifica profilo","Impostazioni","BandBoard", "band", "musica"), 'Stylesheets' => array("style.css"), 'Extra' => array(
+               "<script src='settings.js' type='text/javascript'></script>",
+            ))));
+   ?>
 </head>
 
 <!-- TODO sostituire head con quella autogenerata -->
