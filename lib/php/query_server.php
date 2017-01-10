@@ -2,8 +2,6 @@
 
 /* SIMPLE WRAPPER FOR MYSQL QUERY */
 
-/*TODO: get query from POST*/
-
 /* FUNZIONE DI PROVA PER ESEMPIO*/
 //TEST();
 /*function TEST()
