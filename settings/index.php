@@ -4,10 +4,14 @@ require_once realpath(dirname(__FILE__)) . '/../lib/php/regioni.php';
 require_once realpath(dirname(__FILE__)) . '/../lib/php/province.php';
 require_once realpath(dirname(__FILE__)) . '/../lib/php/menu.php';
 require_once realpath(dirname(__FILE__)) . '/../lib/php/start.php';
-require_once realpath(dirname(__FILE__)) . '/../lib/php/datiUtente.php';
+require_once realpath(dirname(__FILE__)) . '/../lib/php/start.php';
+require_once realpath(dirname(__FILE__)) . '/datiObbligatori.php';
 
 //TODO dati temporanei, ho bisogno di un array di dati in session (o almeno dell'username)
-session_start();
+
+if(!isset($_SESSION)){
+   session_start();
+}
 
 $_SESSION['username'] = "giorgio";
 
@@ -15,8 +19,8 @@ if(!isset($_SESSION['datiUtente'])) {
     $_SESSION['datiUtente'] = Utenti::getDatiUtente($_SESSION['username']);
 }
 
-if(!isset($_SESSION['campiDati'])){
-   $_SESSION['campiDati'] = count($_SESSION['datiUtente']['contatti']);
+if(!isset($_SESSION['campiDati'])) {
+    $_SESSION['campiDati'] = count($_SESSION['datiUtente']['contatti']);
 }
 
 // var_dump($_SESSION['datiUtente']);
@@ -27,14 +31,10 @@ if(!isset($_SESSION['campiDati'])){
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it">
 
 <head>
-
-   <?php
-      var_dump(Start::getHead(
-         array(
-            'Titolo' => "Modifica profilo - BandBoard", 'DescrizioneBreve' => "Pannello di modifica delle informazioni personali", 'Descrizione' => "Pagina per la modifica delle informazioni personali, dei contatti e della biografia del proprio profilo", 'Keywords' => array("Modifica profilo","Impostazioni","BandBoard", "band", "musica"), 'Stylesheets' => array("style.css"), 'Extra' => array(
-               "<script src='settings.js' type='text/javascript'></script>",
-            ))));
-   ?>
+<?php
+   echo Start::getHead(
+      array('Titolo' => "Modifica profilo - BandBoard", 'DescrizioneBreve' => "Pannello di modifica delle informazioni personali", 'Descrizione' => "Pagina per la modifica delle informazioni personali, dei contatti e della biografia del proprio profilo", 'Keywords' => array("Modifica profilo","Impostazioni","BandBoard", "band", "musica"), 'Stylesheets' => array("style.css"), 'Extra' => array("<script src='settings.js' type='text/javascript'></script>")));
+    ?>
 </head>
 
 <!-- TODO sostituire head con quella autogenerata -->
@@ -58,57 +58,10 @@ if(!isset($_SESSION['campiDati'])){
         <div id="mod">
             <form action="processer.php" method="post">
                <fieldset>
-                <fieldset>
-                    <legend>Dati obbligatori</legend>
-                    <ul>
-                        <li><p>
-                           Username: <?php echo $_SESSION['datiUtente']['username']?>
-                        </p></li>
-                        <!-- TODO Nome -->
-                        <li><label for="modNome">Nome</label><input id="modNome" placeholder="Nome" onblur="checkNome(this.value)" onkeypress="clearError('nome')"/><p id="errorModNome"></p></li>
-                        <!-- TODO Cognome -->
-                        <li><label for="modCognome">Cognome</label><input id="modCognome" placeholder="Cognome" onblur="checkCognome(this.value)" onkeypress="clearError('cognome')"/><p id="errorModCognome"></p></li>
-                        <li><label for="modEmail">Email</label><input id="modEmail" type="email" placeholder="email" onblur="checkEmail(this.value)" onkeypress="clearError('email')"/><p id="errorModEmail"></p></li>
-                        <li><label for="modDataNascita">Data di nascita</label><input id="modDataNascita" placeholder="gg/mm/aaaa" onchange="clearError('data')" onblur="checkBDay(this.value)" /><p id="errorModDataNascita"></p></li>
-                    </ul>
-                </fieldset>
-                <fieldset>
-                    <legend>Dati informativi</legend>
-                    <ul>
-                        <li>
-                            <label for="modLoadImage">Carica immagine profilo</label><input id="modLoadImage" type="file" title="Carica immagine"><p id="errorModLoadImage"></p>
-                        </li>
-                        <li>
-                            <label for="modSelectRegione">Regione di provenienza</label>
-                            <select id="modSelectRegione" onchange="showProvince(this.value)">
-                               <option value="">Seleziona regione</option>
-                                <?php
-                                $regioni = Regioni::getRegioni();
-
-                                foreach ($regioni as $key => $regione) {
-                                    printf("<option value='%s'>%s</option>", $regione['nome'], $regione['nome']);
-                                }
-                                ?>
-                            </select>
-                        </li>
-                        <li>
-                            <label for="modSelectProvincia">Seleziona provincia</label>
-                            <select id="modSelectProvincia">
-                               <option value="">Seleziona provincia</option>
-                                <?php
-                                $province = Province::getProvince();
-                                foreach ($province as $key => $provincia) {
-                                    printf("<option value='%s'>%s</option>", $provincia['sigla'], $provincia['nome']);
-                                }
-                                ?>
-                            </select>
-                            <script type="text/javascript">clearProvince();</script>
-                        </li>
-                        <li>
-                            <label for="modTextAreaBio">Bio</label><textarea id="modTextAreaBio" cols="40" rows="4" placeholder="Scrivi una breve descrizione di te..."></textarea>
-                        </li>
-                    </ul>
-                </fieldset>
+                  <?php
+                     echo FormDatiObbligatori::getFormDatiObbligatori();
+                  ?>
+                
                 <fieldset>
                     <legend>Contatti</legend>
                   <ul>

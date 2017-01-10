@@ -61,5 +61,3 @@ class Utenti
         }
     }
 }
-
-Utenti::getDatiUtente("giorgio");
