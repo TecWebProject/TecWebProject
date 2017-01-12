@@ -10,9 +10,6 @@ require_once realpath(dirname(__FILE__)) . "/../lib/php/select_regione.php";
 if(!isset($_SESSION)) {
     session_start();
 }
-
-$_SESSION['username'] = "giorgio";
-
 /**
  * Classe per generare i dati obbligatori della form di modifica profilo
  */
@@ -57,19 +54,18 @@ class FormDatiInformativi
 
           $province = Province::getProvince();
 
-        foreach ($province as $key => $provincia) {
-            if($provincia['sigla'] == $_SESSION['datiUtente']['provincia']) {
-                $string .= "<option value='".$provincia['sigla']."' selected='selected'>".$provincia['nome']."</option>";
-            } else {
-                 $string .= "<option value='".$provincia['sigla']."'>".$provincia['nome']."</option>";
-            };
-        }
+           foreach ($province as $key => $provincia) {
+               if($provincia['sigla'] == $_SESSION['datiUtente']['provincia']) {
+                   $string .= "<option value='".$provincia['sigla']."' selected='selected'>".$provincia['nome']."</option>";
+               } else {
+                    $string .= "<option value='".$provincia['sigla']."'>".$provincia['nome']."</option>";
+               };
+           }
+
          $string .= "</select><script type='text/javascript'>clearProvince();</script></li>";
 
          // bio
-         $string .= "<li>
-             <label for='modTextAreaBio'>Bio</label><textarea id='modTextAreaBio' cols='40' rows='4' placeholder='Scrivi una breve descrizione di te...' value='".$_SESSION['datiUtente']['descrizione']."'></textarea>
-         </li>";
+         $string .= "<li><label for='modTextAreaBio'>Bio</label><textarea id='modTextAreaBio' cols='40' rows='4' placeholder='Scrivi una breve descrizione di te...'>".$_SESSION['datiUtente']['descrizione']."</textarea></li>";
 
          $string .= "</ul></fieldset>";
 
@@ -77,5 +73,3 @@ class FormDatiInformativi
     }
 
 }
-
-echo FormDatiInformativi::getFormDatiInformativi();

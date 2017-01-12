@@ -3,9 +3,6 @@
 require_once realpath(dirname(__FILE__)) . "/../lib/php/datiUtente.php";
 
 session_start();
-
-$_SESSION['username'] = "giorgio";
-
 /**
  * Classe per generare i dati obbligatori della form di modifica profilo
  */
