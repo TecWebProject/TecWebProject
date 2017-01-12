@@ -6,24 +6,30 @@ require_once realpath(dirname(__FILE__)) . '/../lib/php/menu.php';
 require_once realpath(dirname(__FILE__)) . '/../lib/php/start.php';
 require_once realpath(dirname(__FILE__)) . '/../lib/php/start.php';
 require_once realpath(dirname(__FILE__)) . '/datiObbligatori.php';
+require_once realpath(dirname(__FILE__)) . '/datiInformativi.php';
+require_once realpath(dirname(__FILE__)) . '/contatti.php';
+require_once realpath(dirname(__FILE__)) . '/generiPreferiti.php';
 
 //TODO dati temporanei, ho bisogno di un array di dati in session (o almeno dell'username)
 
-if(!isset($_SESSION)){
-   session_start();
+if(!isset($_SESSION)) {
+    session_start();
 }
 
+//TODO temporaneo, mi da un utente di default
 $_SESSION['username'] = "giorgio";
 
-if(!isset($_SESSION['datiUtente'])) {
-    $_SESSION['datiUtente'] = Utenti::getDatiUtente($_SESSION['username']);
-}
+// Carico dati utente se non già caricati
+$_SESSION['datiUtente'] = Utenti::getDatiUtente($_SESSION['username']);
 
+// Reset numero campi se non salvato
 if(!isset($_SESSION['campiDati'])) {
     $_SESSION['campiDati'] = count($_SESSION['datiUtente']['contatti']);
 }
 
-// var_dump($_SESSION['datiUtente']);
+echo "<!--";
+var_dump($_GET);
+echo "-->";
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
@@ -33,7 +39,8 @@ if(!isset($_SESSION['campiDati'])) {
 <head>
 <?php
    echo Start::getHead(
-      array('Titolo' => "Modifica profilo - BandBoard", 'DescrizioneBreve' => "Pannello di modifica delle informazioni personali", 'Descrizione' => "Pagina per la modifica delle informazioni personali, dei contatti e della biografia del proprio profilo", 'Keywords' => array("Modifica profilo","Impostazioni","BandBoard", "band", "musica"), 'Stylesheets' => array("style.css"), 'Extra' => array("<script src='settings.js' type='text/javascript'></script>")));
+       array('Titolo' => "Modifica profilo - BandBoard", 'DescrizioneBreve' => "Pannello di modifica delle informazioni personali", 'Descrizione' => "Pagina per la modifica delle informazioni personali, dei contatti e della biografia del proprio profilo", 'Keywords' => array("Modifica profilo","Impostazioni","BandBoard", "band", "musica"), 'Stylesheets' => array("style.css"), 'Extra' => array("<script src='settings.js' type='text/javascript'></script>"))
+   );
     ?>
 </head>
 
@@ -56,64 +63,15 @@ if(!isset($_SESSION['campiDati'])) {
             </label>
         </div>
         <div id="mod">
-            <form action="processer.php" method="post">
+            <form action="." method="post">
                <fieldset>
-                  <?php
+                    <?php
                      echo FormDatiObbligatori::getFormDatiObbligatori();
-                  ?>
-                
-                <fieldset>
-                    <legend>Contatti</legend>
-                  <ul>
-                     <li>
-                        <input type="button" value="Aggiungi campo" />
-                    </li>
-                    <li>
-                        <label for="contatto1tipo">Tipo contatto</label>
-                        <select id="contatto1tipo">
-                            <option>Telefono (cellulare)</option>
-                            <option>Telefono (casa)</option>
-                            <option>Facebook</option>
-                            <option>Telegram</option>
-                            <option>Skype</option>
-                        </select>
-                    </li>
-                    <li>
-                        <label for="contatto2campo">Valore</label>
-                        <input id="contatto2campo" />
-                    </li>
-                    <li>
-                        <label for="contatto2tipo">Tipo contatto</label>
-                        <select id="contatto2tipo">
-                            <option>Telefono (cellulare)</option>
-                            <option>Telefono (casa)</option>
-                            <option>Facebook</option>
-                            <option>Telegram</option>
-                            <option>Skype</option>
-                        </select>
-                    </li>
-                    <li>
-                        <label for="contatto1campo">Valore</label>
-                        <input id="contatto1campo" /> </fieldset>
-                </li>
-                  </ul>
-                <fieldset>
-                    <legend>Generi preferiti</legend>
-                    <label for="modGenereRock"> Rock </label>
-                    <input id="modGenereRock" type="checkbox" />
-                    <label for="modGenerePop"> Pop </label>
-                    <input id="modGenerePop" type="checkbox" />
-                    <label for="modGenereAcustica"> Acustica </label>
-                    <input id="modGenereAcustica" type="checkbox" />
-                    <label for="modGenereBluse"> Blues </label>
-                    <input id="modGenereBluse" type="checkbox" />
-                    <label for="modGenereMetal"> Metal </label>
-                    <input id="modGenereMetal" type="checkbox" />
-                    <label for="modGenerePunk"> Punk </label>
-                    <input id="modGenerePunk" type="checkbox" />
-                    <!-- La lista può essere estesa dinamicamente -->
-                </fieldset>
-                <input id="modSaveButton" type="submit" value="Salva modifiche" />
+                     echo FormDatiInformativi::getFormDatiInformativi();
+                     echo FormGeneriPreferiti::getFormGeneriPreferiti();
+                     echo FormContatti::getFormContatti();
+                ?>
+                <input id="modSaveButton" type="submit" title='Salva le modifiche al tuo profilo' value="Salva modifiche" />
              </fieldset>
             </form>
         </div>

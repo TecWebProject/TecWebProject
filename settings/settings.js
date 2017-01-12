@@ -23,8 +23,10 @@ function showProvince(str) {
 
 // Nasconde le opzioni del selettore delle province e lo disabilita
 function clearProvince() {
-    document.getElementById("modSelectProvincia").innerHTML = '<option value="">Seleziona provincia</option>';
-    document.getElementById("modSelectProvincia").disabled = true;
+   if(document.getElementById("modSelectProvincia").selectedIndex == 0){
+      document.getElementById("modSelectProvincia").innerHTML = '<option value="">Seleziona provincia</option>';
+      document.getElementById("modSelectProvincia").disabled = true;
+   }
 };
 
 // Controllo username

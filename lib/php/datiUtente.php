@@ -45,7 +45,7 @@ class Utenti
             $stmt->bind_param("s", $username);
             $stmt->execute();
             $stmt_result = $stmt->get_result();
-            $result[0]['contatti'] = ($stmt_result->fetch_all(MYSQLI_ASSOC))[0];
+            $result[0]['contatti'] = ($stmt_result->fetch_all(MYSQLI_ASSOC));
 
             return $result[0];
         } catch (Exception $e) {
