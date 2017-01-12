@@ -85,7 +85,7 @@ COMMENT = 'Recapiti dei gruppi';
 DROP TABLE IF EXISTS Utenti;
 CREATE TABLE IF NOT EXISTS Utenti (
 	username		VARCHAR(25) PRIMARY KEY,
-	password	    VARCHAR(45) DEFAULT NULL,
+	password	    CHAR(32) NOT NULL,
 	email			VARCHAR(45) NOT NULL UNIQUE,
 	nome            VARCHAR(20) DEFAULT NULL,
 	cognome         VARCHAR(20) DEFAULT NULL,
@@ -93,7 +93,7 @@ CREATE TABLE IF NOT EXISTS Utenti (
 	immagine		VARCHAR(45) DEFAULT NULL COMMENT 'Immagine profilo; NULL implica immagine di default',
 	descrizione     VARCHAR(200) DEFAULT NULL COMMENT 'Descrizione dell\'utente',
 	dataIscrizione	DATETIME NOT NULL,
-	provincia		CHAR(2) NOT NULL COMMENT 'Provincia di residenza',
+	provincia		CHAR(2) DEFAULT NULL COMMENT 'Provincia di residenza',
 	FOREIGN KEY (provincia) REFERENCES Province (sigla)
 	    ON DELETE NO ACTION
 	    ON UPDATE CASCADE
@@ -109,7 +109,7 @@ CREATE TABLE IF NOT EXISTS ContattiUtenti (
 	idContatto		INT(10) UNSIGNED PRIMARY KEY AUTO_INCREMENT,
 	utente  		VARCHAR(25) NOT NULL,
 	tipoContatto	VARCHAR(20) NOT NULL,
-	contatto		VARCHAR(45) NOT NULL COMMENT 'Stringa contenente il recapito',
+	contatto		VARCHAR(100) NOT NULL COMMENT 'Stringa contenente il recapito',
 	FOREIGN KEY (utente) REFERENCES Utenti (username)
 	    ON DELETE CASCADE
 	    ON UPDATE CASCADE,
@@ -272,12 +272,12 @@ INSERT INTO Regioni (nome) VALUES
 ('Toscana'),
 ('Trentino-Alto Adige'),
 ('Umbria'),
-('Valle d\'Aosta'),
+('Valle d&apos;Aosta'),
 ('Veneto');
 
 INSERT INTO Province (nome, sigla, regione) VALUES
 ('Chieti', 'CH', 'Abruzzo'),
-('L\'Aquila', 'AQ', 'Abruzzo'),
+('L&apos;Aquila', 'AQ', 'Abruzzo'),
 ('Pescara', 'PE', 'Abruzzo'),
 ('Teramo', 'TE', 'Abruzzo'),
 ('Matera', 'MT', 'Basilicata'),
@@ -378,7 +378,7 @@ INSERT INTO Province (nome, sigla, regione) VALUES
 ('Trento', 'TN', 'Trentino-Alto Adige'),
 ('Perugia', 'PG', 'Umbria'),
 ('Terni', 'TR', 'Umbria'),
-('Aosta', 'AO', 'Valle d\'Aosta'),
+('Aosta', 'AO', 'Valle d&apos;Aosta'),
 ('Belluno', 'BL', 'Veneto'),
 ('Padova', 'PD', 'Veneto'),
 ('Rovigo', 'RO', 'Veneto'),
@@ -388,7 +388,7 @@ INSERT INTO Province (nome, sigla, regione) VALUES
 ('Vicenza', 'VI', 'Veneto');
 
 INSERT INTO Gruppi (idGruppo, nome, immagine, descrizione, dataIscrizione, provincia) VALUES
-(NULL, 'The Leatles', NULL, 'La nostra musica fa bene all\'anima!', '2007-02-21', 'PD'),
+(NULL, 'The Leatles', NULL, 'La nostra musica fa bene all&apos;anima!', '2007-02-21', 'PD'),
 (NULL, 'Pitura Sekka', NULL, 'Molti anni di esperienza alle spalle, con un sacco di esibizioni dal vivo.', '2002-03-20', 'VE'),
 (NULL, 'The Sailers', NULL, NULL, '2003-04-12', 'CA'),
 (NULL, 'Left Zeppelin', NULL, 'Cover band (e grandi fan) dei Right Zeppelin.', '2003-12-01', 'VS'),
@@ -397,7 +397,8 @@ INSERT INTO Gruppi (idGruppo, nome, immagine, descrizione, dataIscrizione, provi
 (NULL, 'Passive Attack', NULL, NULL, '2004-09-30', 'GR'),
 (NULL, 'Perl Jam', NULL, 'Evviva Perl!', '2012-03-21', 'PD'),
 (NULL, 'Radiobox', NULL, NULL, '2012-06-24', 'GR'),
-(NULL, 'Proxy Music', NULL, 'Ci sarà sempre bisogno di un proxy...', '2016-12-17', 'BR');
+(NULL, 'Proxy Music', NULL, 'Ci sarà sempre bisogno di un proxy...', '2016-12-17', 'BR'),
+(NULL, 'Queries of the Stone Age', NULL, NULL, '2001-04-18', 'OR');
 
 INSERT INTO TipiContatti (nome) VALUES
 ('email_pubblica'), # diversa dal campo email di Utenti (che è privato)
@@ -413,19 +414,24 @@ INSERT INTO ContattiGruppi (idContatto, gruppo, tipoContatto, contatto) VALUES
 (NULL, 1, 'facebook', 'https://www.facebook.com/thebeatles'),
 (NULL, 7, 'youtube', 'https://www.youtube.com/user/MassiveAttackVEVO'),
 (NULL, 8, 'youtube', 'https://www.youtube.com/user/PearljamVEVO'),
-(NULL, 9, 'youtube', 'https://www.youtube.com/user/radiohead');
+(NULL, 9, 'youtube', 'https://www.youtube.com/user/radiohead'),
+(NULL, 11, 'facebook', 'https://www.facebook.com/QOTSA');
 
 INSERT INTO Utenti (username, password, email, nome, cognome, dataNascita, immagine, descrizione, dataIscrizione, provincia) VALUES
-('miles26', NULL, 'miles@milesinthesky.jazz', 'Miles', 'Travis', '1926-05-26', NULL, 'Jazz e Blues nel sangue dalla nascita.' ,'1998-11-04', 'FI'),
-('McPaul42', NULL, 'paulmcc@theleatles.lsd', 'Paul', 'McCartney', '1942-06-18', NULL, NULL,'2001-02-18', 'PD'),
-('SuperPippo', NULL, 'super.pippo@example.com', 'Pippo', 'Super', '1992-12-21', NULL, NULL,'2014-10-31', 'PD'),
-('giorgio', NULL, 'giorgio.giuffre@studenti.unipd.it', 'Giorgio', 'Giuffrè', '1994-02-23', NULL, 'Suonatore di pianoforte... Ascoltatore eclettico.' ,'2016-12-19', 'PD'),
-('rob_wyatt', NULL, 'robert@softmachine.org', 'Robert', 'Wyatt', '1945-01-28', NULL, NULL,'1997-10-08', 'LU'),
-('millenium_bug', NULL, 'milbug@ctime.h', 'Milly', 'Bug', '1970-01-01', NULL, 'Ormai in pensione ma sempre sul pezzo.','1999-12-31', 'AG'),
-('ennesimo', NULL, 'ennesimo.utente@popolamento.db', 'Enrico', 'Nesimo', '1995-12-02', NULL, NULL,'2012-04-04', 'EN');
+('miles26', '3a555c464988e33e52f96beffbe3b1ac', 'miles@milesinthesky.jazz', 'Miles', 'Travis', '1926-05-26', NULL, 'Jazz e Blues nel sangue dalla nascita.' ,'1998-11-04', 'FI'),
+('McPaul42', '3a555c464988e33e52f96beffbe3b1ac', 'paulmcc@theleatles.lsd', 'Paul', 'McCartney', '1942-06-18', NULL, NULL,'2001-02-18', 'PD'),
+('SuperPippo', '3a555c464988e33e52f96beffbe3b1ac', 'super.pippo@example.com', 'Pippo', 'Super', '1992-12-21', NULL, NULL,'2014-10-31', 'PD'),
+('giorgio', '3a555c464988e33e52f96beffbe3b1ac', 'giorgio.giuffre@studenti.unipd.it', 'Giorgio', 'Giuffrè', '1994-02-23', NULL, 'Suonatore di pianoforte... Ascoltatore eclettico.' ,'2016-12-19', 'PD'),
+('rob_wyatt', '3a555c464988e33e52f96beffbe3b1ac', 'robert@softmachine.org', 'Robert', 'Wyatt', '1945-01-28', NULL, NULL,'1997-10-08', 'LU'),
+('millenium_bug', '3a555c464988e33e52f96beffbe3b1ac', 'milbug@ctime.h', 'Milly', 'Bug', '1970-01-01', NULL, 'Ormai in pensione ma sempre sul pezzo.','1999-12-31', 'AG'),
+('ennesimo', '3a555c464988e33e52f96beffbe3b1ac', 'ennesimo.utente@popolamento.db', 'Enrico', 'Nesimo', '1995-12-02', NULL, NULL,'2012-04-04', 'EN'),
+('svaughan', '3a555c464988e33e52f96beffbe3b1ac', 'sarahv@example.com', 'Sarah', 'Vaughan', '1924-03-27', NULL, 'Adoro il Jazz e la musica, in generale. Cantare è stato il mio sogno sin dall&apos;infanzia ed rimarrà per sempre una passione, forse ancor più che una professione.','2014-04-19', 'PD');
 
 INSERT INTO ContattiUtenti (idContatto, utente, tipoContatto, contatto) VALUES
-(NULL, 'giorgio', 'telegram', 'telegram.me/ggiuffre');
+(NULL, 'giorgio', 'telegram', 'telegram.me/ggiuffre'),
+(NULL, 'McPaul42', 'youtube', 'https://www.youtube.com/user/PaulMcCartneyVEVO'),
+(NULL, 'ennesimo', 'whatsapp', '049 827 0000'),
+(NULL, 'svaughan', 'whatsapp', '3331234567');
 
 INSERT INTO GeneriMusicali (nome) VALUES
 ('Hard Rock'),
@@ -449,6 +455,7 @@ INSERT INTO GeneriMusicali (nome) VALUES
 ('Gospel'),
 ('Soul'),
 ('Hardcore'),
+('Techno'),
 ('Progressive'),
 ('Psychedelic');
 
@@ -470,7 +477,9 @@ INSERT INTO GeneriUtenti (utente, genere) VALUES
 ('SuperPippo', 'Soul'),
 ('giorgio', 'Psychedelic'),
 ('millenium_bug', 'Disco'),
-('ennesimo', 'Country');
+('ennesimo', 'Country'),
+('svaughan', 'Jazz'),
+('svaughan', 'Pop');
 
 INSERT INTO Strumenti (nome) VALUES
 ('Chitarra Elettrica'),
@@ -495,7 +504,8 @@ INSERT INTO Conoscenze (idConoscenza, utente, strumento) VALUES
 (NULL, 'rob_wyatt', 'Batteria'),
 (NULL, 'rob_wyatt', 'Voce'),
 (NULL, 'McPaul42', 'Chitarra Acustica'),
-(NULL, 'McPaul42', 'Chitarra Elettrica');
+(NULL, 'McPaul42', 'Chitarra Elettrica'),
+(NULL, 'svaughan', 'Voce');
 
 INSERT INTO Annunci (gruppo, ruoloRichiesto) VALUES
 (1, 'Organo'),
@@ -514,6 +524,7 @@ INSERT INTO Formazioni (gruppo, ruolo) VALUES
 (1, 10),
 (2, 3),
 (3, 4),
+(3, 11),
 (4, 4),
 (4, 3),
 (5, 8),
