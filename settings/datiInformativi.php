@@ -6,10 +6,6 @@ require_once realpath(dirname(__FILE__)) . "/../lib/php/province.php";
 require_once realpath(dirname(__FILE__)) . "/../lib/php/select_regione.php";
 
 
-
-if(!isset($_SESSION)) {
-    session_start();
-}
 /**
  * Classe per generare i dati obbligatori della form di modifica profilo
  */
@@ -19,6 +15,10 @@ class FormDatiInformativi
     //TODO dati da concordare $_SESSION['username']
     public static function getFormDatiInformativi()
     {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
         if(!isset($_SESSION['datiUtente'])) {
             $_SESSION['datiUtente'] = Utenti::getDatiUtente($_SESSION['username']);
         }
@@ -38,11 +38,11 @@ class FormDatiInformativi
          $regioneAppartenenza = SelectRegione::getRegione($_SESSION['datiUtente']['provincia']);
 
         foreach ($regioni as $key => $regione) {
-           if($regione['nome'] == $regioneAppartenenza){
-             $string .= "<option value='".htmlentities($regione['nome'], ENT_QUOTES, "UTF-8")."' selected='selected'>".$regione['nome']."</option>";
-          } else {
-             $string .= "<option value='".htmlentities($regione['nome'], ENT_QUOTES, "UTF-8")."'>".$regione['nome']."</option>";
-          }
+            if($regione['nome'] == $regioneAppartenenza) {
+                $string .= "<option value='".htmlentities($regione['nome'], ENT_QUOTES, "UTF-8")."' selected='selected'>".htmlentities($regione['nome'], ENT_QUOTES, "UTF-8")."</option>";
+            } else {
+                 $string .= "<option value='".htmlentities($regione['nome'], ENT_QUOTES, "UTF-8")."'>".htmlentities($regione['nome'], ENT_QUOTES, "UTF-8")."</option>";
+            }
         }
          $string .= "</select></li>";
 
@@ -54,15 +54,14 @@ class FormDatiInformativi
 
           $province = Province::getProvince();
 
-           foreach ($province as $key => $provincia) {
-               if($provincia['sigla'] == $_SESSION['datiUtente']['provincia']) {
-                   $string .= "<option value='".$provincia['sigla']."' selected='selected'>".$provincia['nome']."</option>";
-               } else {
-                    $string .= "<option value='".$provincia['sigla']."'>".$provincia['nome']."</option>";
-               };
-           }
-
-         $string .= "</select><script type='text/javascript'>clearProvince();</script></li>";
+        foreach ($province as $key => $provincia) {
+            if($provincia['sigla'] == $_SESSION['datiUtente']['provincia']) {
+                $string .= "<option value='".htmlentities($provincia['sigla'], ENT_QUOTES, "UTF-8")."' selected='selected'>".htmlentities($provincia['nome'], ENT_QUOTES, "UTF-8")."</option>";
+            } else {
+                $string .= "<option value='".htmlentities($provincia['sigla'], ENT_QUOTES, "UTF-8")."'>".htmlentities($provincia['nome'], ENT_QUOTES, "UTF-8")."</option>";
+            };
+        }
+        $string .= "</select>";
 
          // bio
          $string .= "<li><label for='modTextAreaBio'>Bio</label><textarea id='modTextAreaBio' cols='40' rows='4' placeholder='Scrivi una breve descrizione di te...' onblur='checkBio(this.value)'>".$_SESSION['datiUtente']['descrizione']."</textarea><ul id='errorModBio' class='modErrorEntry'></ul></li>";
