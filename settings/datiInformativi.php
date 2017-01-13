@@ -39,9 +39,9 @@ class FormDatiInformativi
 
         foreach ($regioni as $key => $regione) {
            if($regione['nome'] == $regioneAppartenenza){
-             $string .= "<option value='".$regione['nome']."' selected='selected'>".$regione['nome']."</option>";
+             $string .= "<option value='".htmlentities($regione['nome'], ENT_QUOTES, "UTF-8")."' selected='selected'>".$regione['nome']."</option>";
           } else {
-             $string .= "<option value='".$regione['nome']."'>".$regione['nome']."</option>";
+             $string .= "<option value='".htmlentities($regione['nome'], ENT_QUOTES, "UTF-8")."'>".$regione['nome']."</option>";
           }
         }
          $string .= "</select></li>";
@@ -65,7 +65,7 @@ class FormDatiInformativi
          $string .= "</select><script type='text/javascript'>clearProvince();</script></li>";
 
          // bio
-         $string .= "<li><label for='modTextAreaBio'>Bio</label><textarea id='modTextAreaBio' cols='40' rows='4' placeholder='Scrivi una breve descrizione di te...'>".$_SESSION['datiUtente']['descrizione']."</textarea></li>";
+         $string .= "<li><label for='modTextAreaBio'>Bio</label><textarea id='modTextAreaBio' cols='40' rows='4' placeholder='Scrivi una breve descrizione di te...' onblur='checkBio(this.value)'>".$_SESSION['datiUtente']['descrizione']."</textarea><ul id='errorModBio' class='modErrorEntry'></ul></li>";
 
          $string .= "</ul></fieldset>";
 
