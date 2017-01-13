@@ -53,6 +53,12 @@ class Start
 		# DOCTYPE
 		$Doctype = Start::getDoctype();
 
+		# OPEN html
+		$OpenHtml = "<html xmlns='http://www.w3.org/1999/xhtml'>";
+
+		# OPEN HEAD
+		$OpenHead = "<head>";
+
 		# CHARSET
 		$Charset = "<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />";
 
@@ -84,8 +90,11 @@ class Start
 		# Attenzione! Stampa tutto il contenuto di $contesto['Extra'] con "\n" alla fine di ogni elemento
 		$Extra = Start::getExtraTags($contesto);
 
+		# Close Head
+		$CloseHead = "</head>";
+
 		# RETURN RESULTS
-		return array('Doctype' => $Doctype, 'Charset' => $Charset, 'TagTitle' => $TagTitle, 'MetaTitle' => $MetaTitle, 'MetaDescription' => $MetaDescription, 'MetaAuthor' => $MetaAuthor, 'MetaKeywords' => $MetaKeywords, 'MetaViewport' => $MetaViewport, 'BookmarkIcon' => $BookmarkIcon, 'Stylesheets' => $Stylesheets, 'Extra' => $Extra);
+		return array('Doctype' => $Doctype, 'OpenHtml' => $OpenHtml, 'OpenHead'=> $OpenHead, 'Charset' => $Charset, 'TagTitle' => $TagTitle, 'MetaTitle' => $MetaTitle, 'MetaDescription' => $MetaDescription, 'MetaAuthor' => $MetaAuthor, 'MetaKeywords' => $MetaKeywords, 'MetaViewport' => $MetaViewport, 'BookmarkIcon' => $BookmarkIcon, 'Stylesheets' => $Stylesheets, 'Extra' => $Extra, 'CloseHead' => $CloseHead);
 	}
 
 	# Genera il tag <title>

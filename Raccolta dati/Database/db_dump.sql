@@ -272,12 +272,12 @@ INSERT INTO Regioni (nome) VALUES
 ('Toscana'),
 ('Trentino-Alto Adige'),
 ('Umbria'),
-('Valle d&apos;Aosta'),
+('Valle d\'Aosta'),
 ('Veneto');
 
 INSERT INTO Province (nome, sigla, regione) VALUES
 ('Chieti', 'CH', 'Abruzzo'),
-('L&apos;Aquila', 'AQ', 'Abruzzo'),
+('L\'Aquila', 'AQ', 'Abruzzo'),
 ('Pescara', 'PE', 'Abruzzo'),
 ('Teramo', 'TE', 'Abruzzo'),
 ('Matera', 'MT', 'Basilicata'),
@@ -378,7 +378,7 @@ INSERT INTO Province (nome, sigla, regione) VALUES
 ('Trento', 'TN', 'Trentino-Alto Adige'),
 ('Perugia', 'PG', 'Umbria'),
 ('Terni', 'TR', 'Umbria'),
-('Aosta', 'AO', 'Valle d&apos;Aosta'),
+('Aosta', 'AO', 'Valle d\'Aosta'),
 ('Belluno', 'BL', 'Veneto'),
 ('Padova', 'PD', 'Veneto'),
 ('Rovigo', 'RO', 'Veneto'),
