@@ -28,28 +28,19 @@ if(!isset($_SESSION['campiDati'])) {
 }
 
 echo "<!--";
+echo "\nGET\n";
 var_dump($_GET);
+echo "\nPOST\n";
+var_dump($_POST);
 echo "-->";
 
-?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it">
-
-<head>
-<?php
-   echo Start::getHead(
-       array('Titolo' => "Modifica profilo - BandBoard", 'DescrizioneBreve' => "Pannello di modifica delle informazioni personali", 'Descrizione' => "Pagina per la modifica delle informazioni personali, dei contatti e della biografia del proprio profilo", 'Keywords' => array("Modifica profilo","Impostazioni","BandBoard", "band", "musica"), 'Stylesheets' => array("style.css"), 'Extra' => array("<script src='settings.js' type='text/javascript'></script>"))
-   );
-    ?>
-</head>
-
-<!-- TODO sostituire head con quella autogenerata -->
-
+echo Start::getHead(
+    array('Titolo' => "Modifica profilo - BandBoard", 'DescrizioneBreve' => "Pannello di modifica delle informazioni personali", 'Descrizione' => "Pagina per la modifica delle informazioni personali, dei contatti e della biografia del proprio profilo", 'Keywords' => array("Modifica profilo","Impostazioni","BandBoard", "band", "musica"), 'Stylesheets' => array("style.css"), 'Extra' => array("<script src='settings.js' type='text/javascript'></script>"))
+);
+ ?>
 <body>
     <div class="header">Header standard</div>
     <div class="breadcrump"><h1>Modifica il tuo profilo</h1></div>
-    <!-- TODO sostituire menu con quello autogenerato -->
     <div class="nav">
         <?php
          Menu::getMenu(array("Home","<a href='pagina.html'>Profilo</a>","<a href='pagina.html'>Cerca</a>","<a href='pagina.html'>Band</a>"));
@@ -65,12 +56,12 @@ echo "-->";
         <div id="mod">
             <form action="." method="post">
                <fieldset>
-                    <?php
+                  <?php
                      echo FormDatiObbligatori::getFormDatiObbligatori();
                      echo FormDatiInformativi::getFormDatiInformativi();
                      echo FormGeneriPreferiti::getFormGeneriPreferiti();
                      echo FormContatti::getFormContatti();
-                ?>
+                  ?>
                 <input id="modSaveButton" type="submit" title='Salva le modifiche al tuo profilo' value="Salva modifiche" />
              </fieldset>
             </form>

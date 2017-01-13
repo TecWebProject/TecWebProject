@@ -12,8 +12,6 @@ if(!isset($_SESSION)) {
  */
 class FormGeneriPreferiti
 {
-
-    //TODO dati da concordare $_SESSION['username']
     public static function getFormGeneriPreferiti()
     {
         if(!isset($_SESSION['datiUtente'])) {
@@ -25,12 +23,12 @@ class FormGeneriPreferiti
         $generi = GeneriMusicali::getGeneriMusicali();
 
         foreach ($generi as $key => $genere) {
-           $string .= "<li><input id='modGenere$genere' type='checkbox' /><label for='modGenere$genere'> $genere </label></li>";
+            $string .= "<li><input id='modGenere".htmlentities($genere, ENT_QUOTES, "UTF-8")."' type='checkbox'/><label for='modGenere".htmlentities($genere)."'>".htmlentities($genere, ENT_QUOTES, "UTF-8")."</label></li>";
         }
 
         $string .= "</ul></fieldset>";
 
-      return $string;
+        return $string;
     }
 
 }
