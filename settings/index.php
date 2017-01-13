@@ -9,36 +9,24 @@ require_once realpath(dirname(__FILE__)) . '/datiObbligatori.php';
 require_once realpath(dirname(__FILE__)) . '/datiInformativi.php';
 require_once realpath(dirname(__FILE__)) . '/contatti.php';
 require_once realpath(dirname(__FILE__)) . '/generiPreferiti.php';
+require_once realpath(dirname(__FILE__)) . '/gestionePost.php';
 
 //TODO dati temporanei, ho bisogno di un array di dati in session (o almeno dell'username)
-
-if(!isset($_SESSION)) {
-    session_start();
-}
 
 //TODO temporaneo, mi da un utente di default
 $_SESSION['username'] = "giorgio";
 
-// Carico dati utente se non già caricati
-$_SESSION['datiUtente'] = Utenti::getDatiUtente($_SESSION['username']);
-
-// Reset numero campi se non salvato
-if(!isset($_SESSION['campiDati'])) {
-    $_SESSION['campiDati'] = count($_SESSION['datiUtente']['contatti']);
-}
-
-echo "<!--";
-echo "\nGET\n";
-var_dump($_GET);
-echo "\nPOST\n";
-var_dump($_POST);
-echo "-->";
-
 echo Start::getHead(
     array('Titolo' => "Modifica profilo - BandBoard", 'DescrizioneBreve' => "Pannello di modifica delle informazioni personali", 'Descrizione' => "Pagina per la modifica delle informazioni personali, dei contatti e della biografia del proprio profilo", 'Keywords' => array("Modifica profilo","Impostazioni","BandBoard", "band", "musica"), 'Stylesheets' => array("style.css"), 'Extra' => array("<script src='settings.js' type='text/javascript'></script>"))
 );
- ?>
-<body>
+
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+    ?>
+
+<body onload="clearProvince();">
     <div class="header">Header standard</div>
     <div class="breadcrump"><h1>Modifica il tuo profilo</h1></div>
     <div class="nav">
@@ -56,12 +44,12 @@ echo Start::getHead(
         <div id="mod">
             <form action="." method="post">
                <fieldset>
-                  <?php
+                    <?php
                      echo FormDatiObbligatori::getFormDatiObbligatori();
                      echo FormDatiInformativi::getFormDatiInformativi();
                      echo FormGeneriPreferiti::getFormGeneriPreferiti();
                      echo FormContatti::getFormContatti();
-                  ?>
+                    ?>
                 <input id="modSaveButton" type="submit" title='Salva le modifiche al tuo profilo' value="Salva modifiche" />
              </fieldset>
             </form>

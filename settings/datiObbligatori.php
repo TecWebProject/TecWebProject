@@ -10,9 +10,16 @@ class FormDatiObbligatori
 {
     public static function getFormDatiObbligatori()
     {
+
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        // Ottengo i dati utente se non sono già nella sessione
         if(!isset($_SESSION['datiUtente'])) {
             $_SESSION['datiUtente'] = Utenti::getDatiUtente($_SESSION['username']);
         }
+
         $string = "<fieldset><legend>Dati obbligatori</legend><ul>";
 
         // username

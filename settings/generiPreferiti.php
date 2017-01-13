@@ -3,10 +3,6 @@
 require_once realpath(dirname(__FILE__)) . "/../lib/php/datiUtente.php";
 require_once realpath(dirname(__FILE__)) . "/../lib/php/generiMusicali.php";
 
-if(!isset($_SESSION)) {
-    session_start();
-}
-
 /**
  * Classe per generare i dati obbligatori della form di modifica profilo
  */
@@ -14,9 +10,14 @@ class FormGeneriPreferiti
 {
     public static function getFormGeneriPreferiti()
     {
-        if(!isset($_SESSION['datiUtente'])) {
-            $_SESSION['datiUtente'] = Utenti::getDatiUtente($_SESSION['username']);
-        }
+
+      if (session_status() == PHP_SESSION_NONE) {
+           session_start();
+      }
+
+      if(!isset($_SESSION['datiUtente'])) {
+           $_SESSION['datiUtente'] = Utenti::getDatiUtente($_SESSION['username']);
+      }
 
         $string = "<fieldset><legend>Generi preferiti</legend><ul>";
 
