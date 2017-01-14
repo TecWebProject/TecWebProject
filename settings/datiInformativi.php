@@ -12,7 +12,7 @@ require_once realpath(dirname(__FILE__)) . "/../lib/php/select_regione.php";
 class FormDatiInformativi
 {
 
-    //TODO dati da concordare $_SESSION['username']
+    //TODO richiede che nella sessione sia salvato $_SESSION['username'] per l'identificazione
     public static function getFormDatiInformativi()
     {
         if (session_status() == PHP_SESSION_NONE) {
@@ -26,7 +26,7 @@ class FormDatiInformativi
         $string = "<fieldset><legend>Dati informativi</legend><ul>";
 
         // immagine profilo
-        $string .= "<li><label for='modLoadImage'>Carica immagine profilo</label><input id='modLoadImage' type='file' title='Carica immagine'><p id='errorModLoadImage'></p></li>";
+        $string .= "<li><label for='modLoadImage'>Carica immagine profilo</label><input id='modLoadImage' type='file' title='Carica immagine'/><p id='errorModLoadImage'></p></li>";
 
         // regione di provenienza
         $string .= "<li>
@@ -61,10 +61,11 @@ class FormDatiInformativi
                 $string .= "<option value='".htmlentities($provincia['sigla'], ENT_QUOTES, "UTF-8")."'>".htmlentities($provincia['nome'], ENT_QUOTES, "UTF-8")."</option>";
             };
         }
-        $string .= "</select>";
+        $string .= "</select></li>";
 
          // bio
-         $string .= "<li><label for='modTextAreaBio'>Bio</label><textarea id='modTextAreaBio' cols='40' rows='4' placeholder='Scrivi una breve descrizione di te...' onblur='checkBio(this.value)'>".$_SESSION['datiUtente']['descrizione']."</textarea><ul id='errorModBio' class='modErrorEntry'></ul></li>";
+         //TODO placeholder "Scrivi una breve descrizione di te..."
+         $string .= "<li><label for='modTextAreaBio'>Bio</label><textarea id='modTextAreaBio' cols='40' rows='4' onblur='checkBio(this.value)'>".$_SESSION['datiUtente']['descrizione']."</textarea><span id='errorModBio' class='modErrorEntry'></span></li>";
 
          $string .= "</ul></fieldset>";
 

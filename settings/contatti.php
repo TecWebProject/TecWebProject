@@ -62,9 +62,9 @@ class FormContatti
 
             $string .= "</select>";
             if(isset($contatti[$i])) {
-                $string .= "<label for='campoContatto".$i."'>Contatto</label><input name='campoContatto".$i."' value='".$value['contatto']."'/><button name='rimuoviCampo".$i."' title='Rimuovi il campo contatto'>Rimuovi</button></li>";
+                $string .= "<label for='campoContatto".$i."'>Contatto</label><input id='campoContatto".$i."' name='campoContatto".$i."' value='".$value['contatto']."'/><button name='rimuoviCampo".$i."' title='Rimuovi il campo contatto'>Rimuovi</button></li>";
             } else {
-                $string .= "<label for='campoContatto".$i."'>Contatto</label><input name='campoContatto".$i."'/><button name='rimuoviCampo' value='".$i."' title='Rimuovi il campo contatto'>Rimuovi</button></li>";
+                $string .= "<label for='campoContatto".$i."'>Contatto</label><input id='campoContatto".$i."' name='campoContatto".$i."'/><button name='rimuoviCampo' value='".$i."' title='Rimuovi il campo contatto'>Rimuovi</button></li>";
             }
         }
 

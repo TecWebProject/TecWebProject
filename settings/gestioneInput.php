@@ -4,79 +4,80 @@
     /**
      *
      */
-    class GestioneInput
+class GestioneInput
+{
+    //TODO richiede che nella sessione sia salvato $_SESSION['username'] per l'identificazione
+    public static function doGestioneInput()
     {
-       public static function doGestioneInput(){
-          if(!isset($_SESSION['username'])) {
-                 throw new Exception("Missing username record", 1);
-          }
+        if(!isset($_SESSION['username'])) {
+               throw new Exception("Missing username record", 1);
+        }
 
-          echo "<!--";
-          echo "\nGET\n";
-          var_dump($_GET);
-          echo "\nPOST\n";
-          var_dump($_POST);
-          echo "\nSESSION['campiDati']\n";
-          var_dump($_SESSION['campiDati']);
-          echo "\nSESSION['nCampi']\n";
-          var_dump($_SESSION['nCampi']);
-          echo "-->";
+        echo "<!-- \nSTATO INIZIALE \n";
+        var_dump("GET",$_GET,"POST",$_POST,"campiDati",$_SESSION['campiDati'],"nCampi",$_SESSION['nCampi']);
+        echo "-->\n\n";
 
-          // Fà partire la sessione se non è già partita
-          if (session_status() == PHP_SESSION_NONE) {
-              session_start();
-          }
+        // Fà partire la sessione se non è già partita
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
 
-          // Aggiorna i dati utente dal server
-          $_SESSION['datiUtente'] = Utenti::getDatiUtente($_SESSION['username']);
+        # $_SESSION['username'] è fondamentale per ottenere i dati dell'utente
+        if(!isset($_SESSION['username'])) {
+            throw new Exception("Missing username in SESSION", 1);
+        }
 
-          // Post è vuoto
-          if(empty($_POST)) {
-              $_SESSION['campiDati'] = $_SESSION['datiUtente'];
-          }
+        // Aggiorna i dati utente dal server
+        //   $_SESSION['datiUtente'] = Utenti::getDatiUtente($_SESSION['username']);
 
-          if(!empty($_POST)) {
-              // Get tipoContatto e campoContatto in associative array
-              unset($_SESSION['campiDati']['contatti']);
-              $i = 0;
-              foreach($_POST as $key => $value){
-                  if(preg_match("/^tipoContatto[0-9]+$/", $key)) {
-                      $_SESSION['campiDati']['contatti'][$i/2]['tipoContatto'] = $value;
-                  } else if(preg_match("/^campoContatto[0-9]+$/", $key)) {
-                      $_SESSION['campiDati']['contatti'][$i/2]['contatto'] = $value;
-                  }
-                  $i++;
-              }
-          }
+        // Post è vuoto
+        if(empty($_POST)) {
+            $_SESSION['campiDati'] = Utenti::getDatiUtente($_SESSION['username']);
 
-          echo "<!-- Dopo get da post\n";
-          var_dump($_SESSION['campiDati']);
-          echo "-->";
+            echo "<!-- Aggiornati campi dati da DB\n";
+            var_dump($_SESSION['campiDati']);
+            echo "-->";
+        }
 
-          // Get numero campi da inserire
-          $_SESSION['nCampi'] = count($_SESSION['campiDati']['contatti']);
+        if(!empty($_POST)) {
+            // Get tipoContatto e campoContatto in associative array
+            unset($_SESSION['campiDati']);
 
-          if(!empty($_POST)) {
-              // Check if new campoDati is needed
-              if(isset($_POST['aggiungiCampo']) && $_POST['aggiungiCampo'] == "true") {
-                  $_SESSION['nCampi'] += 1;
-              }
+            //TODO MODIFICA PASSWORD
+            //FIX temporaneo
+            $datiDB = Utenti::getDatiUtente($_SESSION['username']);
 
-              if(isset($_POST['rimuoviCampo'])) {
+            $campiDati = array(
+               'username' => $_SESSION['username'],
+               'password' => $datiDB['password'],
+               'email' => (isset($_POST['']))
+            );
+        }
 
-                  echo "Rimuovo campo ".$_POST['rimuoviCampo'];
+        // Get numero campi da inserire
+        $_SESSION['nCampi'] = count($_SESSION['campiDati']['contatti']);
 
-                  $key = $_POST['rimuoviCampo'];
-                  unset($_SESSION['campiDati'][$key]);
-                  $_SESSION['campiDati'] = array_values($_SESSION['campiDati']);
-                  $_SESSION['nCampi'] -= 1;
-              }
+        if(!empty($_POST)) {
+            // Check if new campoDati is needed
+            if(isset($_POST['aggiungiCampo']) && $_POST['aggiungiCampo'] == "true") {
+                $_SESSION['nCampi'] += 1;
+            }
 
-          }
+            if(isset($_POST['rimuoviCampo'])) {
 
-          $campiDati = array();
-       }
+                echo "Rimuovo campo ".$_POST['rimuoviCampo'];
+
+                $key = $_POST['rimuoviCampo'];
+                unset($_SESSION['campiDati'][$key]);
+                $_SESSION['campiDati'] = array_values($_SESSION['campiDati']);
+                $_SESSION['nCampi'] -= 1;
+            }
+
+        }
+
+        $campiDati = array();
     }
+}
 
 
 

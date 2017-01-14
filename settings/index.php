@@ -47,13 +47,13 @@ try {
     $string .= "
     <div id='modFotoProfilo'>
       <!-- TODO: Caricare immagine dinamicamente -->
-      <label for='modLoadImage'><img src='../images/fotoProfilo.jpg'></label>
+      <label for='modLoadImage'><img src='../images/fotoProfilo.jpg' alt=\"Immagine profilo dell\'utente\"/></label>
     </div>";
 
     // Inizio form
     $string .= "
         <div id='mod'>
-            <form action="." method='post' onsubmit='myFunction();'>
+            <form action='.' method='post' onsubmit='checkForm();'>
                <fieldset>";
 
     // Dati obbligatori
@@ -79,6 +79,8 @@ try {
 
     // Chiusura body e html
     $string .= "</body></html>";
+
+    echo $string;
 
 } catch (Exception $e) {
     echo $e->getMessage();

@@ -10,7 +10,7 @@ class Menu {
 	public static function getMenu($links) {
 		// Check array links valido
 		if (!isset($links)) {
-			throw new Exception("Impossibile generare il menu", 1);
+			throw new Exception("Missing links in menu", 1);
 		}
 
 		// Aggiunge <li> e </li>
