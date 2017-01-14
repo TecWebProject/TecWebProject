@@ -5,7 +5,7 @@
  * Basta passare un array di stringhe al metodo Menu::getMenu()
  */
 class Menu {
-	// getMenu($link, [$corrente=-1])
+	// getMenu($link)
 	// $link è l'array di elementi del menu
 	public static function getMenu($links) {
 		// Check array links valido
@@ -22,5 +22,4 @@ class Menu {
 		return "<input type='checkbox' id='menu_check' name='menu_check' />\n<div class='nav'>\n<label id='menu_button' for='menu_check'><a title='Mostra menù laterale'>&#9776;</a></label>\n<ul>\n".implode("\n", $links)."\n</ul>\n</div>\n";
 	}
 }
-
 ?>

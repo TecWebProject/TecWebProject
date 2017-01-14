@@ -33,7 +33,7 @@ class Username
             $result = $stmt_result->fetch_all(MYSQLI_ASSOC);
 
             $notAlreadyUsed = $result[0]["COUNT(username)"] == 0;
-            $valid = preg_match("/^[a-zA-Z0-9]+$/",$username);
+            $valid = preg_match("/^[a-zA-Z0-9_]+$/",$username); # ho aggiunto l'underscore, che mancava (non solo caratteri alfanumerici)
 
             if($notAlreadyUsed && $valid){
                return 0;
