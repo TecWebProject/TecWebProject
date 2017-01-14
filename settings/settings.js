@@ -178,3 +178,10 @@ function clearError(str) {
             console.error("passato: " + str);
     }
 }
+
+function checkForm() {
+
+    console.log("Definire checkForm()");
+
+    return true;
+}
