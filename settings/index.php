@@ -47,7 +47,7 @@ try {
     $string .= "
     <div id='modFotoProfilo'>
       <!-- TODO: Caricare immagine dinamicamente -->
-      <label for='modLoadImage'><img src='../images/fotoProfilo.jpg' alt=\"Immagine profilo dell\'utente\"/></label>
+      <label for='modLoadImage'><img src='../images/fotoProfilo.jpg' alt='Immagine profilo dell&apos;utente'/></label>
     </div>";
 
     // Inizio form
@@ -69,7 +69,7 @@ try {
      $string .= FormContatti::getFormContatti();
 
     // Submit
-    $string .= "<button name='salvaModifiche' value='true' type='submit'>Slava modifiche</button>";
+    $string .= "<button name='salvaModifiche' value='true' type='submit'>Salva modifiche</button>";
 
     // Chiusura form
     $string .= "</fieldset></form></div></div>";

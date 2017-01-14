@@ -93,6 +93,38 @@ function checkEmail(email) {
     return valid
 }
 
+function checkPassword(password) {
+    var length = password.length;
+    var specialChar = password.match(/[!@#\$%\^\&*\)\(+=._-]*/);
+
+    valid = true;
+
+    if (length < 8 || special == false) {
+        valid = false;
+    }
+
+    if (valid) {
+        document.getElementById("errorModPassword").innerHTML = "<img src='correctEntry.png' class='modCorrectEntry'/>";
+    } else {
+        document.getElementById("errorModPassword").innerHTML = "Password non sicura. Usa almeno 8 caratteri, tra cui almeno uno di .!@#$%^&*()_+-=";
+    }
+
+    return valid;
+}
+
+function checkPasswordCheck(passwordCheck) {
+    var valid = document.getElementById("modPassword").value === passwordCheck;
+
+    if (valid) {
+        document.getElementById("errorModPasswordCheck").innerHTML = "<img src='correctEntry.png' class='modCorrectEntry'/>";
+    } else {
+        document.getElementById("errorModPasswordCheck").innerHTML = "Le due password non corrispondono.";
+    }
+
+    return valid;
+
+}
+
 // Controllo età
 function checkBDay(bDay) {
     var d = document.getElementById('modDataNascitaGiorno').value;
@@ -172,6 +204,12 @@ function clearError(str) {
             break;
         case 'bio':
             document.getElementById("errorModBio").innerHTML = "";
+            break;
+        case 'password':
+            document.getElementById("errorModPassword").innerHTML = "";
+            break;
+        case 'passwordCheck':
+            document.getElementById("errorModPasswordCheck").innerHTML = "";
             break;
         default:
             console.error("passato: " + str);
