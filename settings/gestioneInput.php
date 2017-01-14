@@ -41,7 +41,7 @@ class GestioneInput
 
         if(!empty($_POST)) {
             // Get tipoContatto e campoContatto in associative array
-            unset($_SESSION['campiDati']);
+            //unset($_SESSION['campiDati']);
 
             //TODO MODIFICA PASSWORD
             //FIX temporaneo
@@ -55,7 +55,7 @@ class GestioneInput
         }
 
         // Get numero campi da inserire
-        $_SESSION['nCampi'] = count($_SESSION['campiDati']['contatti']);
+       /* $_SESSION['nCampi'] = count($_SESSION['campiDati']['contatti']);
 
         if(!empty($_POST)) {
             // Check if new campoDati is needed
@@ -73,7 +73,7 @@ class GestioneInput
                 $_SESSION['nCampi'] -= 1;
             }
 
-        }
+        }*/
 
         $campiDati = array();
     }

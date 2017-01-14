@@ -27,33 +27,28 @@ class FormDatiObbligatori
 
         // nome
         //TODO placeholder='Nome'
-        $string .= "<li><label for='modNome'>Nome</label><input id='modNome' value='";
+        $string .= "<li><label for='modNome'>Nome</label><input id='modNome' name='nome' value='";
         $string .= $_SESSION['datiUtente']['nome'];
         $string .= "' onblur='checkNome(this.value)' onkeypress='clearError(\"nome\")'/><span id='errorModNome' class='modErrorEntry'></span></li>";
 
         // cognome
         //TODO placeholder='Cognome'
-        $string .= "<li><label for='modCognome'>Cognome</label><input id='modCognome' value='";
+        $string .= "<li><label for='modCognome'>Cognome</label><input id='modCognome' name='cognome' value='";
         $string .= $_SESSION['datiUtente']['cognome'];
         $string .= "' onblur='checkCognome(this.value)' onkeypress='clearError(\"cognome\")'/><span id='errorModCognome' class='modErrorEntry'></span></li>";
 
         // email
         //TODO placeholder='email'
-        $string.= "<li><label for='modEmail'>Email</label><input id='modEmail' value='";
+        $string.= "<li><label for='modEmail'>Email</label><input id='modEmail' name='email' value='";
         $string .= $_SESSION['datiUtente']['email'];
         $string .= "' onblur='checkEmail(this.value)' onkeypress='clearError(\"email\")'/><span id='errorModEmail' class='modErrorEntry'></span></li>";
 
-        // data nascita
-        //   $string .= "<li><label for='modDataNascitaGiorno'>Data di nascita</label><input type='text' id='modDataNascitaGiorno' length='2' value='";
-        //   $string .= date("d", strtotime($_SESSION['datiUtente']['dataNascita']));
-        //   $string .= "' onkeypress='clearError(\"data\")' onblur='checkBDay()' /><label for='modDataNascita'>Data di nascita</label><input type='text' length='2' value='<p id='errorModDataNascita'></p></li>";
-
         //TODO placeholder='gg' placeholder='mm' placeholder='aaaa'
-        $string .= "<li><div>Data di nascita:</div><label for='modDataNascitaGiorno'>Giorno</label><input id='modDataNascitaGiorno' type='text' size='2' maxlength='2'   value='";
+        $string .= "<li><div>Data di nascita:</div><label for='modDataNascitaGiorno'>Giorno</label><input id='modDataNascitaGiorno' name='bDayGiorno' type='text' size='2' maxlength='2'   value='";
         $string .= date("d", strtotime($_SESSION['datiUtente']['dataNascita']));
-        $string .= "' onkeypress='clearError(\"data\")' onblur='checkBDay()'/><label for='modDataNascitaMese'>Mese</label><input id='modDataNascitaMese' type='text' size='2' maxlength='2' value='";
+        $string .= "' onkeypress='clearError(\"data\")' onblur='checkBDay()'/><label for='modDataNascitaMese'>Mese</label><input id='modDataNascitaMese' name='bDayMese' type='text' size='2' maxlength='2' value='";
         $string .= date("m", strtotime($_SESSION['datiUtente']['dataNascita']));
-        $string .= "' onkeypress='clearError(\"data\")' onblur='checkBDay()'/><label for='modDataNascitaAnno'>Anno</label><input id='modDataNascitaAnno' type='text' size='4' maxlength='4' value='";
+        $string .= "' onkeypress='clearError(\"data\")' onblur='checkBDay()'/><label for='modDataNascitaAnno'>Anno</label><input id='modDataNascitaAnno' name='bDayAnno' type='text' size='4' maxlength='4' value='";
         $string .= date("Y", strtotime($_SESSION['datiUtente']['dataNascita']));
         $string .= "' onkeypress='clearError(\"data\")' onblur='checkBDay()'/><span id='errorModDataNascita' class='modErrorEntry'></span></li>";
 

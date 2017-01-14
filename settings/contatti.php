@@ -51,7 +51,7 @@ class FormContatti
             } else {
                 $value = array('tipoContatto' => '', 'contatto' => '');
             }
-            $string .= "<li><label for='tipoContatto".$i."'>Tipo contatto</label><select  name='tipoContatto".$i."' id='tipoContatto".$i."'>";
+            $string .= "<li><label for='tipoContatto".$i."'>Tipo contatto</label><select name='tipoContatto".$i."' id='tipoContatto".$i."'>";
             foreach ($tipiContatto as $key => $tipoContatto) {
                 if(isset($value['tipoContatto']) && $value['tipoContatto'] == $tipoContatto) {
                      $string .= "<option value='$tipoContatto' selected='selected'>".ucfirst(str_replace("_", " ", $tipoContatto))."</option>";

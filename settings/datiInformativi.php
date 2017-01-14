@@ -26,12 +26,12 @@ class FormDatiInformativi
         $string = "<fieldset><legend>Dati informativi</legend><ul>";
 
         // immagine profilo
-        $string .= "<li><label for='modLoadImage'>Carica immagine profilo</label><input id='modLoadImage' type='file' title='Carica immagine'/><p id='errorModLoadImage'></p></li>";
+        $string .= "<li><label for='modLoadImage'>Carica immagine profilo</label><input id='modLoadImage' name='image' type='file' title='Carica immagine'/><p id='errorModLoadImage'></p></li>";
 
         // regione di provenienza
         $string .= "<li>
             <label for='modSelectRegione'>Regione di provenienza</label>
-            <select id='modSelectRegione' onchange='showProvince(this.value)'>
+            <select id='modSelectRegione' name='selectRegione' onchange='showProvince(this.value)'>
                <option value=''>Seleziona regione</option>";
 
          $regioni = Regioni::getRegioni();
@@ -49,7 +49,7 @@ class FormDatiInformativi
          // provincia di appartenenza
          $string .= "<li>
              <label for='modSelectProvincia'>Seleziona provincia</label>
-             <select id='modSelectProvincia'>
+             <select id='modSelectProvincia' name='selectProvincia'>
                 <option value=''>Seleziona provincia</option>";
 
           $province = Province::getProvince();
@@ -65,7 +65,7 @@ class FormDatiInformativi
 
          // bio
          //TODO placeholder "Scrivi una breve descrizione di te..."
-         $string .= "<li><label for='modTextAreaBio'>Bio</label><textarea id='modTextAreaBio' cols='40' rows='4' onblur='checkBio(this.value)'>".$_SESSION['datiUtente']['descrizione']."</textarea><span id='errorModBio' class='modErrorEntry'></span></li>";
+         $string .= "<li><label for='modTextAreaBio'>Bio</label><textarea id='modTextAreaBio' name='bio' cols='40' rows='4' onblur='checkBio(this.value)'>".$_SESSION['datiUtente']['descrizione']."</textarea><span id='errorModBio' class='modErrorEntry'></span></li>";
 
          $string .= "</ul></fieldset>";
 

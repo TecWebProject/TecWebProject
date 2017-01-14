@@ -57,19 +57,19 @@ try {
                <fieldset>";
 
     // Dati obbligatori
-    $string .= FormDatiObbligatori::getFormDatiObbligatori();
+     $string .= FormDatiObbligatori::getFormDatiObbligatori();
 
     // Dati informativi
-    $string .= FormDatiInformativi::getFormDatiInformativi();
+      $string .= FormDatiInformativi::getFormDatiInformativi();
 
     // Generi preferiti
-    $string .= FormGeneriPreferiti::getFormGeneriPreferiti();
+     $string .= FormGeneriPreferiti::getFormGeneriPreferiti();
 
     // Contatti
-    $string .= FormContatti::getFormContatti();
+     $string .= FormContatti::getFormContatti();
 
     // Submit
-    $string .= "<input id='modSaveButton' type='submit' title='Salva le modifiche al tuo profilo' value='Salva modifiche' />";
+    $string .= "<button name='salvaModifiche' value='true' type='submit'>Slava modifiche</button>";
 
     // Chiusura form
     $string .= "</fieldset></form></div></div>";
