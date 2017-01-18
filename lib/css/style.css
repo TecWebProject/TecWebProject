@@ -441,14 +441,16 @@
 
 
 /* 404 */
-#content.notFound {
-	text-align: center;
-}
-
 #header .notFound {
 	color: #70c1ff;
 }
 
 #content.notFound h1 {
 	font-size: 5em;
+}
+
+#content.notFound {
+	text-align: center;
+	width: 90%;
+	margin: auto;
 }
