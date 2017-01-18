@@ -6,7 +6,9 @@ session_start();
 
 include_once realpath(dirname(__FILE__))."/lib/php/query_server.php";
 include_once realpath(dirname(__FILE__))."/lib/php/start.php";	//LIBRERIA PER CREARE HEAD
+include_once realpath(dirname(__FILE__))."/lib/php/header.php";	//LIBRERIA PER CREARE HEADER
 include_once realpath(dirname(__FILE__))."/lib/php/menu.php";	//LIBRERIA PER CREARE MENU
+include_once realpath(dirname(__FILE__))."/lib/php/footer.php";	//LIBRERIA PER CREARE FOOTER
 
 function pulisciInput($value) {
 	$value=trim($value);
@@ -144,14 +146,14 @@ echo Start::getHead(array(
 	'Titolo' => "BandBoard",
 	'DescrizioneBreve' => "Home - BandBoard",
 	'Descrizione' => "Home page del sito BandBoard",
-	'Author' => array("Derek Toninato", "Filippo Berto", "Francesco Pezzuto", "Giorgio Giuffre"),
+	'Author' => array("Derek Toninato", "Filippo Berto", "Francesco Pezzuto", "Giorgio Giuffrè"),
 	'Keywords' => array("BandBoard", "home", "bacheca", "musica", "musicisti", "gruppi", "chitarra", "basso", "batteria", "piano", "tastiera"),
 	'BookmarkIcon' => 'site/logo.png',
 	'Stylesheets' => array("style.css"),
 	'Extra' => array("<link rel=\"stylesheet\" media=\"handheld, screen and (max-width:480px), only screen and (max-device-width:480px)\" href=\"lib/css/style_mobile.css\" type=\"text/css\" />")
 ));	//CREAZIONE HEAD
 
-echo file_get_contents(realpath(dirname(__FILE__))."/lib/testiStruttura/header.txt");	//CREAZIONE HEADER
+echo Header::getHeader(); //CREAZIONE HEADER
 
 if (!isset($_SESSION['started'])) {	//APPENA ARRIVATO IN HOME
 	$_SESSION['started']=1;
@@ -236,7 +238,7 @@ if (!isset($_SESSION['started'])) {	//APPENA ARRIVATO IN HOME
 		}
 	}
 }
-echo file_get_contents(realpath(dirname(__FILE__))."/lib/testiStruttura/footer.txt");	//CREAZIONE DEL FOOTER
+echo Footer::getFooter();	//CREAZIONE DEL FOOTER
 
 ?>
 

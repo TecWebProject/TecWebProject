@@ -9,14 +9,9 @@ class Header {
 	public static function getHeader() {
 		global $nomeSito;
 		return	'<div id="header">' .
-				'<h1>' . $nomeSito . '</h1>' .
+				'<h1 xml:lang="en" lang="en">' . $nomeSito . '</h1>' .
 #					'<img src="/images/logo.png" />'
 				'</div>';
-	}
-
-	# scrive l'header
-	public static function echoHeader() {
-		echo Header::getString();
 	}
 }
 

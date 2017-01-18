@@ -1,5 +1,0 @@
-	<body>
-		<div id="header">
-			<h1 xml:lang="en" lang="en">BandBoard</h1>
-		</div>
-

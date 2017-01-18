@@ -4,6 +4,9 @@
 
 include_once realpath(dirname(__FILE__, 2))."/lib/php/query_server.php";
 include_once realpath(dirname(__FILE__, 2))."/lib/php/start.php";	//LIBRERIA PER CREARE HEAD
+include_once realpath(dirname(__FILE__, 2))."/lib/php/header.php";	//LIBRERIA PER CREARE HEADER
+include_once realpath(dirname(__FILE__, 2))."/lib/php/menu.php";	//LIBRERIA PER CREARE MENU
+include_once realpath(dirname(__FILE__, 2))."/lib/php/footer.php";	//LIBRERIA PER CREARE FOOTER
 
 function pulisciInput($value) {
 	$value=trim($value);
@@ -16,14 +19,23 @@ echo Start::getHead(array(
 	'Titolo' => "Registrazione BandBoard",
 	'DescrizioneBreve' => "Registrazione - BandBoard",
 	'Descrizione' => "Pagina di registrazione del sito BandBoard",
-	'Author' => array("Derek Toninato", "Filippo Berto", "Francesco Pezzuto", "Giorgio Giuffre"),
+	'Author' => array("Derek Toninato", "Filippo Berto", "Francesco Pezzuto", "Giorgio Giuffrè"),
 	'Keywords' => array("BandBoard", "registrazione", "iscrizione", "bacheca", "musica", "musicisti", "gruppi", "chitarra", "basso", "batteria", "piano", "tastiera"),
 	'BookmarkIcon' => 'site/logo.png',
 	'Stylesheets' => array("style.css"),
 	'Extra' => array("<link rel=\"stylesheet\" media=\"handheld, screen and (max-width:480px), only screen and (max-device-width:480px)\" href=\"../lib/css/style_mobile.css\" type=\"text/css\" />", "<script type=\"text/javascript\" src=\"registrazione.js\"></script>")
 ));	//CREAZIONE HEAD
 
-echo file_get_contents(realpath(dirname(__FILE__, 2))."/lib/testiStruttura/header.txt");	//CREAZIONE HEADER
+echo Header::getHeader(); //CREAZIONE HEADER
+
+echo Menu::getMenu(array(
+	'<a href="../index.html" xml:lang="en">Home</a>',
+	'Registrazione',
+	'<a href="pagina.php">Profilo</a>',
+	'<a href="../cercaUtenti/index.php">Cerca Utenti</a>',
+	'<a href="../cercaGruppi/index.php">Cerca Gruppi</a>',
+	'<a href="pagina.php">I miei Gruppi</a>'
+)); // CREAZIONE MENU
 
 if (count($_REQUEST)==0) {	//APPENA ARRIVATO DA HOME
 	echo file_get_contents("registrazione_form.txt");	//CREAZIONE PAGINA DI REGISTRAZIONE
@@ -66,7 +78,7 @@ if (count($_REQUEST)==0) {	//APPENA ARRIVATO DA HOME
 		//header("Location: ../modificaProfilo/modificaProfilo.php");	//CHIAMATA A PAGINA DI MODIFICA DEL PROFILO
 	}
 }
-echo file_get_contents(realpath(dirname(__FILE__, 2))."/lib/testiStruttura/footer.txt");	//CREAZIONE FOOTER
+echo Footer::getFooter();	//CREAZIONE DEL FOOTER
 
 ?>
 
