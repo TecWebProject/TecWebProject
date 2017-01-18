@@ -3,6 +3,7 @@
 require_once realpath(dirname(__FILE__)) . '/../lib/php/select_provincia.php';
 require_once realpath(dirname(__FILE__)) . '/../lib/php/regioni.php';
 require_once realpath(dirname(__FILE__)) . '/../lib/php/province.php';
+require_once realpath(dirname(__FILE__)) . '/../lib/php/header.php';
 require_once realpath(dirname(__FILE__)) . '/../lib/php/menu.php';
 require_once realpath(dirname(__FILE__)) . '/../lib/php/start.php';
 require_once realpath(dirname(__FILE__)) . '/../lib/php/start.php';
@@ -32,10 +33,12 @@ try {
     );
 
     // Inizio body
-    $string .= "<body onload='clearProvince();'><div class='header'>Header standard</div><div class='breadcrump'><h1>Modifica il tuo profilo</h1></div><div class='nav'>";
+    $string .= "<body onload='clearProvince();'>";#<div class='header'>Header standard</div><div class='breadcrump'><h1>Modifica il tuo profilo</h1></div><div class='nav'>";
+
+    $string .= Header::getHeader();
 
     // Menu
-    $string .= Menu::getMenu(array("Home","<a href='pagina.html'>Profilo</a>","<a href='pagina.html'>Cerca</a>","<a href='pagina.html'>Band</a>"));
+    $string .= Menu::getMenu(array("Home","<a href='pagina.html'>Profilo</a>", "<a href='../cercaUtenti/index.php'>Cerca Utenti</a>", "<a href='../cercaGruppi/index.php'>Cerca Gruppi</a>", "<a href='pagina.html'>Band</a>"));
 
     // Fine Menu
     $string .= "</div>";

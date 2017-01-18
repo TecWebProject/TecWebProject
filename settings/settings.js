@@ -14,7 +14,7 @@ function showProvince(str) {
                 document.getElementById("modSelectProvincia").disabled = false;
             }
         };
-        xmlhttp.open("GET", "/settings/script_select_provincia.php?regione=" + str, true);
+        xmlhttp.open("GET", "script_select_provincia.php?regione=" + str, true);
         xmlhttp.send();
         document.getElementById("modSelectProvincia").innerHTML = xmlhttp.response
     }

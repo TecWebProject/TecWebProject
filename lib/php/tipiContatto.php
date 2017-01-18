@@ -18,7 +18,7 @@ class TipiContatto {
 		try {
 			mysqli_report(MYSQLI_REPORT_STRICT);
 
-			$query = "select nome FROM TipiContatti ORDER BY nome";
+			$query = "SELECT nome FROM TipiContatti ORDER BY nome";
 
 			$_mysqli = dbConnectionData::getMysqli();
 
