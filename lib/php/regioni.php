@@ -17,7 +17,7 @@ class Regioni {
 		try {
 			mysqli_report(MYSQLI_REPORT_STRICT);
 
-			$query = "SELECT * FROM Regioni ORDER BY Nome";
+			$query = "SELECT * FROM Regioni ORDER BY nome";
 
 			$_mysqli = dbConnectionData::getMysqli();
 

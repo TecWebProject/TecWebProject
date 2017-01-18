@@ -348,6 +348,7 @@
 }
 
 
+
 /* menù */
 #menu_check {
 	position: absolute;
@@ -434,10 +435,12 @@
 }
 
 
+
 /* form ricerca utenti/gruppi */
 #content select {
 	margin-bottom: 1em;
 }
+
 
 
 /* 404 */

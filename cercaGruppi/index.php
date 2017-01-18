@@ -13,7 +13,7 @@
 			'Descrizione' => 'Cerca gruppi in BandBoard, per strumenti suonati, province e genere.',
 			'Keywords' => array('cerca', 'gruppi', 'musicisti'),
 			'Stylesheets' => array('style.css'),
-			'Extra' => array('<link rel="stylesheet" type="text/css" href="../lib/css/style.css" />', '<script type="text/javascript" src="../lib/js/settings.js"></script>')
+			'Extra' => array('<link rel="stylesheet" type="text/css" href="../lib/css/style.css" />', '<script type="text/javascript" src="../lib/js/province.js"></script>')
 		)
 	);
 	$file = str_replace('<html>', $start, $file);
@@ -61,10 +61,10 @@
 	$regioni = '';
 	$arr_regioni = Regioni::getRegioni();
 	foreach ($arr_regioni as $el) {
-		$regioni .= '<option value="' . $el . '"';
-		if (isset($_GET['regione']) && $el == $_GET['regione'])
+		$regioni .= '<option value="' . $el['nome'] . '"';
+		if (isset($_GET['regione']) && $el['nome'] == $_GET['regione'])
 			$regioni .= ' selected="selected"';
-		$regioni .= '>' . $el . '</option>';
+		$regioni .= '>' . $el['nome'] . '</option>';
 	}
 	$file = str_replace('<regioni />', $regioni, $file);
 
