@@ -1,6 +1,7 @@
 <?php
 
 require_once(realpath(dirname(__FILE__))."/paths.php");
+
 /*
 	Ritorna l'array delle stringhe dell'head delle pagine in base
 	al contesto passato come parametro. Contesto è un array
@@ -18,8 +19,7 @@ require_once(realpath(dirname(__FILE__))."/paths.php");
 // ESEMPIO
 //var_dump(getArray(array('Titolo' => "PASS TODO Nome Sito", 'DescrizioneBreve' => "PASS TODO Descrizione breve", 'Descrizione' => "PASS TODO Descrizione pagina", 'Author' => array("Derek Toninato","Filippo Berto", "Francesco Pezzuto", "Giorgio Giuffrè"), 'Keywords' => array("PASS TODO KEYWORD 1","PASS TODO KEYWORD 2","PASS TODO KEYWORD 3"), 'BookmarkIcon' => 'icon.png', 'Stylesheets' => array("style.css"), 'Extra' => array( "<link type='text/css' rel='stylesheet' href='lib/css/styleStampa.css' />", "<link type='text/css' rel='stylesheet' href='lib/css/styleSmartphone.css' />" ))));
 
-class Start
-{
+class Start {
 	private static $contestoDefault = array(
 		'Titolo' => "BandBoard",
 		'Author' => array("Derek Toninato", "Filippo Berto", "Francesco Pezzuto", "Giorgio Giuffrè")
@@ -27,7 +27,7 @@ class Start
 
 	# fornisce il Doctype
 	public static function getDoctype() {
-		return '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">';
+		return '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">';
 	}
 
 	# fornisce l'intestazione
@@ -271,3 +271,5 @@ class Start
 		return isset($contesto) && isset($contesto['Extra']) ? $contesto['Extra'] : null;
 	}
 }
+
+?>

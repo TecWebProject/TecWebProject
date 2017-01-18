@@ -1,17 +1,15 @@
 <?php
 
-   $relPath = realpath(dirname(__FILE__));
-   require_once $relPath . '/query_server.php';
+$relPath = realpath(dirname(__FILE__));
+require_once $relPath . '/query_server.php';
 
-   /**
-   *  Classe per la richiesta degli strumenti musicali
-   *  Usare il metodo statico getStrumenti()
-   *  OUTPUT: Array degli strumenti musicali
-   */
-class Strumenti
-{
-	public static function getStrumenti()
-	{
+/**
+*  Classe per la richiesta degli strumenti musicali
+*  Usare il metodo statico getStrumenti()
+*  OUTPUT: Array degli strumenti musicali
+*/
+class Strumenti {
+	public static function getStrumenti() {
 		$result = null;
 		try {
 			mysqli_report(MYSQLI_REPORT_STRICT);
@@ -33,3 +31,5 @@ class Strumenti
 		}
 	}
 }
+
+?>
