@@ -438,3 +438,17 @@
 #content select {
 	margin-bottom: 1em;
 }
+
+
+/* 404 */
+#content.notFound {
+	text-align: center;
+}
+
+#header .notFound {
+	color: #70c1ff;
+}
+
+#content.notFound h1 {
+	font-size: 5em;
+}
