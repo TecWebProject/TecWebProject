@@ -1,0 +1,43 @@
+<html>
+
+<body>
+	<header />
+
+	<menu />
+
+	<div id="content">
+		<h1>Ricerca Utenti</h1>
+		<form name="filtri" action="index.php">
+			<fieldset>
+				<legend>Filtri:</legend>
+				Strumento:
+				<select name="strumento">
+					<option value="">Seleziona strumento</option>
+					<strumenti />
+				</select><br />
+
+				Regione:
+				<select id="modSelectRegione" name="regione" onchange="showProvince(this.value)">
+					<option value="">Seleziona regione</option>
+					<regioni />
+				</select><br />
+
+				Provincia:
+				<select id="modSelectProvincia" name="provincia">
+					<option value="">Seleziona provincia</option>
+					<province />
+				</select><br />
+
+				Genere:
+				<select name="genere">
+					<option value="">Seleziona genere</option>
+					<generi />
+				</select><br />
+
+				<input type="submit" value="Cerca utenti" />
+			</fieldset>
+		</form>
+		<risultati />
+	</div>
+</body>
+</html>
