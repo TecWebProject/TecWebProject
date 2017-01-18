@@ -1,0 +1,27 @@
+		<div id="content">
+			<div class="logout">
+				<form action="lib/php/logout.php" method="post">
+					<input type="submit" id="logout" value="Logout" />
+				</form>
+			</div>
+
+			<div id="testo">
+				<h2>Bentornato/a!</h2>
+
+				<div class="suggeriti">
+					<p>Ecco dei nuovi utenti che potresti conoscere:</p>
+					
+					<utentiSuggeriti />
+					
+				</div>
+
+				<div class="suggeriti">
+					<p>Ecco dei nuovi gruppi che potrebbero interessarti:</p>
+					
+					<gruppiSuggeriti />
+					
+				</div>
+
+			</div>
+		</div>
+
