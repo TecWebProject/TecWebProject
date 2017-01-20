@@ -1,6 +1,6 @@
 <?php
 
-$username = '<username />';
+$username = 'prova';
 
 # leggi template
 $file = file_get_contents("../lib/struttura/user_page.html");

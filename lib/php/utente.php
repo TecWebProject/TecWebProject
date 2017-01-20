@@ -302,12 +302,13 @@ class Utente {
 	}
 
 	private function createPage() {
-		$userTemplate = file_get_contents('user_template.php');
-		$userPage = fopen('../../users/' . $this->username . '/index.php', 'w');
+		$userTemplate = file_get_contents('../lib/php/user_template.php');
+		$userTemplate = str_replace('<username />', $this->username, $userTemplate);
+		$userPage = fopen('../users/' . $this->username . '.php', 'w');
 		fwrite($userPage, $userTemplate);
 	}
 
-	function save() {
+	public function save() {
 		$connessione=dbConnectionData::getMysqli();	//CONNESSIONE AL DATABASE
 		try {
 			if ($connessione->connect_errno) {
@@ -318,7 +319,7 @@ class Utente {
 					throw new Exception("Query non valida: ".$connessione->error.".");
 				}
 				$connessione->close();	//CHIUSURA CONNESSIONE
-				createPage();	// CREAZIONE DELLA PAGINA PROFILO HTML
+				$this->createPage();	// CREAZIONE DELLA PAGINA PROFILO HTML
 			}
 		} catch (Exception $e){
 			echo "Errore: inserimento fallito (".$e->getMessage().").";
