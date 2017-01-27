@@ -59,5 +59,3 @@
 #		}
 #		$province .= '</optgroup>';
 #	}
-
-?>

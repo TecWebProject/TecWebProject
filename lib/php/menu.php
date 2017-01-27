@@ -22,4 +22,3 @@ class Menu {
 		return "<input type='checkbox' id='menu_check' name='menu_check' />\n<div class='nav'>\n<label id='menu_button' for='menu_check'><a title='Mostra menù laterale'>&#9776;</a></label>\n<ul>\n".implode("\n", $links)."\n</ul>\n</div>\n";
 	}
 }
-?>

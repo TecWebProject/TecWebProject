@@ -7,7 +7,7 @@ function showProvince(str) {
     } else {
         // Stringa valida, eseguo query
         // IE7+, Firefox, Chrome, Opera, Safari
-        xmlhttp = new XMLHttpRequest();
+        var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 document.getElementById("modSelectProvincia").innerHTML = '<option value="">Seleziona provincia</option>' + this.responseText;
@@ -16,7 +16,7 @@ function showProvince(str) {
         };
         xmlhttp.open("GET", "/settings/script_select_provincia.php?regione=" + str, true);
         xmlhttp.send();
-        document.getElementById("modSelectProvincia").innerHTML = xmlhttp.response
+        document.getElementById("modSelectProvincia").innerHTML = xmlhttp.response.toString()
     }
 }
 
@@ -26,7 +26,7 @@ function clearProvince() {
         document.getElementById("modSelectProvincia").innerHTML = '<option value="">Seleziona provincia</option>';
         document.getElementById("modSelectProvincia").disabled = true;
     }
-};
+}
 
 // Controllo username
 function checkUsername(username) {
@@ -36,7 +36,7 @@ function checkUsername(username) {
     }
     // Controllo online
     else {
-        xmlhttp = new XMLHttpRequest();
+        var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 if (this.responseText == "0") {
@@ -95,21 +95,32 @@ function checkEmail(email) {
 
 function checkPassword(password) {
     var length = password.length;
-    var specialChar = password.match(/[!@#\$%\^\&*\)\(+=._-]*/);
+    var specialChar = password.match(/[!@#$%\^&*)(+=._-]*/);
 
-    valid = true;
+    var skipPasswordCheck = true;
 
-    if (length < 8 || special == false) {
+    if (document.getElementById("modPassword").value != "" && document.getElementById("modPasswordCheck").value != "") {
+        skipPasswordCheck = true;
+    }
+
+    var valid = true;
+
+    if (length < 8 || specialChar == false) {
         valid = false;
     }
 
-    if (valid) {
-        document.getElementById("errorModPassword").innerHTML = "<img src='correctEntry.png' class='modCorrectEntry'/>";
-    } else {
-        document.getElementById("errorModPassword").innerHTML = "Password non sicura. Usa almeno 8 caratteri, tra cui almeno uno di .!@#$%^&*()_+-=";
+    if (skipPasswordCheck) {
+        return skipPasswordCheck
     }
+    else {
+        if (valid) {
+            document.getElementById("errorModPassword").innerHTML = "<img src='correctEntry.png' class='modCorrectEntry'/>";
+        } else {
+            document.getElementById("errorModPassword").innerHTML = "Password non sicura. Usa almeno 8 caratteri, tra cui almeno uno di .!@#$%^&*()_+-=";
+        }
 
-    return valid;
+        return valid;
+    }
 }
 
 function checkPasswordCheck(passwordCheck) {
@@ -126,25 +137,20 @@ function checkPasswordCheck(passwordCheck) {
 }
 
 // Controllo età
-function checkBDay(bDay) {
+function checkBDay() {
     var d = document.getElementById('modDataNascitaGiorno').value;
     var m = document.getElementById('modDataNascitaMese').value;
     var y = document.getElementById('modDataNascitaAnno').value;
     var date = new Date(y, m, d);
-    var stringDate = d + "/" + m + "/" + y
+    var stringDate = d + "/" + m + "/" + y;
     var valid;
     //  if (bDay == "") {
     //      valid = false;
     //  } else
-    if (/^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/.test(stringDate)) {
-        // Accetta dd/mm/yyyy, dd-mm-yyyy e dd.mm.yyyy
-        valid = true;
-    } else {
-        valid = false;
-    }
+    valid = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/.test(stringDate);
 
     if (valid) {
-        var today = new Date()
+        var today = new Date();
         if (today >= date) {
             document.getElementById("errorModDataNascita").innerHTML = "<img src='correctEntry.png' class='modCorrectEntry'/>";
         } else {
@@ -172,11 +178,11 @@ function checkBio(str) {
         document.getElementById("errorModBio").innerHTML += "<li>Non è possibilie inserire tag HTML form nel testo.</li>";
         valid = false;
     }
-    if (/style[\s]*\=/.test(str)) {
+    if (/style[\s]*=/.test(str)) {
         document.getElementById("errorModBio").innerHTML += "<li>Non è possibilie modificare lo stile dei tag HTML.</li>";
         valid = false;
     }
-    if (/\/\>/.test(str)) {
+    if (/\/>/.test(str)) {
         document.getElementById("errorModBio").innerHTML += "<li>Non è possibilie modificare la chiusura dei tag HTML del testo.</li>";
         valid = false;
     }
