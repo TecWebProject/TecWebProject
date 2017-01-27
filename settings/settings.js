@@ -8,7 +8,7 @@ function showProvince(str) {
         // Stringa valida, eseguo query
         // IE7+, Firefox, Chrome, Opera, Safari
         xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() {
+        xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 document.getElementById("modSelectProvincia").innerHTML = '<option value="">Seleziona provincia</option>' + this.responseText;
                 document.getElementById("modSelectProvincia").disabled = false;
@@ -37,7 +37,7 @@ function checkUsername(username) {
     // Controllo online
     else {
         xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() {
+        xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 if (this.responseText == "0") {
                     document.getElementById("errorModUsername").innerHTML = "<img src='correctEntry.png' class='modCorrectEntry'/>";

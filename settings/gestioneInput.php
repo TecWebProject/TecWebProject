@@ -1,9 +1,9 @@
 <?php
 
 
-    /**
-     *
-     */
+/**
+ *
+ */
 class GestioneInput
 {
     //TODO richiede che nella sessione sia salvato $_SESSION['username'] per l'identificazione
@@ -16,13 +16,13 @@ class GestioneInput
         }
 
         // check username
-        if(!isset($_SESSION['username'])) {
-               throw new Exception("Missing username in SESSION", 1);
+        if (!isset($_SESSION['username'])) {
+            throw new Exception("Missing username in SESSION", 1);
         }
 
 
         // Post è vuoto
-        if(empty($_POST)) {
+        if (empty($_POST)) {
             // Svuoto l'array
             unset($_SESSION['campiDati']);
 
@@ -34,7 +34,7 @@ class GestioneInput
 
         }
 
-        if(!empty($_POST)) {
+        if (!empty($_POST)) {
             // Prendo i dati per i campi da post
             unset($_SESSION['campiDati']);
 
@@ -44,23 +44,23 @@ class GestioneInput
             $dati['username'] = $_SESSION['username'];
 
             // Password
-            if(isset($_POST['password']) || $_POST['passwordCheck']) {
+            if (isset($_POST['password']) || $_POST['passwordCheck']) {
                 $dati['password'] = isset($_POST['password']) ? $_POST['password'] : "";
                 $dati['passwordCheck'] = isset($_POST['passwordCheck']) ? $_POST['passwordCheck'] : "";
             }
 
             // Nome
-            if(isset($_POST['nome'])) {
+            if (isset($_POST['nome'])) {
                 $dati['nome'] = $_POST['nome'];
             }
 
             // Cognome
-            if(isset($_POST['cognome'])) {
+            if (isset($_POST['cognome'])) {
                 $dati['cognome'] = $_POST['cognome'];
             }
 
             // Email
-            if(isset($_POST['email'])) {
+            if (isset($_POST['email'])) {
                 $dati['email'] = $_POST['email'];
             }
 
@@ -68,50 +68,50 @@ class GestioneInput
             $dati['dataNascita'] = (isset($_POST['bDayAnno']) ? $_POST['bDayAnno'] : "") . "/" . (isset($_POST['bDayMese']) ? $_POST['bDayMese'] : "") . "/" . (isset($_POST['bDayGiorno']) ? $_POST['bDayGiorno'] : "");
 
             // image
-            if(isset($_POST['image'])) {
-                $dati['image'] =  $_POST['image'];
+            if (isset($_POST['image'])) {
+                $dati['image'] = $_POST['image'];
             }
 
             // Regione e provincia
-            if(isset($_POST['selectRegione']) && isset($_POST['selectProvincia'])) {
-                $dati['selectRegione'] =  $_POST['selectRegione'];
-                $dati['selectProvincia'] =  $_POST['selectProvincia'];
+            if (isset($_POST['selectRegione']) && isset($_POST['selectProvincia'])) {
+                $dati['selectRegione'] = $_POST['selectRegione'];
+                $dati['selectProvincia'] = $_POST['selectProvincia'];
             }
 
             // Bio
-            if(isset($_POST['bio'])) {
-                $dati['bio'] =  $_POST['bio'];
+            if (isset($_POST['bio'])) {
+                $dati['bio'] = $_POST['bio'];
             }
 
             // Tipicontatto e Contatti
             $arrayTipiContatto = array_values(
                 array_filter(
                     $_POST, function ($a) {
-                        return preg_match("/^tipoContatto[0-9]+?/", $a);
-                    }, ARRAY_FILTER_USE_KEY
+                    return preg_match("/^tipoContatto[0-9]+?/", $a);
+                }, ARRAY_FILTER_USE_KEY
                 )
             );
             $arrayCampiContatto = array_values(
                 array_filter(
                     $_POST, function ($a) {
-                        return preg_match("/^campoContatto[0-9]+?/", $a);
-                    }, ARRAY_FILTER_USE_KEY
+                    return preg_match("/^campoContatto[0-9]+?/", $a);
+                }, ARRAY_FILTER_USE_KEY
                 )
             );
 
             // Controllo lunghezza uguale
-            if(count($arrayTipiContatto) != count($arrayCampiContatto)) {
+            if (count($arrayTipiContatto) != count($arrayCampiContatto)) {
                 throw new Exception("Lunghezze degli array di contatti non uguali", 1);
             }
 
             $dati['contatti'] = array_fill(0, count($arrayTipiContatto), array('tipoContatto' => "", 'contatto' => ""));
-            for ($i=0; $i < count($arrayTipiContatto); $i++) {
+            for ($i = 0; $i < count($arrayTipiContatto); $i++) {
                 $dati['contatti'][$i]['tipoContatto'] = $arrayTipiContatto[$i];
                 $dati['contatti'][$i]['contatto'] = $arrayCampiContatto[$i];
             }
 
             // Rimozione campo
-            if(isset($_POST['rimuoviCampo'])) {
+            if (isset($_POST['rimuoviCampo'])) {
                 unset($dati['contatti'][(int)$_POST['rimuoviCampo']]);
                 $dati['contatti'] = array_values($dati['contatti']);
             }
@@ -133,8 +133,4 @@ class GestioneInput
 }
 
 
-
-
-
-
-    ?>
+?>

@@ -19,7 +19,7 @@ class FormDatiInformativi
             session_start();
         }
 
-        if(!isset($_SESSION['datiUtente'])) {
+        if (!isset($_SESSION['datiUtente'])) {
             $_SESSION['datiUtente'] = Utenti::getDatiUtente($_SESSION['username']);
         }
 
@@ -34,42 +34,42 @@ class FormDatiInformativi
             <select id='modSelectRegione' name='selectRegione' onchange='showProvince(this.value)'>
                <option value=''>Seleziona regione</option>";
 
-         $regioni = Regioni::getRegioni();
-         $regioneAppartenenza = SelectRegione::getRegione($_SESSION['datiUtente']['provincia']);
+        $regioni = Regioni::getRegioni();
+        $regioneAppartenenza = SelectRegione::getRegione($_SESSION['datiUtente']['provincia']);
 
         foreach ($regioni as $key => $regione) {
-            if($regione['nome'] == $regioneAppartenenza) {
-                $string .= "<option value='".htmlentities($regione['nome'], ENT_QUOTES, "UTF-8")."' selected='selected'>".htmlentities($regione['nome'], ENT_QUOTES, "UTF-8")."</option>";
+            if ($regione['nome'] == $regioneAppartenenza) {
+                $string .= "<option value='" . htmlentities($regione['nome'], ENT_QUOTES, "UTF-8") . "' selected='selected'>" . htmlentities($regione['nome'], ENT_QUOTES, "UTF-8") . "</option>";
             } else {
-                 $string .= "<option value='".htmlentities($regione['nome'], ENT_QUOTES, "UTF-8")."'>".htmlentities($regione['nome'], ENT_QUOTES, "UTF-8")."</option>";
+                $string .= "<option value='" . htmlentities($regione['nome'], ENT_QUOTES, "UTF-8") . "'>" . htmlentities($regione['nome'], ENT_QUOTES, "UTF-8") . "</option>";
             }
         }
-         $string .= "</select></li>";
+        $string .= "</select></li>";
 
-         // provincia di appartenenza
-         $string .= "<li>
+        // provincia di appartenenza
+        $string .= "<li>
              <label for='modSelectProvincia'>Seleziona provincia</label>
              <select id='modSelectProvincia' name='selectProvincia'>
                 <option value=''>Seleziona provincia</option>";
 
-          $province = Province::getProvince();
+        $province = Province::getProvince();
 
         foreach ($province as $key => $provincia) {
-            if($provincia['sigla'] == $_SESSION['datiUtente']['provincia']) {
-                $string .= "<option value='".htmlentities($provincia['sigla'], ENT_QUOTES, "UTF-8")."' selected='selected'>".htmlentities($provincia['nome'], ENT_QUOTES, "UTF-8")."</option>";
+            if ($provincia['sigla'] == $_SESSION['datiUtente']['provincia']) {
+                $string .= "<option value='" . htmlentities($provincia['sigla'], ENT_QUOTES, "UTF-8") . "' selected='selected'>" . htmlentities($provincia['nome'], ENT_QUOTES, "UTF-8") . "</option>";
             } else {
-                $string .= "<option value='".htmlentities($provincia['sigla'], ENT_QUOTES, "UTF-8")."'>".htmlentities($provincia['nome'], ENT_QUOTES, "UTF-8")."</option>";
+                $string .= "<option value='" . htmlentities($provincia['sigla'], ENT_QUOTES, "UTF-8") . "'>" . htmlentities($provincia['nome'], ENT_QUOTES, "UTF-8") . "</option>";
             };
         }
         $string .= "</select></li>";
 
-         // bio
-         //TODO placeholder "Scrivi una breve descrizione di te..."
-         $string .= "<li><label for='modTextAreaBio'>Bio</label><textarea id='modTextAreaBio' name='bio' cols='40' rows='4' onblur='checkBio(this.value)'>".$_SESSION['datiUtente']['descrizione']."</textarea><span id='errorModBio' class='modErrorEntry'></span></li>";
+        // bio
+        //TODO placeholder "Scrivi una breve descrizione di te..."
+        $string .= "<li><label for='modTextAreaBio'>Bio</label><textarea id='modTextAreaBio' name='bio' cols='40' rows='4' onblur='checkBio(this.value)'>" . $_SESSION['datiUtente']['descrizione'] . "</textarea><span id='errorModBio' class='modErrorEntry'></span></li>";
 
-         $string .= "</ul></fieldset>";
+        $string .= "</ul></fieldset>";
 
-         return $string;
+        return $string;
     }
 
 }

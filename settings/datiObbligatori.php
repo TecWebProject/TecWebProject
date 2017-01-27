@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+
 /**
  * Classe per generare i dati obbligatori della form di modifica profilo
  */
@@ -13,14 +14,14 @@ class FormDatiObbligatori
             session_start();
         }
 
-        if(!isset($_SESSION['campiDati'])) {
-           throw new Exception("Missing campiDati from SESSION", 1);
+        if (!isset($_SESSION['campiDati'])) {
+            throw new Exception("Missing campiDati from SESSION", 1);
         }
 
         $string = "<fieldset><legend>Dati obbligatori</legend><ul>";
 
         // username
-        $string .= "<li>Username: ".$_SESSION['campiDati']['username']."</li>";
+        $string .= "<li>Username: " . $_SESSION['campiDati']['username'] . "</li>";
 
         // nome
         //TODO placeholder='Nome'
@@ -36,20 +37,20 @@ class FormDatiObbligatori
 
         // email
         //TODO placeholder='email'
-        $string.= "<li><label for='modEmail'>Email</label><input id='modEmail' name='email' value='";
+        $string .= "<li><label for='modEmail'>Email</label><input id='modEmail' name='email' value='";
         $string .= $_SESSION['campiDati']['email'];
         $string .= "' onblur='checkEmail(this.value)' onkeypress='clearError(\"email\")'/><span id='errorModEmail' class='modErrorEntry'></span></li>";
 
         // password
         //TODO placeholder='password'
         $string .= "<li>
-        <label for='modPassword'>Password</label><input type='password' id='modPassword' name='password' value='".(isset($_SESSION['campiDati']['password']) ? $_SESSION['campiDati']['password'] : "")."' onblur='checkPassword(this.value)' onkeypress='clearError(\"password\")'/><span id='errorModPassword' class='modErrorEntry'></span>
+        <label for='modPassword'>Password</label><input type='password' id='modPassword' name='password' value='" . (isset($_SESSION['campiDati']['password']) ? $_SESSION['campiDati']['password'] : "") . "' onblur='checkPassword(this.value)' onkeypress='clearError(\"password\")'/><span id='errorModPassword' class='modErrorEntry'></span>
         </li>";
 
         // password check
         //TODO placeholder='password check'
         $string .= "<li>
-        <label for='modPassword'>Reinserisci password</label><input type='password' id='modPasswordCheck' name='passwordCheck' value='".(isset($_SESSION['campiDati']['passwordCheck']) ? $_SESSION['campiDati']['passwordCheck'] : "")."' onblur='checkPasswordCheck(this.value)' onkeypress='clearError(\"passwordCheck\")'/><span id='errorModPasswordCheck' class='modErrorEntry'></span>
+        <label for='modPassword'>Reinserisci password</label><input type='password' id='modPasswordCheck' name='passwordCheck' value='" . (isset($_SESSION['campiDati']['passwordCheck']) ? $_SESSION['campiDati']['passwordCheck'] : "") . "' onblur='checkPasswordCheck(this.value)' onkeypress='clearError(\"passwordCheck\")'/><span id='errorModPasswordCheck' class='modErrorEntry'></span>
         </li>";
 
         //TODO placeholder='gg' placeholder='mm' placeholder='aaaa'

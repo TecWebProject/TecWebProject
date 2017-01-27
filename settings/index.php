@@ -28,14 +28,14 @@ try {
 
     // Generazione head
     $string .= Start::getHead(
-        array('Titolo' => "Modifica profilo - BandBoard", 'DescrizioneBreve' => "Pannello di modifica delle informazioni personali", 'Descrizione' => "Pagina per la modifica delle informazioni personali, dei contatti e della biografia del proprio profilo", 'Keywords' => array("Modifica profilo","Impostazioni","BandBoard", "band", "musica"), 'Stylesheets' => array("style.css"), 'Extra' => array("<script src='settings.js' type='text/javascript'></script>"))
+        array('Titolo' => "Modifica profilo - BandBoard", 'DescrizioneBreve' => "Pannello di modifica delle informazioni personali", 'Descrizione' => "Pagina per la modifica delle informazioni personali, dei contatti e della biografia del proprio profilo", 'Keywords' => array("Modifica profilo", "Impostazioni", "BandBoard", "band", "musica"), 'Stylesheets' => array("style.css"), 'Extra' => array("<script src='settings.js' type='text/javascript'></script>"))
     );
 
     // Inizio body
     $string .= "<body onload='clearProvince();'><div class='header'>Header standard</div><div class='breadcrump'><h1>Modifica il tuo profilo</h1></div><div class='nav'>";
 
     // Menu
-    $string .= Menu::getMenu(array("Home","<a href='pagina.html'>Profilo</a>","<a href='pagina.html'>Cerca</a>","<a href='pagina.html'>Band</a>"));
+    $string .= Menu::getMenu(array("Home", "<a href='pagina.html'>Profilo</a>", "<a href='pagina.html'>Cerca</a>", "<a href='pagina.html'>Band</a>"));
 
     // Fine Menu
     $string .= "</div>";
@@ -57,16 +57,16 @@ try {
                <fieldset>";
 
     // Dati obbligatori
-     $string .= FormDatiObbligatori::getFormDatiObbligatori();
+    $string .= FormDatiObbligatori::getFormDatiObbligatori();
 
     // Dati informativi
-      $string .= FormDatiInformativi::getFormDatiInformativi();
+    $string .= FormDatiInformativi::getFormDatiInformativi();
 
     // Generi preferiti
-     $string .= FormGeneriPreferiti::getFormGeneriPreferiti();
+    $string .= FormGeneriPreferiti::getFormGeneriPreferiti();
 
     // Contatti
-     $string .= FormContatti::getFormContatti();
+    $string .= FormContatti::getFormContatti();
 
     // Submit
     $string .= "<button name='salvaModifiche' value='true' type='submit'>Salva modifiche</button>";
