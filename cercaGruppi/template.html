@@ -1,0 +1,37 @@
+<html>
+
+<body>
+	<header />
+
+	<menu />
+
+	<div id="content">
+		<h1>Ricerca Gruppi</h1>
+		<form name="cerca_gruppi" action="index.php" method="get">
+			<fieldset>
+				<legend>Filtri:</legend>
+				Genere musicale:
+				<select name="genere">
+					<option value="">Seleziona genere</option>
+					<generi />
+				</select><br />
+
+				Regione:
+				<select id="modSelectRegione" name="regione" onchange="showProvince(this.value)">
+					<option value="">Seleziona regione</option>
+					<regioni />
+				</select><br />
+
+				Provincia:
+				<select id="modSelectProvincia" name="provincia">
+					<option value="" id="prova">Seleziona provincia</option>
+					<province />
+				</select><br />
+
+				<input type="submit" value="Cerca tra i gruppi" />
+			</fieldset>
+		</form>
+		<risultati />
+	</div>
+</body>
+</html>
