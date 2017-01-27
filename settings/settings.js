@@ -99,7 +99,7 @@ function checkPassword(password) {
 
     var skipPasswordCheck = true;
 
-    if (document.getElementById("modPassword").value != "" && document.getElementById("modPasswordCheck").value != "") {
+    if (document.getElementById("modPassword").value == "" && document.getElementById("modPasswordCheck").value == "") {
         skipPasswordCheck = true;
     }
 
@@ -126,10 +126,25 @@ function checkPassword(password) {
 function checkPasswordCheck(passwordCheck) {
     var valid = document.getElementById("modPassword").value === passwordCheck;
 
-    if (valid) {
-        document.getElementById("errorModPasswordCheck").innerHTML = "<img src='correctEntry.png' class='modCorrectEntry'/>";
+    var skipPasswordCheck = false;
+
+    if (document.getElementById("modPassword").value == "" && document.getElementById("modPasswordCheck").value == "") {
+        skipPasswordCheck = true;
+    }
+
+    if (skipPasswordCheck) {
+        console.log("skip password check");
+        console.log("modPassword: " + document.getElementById("modPassword").value);
+        console.log("modPassword empty: " + document.getElementById("modPassword").value == '');
+        console.log("modPasswordCheck: " + "*" + document.getElementById("modPasswordCheck").value + "*");
+        console.log("modPasswordCheck empty: " + document.getElementById("modPasswordCheck").value == '');
+        return skipPasswordCheck
     } else {
-        document.getElementById("errorModPasswordCheck").innerHTML = "Le due password non corrispondono.";
+        if (valid) {
+            document.getElementById("errorModPasswordCheck").innerHTML = "<img src='correctEntry.png' class='modCorrectEntry'/>";
+        } else {
+            document.getElementById("errorModPasswordCheck").innerHTML = "Le due password non corrispondono.";
+        }
     }
 
     return valid;
