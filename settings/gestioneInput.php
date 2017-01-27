@@ -128,6 +128,6 @@ class GestioneInput
 
         }
 
-        $_SESSION['nCampi'] += (isset($_POST['aggiungiCampo']) ? 1 : 0) + (isset($_POST['rimuoviCampo']) && $_POST['rimuoviCampo'] > count($dati['contatti']) ? -1 : 0);
+        $_SESSION['nCampi'] += (isset($_POST['aggiungiCampo']) ? 1 : 0) + (isset($_POST['rimuoviCampo']) && isset($dati['contatti']) && $_POST['rimuoviCampo'] > count($dati['contatti']) ? -1 : 0);
     }
 }
