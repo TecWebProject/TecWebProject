@@ -42,11 +42,12 @@
 
 
 
-	# costruisci selezione generi
+	# costruisci selezione generi musicali
 	require_once '../lib/php/generiMusicali.php';
 	$generi = '';
 	$arr_generi = GeneriMusicali::getGeneriMusicali();
 	foreach ($arr_generi as $el) {
+		$el = htmlentities($el);
 		$generi .= '<option value="' . $el . '"';
 		if (isset($_GET['genere']) && $el == $_GET['genere'])
 			$generi .= ' selected="selected"';
