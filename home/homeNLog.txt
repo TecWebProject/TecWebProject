@@ -58,4 +58,3 @@
 				<a href="cercaGruppi/cercaGruppi.php" id="cercaBand" tabindex="6">Cerca <span xml:lang="en" lang="en">Band</span></a>
 			</div>
 		</div>
-
