@@ -388,7 +388,7 @@ INSERT INTO Province (nome, sigla, regione) VALUES
 ('Vicenza', 'VI', 'Veneto');
 
 INSERT INTO Gruppi (idGruppo, nome, immagine, descrizione, dataIscrizione, provincia) VALUES
-(NULL, 'The Leatles', NULL, 'La nostra musica fa bene all&apos;anima!', '2007-02-21', 'PD'),
+(NULL, 'The Leatles', NULL, 'La nostra musica fa bene all\'anima!', '2007-02-21', 'PD'),
 (NULL, 'Pitura Sekka', NULL, 'Molti anni di esperienza alle spalle, con un sacco di esibizioni dal vivo.', '2002-03-20', 'VE'),
 (NULL, 'The Sailers', NULL, NULL, '2003-04-12', 'CA'),
 (NULL, 'Left Zeppelin', NULL, 'Cover band (e grandi fan) dei Right Zeppelin.', '2003-12-01', 'VS'),
@@ -398,7 +398,11 @@ INSERT INTO Gruppi (idGruppo, nome, immagine, descrizione, dataIscrizione, provi
 (NULL, 'Perl Jam', NULL, 'Evviva Perl!', '2012-03-21', 'PD'),
 (NULL, 'Radiobox', NULL, NULL, '2012-06-24', 'GR'),
 (NULL, 'Proxy Music', NULL, 'Ci sarà sempre bisogno di un proxy...', '2016-12-17', 'BR'),
-(NULL, 'Queries of the Stone Age', NULL, NULL, '2001-04-18', 'OR');
+(NULL, 'Queries of the Stone Age', NULL, NULL, '2001-04-18', 'OR'),
+(NULL, 'U3', NULL, 'Rock, pop e un po\' di beat elettronici...', '2016-02-07', 'RM'),
+(NULL, 'Gruppo', NULL, NULL, '2001-04-18', 'RM'),
+(NULL, 'Gruppo', NULL, NULL, '2001-04-18', 'PD'),
+(NULL, 'Gruppo', NULL, NULL, '2001-04-18', 'PD');
 
 INSERT INTO TipiContatti (nome) VALUES
 ('email_pubblica'), # diversa dal campo email di Utenti (che è privato)
@@ -419,18 +423,24 @@ INSERT INTO ContattiGruppi (idContatto, gruppo, tipoContatto, contatto) VALUES
 
 INSERT INTO Utenti (username, password, email, nome, cognome, dataNascita, immagine, descrizione, dataIscrizione, provincia) VALUES
 ('miles26', '3a555c464988e33e52f96beffbe3b1ac', 'miles@milesinthesky.jazz', 'Miles', 'Travis', '1926-05-26', NULL, 'Jazz e Blues nel sangue dalla nascita.' ,'1998-11-04', 'FI'),
-('McPaul42', '3a555c464988e33e52f96beffbe3b1ac', 'paulmcc@theleatles.lsd', 'Paul', 'McCartney', '1942-06-18', NULL, NULL,'2001-02-18', 'PD'),
-('SuperPippo', '3a555c464988e33e52f96beffbe3b1ac', 'super.pippo@example.com', 'Pippo', 'Super', '1992-12-21', NULL, NULL,'2014-10-31', 'PD'),
-('giorgio', '3a555c464988e33e52f96beffbe3b1ac', 'giorgio.giuffre@studenti.unipd.it', 'Giorgio', 'Giuffrè', '1994-02-23', NULL, 'Suonatore di pianoforte... Ascoltatore eclettico.' ,'2016-12-19', 'PD'),
-('rob_wyatt', '3a555c464988e33e52f96beffbe3b1ac', 'robert@softmachine.org', 'Robert', 'Wyatt', '1945-01-28', NULL, NULL,'1997-10-08', 'LU'),
+('McPaul42', '3a555c464988e33e52f96beffbe3b1ac', 'paulmcc@theleatles.lsd', 'Paul', 'McCartney', '1942-06-18', NULL, NULL, '2001-02-18', 'PD'),
+('SuperPippo', '3a555c464988e33e52f96beffbe3b1ac', 'super.pippo@example.com', 'Pippo', 'Super', '1992-12-21', NULL, NULL, '2014-10-31', 'PD'),
+('giorgio', '3a555c464988e33e52f96beffbe3b1ac', 'giorgio.giuffre@studenti.unipd.it', 'Giorgio', 'Giuffrè', '1994-02-23', NULL, 'Suonatore di pianoforte - ascoltatore eclettico.' ,'2016-12-19', 'PD'),
+('rob_wyatt', '3a555c464988e33e52f96beffbe3b1ac', 'robert@softmachine.org', 'Robert', 'Wyatt', '1945-01-28', NULL, NULL, '1997-10-08', 'LU'),
 ('millenium_bug', '3a555c464988e33e52f96beffbe3b1ac', 'milbug@ctime.h', 'Milly', 'Bug', '1970-01-01', NULL, 'Ormai in pensione ma sempre sul pezzo.','1999-12-31', 'AG'),
-('ennesimo', '3a555c464988e33e52f96beffbe3b1ac', 'ennesimo.utente@popolamento.db', 'Enrico', 'Nesimo', '1995-12-02', NULL, NULL,'2012-04-04', 'EN'),
-('svaughan', '3a555c464988e33e52f96beffbe3b1ac', 'sarahv@example.com', 'Sarah', 'Vaughan', '1924-03-27', NULL, 'Adoro il Jazz e la musica, in generale. Cantare è stato il mio sogno sin dall&apos;infanzia ed rimarrà per sempre una passione, forse ancor più che una professione.','2014-04-19', 'PD');
+('ennesimo', '3a555c464988e33e52f96beffbe3b1ac', 'ennesimo.utente@popolamento.db', 'Enrico', 'Nesimo', '1995-12-02', NULL, NULL, '2012-04-04', 'EN'),
+('mrossi', '3a555c464988e33e52f96beffbe3b1ac', 'mario.rossi@nomifamosi.it', 'Mario', 'Rossi', '1989-02-02', NULL, 'Spolvero la mia chitarra solo in ferie ma sogno di poterla suonare un giorno anche per lavoro... Ho imparato a suonare l\'organo da piccolo e solo di recente la chitarra.', '2009-04-02', 'PD'),
+('tverdi', '3a555c464988e33e52f96beffbe3b1ac', 'tizio.verdi@nomifamosi.it', 'Tizio', 'Verdi', '1994-12-27', NULL, NULL, '2016-08-30', 'RM'),
+('cverdi', '3a555c464988e33e52f96beffbe3b1ac', 'caio.verdi@nomifamosi.it', 'Caio', 'Verdi', '1997-05-07', NULL, NULL, '2016-08-30', 'RM'),
+('sempronio96', '3a555c464988e33e52f96beffbe3b1ac', 'sempronio@nomifamosi.it', 'Sempronio', 'Bianchi', '1996-02-14', NULL, 'DJ, con grande passione per gli anni \'90 (e primi 2000). Disponibile per feste: contattatemi via whatsapp o telegram', '2015-11-11', 'CR'),
+('svaughan', '3a555c464988e33e52f96beffbe3b1ac', 'sarahv@example.com', 'Sarah', 'Vaughan', '1924-03-27', NULL, 'Adoro il Jazz e la musica, in generale. Cantare è stato il mio sogno sin dall\'infanzia ed rimarrà per sempre una passione, forse ancor più che una professione.','2014-04-19', 'PD');
 
 INSERT INTO ContattiUtenti (idContatto, utente, tipoContatto, contatto) VALUES
 (NULL, 'giorgio', 'telegram', 'telegram.me/ggiuffre'),
 (NULL, 'McPaul42', 'youtube', 'https://www.youtube.com/user/PaulMcCartneyVEVO'),
 (NULL, 'ennesimo', 'whatsapp', '049 827 0000'),
+(NULL, 'sempronio96', 'whatsapp', '340 123 4567'),
+(NULL, 'sempronio96', 'telegram', 'telegram.me/sempronio96'),
 (NULL, 'svaughan', 'whatsapp', '3331234567');
 
 INSERT INTO GeneriMusicali (nome) VALUES
@@ -476,8 +486,15 @@ INSERT INTO GeneriUtenti (utente, genere) VALUES
 ('McPaul42', 'Blues'),
 ('SuperPippo', 'Soul'),
 ('giorgio', 'Psychedelic'),
+('giorgio', 'Progressive'),
+('giorgio', 'Pop'),
 ('millenium_bug', 'Disco'),
 ('ennesimo', 'Country'),
+('mrossi', 'Hard Rock'),
+('tverdi', 'Hard Rock'),
+('sempronio96', 'Disco'),
+('sempronio96', 'Techno'),
+('sempronio96', 'Pop'),
 ('svaughan', 'Jazz'),
 ('svaughan', 'Pop');
 
@@ -505,7 +522,12 @@ INSERT INTO Conoscenze (idConoscenza, utente, strumento) VALUES
 (NULL, 'rob_wyatt', 'Voce'),
 (NULL, 'McPaul42', 'Chitarra Acustica'),
 (NULL, 'McPaul42', 'Chitarra Elettrica'),
-(NULL, 'svaughan', 'Voce');
+(NULL, 'svaughan', 'Voce'),
+(NULL, 'sempronio96', 'Computer'),
+(NULL, 'mrossi', 'Organo'),
+(NULL, 'tverdi', 'Batteria'),
+(NULL, 'cverdi', 'Computer'),
+(NULL, 'mrossi', 'Chitarra Acustica');
 
 INSERT INTO Annunci (gruppo, ruoloRichiesto) VALUES
 (1, 'Organo'),
@@ -532,4 +554,7 @@ INSERT INTO Formazioni (gruppo, ruolo) VALUES
 (7, 10),
 (8, 9),
 (9, 3),
-(10, 8);
+(10, 8),
+(13, 8),
+(14, 8),
+(15, 8);

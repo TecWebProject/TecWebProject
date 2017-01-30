@@ -12,8 +12,8 @@
 			'DescrizioneBreve' => 'Cerca utenti in BandBoard',
 			'Descrizione' => 'Cerca utenti in BandBoard, per strumenti suonati, province e genere.',
 			'Keywords' => array('cerca', 'utenti', 'musicisti'),
-			'Stylesheets' => array('../lib/css/style.css'),
-			'Extra' => array('<link rel="stylesheet" type="text/css" href="../lib/css/style.css" />', '<script type="text/javascript" src="../lib/js/province.js"></script>')
+			'Stylesheets' => array('style.css', 'mobile.css'),
+			'Extra' => array('<script type="text/javascript" src="../lib/js/province.js"></script>')
 		)
 	);
 	$file = str_replace('<html>', $start, $file);
@@ -31,7 +31,7 @@
 	require_once '../lib/php/menu.php';
 	$menu = Menu::getMenu(
 		array(
-			'<a href="index.html" xml:lang="en">Home</a>',
+			'<a href="../index.php" xml:lang="en" lang="en">Home</a>',
 			'<a href="profilo.php">Profilo</a>',
 			'Cerca Utenti',
 			'<a href="../cercaGruppi">Cerca Gruppi</a>',
@@ -103,9 +103,20 @@
 
 
 
-	# costruisci risultati query
+	# prepara parametri di paginazione dei risultati
 	require_once '../lib/php/query_server.php';
 	$conn = dbConnectionData::getMysqli();
+	$count = $conn->query("SELECT COUNT(username) FROM Utenti");
+	$tot = $count->fetch_row()[0];
+	$per_page = 10; # risultati per pagina
+	$tot_pages = ceil($tot / $per_page); # numero totale pagine
+	$curr_page = (!isset($_GET['page'])) ? 1 : (int)$_GET['page']; # pag. corrente
+	$primo = ($curr_page - 1) * $per_page; # primo utente della pag. corrente
+	$limit = " LIMIT $primo, $per_page";
+
+
+
+	# costruisci pagina di risultati
 	$risultati = '';
 	if (isset($_GET['strumento']) && isset($_GET['provincia'])) {
 		$genere = '';
@@ -116,14 +127,15 @@
 			WHERE u.username = g.utente
 			AND u.username = c.utente
 			AND u.provincia = ?
-			AND c.strumento = ?" . $genere);
+			AND c.strumento = ?" . $genere . $limit);
 		if ($_GET['genere'] != '')
-			$stmt->bind_param("sss", $_GET['provincia'], $_GET['strumento'], $_GET['genere']);
+			$stmt->bind_param('sss', $_GET['provincia'], $_GET['strumento'], $_GET['genere']);
 		else
-			$stmt->bind_param("ss", $_GET['provincia'], $_GET['strumento']);
+			$stmt->bind_param('ss', $_GET['provincia'], $_GET['strumento']);
 
 		if (!$stmt) {
-			throw new Exception("ERROR: [$conn->errno] $conn->error\n", 1);
+			$risultati .= '<p>Errore: [' . $conn->errno  .'] ' . $conn->error . '</p>';
+			exit;
 		}
 		$stmt->execute();
 		$stmt_result = $stmt->get_result();
@@ -131,7 +143,7 @@
 		if ($result) {
 			$risultati .= '<ul id="risultati">';
 			foreach ($result as $el) {
-				$risultati .= '<li><a href="www.sito.it/' . $el['username'] . '">' . $el['username'] . ' (' . $el['provincia'] . ") - " . $el['genere'] . "</a></li>";
+				$risultati .= '<li><a href="../profilo/index.php?user=' . $el['username'] . '">' . $el['username'] . ' (' . $el['provincia'] . ") - " . $el['genere'] . '</a></li>';
 			}
 			$risultati .= '</ul>';
 		}
@@ -148,6 +160,7 @@
 	require_once '../lib/php/footer.php';
 	$footer = Footer::getFooter();
 	$file = str_replace('<footer />', $footer, $file);
+
 
 
 	# ritorna template popolato con contenuto dinamico

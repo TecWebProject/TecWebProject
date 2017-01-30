@@ -12,8 +12,8 @@
 			'DescrizioneBreve' => 'Cerca gruppi in BandBoard',
 			'Descrizione' => 'Cerca gruppi in BandBoard, per strumenti suonati, province e genere.',
 			'Keywords' => array('cerca', 'gruppi', 'musicisti'),
-			'Stylesheets' => array('style.css'),
-			'Extra' => array('<link rel="stylesheet" type="text/css" href="../lib/css/style.css" />', '<script type="text/javascript" src="../lib/js/province.js"></script>')
+			'Stylesheets' => array('style.css', 'mobile.css'),
+			'Extra' => array('<script type="text/javascript" src="../lib/js/province.js"></script>')
 		)
 	);
 	$file = str_replace('<html>', $start, $file);
@@ -31,7 +31,7 @@
 	require_once '../lib/php/menu.php';
 	$menu = Menu::getMenu(
 		array(
-			'<a href="index.html" xml:lang="en">Home</a>',
+			'<a href="../index.php" xml:lang="en" lang="en">Home</a>',
 			'<a href="profilo.php">Profilo</a>',
 			'<a href="../cercaUtenti">Cerca Utenti</a>',
 			'Cerca Gruppi',
@@ -89,6 +89,19 @@
 
 
 
+	# prepara parametri di paginazione dei risultati
+	require_once '../lib/php/query_server.php';
+	$conn = dbConnectionData::getMysqli();
+	$count = $conn->query("SELECT COUNT(username) FROM Utenti");
+	$tot = $count->fetch_row()[0];
+	$per_page = 10; # numero risultati per pagina
+	$tot_pages = ceil($tot / $per_page); # numero totale pagine
+	$curr_page = (!isset($_GET['page'])) ? 1 : (int)$_GET['page']; # pag. corrente
+	$primo = ($curr_page - 1) * $per_page; # primo gruppo della pag. corrente
+	$limit = " LIMIT $primo, $per_page";
+
+
+
 	# costruisci risultati query
 	require_once '../lib/php/query_server.php';
 	$conn = dbConnectionData::getMysqli();
@@ -98,17 +111,16 @@
 			FROM Gruppi gr, GeneriGruppi gg
 			WHERE gr.idGruppo = gg.gruppo
 			AND gg.genere = ?
-			AND gr.provincia = ?");
-		$stmt->bind_param("ss", $_GET['genere'], $_GET['provincia']);
+			AND gr.provincia = ?" . $limit);
+		$stmt->bind_param('ss', $_GET['genere'], $_GET['provincia']);
 
-		$stmt->bind_result($res_band, $res_nome, $res_prov, $res_genere);
 		$res = $stmt->execute();
 		$stmt_result = $stmt->get_result();
 		$result = $stmt_result->fetch_all(MYSQLI_ASSOC);
 		if ($result) {
 			$risultati .= '<ul id="risultati">';
 			foreach ($result as $el) {
-				$risultati .= '<li><a href="www.sito.it/users/' . $el['idGruppo'] . '">' . $el['nome'] . ' (' . $el['provincia'] . ') - ' . $el['genere'] . "</a></li>";
+				$risultati .= '<li><a href="../profilo/index.php?gruppo=' . $el['idGruppo'] . '">' . $el['nome'] . ' (' . $el['provincia'] . ') - ' . $el['genere'] . '</a></li>';
 			}
 			$risultati .= '</ul>';
 		}
