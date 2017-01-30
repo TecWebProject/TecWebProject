@@ -26,10 +26,11 @@ echo Start::getHead(array(
 	'Extra' => array("<link rel=\"stylesheet\" media=\"handheld, screen and (max-width:480px), only screen and (max-device-width:480px)\" href=\"../lib/css/style_mobile.css\" type=\"text/css\" />", "<script type=\"text/javascript\" src=\"registrazione.js\"></script>")
 ));	//CREAZIONE HEAD
 
+echo '<body>';
 echo Header::getHeader(); //CREAZIONE HEADER
 
 echo Menu::getMenu(array(
-	'<a href="../index.html" xml:lang="en">Home</a>',
+	'<a href="../index.php" xml:lang="en">Home</a>',
 	'Registrazione',
 	'<a href="pagina.php">Profilo</a>',
 	'<a href="../cercaUtenti/index.php">Cerca Utenti</a>',
@@ -78,7 +79,9 @@ if (count($_REQUEST)==0) {	//APPENA ARRIVATO DA HOME
 		//header("Location: ../modificaProfilo/modificaProfilo.php");	//CHIAMATA A PAGINA DI MODIFICA DEL PROFILO
 	}
 }
+
 echo Footer::getFooter();	//CREAZIONE DEL FOOTER
+echo '</body>';
+echo '</html>';
 
 ?>
-

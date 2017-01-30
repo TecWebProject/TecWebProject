@@ -153,6 +153,7 @@ echo Start::getHead(array(
 	'Extra' => array("<link rel=\"stylesheet\" media=\"handheld, screen and (max-width:480px), only screen and (max-device-width:480px)\" href=\"lib/css/style_mobile.css\" type=\"text/css\" />")
 ));	//CREAZIONE HEAD
 
+echo '<body>';
 echo Header::getHeader(); //CREAZIONE HEADER
 
 if (!isset($_SESSION['started'])) {	//APPENA ARRIVATO IN HOME
@@ -238,7 +239,9 @@ if (!isset($_SESSION['started'])) {	//APPENA ARRIVATO IN HOME
 		}
 	}
 }
+
 echo Footer::getFooter();	//CREAZIONE DEL FOOTER
+echo '</body>';
+echo '</html>';
 
 ?>
-
