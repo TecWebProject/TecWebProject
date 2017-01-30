@@ -12,8 +12,8 @@
 			'DescrizioneBreve' => 'Cerca utenti in BandBoard',
 			'Descrizione' => 'Cerca utenti in BandBoard, per strumenti suonati, province e genere.',
 			'Keywords' => array('cerca', 'utenti', 'musicisti'),
-			'Stylesheets' => array('../lib/css/style.css'),
-			'Extra' => array('<link rel="stylesheet" type="text/css" href="../lib/css/style.css" />', '<script type="text/javascript" src="../lib/js/province.js"></script>')
+			'Stylesheets' => array('style.css', 'mobile.css'),
+			'Extra' => array('<script type="text/javascript" src="../lib/js/province.js"></script>')
 		)
 	);
 	$file = str_replace('<html>', $start, $file);
@@ -134,7 +134,8 @@
 			$stmt->bind_param('ss', $_GET['provincia'], $_GET['strumento']);
 
 		if (!$stmt) {
-			echo '<p>Errore: [' . $conn->errno  .'] ' . $conn->error . '</p>';
+			$risultati .= '<p>Errore: [' . $conn->errno  .'] ' . $conn->error . '</p>';
+			exit;
 		}
 		$stmt->execute();
 		$stmt_result = $stmt->get_result();
@@ -159,6 +160,7 @@
 	require_once '../lib/php/footer.php';
 	$footer = Footer::getFooter();
 	$file = str_replace('<footer />', $footer, $file);
+
 
 
 	# ritorna template popolato con contenuto dinamico

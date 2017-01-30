@@ -12,8 +12,8 @@
 			'DescrizioneBreve' => 'Cerca gruppi in BandBoard',
 			'Descrizione' => 'Cerca gruppi in BandBoard, per strumenti suonati, province e genere.',
 			'Keywords' => array('cerca', 'gruppi', 'musicisti'),
-			'Stylesheets' => array('style.css'),
-			'Extra' => array('<link rel="stylesheet" type="text/css" href="../lib/css/style.css" />', '<script type="text/javascript" src="../lib/js/province.js"></script>')
+			'Stylesheets' => array('style.css', 'mobile.css'),
+			'Extra' => array('<script type="text/javascript" src="../lib/js/province.js"></script>')
 		)
 	);
 	$file = str_replace('<html>', $start, $file);
@@ -114,7 +114,6 @@
 			AND gr.provincia = ?" . $limit);
 		$stmt->bind_param('ss', $_GET['genere'], $_GET['provincia']);
 
-		$stmt->bind_result($res_band, $res_nome, $res_prov, $res_genere);
 		$res = $stmt->execute();
 		$stmt_result = $stmt->get_result();
 		$result = $stmt_result->fetch_all(MYSQLI_ASSOC);
