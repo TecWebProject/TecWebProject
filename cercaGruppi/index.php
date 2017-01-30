@@ -121,6 +121,13 @@
 
 
 
+	# costruisci footer
+	require_once '../lib/php/footer.php';
+	$footer = Footer::getFooter();
+	$file = str_replace('<footer />', $footer, $file);
+
+
+
 	# ritorna template popolato con contenuto dinamico
 	echo $file;
 ?>
