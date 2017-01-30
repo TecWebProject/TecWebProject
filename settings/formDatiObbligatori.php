@@ -9,13 +9,19 @@ session_start();
  */
 class FormDatiObbligatori
 {
+    /**
+     * @return string stringa della form
+     * @throws Exception lancia un eccezione se la sessione non è valida
+     */
     public static function getFormDatiObbligatori()
     {
 
+        // Controllo sessione attiva
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
 
+        // Controllo sessione valida
         if (!isset($_SESSION['username'])) {
             session_unset();
             session_destroy();
@@ -25,14 +31,126 @@ class FormDatiObbligatori
         //Gestione input con post
         try {
 
-            // Test input
-            $errori = array();
+            if (!empty($_POST)) {
 
-            preg_match("^[A-Za-z\sàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]+/ui", "");
+                // Test input
+                $errori = array();
+                $dati = array();
+
+                // Nome
+                try {
+
+                    if (!isset($_POST['nome'])) {
+                        throw new Exception("Missing name");
+                    }
+
+                    if (!preg_match("/^[A-Za-zàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ\s]+/ui", "")) {
+                        throw new Exception("Invalid name");
+                    }
+
+                    $dati["nome"] = $_POST['nome'];
+
+                } catch (Exception $e) {
+                    switch ($e->getMessage()) {
+                        case "Missing name":
+                            array_push($errori, "Nome vuoto.");
+                            break;
+                        case "Invalid name":
+                            array_push($errori, "Nome non valido. Può contenere solo lettere e spazi.");
+                            break;
+                        default:
+                            throw $e;
+                            break;
+                    }
+                }
+
+                // Cognome
+                try {
+
+                    if (!isset($_POST['cognome'])) {
+                        throw new Exception("Missing surname");
+                    }
+
+                    if (!preg_match("/^[A-Za-zàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ\s]+/ui", "")) {
+                        throw new Exception("Invalid surname");
+                    }
+
+                    $dati['cognome'] = $_POST['cognome'];
+
+                } catch (Exception $e) {
+                    switch ($e->getMessage()) {
+                        case "Missing surname":
+                            array_push($errori, "Cognome vuoto.");
+                            break;
+                        case "Invalid surname":
+                            array_push($errori, "Cognome non valido. Può contenere solo lettere e spazi.");
+                            break;
+                        default:
+                            throw $e;
+                            break;
+                    }
+                }
+
+                // Email
+                try {
+
+                    if (!isset($_POST['email'])) {
+                        throw new Exception("Missing email");
+                    }
+
+                    if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+                        throw new Exception("Invalid email");
+                    }
 
 
-            // Update DB
+                } catch (Exception $e) {
+                    switch ($e->getMessage()) {
+                        case "Missing email":
+                            array_push($errori, "Email vuota.");
+                            break;
+                        case "Missing email":
+                            array_push($errori, "Email non valida.");
+                            break;
+                        default:
+                            throw $e;
+                            break;
+                    }
+                }
 
+                // Password
+
+                try {
+                    if (!isset($_POST['password']) xor !isset($_POST['passwordCheck'])) {
+                        throw new Exception("One password missing");
+                    }
+
+                    if ($_POST['password'] == null xor $_POST['passwordCheck'] == null) {
+                        throw new Exception("One password not compiled");
+                    }
+
+                    if (strlen($_POST['password']) < 8) {
+                        throw new Exception("Password too short");
+                    }
+
+                    if()
+
+                } catch (Exception $e) {
+                    switch ($e->getMessage()) {
+                        case "One password missing":
+                            array_push($errori, "Per cambiare la password devono essere compilate entrambi i campi password.");
+                            break;
+                        case "One password not compiled":
+                            array_push($errori, "Per cambiare la password devono essere compilate entrambi i campi password.");
+                            break;
+                        default:
+                            throw $e;
+                            break;
+                    }
+                }
+
+                // Update DB
+
+            }
 
         } catch (Exception $e) {
 
@@ -48,7 +166,7 @@ class FormDatiObbligatori
         }
 
         //Costruzione contenuto pagina
-        $string = "<form action='datiObbligatori.php'><fieldset><legend>Dati obbligatori</legend><ul>";
+        $string = "<form action='datiObbligatori.php' method='post'><fieldset><legend>Dati obbligatori</legend><ul>";
 
         // username
         $string .= "<li>Username: " . $dati['username'] . "</li>";
