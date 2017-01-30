@@ -103,9 +103,20 @@
 
 
 
-	# costruisci risultati query
+	# prepara parametri di paginazione dei risultati
 	require_once '../lib/php/query_server.php';
 	$conn = dbConnectionData::getMysqli();
+	$count = $conn->query("SELECT COUNT(username) FROM Utenti");
+	$tot = $count->fetch_row()[0];
+	$per_page = 10; # risultati per pagina
+	$tot_pages = ceil($tot / $per_page); # numero totale pagine
+	$curr_page = (!isset($_GET['page'])) ? 1 : (int)$_GET['page']; # pag. corrente
+	$primo = ($curr_page - 1) * $per_page; # primo utente della pag. corrente
+	$limit = " LIMIT $primo, $per_page";
+
+
+
+	# costruisci pagina di risultati
 	$risultati = '';
 	if (isset($_GET['strumento']) && isset($_GET['provincia'])) {
 		$genere = '';
@@ -116,14 +127,14 @@
 			WHERE u.username = g.utente
 			AND u.username = c.utente
 			AND u.provincia = ?
-			AND c.strumento = ?" . $genere);
+			AND c.strumento = ?" . $genere . $limit);
 		if ($_GET['genere'] != '')
-			$stmt->bind_param("sss", $_GET['provincia'], $_GET['strumento'], $_GET['genere']);
+			$stmt->bind_param('sss', $_GET['provincia'], $_GET['strumento'], $_GET['genere']);
 		else
-			$stmt->bind_param("ss", $_GET['provincia'], $_GET['strumento']);
+			$stmt->bind_param('ss', $_GET['provincia'], $_GET['strumento']);
 
 		if (!$stmt) {
-			throw new Exception("ERROR: [$conn->errno] $conn->error\n", 1);
+			echo '<p>Errore: [' . $conn->errno  .'] ' . $conn->error . '</p>';
 		}
 		$stmt->execute();
 		$stmt_result = $stmt->get_result();
@@ -131,7 +142,7 @@
 		if ($result) {
 			$risultati .= '<ul id="risultati">';
 			foreach ($result as $el) {
-				$risultati .= '<li><a href="www.sito.it/' . $el['username'] . '">' . $el['username'] . ' (' . $el['provincia'] . ") - " . $el['genere'] . "</a></li>";
+				$risultati .= '<li><a href="../profilo/index.php?user=' . $el['username'] . '">' . $el['username'] . ' (' . $el['provincia'] . ") - " . $el['genere'] . '</a></li>';
 			}
 			$risultati .= '</ul>';
 		}
