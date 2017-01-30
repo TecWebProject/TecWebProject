@@ -31,7 +31,8 @@ class MenuProfilo
         $entryMenu = array(
             array("stringa" => "Dati obbgligatori", "link" => $relativePathToMenuEntry . "datiObbligatori.php"),
             array("stringa" => "Dati informativi", "link" => $relativePathToMenuEntry . "datiInformativi.php"),
-            array("stringa" => "Preferenze", "link" => $relativePathToMenuEntry . "datiPreferenze.php")
+            array("stringa" => "Preferenze", "link" => $relativePathToMenuEntry . "datiPreferenze.php"),
+            array("stringa" => "Contatti", "link" => $relativePathToMenuEntry . "contatti.php")
         );
 
         //Controllo input
@@ -42,7 +43,7 @@ class MenuProfilo
 
         //Inizio della produzione della stringa
 
-        $string = "<div><ul>";
+        $string = "<div id='modMenuPagine'><ul>";
 
         for ($i = 0; $i < count($entryMenu); ++$i) {
             if ($i == $ind) {

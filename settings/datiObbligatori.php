@@ -6,6 +6,7 @@ require_once realpath(dirname(__FILE__)) . '/../lib/php/menu.php';
 require_once realpath(dirname(__FILE__)) . '/../lib/php/start.php';
 require_once realpath(dirname(__FILE__)) . '/menuProfilo.php';
 require_once realpath(dirname(__FILE__)) . '/sessioneNonValida.php';
+require_once realpath(dirname(__FILE__)) . '/formDatiObbligatori.php';
 
 try {
 
@@ -27,16 +28,27 @@ try {
 
 
     // Inizio body
-    $string .= "<body><div class='header'>Header standard</div><div class='breadcrump'><h1>Modifica il tuo profilo</h1></div>";
+    //TODO header standard
+    $string .= "<body><div class='header'>Header standard</div><div class='breadcrump'><h1>Modifica dati obbligatori</h1></div>";
 
     // Menu
     $string .= "<div class='nav'>" . Menu::getMenu(array("Home", "<a href='pagina.html'>Profilo</a>", "<a href='pagina.html'>Cerca</a>", "<a href='pagina.html'>Band</a>")) . "</div>";
 
+    $string .= "<div class='content'>";
+
     $string .= MenuProfilo::getMenuProfilo();
 
-    $string .= "<div id='modImmagineSfondoMenu'></div>";
+    $string .= "<div id='modContenutoPagina'>";
 
-    $string .= "</body></html>";
+    $string .= FormDatiObbligatori::getFormDatiObbligatori();
+
+    $string .= "</div>";    //Fine modContenutoPagina
+
+    $string .= "</div>";    //Fine content
+
+    $string .= "<a href='index.php'><div id='modBackButton'>Indietro</div></a>";    //Pulsante indietro
+
+    $string .= "</body></html>";    //Fine body e html
 
     echo $string;
 
