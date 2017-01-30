@@ -23,7 +23,7 @@ try {
     // Generazione head
     $string .= Start::getHead(
         array('Titolo' => "Impostazioni profilo - BandBoard", 'DescrizioneBreve' => "Pannello di modifica delle informazioni personali", 'Descrizione' => "Pagina per la modifica delle informazioni personali, dei contatti e della biografia del proprio profilo", 'Keywords' => array("Modifica profilo", "Impostazioni", "BandBoard", "band", "musica"), 'Stylesheets' => array("style.css"), 'Extra' => array("<script src='settings.js' type='text/javascript'></script>", /*TODO temp*/
-            "<meta http-equiv='refresh' content='20'>"))
+            "<meta http-equiv='refresh' content='20'></meta>"))
     );
 
 
@@ -46,7 +46,7 @@ try {
 
     $string .= "</div>";    //Fine content
 
-    $string .= "<a href='index.php'><div id='modBackButton'>Indietro</div></a>";    //Pulsante indietro
+    $string .= "<div id='modBackButton'><a href='index.php'>Indietro</a></div>";    //Pulsante indietro
 
     $string .= "</body></html>";    //Fine body e html
 
