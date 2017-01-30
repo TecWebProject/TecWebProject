@@ -31,7 +31,7 @@
 	require_once '../lib/php/menu.php';
 	$menu = Menu::getMenu(
 		array(
-			'<a href="index.html" xml:lang="en">Home</a>',
+			'<a href="../index.php" xml:lang="en" lang="en">Home</a>',
 			'<a href="profilo.php">Profilo</a>',
 			'<a href="../cercaUtenti">Cerca Utenti</a>',
 			'Cerca Gruppi',
