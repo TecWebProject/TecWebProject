@@ -37,7 +37,6 @@ class FormDatiObbligatori
         if (!empty($_POST)) {
 
             // Test input
-            $errori = array();
             $dati = array();
 
             $dati['username'] = $_SESSION['username'];
@@ -49,7 +48,7 @@ class FormDatiObbligatori
                     throw new Exception("Missing name");
                 }
 
-                if (!preg_match("/^[A-Za-zàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ\s]+/u", $_POST['nome'])) {
+                if (!preg_match("/^[A-Za-zàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ\s]+$/u", $_POST['nome'])) {
                     throw new Exception("Invalid name");
                 }
 
@@ -76,7 +75,7 @@ class FormDatiObbligatori
                     throw new Exception("Missing surname");
                 }
 
-                if (!preg_match("/^[A-Za-zàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ\s]+/u", $_POST['cognome'])) {
+                if (!preg_match("/^[A-Za-zàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ\s]+$/u", $_POST['cognome'])) {
                     throw new Exception("Invalid surname");
                 }
 
@@ -114,7 +113,7 @@ class FormDatiObbligatori
                     case "Missing email":
                         array_push($errori, "Email vuota.");
                         break;
-                    case "Missing email":
+                    case "Invalid email":
                         array_push($errori, "Email non valida.");
                         break;
                     default:
@@ -201,7 +200,7 @@ class FormDatiObbligatori
             }
 
             // Update DB
-            if (!empty($errori)) {
+            if (empty($errori)) {
                 try {
                     if (AggiornamentoDB::aggiornaDatiDB($dati)) {
                         echo "Aggiornamento riuscito";
