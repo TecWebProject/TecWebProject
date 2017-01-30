@@ -351,9 +351,12 @@
 
 /* menù */
 #menu_check {
-	position: absolute;
-	top: 0;
-	right: 0;
+==== BASE ====
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: none;
+==== BASE ====
 }
 
 #menu_check:checked + div {
@@ -456,4 +459,30 @@
 	text-align: center;
 	width: 90%;
 	margin: auto;
+}
+
+.content {
+  margin: 0 3em;
+}
+
+.breadcrump {
+  margin: 0 3em;
+}
+
+#modSaveButton {
+  margin: 0.5em 0.5em;
+  float: right;
+}
+
+.modCorrectEntry {
+  height: 2em;
+  width: 2em;
+  display: inline;
+  position: relative;
+  vertical-align: middle;
+  margin: 0 1em;
+}
+
+.modErrorEntry {
+  color: red;
 }

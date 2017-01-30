@@ -10,5 +10,3 @@ class Email {
 		return $valid ? 0 : 1;
 	}
 }
-
-?>

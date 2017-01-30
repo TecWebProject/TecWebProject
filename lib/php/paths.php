@@ -36,5 +36,3 @@ class Paths {
 		return implode('/', $relPath);
 	}
 }
-
-?>

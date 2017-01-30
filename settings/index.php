@@ -1,17 +1,11 @@
 <?php
 
-require_once realpath(dirname(__FILE__)) . '/../lib/php/select_provincia.php';
-require_once realpath(dirname(__FILE__)) . '/../lib/php/regioni.php';
-require_once realpath(dirname(__FILE__)) . '/../lib/php/province.php';
-require_once realpath(dirname(__FILE__)) . '/../lib/php/header.php';
+/*Pagina di selezione delle impostazioni*/
+
 require_once realpath(dirname(__FILE__)) . '/../lib/php/menu.php';
 require_once realpath(dirname(__FILE__)) . '/../lib/php/start.php';
-require_once realpath(dirname(__FILE__)) . '/../lib/php/start.php';
-require_once realpath(dirname(__FILE__)) . '/datiObbligatori.php';
-require_once realpath(dirname(__FILE__)) . '/datiInformativi.php';
-require_once realpath(dirname(__FILE__)) . '/contatti.php';
-require_once realpath(dirname(__FILE__)) . '/generiPreferiti.php';
-require_once realpath(dirname(__FILE__)) . '/gestioneInput.php';
+require_once realpath(dirname(__FILE__)) . '/menuProfilo.php';
+require_once realpath(dirname(__FILE__)) . '/sessioneNonValida.php';
 
 try {
 
@@ -22,71 +16,45 @@ try {
     //TODO temporaneo, mi da un utente di default
     $_SESSION['username'] = "giorgio";
 
-    $string = "";
+    if (!isset($_SESSION['username'])) {
+        throw new Exception("Invalid session");
+    }
 
-    // Gestione degli input
-    GestioneInput::doGestioneInput();
+    $string = "";
 
     // Generazione head
     $string .= Start::getHead(
-        array('Titolo' => "Modifica profilo - BandBoard", 'DescrizioneBreve' => "Pannello di modifica delle informazioni personali", 'Descrizione' => "Pagina per la modifica delle informazioni personali, dei contatti e della biografia del proprio profilo", 'Keywords' => array("Modifica profilo","Impostazioni","BandBoard", "band", "musica"), 'Stylesheets' => array("style.css"), 'Extra' => array("<script src='settings.js' type='text/javascript'></script>"))
+        array('Titolo' => "Impostazioni profilo - BandBoard", 'DescrizioneBreve' => "Pannello di modifica delle informazioni personali", 'Descrizione' => "Pagina per la modifica delle informazioni personali, dei contatti e della biografia del proprio profilo", 'Keywords' => array("Modifica profilo", "Impostazioni", "BandBoard", "band", "musica"), 'Stylesheets' => array("style.css"), 'Extra' => array("<script src='settings.js' type='text/javascript'></script>", /*TODO temp*/
+            "<meta http-equiv='refresh' content='20'>"))
     );
 
-    // Inizio body
-    $string .= "<body onload='clearProvince();'>";#<div class='header'>Header standard</div><div class='breadcrump'><h1>Modifica il tuo profilo</h1></div><div class='nav'>";
 
-    $string .= Header::getHeader();
+    // Inizio body
+    //TODO header standard
+    $string .= "<body><div class='header'>Header standard</div><div class='breadcrump'><h1>Modifica il tuo profilo</h1></div>";
 
     // Menu
-    $string .= Menu::getMenu(array("Home","<a href='pagina.html'>Profilo</a>", "<a href='../cercaUtenti/index.php'>Cerca Utenti</a>", "<a href='../cercaGruppi/index.php'>Cerca Gruppi</a>", "<a href='pagina.html'>Band</a>"));
+    $string .= "<div class='nav'>" . Menu::getMenu(array("Home", "<a href='pagina.html'>Profilo</a>", "<a href='pagina.html'>Cerca</a>", "<a href='pagina.html'>Band</a>")) . "</div>";
 
-    // Fine Menu
-    $string .= "</div>";
-
-    // Inizio content
     $string .= "<div class='content'>";
 
-    // Immagine profilo
-    $string .= "
-    <div id='modFotoProfilo'>
-      <!-- TODO: Caricare immagine dinamicamente -->
-      <label for='modLoadImage'><img src='../images/fotoProfilo.jpg' alt='Immagine profilo dell&apos;utente'/></label>
-    </div>";
+    $string .= MenuProfilo::getMenuProfilo();
 
-    // Inizio form
-    $string .= "
-        <div id='mod'>
-            <form action='.' method='post' onsubmit='checkForm();'>
-               <fieldset>";
+    $string .= "<div id='modImmagineSfondoMenu'></div>";
 
-    // Dati obbligatori
-     $string .= FormDatiObbligatori::getFormDatiObbligatori();
+    $string .= "</div>";
 
-    // Dati informativi
-      $string .= FormDatiInformativi::getFormDatiInformativi();
-
-    // Generi preferiti
-     $string .= FormGeneriPreferiti::getFormGeneriPreferiti();
-
-    // Contatti
-     $string .= FormContatti::getFormContatti();
-
-    // Submit
-    $string .= "<button name='salvaModifiche' value='true' type='submit'>Salva modifiche</button>";
-
-    // Chiusura form
-    $string .= "</fieldset></form></div></div>";
-
-    // Footer
-    $string .= "<div class='footer'></div>";
-
-    // Chiusura body e html
     $string .= "</body></html>";
 
     echo $string;
 
 } catch (Exception $e) {
-    echo $e->getMessage();
+    switch ($e->getMessage()) {
+        case "Invalid session":
+            sessioneNonValida::manageSessioneNonValida();
+            break;
+        default:
+            echo $e->getMessage();
+            break;
+    }
 }
-
-?>

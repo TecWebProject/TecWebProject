@@ -17,15 +17,15 @@ class FormContatti
             session_start();
         }
 
-        if(!isset($_SESSION['username'])) {
+        if (!isset($_SESSION['username'])) {
             throw new Exception("Missing username in SESSION", 1);
         }
 
-        if(!isset($_SESSION['campiDati'])) {
+        if (!isset($_SESSION['campiDati'])) {
             throw new Exception("Missing campiDati in SESSION", 1);
         }
 
-        if(!isset($_SESSION['nCampi'])) {
+        if (!isset($_SESSION['nCampi'])) {
             throw new Exception("Missing nCampi in SESSION", 1);
         }
 
@@ -34,34 +34,33 @@ class FormContatti
 
         $string = "<fieldset><legend>Contatti</legend><ul>";
 
-        for ($i=0; $i < $_SESSION['nCampi']; $i++) {
+        for ($i = 0; $i < $_SESSION['nCampi']; $i++) {
 
-            if(isset($_SESSION['campiDati']['contatti'][$i])) {
+            if (isset($_SESSION['campiDati']['contatti'][$i])) {
                 $entryContatto = $_SESSION['campiDati']['contatti'][$i];
             } else {
                 $entryContatto = array('tipoContatto' => '', 'contatto' => '');
             }
 
-            $string .= "<li><label for='tipoContatto".$i."'>Tipo contatto</label><select name='tipoContatto".$i."' id='tipoContatto".$i."'>";
+            $string .= "<li><label for='tipoContatto" . $i . "'>Tipo contatto</label><select name='tipoContatto" . $i . "' id='tipoContatto" . $i . "'>";
             foreach ($tipiContatto as $key => $tipoContatto) {
-                if(isset($entryContatto['tipoContatto']) && $entryContatto['tipoContatto'] == $tipoContatto) {
-                     $string .= "<option value='$tipoContatto' selected='selected'>".ucfirst(str_replace("_", " ", $tipoContatto))."</option>";
+                if (isset($entryContatto['tipoContatto']) && $entryContatto['tipoContatto'] == $tipoContatto) {
+                    $string .= "<option value='$tipoContatto' selected='selected'>" . ucfirst(str_replace("_", " ", $tipoContatto)) . "</option>";
                 } else {
-                     $string .= "<option value='$tipoContatto'>".ucfirst(str_replace("_", " ", $tipoContatto))."</option>";
+                    $string .= "<option value='$tipoContatto'>" . ucfirst(str_replace("_", " ", $tipoContatto)) . "</option>";
                 }
             }
             $string .= "</select>";
 
-            if(isset($_SESSION['campiDati']['contatti'][$i])) {
-                $string .= "<label for='campoContatto".$i."'>Contatto</label><input id='campoContatto".$i."' name='campoContatto".$i."' value='".$entryContatto['contatto']."'/><button name='rimuoviCampo' title='Rimuovi il campo contatto' value='".$i."'>Rimuovi</button></li>";
+            if (isset($_SESSION['campiDati']['contatti'][$i])) {
+                $string .= "<label for='campoContatto" . $i . "'>Contatto</label><input id='campoContatto" . $i . "' name='campoContatto" . $i . "' value='" . $entryContatto['contatto'] . "'/><button name='rimuoviCampo' title='Rimuovi il campo contatto' value='" . $i . "'>Rimuovi</button></li>";
             } else {
-                $string .= "<label for='campoContatto".$i."'>Contatto</label><input id='campoContatto".$i."' name='campoContatto".$i." value='".$entryContatto['contatto']."'/><button name='rimuoviCampo' value='".$i."' title='Rimuovi il campo contatto'>Rimuovi</button></li>";
+                $string .= "<label for='campoContatto" . $i . "'>Contatto</label><input id='campoContatto" . $i . "' name='campoContatto" . $i . " value='" . $entryContatto['contatto'] . "'/><button name='rimuoviCampo' value='" . $i . "' title='Rimuovi il campo contatto'>Rimuovi</button></li>";
             }
         }
 
         // Bottone aggiungi campo
         $string .= "<li><button name='aggiungiCampo' title='Aggiungi un campo contatti' value='true'>Aggiungi un campo</button></li>";
-
 
 
         $string .= "</ul></fieldset>";
