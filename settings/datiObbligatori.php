@@ -34,7 +34,7 @@ try {
     // Menu
     $string .= "<div class='nav'>" . Menu::getMenu(array("Home", "<a href='pagina.html'>Profilo</a>", "<a href='pagina.html'>Cerca</a>", "<a href='pagina.html'>Band</a>")) . "</div>";
 
-    $string .= "<div class='content'>";
+    $string .= "<div id='content'>";
 
     $string .= MenuProfilo::getMenuProfilo();
 

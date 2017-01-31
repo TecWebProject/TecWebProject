@@ -1,5 +1,5 @@
 /* per tutte le pagine */
-#html, body {
+html, body {
 	margin: 0;
 	padding: 0;
 	font-family: Verdana, Arial, Helvetica, sans-serif; /* Twitter usa: "Helvetica Neue", Helvetica, Arial, sans-serif; Gitlab usa: "Source Sans Pro", sans-serif; */
@@ -22,14 +22,19 @@
 	padding: 0;
 }
 
+
+/* contenuto principale */
 #content {
 	width: 100%;
 	font-size: 0.9em;
 	padding-top: 1em;
 	padding-bottom: 0.5em;
+	text-align: center;
 }
 
-/* CSS PER FOOTER */
+
+
+/* footer */
 .footerContent {
 	text-align: center;
 	display: inline-block;
@@ -39,6 +44,8 @@
 	padding-right: 15%;
 }
 
+
+
 .paginaPrec {
 	margin: 0;
 	padding: 0% 20%;
@@ -46,7 +53,10 @@
 	font-size: 1.2em;
 }
 
-.report { /* PER NOTIZIE SU SCRIPT PHP */
+
+
+/* per notizie su script php */
+.report {
 	margin: 0;
 	padding: 0;
 	text-align: center;
@@ -57,21 +67,23 @@
 	padding: 0;
 }
 
-.report ul {  /* PER NOTIZIE SU SCRIPT PHP */
+.report ul {
 	list-style: none;
 	margin: 0;
 	padding-left: 0.4em;
 	color: red;
 }
 
-.errRep { /* PER NOTIZIE SU SCRIPT PHP */
+.errRep {
 	color: red;
 }
 
 
-.okRep {  /* PER NOTIZIE SU SCRIPT PHP */
+.okRep {
 	color: green;
 }
+
+
 
 .logout {
 	text-align: right;
@@ -79,8 +91,10 @@
 	padding-right: 8%;
 }
 
-/* PAGINA HOME */
-.homeReg {  /* VALIDO PER HOME E PAGINA DI REGISTRAZIONE */
+
+
+/* home e pagina di registrazione */
+.homeReg {
 	text-align: center;
 }
 
@@ -96,7 +110,7 @@
 	margin: 0em 0em 0em 3.2em;
 }
 
-#login fieldset, .filtri {
+#login fieldset {
 	border: none;
 }
 
@@ -108,13 +122,13 @@
 	margin-left: 0.1em;
 }
 
-#username, #password {    /* VALIDI PER TUTTI I FORM AVENTI I CAMPI USERNAME E PASSWORD */
+#username, #password { /* per tutti i form aventi i campi username e password */
 	text-align: left;
 	width: 15em;
 	font-size: 1.2em;
 }
 
-#invio {  /* VALIDO PER TUTTI I SUBMIT AVENTI id="invio" */
+#invio { /* valido per tutti i submit aventi id="invio" */
 	margin-top: 1em;
 	padding: 0.6em 5.9em 0.6em 5.9em;
 	font-size: 1.2em;
@@ -129,7 +143,7 @@
 	margin: 1em;
 }
 
-/* LINK ALLA PAGINA DI REGISTRAZIONE */
+/* link alla pagina di registrazione */
 #registrati {
 	display: inline-block;
 	text-align: center;
@@ -141,20 +155,15 @@
 	text-decoration-line: none;
 }
 
-#registrati:visited {
-	color: #000000;
+#registrati:visited, #registrati:active {
 	background-color: #70c1ff;
 }
 
 #registrati:hover {
-	color: #000000;
 	background-color: #5eadea;
 }
 
-#registrati:active {
-	color: #000000;
-	background-color: #70c1ff;
-}
+
 
 #testo {
 	font-size: 1.4em;
@@ -212,8 +221,10 @@
 	font-size: 1.2em;
 }
 
-/* LINK ALLA PAGINA DI RICERCA UTENTI */
-#cercaUtenti {
+
+
+/* link dalla home alle pagine di ricerca utenti/gruppi */
+#cercaUtenti, #cercaBand {
 	display: inline-block;
 	text-align: center;
 	font-size: 1.4em;
@@ -221,54 +232,29 @@
 	background-color: #70c1ff;
 	margin: 0em 0.8em;
 	padding: 0.8em 4.3em 0.8em 4.3em;
+	min-width: 6em;
 	border-radius: 0.4em;
 	text-decoration-line: none;
 }
 
-#cercaUtenti:visited {
+#cercaUtenti:visited, #cercaBand:visited {
 	color: #000000;
 	background-color: #70c1ff;
 }
 
-#cercaUtenti:hover {
+#cercaUtenti:hover, #cercaBand:hover {
 	color: #000000;
 	background-color: #5eadea;
 }
 
-#cercaUtenti:active {
+#cercaUtenti:active, #cercaBand:active {
 	color: #000000;
 	background-color: #70c1ff;
 }
 
-/* LINK ALLA PAGINA DI RICERCA GRUPPI */
-#cercaBand {
-	display: inline-block;
-	text-align: center;
-	font-size: 1.4em;
-	color: #000000;
-	background-color: #70c1ff;
-	margin: 0em 0.8em;
-	padding: 0.8em 4.4em 0.8em 4.4em;
-	border-radius: 0.4em;
-	text-decoration-line: none;
-}
 
-#cercaBand:visited {
-	color: #000000;
-	background-color: #70c1ff;
-}
 
-#cercaBand:hover {
-	color: #000000;
-	background-color: #5eadea;
-}
-
-#cercaBand:active {
-	color: #000000;
-	background-color: #70c1ff;
-}
-
-/* PER LISTE UTENTI E BAND SUGGERITE (PAGINA HOME DI UTENTE LOGGATO) */
+/* per liste utenti/gruppi suggerite dalla home o trovate dalle ricerche */
 .suggeriti {
 	text-align: left;
 	margin: 0;
@@ -305,24 +291,26 @@
 	top: 0.1em;
 }
 
-/* PAGINA REGISTRAZIONE */
+
+
+/* pagina di registrazione e filtri per ricerche utenti/gruppi */
 #invitoReg {
 	margin: 0.2em 0em 0.8em 0em;
 }
 
-#iscrizione {
+#iscrizione, .filtri {
 	width: 20em;
 	display: inline-block;
 	text-align: left;
 	margin: 1em;
 }
 
-#iscrizione legend {
+#iscrizione legend, .filtri legend {
 	font-size: 1.2em;
 	margin: 0em 0em 0em 3.4em;
 }
 
-#iscrizione fieldset {
+#iscrizione fieldset, .filtri fieldset {
 	border: none;
 }
 
@@ -334,7 +322,7 @@
 	margin-left: 0.1em;
 }
 
-#confermaPassword, #dataNascita, #email { /* VALIDI PER TUTTI I FORM AVENTI I CAMPI CONFERMAPASSWORD, DATANASCITA E EMAIL */
+#confermaPassword, #dataNascita, #email { /* validi per tutti i form aventi i campi confermaPassword, dataDascita e email */
 	text-align: left;
 	width: 15em;
 	font-size: 1.2em;
@@ -352,12 +340,10 @@
 
 /* menù */
 #menu_check {
-==== BASE ====
   position: absolute;
   top: 0;
   right: 0;
   display: none;
-==== BASE ====
 }
 
 #menu_check:checked + div {
@@ -412,12 +398,25 @@
 	color: rgba(255, 255, 255, 0.8);
 }
 
-.content {
-	margin: 0 3em;
+
+
+/* pagina di modifica profilo */
+#modSaveButton {
+	margin: 0.5em 0.5em;
+	float: right;
 }
 
-.breadcrump {
-	margin: 0 3em;
+.modCorrectEntry {
+	height: 2em;
+	width: 2em;
+	display: inline;
+	position: relative;
+	vertical-align: middle;
+	margin: 0 1em;
+}
+
+.modErrorEntry {
+	color: red;
 }
 
 #modSaveButton {
@@ -441,8 +440,11 @@
 
 
 /* form ricerca utenti/gruppi */
-#content select {
+.filtri select {
+	display: block;
+	margin-top: 0.2em;
 	margin-bottom: 1em;
+	text-align: left;
 }
 
 
@@ -460,30 +462,4 @@
 	text-align: center;
 	width: 90%;
 	margin: auto;
-}
-
-.content {
-	margin: 0 3em;
-}
-
-.breadcrump {
-	margin: 0 3em;
-}
-
-#modSaveButton {
-	margin: 0.5em 0.5em;
-	float: right;
-}
-
-.modCorrectEntry {
-	height: 2em;
-	width: 2em;
-	display: inline;
-	position: relative;
-	vertical-align: middle;
-	margin: 0 1em;
-}
-
-.modErrorEntry {
-  color: red;
 }
