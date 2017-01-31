@@ -3,19 +3,22 @@
 require_once realpath(dirname(__FILE__)) . "/../lib/php/datiUtente.php";
 require_once realpath(dirname(__FILE__)) . "/../lib/php/utente.php";
 require_once realpath(dirname(__FILE__)) . "/aggiornamentoDB.php";
+require_once realpath(dirname(__FILE__)) . "/../lib/php/regioni.php";
+require_once realpath(dirname(__FILE__)) . "/../lib/php/province.php";
+require_once realpath(dirname(__FILE__)) . "/../lib/php/select_regione.php";
 
 session_start();
 
 /**
  * Classe per generare i dati obbligatori della form di modifica profilo
  */
-class FormDatiObbligatori
+class FormDatiInformativi
 {
     /**
      * @return string stringa della form
      * @throws Exception lancia un eccezione se la sessione non è valida
      */
-    public static function getFormDatiObbligatori()
+    public static function getFormDatiInformativi()
     {
 
         $errori = array();
@@ -41,6 +44,7 @@ class FormDatiObbligatori
 
             $dati['username'] = $_SESSION['username'];
 
+/*
             // Nome
             try {
 
@@ -137,11 +141,11 @@ class FormDatiObbligatori
                     throw new Exception("Mismatching password");
                 }
 
-                /*TODO lughezza password
-                if (strlen($_POST['password']) < 8) {
-                    throw new Exception("Password too short");
-                }
-                */
+               //  TODO lughezza password
+               //  if (strlen($_POST['password']) < 8) {
+               //      throw new Exception("Password too short");
+               //  }
+
                 if ($_POST['password'] == "") {
                     throw new Exception("No password change");
                 }
@@ -198,7 +202,11 @@ class FormDatiObbligatori
                         break;
                 }
             }
+*/
 
+
+
+/*
             // Update DB
             if (empty($errori)) {
                 try {
@@ -220,9 +228,12 @@ class FormDatiObbligatori
                 }
             }
 
-        }
 
+*/
         //Lettura dati dal DB
+
+     }
+
         $dati = Utenti::getDatiUtente($_SESSION['username']);
 
         if ($dati == null) {
@@ -244,8 +255,55 @@ class FormDatiObbligatori
         }
 
         //Costruzione contenuto pagina
-        $string .= "<form action='datiObbligatori.php' method='post'><fieldset><legend>Dati obbligatori</legend><ul>";
+        $string .= "<form action='datiInformativi.php' method='post'><fieldset><legend>Dati obbligatori</legend><ul>";
 
+        $string = "<fieldset><legend>Dati informativi</legend><ul>";
+
+        // immagine profilo
+        $string .= "<li><label for='modLoadImage'>Carica immagine profilo</label> <input id='modLoadImage' name='image' type='file' title='Carica immagine'/><p id='errorModLoadImage'></p></li>";
+
+        // regione di provenienza
+        $string .= "<li>
+            <label for='modSelectRegione'>Regione di provenienza</label>
+            <select id='modSelectRegione' name='selectRegione' onchange='showProvince(this.value)'>
+               <option value=''>Seleziona regione</option>";
+
+         $regioni = Regioni::getRegioni();
+         $regioneAppartenenza = SelectRegione::getRegione($dati['provincia']);
+
+        foreach ($regioni as $key => $regione) {
+            if($regione['nome'] == $regioneAppartenenza) {
+                $string .= "<option value='".htmlentities($regione['nome'], ENT_QUOTES, "UTF-8")."' selected='selected'>".htmlentities($regione['nome'], ENT_QUOTES, "UTF-8")."</option>";
+            } else {
+                 $string .= "<option value='".htmlentities($regione['nome'], ENT_QUOTES, "UTF-8")."'>".htmlentities($regione['nome'], ENT_QUOTES, "UTF-8")."</option>";
+            }
+        }
+         $string .= "</select></li>";
+
+         // provincia di appartenenza
+         $string .= "<li>
+             <label for='modSelectProvincia'>Seleziona provincia</label>
+             <select id='modSelectProvincia' name='selectProvincia'>
+                <option value=''>Seleziona provincia</option>";
+
+          $province = Province::getProvince();
+
+        foreach ($province as $key => $provincia) {
+            if($provincia['sigla'] == $dati['provincia']) {
+                $string .= "<option value='".htmlentities($provincia['sigla'], ENT_QUOTES, "UTF-8")."' selected='selected'>".htmlentities($provincia['nome'], ENT_QUOTES, "UTF-8")."</option>";
+            } else {
+                $string .= "<option value='".htmlentities($provincia['sigla'], ENT_QUOTES, "UTF-8")."'>".htmlentities($provincia['nome'], ENT_QUOTES, "UTF-8")."</option>";
+            };
+        }
+        $string .= "</select></li>";
+
+         // bio
+         //TODO placeholder "Scrivi una breve descrizione di te..."
+         $string .= "<li><label for='modTextAreaBio'>Bio</label> <textarea id='modTextAreaBio' name='bio' cols='40' rows='4' onblur='checkBio(this.value)'>".$dati['descrizione']."</textarea><span id='errorModBio' class='modErrorEntry'></span></li>";
+
+         $string .= "</ul>";
+
+/*
         // username
         $string .= "<li>Username: " . $dati['username'] . "</li>";
 
@@ -284,6 +342,7 @@ class FormDatiObbligatori
         $string .= "' onkeypress='clearError(\"data\")' onblur='checkBDay()'/><label for='modDataNascitaAnno'>Anno</label><input id='modDataNascitaAnno' name='bDayAnno' type='text' size='4' maxlength='4' value='";
         $string .= date("Y", strtotime($dati['dataNascita']));
         $string .= "' onkeypress='clearError(\"data\")' onblur='checkBDay()'/><span id='errorModDataNascita' class='modErrorEntry'></span></li>";
+*/
 
         $string .= "</ul><button type='submit'>Salva</button></fieldset></form>";
 

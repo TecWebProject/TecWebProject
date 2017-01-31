@@ -40,16 +40,12 @@ class AggiornamentoDB
                         $stmt->bind_param("ss", $campo, $dati['username']);
                         $stmt->execute();
 
-                        var_dump("nome: " . $dati['nome']);
-
                         break;
                     case "cognome":
 
                         $stmt = $mysqli->prepare("UPDATE `Utenti` SET `cognome` = ? WHERE `Utenti`.`username` = ?");
                         $stmt->bind_param("ss", $campo, $dati['username']);
                         $stmt->execute();
-
-                        var_dump("cognome: " . $dati['cognome']);
 
                         break;
                     case "email":
@@ -58,8 +54,6 @@ class AggiornamentoDB
                         $stmt->bind_param("ss", $campo, $dati['username']);
                         $stmt->execute();
 
-                        var_dump("email: " . $dati['email']);
-
                         break;
                     case "password":
 
@@ -67,16 +61,12 @@ class AggiornamentoDB
                         $stmt->bind_param("ss", $campo, $dati['username']);
                         $stmt->execute();
 
-                        var_dump("password: " . $dati['password']);
-
                         break;
                     case "dataNascita":
 
                         $stmt = $mysqli->prepare("UPDATE `Utenti` SET `dataNascita` = ? WHERE `Utenti`.`username` = ?");
                         $stmt->bind_param("ss", $campo, $dati['username']);
                         $stmt->execute();
-
-                        var_dump("dataNascita: " . $dati['dataNascita']);
 
                         break;
                     default:

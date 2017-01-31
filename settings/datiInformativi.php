@@ -1,75 +1,66 @@
 <?php
 
-require_once realpath(dirname(__FILE__)) . "/../lib/php/datiUtente.php";
-require_once realpath(dirname(__FILE__)) . "/../lib/php/regioni.php";
-require_once realpath(dirname(__FILE__)) . "/../lib/php/province.php";
-require_once realpath(dirname(__FILE__)) . "/../lib/php/select_regione.php";
+/*Pagina modifica dati obbligatori*/
 
+require_once realpath(dirname(__FILE__)) . '/../lib/php/menu.php';
+require_once realpath(dirname(__FILE__)) . '/../lib/php/start.php';
+require_once realpath(dirname(__FILE__)) . '/menuProfilo.php';
+require_once realpath(dirname(__FILE__)) . '/sessioneNonValida.php';
+require_once realpath(dirname(__FILE__)) . '/formDatiInformativi.php';
 
-/**
- * Classe per generare i dati obbligatori della form di modifica profilo
- */
-class FormDatiInformativi
-{
+try {
 
-    //TODO richiede che nella sessione sia salvato $_SESSION['username'] per l'identificazione
-    public static function getFormDatiInformativi()
-    {
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
-
-        if(!isset($_SESSION['datiUtente'])) {
-            $_SESSION['datiUtente'] = Utenti::getDatiUtente($_SESSION['username']);
-        }
-
-        $string = "<fieldset><legend>Dati informativi</legend><ul>";
-
-        // immagine profilo
-        $string .= "<li><label for='modLoadImage'>Carica immagine profilo</label> <input id='modLoadImage' name='image' type='file' title='Carica immagine'/><p id='errorModLoadImage'></p></li>";
-
-        // regione di provenienza
-        $string .= "<li>
-            <label for='modSelectRegione'>Regione di provenienza</label> 
-            <select id='modSelectRegione' name='selectRegione' onchange='showProvince(this.value)'>
-               <option value=''>Seleziona regione</option>";
-
-         $regioni = Regioni::getRegioni();
-         $regioneAppartenenza = SelectRegione::getRegione($_SESSION['datiUtente']['provincia']);
-
-        foreach ($regioni as $key => $regione) {
-            if($regione['nome'] == $regioneAppartenenza) {
-                $string .= "<option value='".htmlentities($regione['nome'], ENT_QUOTES, "UTF-8")."' selected='selected'>".htmlentities($regione['nome'], ENT_QUOTES, "UTF-8")."</option>";
-            } else {
-                 $string .= "<option value='".htmlentities($regione['nome'], ENT_QUOTES, "UTF-8")."'>".htmlentities($regione['nome'], ENT_QUOTES, "UTF-8")."</option>";
-            }
-        }
-         $string .= "</select></li>";
-
-         // provincia di appartenenza
-         $string .= "<li>
-             <label for='modSelectProvincia'>Seleziona provincia</label> 
-             <select id='modSelectProvincia' name='selectProvincia'>
-                <option value=''>Seleziona provincia</option>";
-
-          $province = Province::getProvince();
-
-        foreach ($province as $key => $provincia) {
-            if($provincia['sigla'] == $_SESSION['datiUtente']['provincia']) {
-                $string .= "<option value='".htmlentities($provincia['sigla'], ENT_QUOTES, "UTF-8")."' selected='selected'>".htmlentities($provincia['nome'], ENT_QUOTES, "UTF-8")."</option>";
-            } else {
-                $string .= "<option value='".htmlentities($provincia['sigla'], ENT_QUOTES, "UTF-8")."'>".htmlentities($provincia['nome'], ENT_QUOTES, "UTF-8")."</option>";
-            };
-        }
-        $string .= "</select></li>";
-
-         // bio
-         //TODO placeholder "Scrivi una breve descrizione di te..."
-         $string .= "<li><label for='modTextAreaBio'>Bio</label> <textarea id='modTextAreaBio' name='bio' cols='40' rows='4' onblur='checkBio(this.value)'>".$_SESSION['datiUtente']['descrizione']."</textarea><span id='errorModBio' class='modErrorEntry'></span></li>";
-
-         $string .= "</ul></fieldset>";
-
-         return $string;
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
     }
 
+    if (!isset($_SESSION['username'])) {
+        throw new Exception("Invalid session");
+    }
+
+    $string = "";
+
+    // Generazione head
+    $string .= Start::getHead(
+        array('Titolo' => "Impostazioni profilo - BandBoard", 'DescrizioneBreve' => "Pannello di modifica delle informazioni personali", 'Descrizione' => "Pagina per la modifica delle informazioni personali, dei contatti e della biografia del proprio profilo", 'Keywords' => array("Modifica informazioni personali", "Impostazioni", "BandBoard", "band", "musica"), 'Stylesheets' => array("style.css"), 'Extra' => array("<script src='settings.js' type='text/javascript'></script>", /*TODO temp*/
+            "<meta http-equiv='refresh' content='20'></meta>"))
+    );
+
+
+    // Inizio body
+    //TODO header standard
+    $string .= "<body><div class='header'>Header standard</div><div class='breadcrump'><h1>Modifica dati obbligatori</h1></div>";
+
+    // Menu
+    $string .= "<div class='nav'>" . Menu::getMenu(array("Home", "<a href='pagina.html'>Profilo</a>", "<a href='pagina.html'>Cerca</a>", "<a href='pagina.html'>Band</a>")) . "</div>";
+
+    $string .= "<div class='content'>";
+
+    $string .= MenuProfilo::getMenuProfilo();
+
+    $string .= "<div id='modContenutoPagina'>";
+
+    $string .= FormDatiInformativi::getFormDatiInformativi();
+
+    $string .= "</div>";    //Fine modContenutoPagina
+
+    $string .= "</div>";    //Fine content
+
+    $string .= "<div id='modBackButton'><a href='index.php'>Indietro</a></div>";    //Pulsante indietro
+
+    $string .= "</body></html>";    //Fine body e html
+
+    echo $string;
+
+} catch (Exception $e) {
+    switch ($e->getMessage()) {
+        case "Invalid session":
+
+            sessioneNonValida::manageSessioneNonValida();
+
+            break;
+        default:
+            echo $e->getMessage();
+            break;
+    }
 }
