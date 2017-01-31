@@ -400,9 +400,12 @@ INSERT INTO Gruppi (idGruppo, nome, immagine, descrizione, dataIscrizione, provi
 (NULL, 'Proxy Music', NULL, 'Ci sarà sempre bisogno di un proxy...', '2016-12-17', 'BR'),
 (NULL, 'Queries of the Stone Age', NULL, NULL, '2001-04-18', 'OR'),
 (NULL, 'U3', NULL, 'Rock, pop e un po\' di beat elettronici...', '2016-02-07', 'RM'),
-(NULL, 'Gruppo', NULL, NULL, '2001-04-18', 'RM'),
-(NULL, 'Gruppo', NULL, NULL, '2001-04-18', 'PD'),
-(NULL, 'Gruppo', NULL, NULL, '2001-04-18', 'PD');
+(NULL, 'Alice in JS', NULL, 'Cover band degli Alice in Chains', '2002-01-03', 'RM'),
+(NULL, 'JSON Five', NULL, NULL, '1999-10-16', 'LE'),
+(NULL, 'The Spiders from Google', NULL, NULL, '2001-10-13', 'CR'),
+(NULL, 'Gruppo Anonimo', NULL, 'In missione per popolare il database di BandBoard', '2000-01-31', 'LE'),
+(NULL, 'Files', NULL, 'Principalmente grunge e heavy metal.', '2002-04-10', 'MI'),
+(NULL, 'Maroon 3', NULL, NULL, '2002-06-10', 'MI');
 
 INSERT INTO TipiContatti (nome) VALUES
 ('email_pubblica'), # diversa dal campo email di Utenti (che è privato)
@@ -419,7 +422,11 @@ INSERT INTO ContattiGruppi (idContatto, gruppo, tipoContatto, contatto) VALUES
 (NULL, 7, 'youtube', 'https://www.youtube.com/user/MassiveAttackVEVO'),
 (NULL, 8, 'youtube', 'https://www.youtube.com/user/PearljamVEVO'),
 (NULL, 9, 'youtube', 'https://www.youtube.com/user/radiohead'),
-(NULL, 11, 'facebook', 'https://www.facebook.com/QOTSA');
+(NULL, 11, 'facebook', 'https://www.facebook.com/QOTSA'),
+(NULL, 18, 'facebook', 'https://www.facebook.com/maroon5'),
+(NULL, 14, 'facebook', 'https://www.facebook.com/pages/The-Jackson-Five/21921713821'),
+(NULL, 14, 'youtube', 'https://www.youtube.com/channel/UC61njVWfh29aExlrfE-2B5w'),
+(NULL, 13, 'youtube', 'https://www.youtube.com/user/AliceInChainsVEVO');
 
 INSERT INTO Utenti (username, password, email, nome, cognome, dataNascita, immagine, descrizione, dataIscrizione, provincia) VALUES
 ('miles26', '3a555c464988e33e52f96beffbe3b1ac', 'miles@milesinthesky.jazz', 'Miles', 'Travis', '1926-05-26', NULL, 'Jazz e Blues nel sangue dalla nascita.' ,'1998-11-04', 'FI'),
@@ -429,11 +436,22 @@ INSERT INTO Utenti (username, password, email, nome, cognome, dataNascita, immag
 ('rob_wyatt', '3a555c464988e33e52f96beffbe3b1ac', 'robert@softmachine.org', 'Robert', 'Wyatt', '1945-01-28', NULL, NULL, '1997-10-08', 'LU'),
 ('millenium_bug', '3a555c464988e33e52f96beffbe3b1ac', 'milbug@ctime.h', 'Milly', 'Bug', '1970-01-01', NULL, 'Ormai in pensione ma sempre sul pezzo.','1999-12-31', 'AG'),
 ('ennesimo', '3a555c464988e33e52f96beffbe3b1ac', 'ennesimo.utente@popolamento.db', 'Enrico', 'Nesimo', '1995-12-02', NULL, NULL, '2012-04-04', 'EN'),
-('mrossi', '3a555c464988e33e52f96beffbe3b1ac', 'mario.rossi@nomifamosi.it', 'Mario', 'Rossi', '1989-02-02', NULL, 'Spolvero la mia chitarra solo in ferie ma sogno di poterla suonare un giorno anche per lavoro... Ho imparato a suonare l\'organo da piccolo e solo di recente la chitarra.', '2009-04-02', 'PD'),
+('mrossi', '3a555c464988e33e52f96beffbe3b1ac', 'marta.rossi@nomifamosi.it', 'Marta', 'Rossi', '1989-02-02', NULL, 'Spolvero la mia chitarra solo in ferie ma sogno di poterla suonare un giorno anche per lavoro... Ho imparato a suonare l\'organo da piccolo e solo di recente la chitarra.', '2009-04-02', 'PD'),
 ('tverdi', '3a555c464988e33e52f96beffbe3b1ac', 'tizio.verdi@nomifamosi.it', 'Tizio', 'Verdi', '1994-12-27', NULL, NULL, '2016-08-30', 'RM'),
 ('cverdi', '3a555c464988e33e52f96beffbe3b1ac', 'caio.verdi@nomifamosi.it', 'Caio', 'Verdi', '1997-05-07', NULL, NULL, '2016-08-30', 'RM'),
 ('sempronio96', '3a555c464988e33e52f96beffbe3b1ac', 'sempronio@nomifamosi.it', 'Sempronio', 'Bianchi', '1996-02-14', NULL, 'DJ, con grande passione per gli anni \'90 (e primi 2000). Disponibile per feste: contattatemi via whatsapp o telegram', '2015-11-11', 'CR'),
-('svaughan', '3a555c464988e33e52f96beffbe3b1ac', 'sarahv@example.com', 'Sarah', 'Vaughan', '1924-03-27', NULL, 'Adoro il Jazz e la musica, in generale. Cantare è stato il mio sogno sin dall\'infanzia ed rimarrà per sempre una passione, forse ancor più che una professione.','2014-04-19', 'PD');
+('svaughan', '3a555c464988e33e52f96beffbe3b1ac', 'sarahv@example.com', 'Sarah', 'Vaughan', '1924-03-27', NULL, 'Adoro il Jazz e la musica, in generale. Cantare è stato il mio sogno sin dall\'infanzia ed rimarrà per sempre una passione, forse ancor più che una professione.','2014-04-19', 'PD'),
+('m_json_1', '3a555c464988e33e52f96beffbe3b1ac', 'mick.json@example.com', 'Michael', 'JSON', '1958-08-29', NULL, 'Ho cantato sin dalla più tenera età in gruppo con i miei fratelli; inizio ora una carriera da solista.', '1999-07-28', 'LE'),
+('david', '3a555c464988e33e52f96beffbe3b1ac', 'dave_b@example.com', 'David', 'Browser', '1947-01-08', NULL, 'Ringrazio il mio amico Ziggy Stardust per avermi fatto conoscere BandBoard! :)', '1995-11-10', 'MI'),
+('cb01', '3a555c464988e33e52f96beffbe3b1ac', 'carlob@nomifamosi.it', 'Carlo', 'Bianchi', '1989-12-07', NULL, NULL, '2012-02-27', 'LE'),
+('fiamm-1', '3a555c464988e33e52f96beffbe3b1ac', 'fiamm_1@nomifamosi.it', 'Fiammetta', 'Rossi', '1995-10-01', NULL, 'Esperta in canto jazz, con buona conoscenza del pianoforte', '2016-12-24', 'PG'),
+('tverdi_2', '3a555c464988e33e52f96beffbe3b1ac', 'tiziaverdi@nomifamosi.it', 'Tizia', 'Verdi', '1994-03-15', NULL, 'Chitarrista provetta - cantautrice', '2014-12-12', 'RM'),
+('bosc', '3a555c464988e33e52f96beffbe3b1ac', 'mbosc@nomifamosi.it', 'Mario', 'Boscolo', '1994-05-07', NULL, NULL, '2015-08-30', 'VE'),
+('anto', '3a555c464988e33e52f96beffbe3b1ac', 'anto_b@nomifamosi.it', 'Antonio', 'Boscolo', '1997-01-17', NULL, 'Bassista jazz', '2016-06-30', 'VE'),
+('agrigi', '3a555c464988e33e52f96beffbe3b1ac', 'ale_gri@nomiacaso.it', 'Alessia', 'Grigi', '1994-10-21', NULL, 'Studente al conservatiorio. Suono il basso e ascolto soprattutto jazz e reggae.', '2017-01-03', 'RN'),
+('maria', '3a555c464988e33e52f96beffbe3b1ac', 'mariabianchi@popolamento.db', 'Maria', 'Bianchi', '1995-11-17', NULL, 'Mi ispiro da Big Man della E-Street Band; sunono il sax da 5 anni', '2012-10-01', 'RE'),
+('Serena_Gialli', '3a555c464988e33e52f96beffbe3b1ac', 'serena@nomiacaso.it', 'Serena', 'Gialli', '1994-02-14', NULL, NULL, '2002-09-30', 'GO'),
+('_carlo_', '3a555c464988e33e52f96beffbe3b1ac', 'cgialli@nomiacaso.it', 'Carlo', 'Gialli', '1999-05-18', NULL, NULL, '2006-09-01', 'GO');
 
 INSERT INTO ContattiUtenti (idContatto, utente, tipoContatto, contatto) VALUES
 (NULL, 'giorgio', 'telegram', 'telegram.me/ggiuffre'),
@@ -477,7 +495,9 @@ INSERT INTO GeneriGruppi (gruppo, genere) VALUES
 (2, 'Reggae'),
 (4, 'Hard Rock'),
 (10, 'Pop Rock'),
-(3, 'Reggae');
+(3, 'Reggae'),
+(15, 'Grunge'),
+(15, 'Metal');
 
 INSERT INTO GeneriUtenti (utente, genere) VALUES
 ('miles26', 'Jazz'),
@@ -496,12 +516,32 @@ INSERT INTO GeneriUtenti (utente, genere) VALUES
 ('sempronio96', 'Techno'),
 ('sempronio96', 'Pop'),
 ('svaughan', 'Jazz'),
-('svaughan', 'Pop');
+('svaughan', 'Fusion'),
+('david', 'Pop Rock'),
+('david', 'Psychedelic'),
+('m_json_1', 'Pop'),
+('m_json_1', 'Disco'),
+('cb01', 'Metal'),
+('fiamm-1', 'Jazz'),
+('tverdi_2', 'Country'),
+('anto', 'Jazz'),
+('agrigi', 'Reggae'),
+('agrigi', 'Jazz'),
+('maria', 'Soul'),
+('maria', 'Jazz'),
+('maria', 'R&B'),
+('maria', 'Hip Hop'),
+('Serena_Gialli', 'Techno'),
+('Serena_Gialli', 'Psychedelic'),
+('_carlo_', 'Blues'),
+('_carlo_', 'Hard Rock'),
+('_carlo_', 'Funk');
 
 INSERT INTO Strumenti (nome) VALUES
 ('Chitarra Elettrica'),
 ('Chitarra Acustica'),
 ('Basso Elettrico'),
+('Contrabbasso'),
 ('Batteria'),
 ('Organo'),
 ('Pianoforte'),
@@ -527,19 +567,25 @@ INSERT INTO Conoscenze (idConoscenza, utente, strumento) VALUES
 (NULL, 'mrossi', 'Organo'),
 (NULL, 'tverdi', 'Batteria'),
 (NULL, 'cverdi', 'Computer'),
-(NULL, 'mrossi', 'Chitarra Acustica');
+(NULL, 'mrossi', 'Chitarra Acustica'),
+(NULL, 'm_json_1', 'Voce'),
+(NULL, 'david', 'Voce'),
+(NULL, 'david', 'Pianoforte'),
+(NULL, 'cb01', 'Violino'),
+(NULL, 'tverdi', 'Chitarra Acustica'),
+(NULL, 'tverdi', 'Chitarra Elettrica'),
+(NULL, 'anto', 'Basso Elettrico'),
+(NULL, 'agrigi', 'Basso Elettrico'),
+(NULL, 'maria', 'Sassofono'),
+(NULL, 'Serena_Gialli', 'Computer'),
+(NULL, '_carlo_', 'Voce'),
+(NULL, '_carlo_', 'Batteria');
 
-INSERT INTO Annunci (gruppo, ruoloRichiesto) VALUES
-(1, 'Organo'),
-(4, 'Chitarra Elettrica'),
-(2, 'Sassofono'),
-(4, 'Voce'),
-(7, 'Computer');
+# INSERT INTO Annunci (gruppo, ruoloRichiesto) VALUES
+# inutile: funzionalità non ancora implementata
 
-INSERT INTO RichiestePartecipazione (utente, gruppo, richiestaDaGruppo) VALUES
-('ennesimo', 2, 0),
-('miles26', 3, 1),
-('giorgio', 7, 0);
+# INSERT INTO RichiestePartecipazione (utente, gruppo, richiestaDaGruppo) VALUES
+# inutile: funzionalità non ancora implementata
 
 INSERT INTO Formazioni (gruppo, ruolo) VALUES
 (1, 9),
@@ -557,4 +603,8 @@ INSERT INTO Formazioni (gruppo, ruolo) VALUES
 (10, 8),
 (13, 8),
 (14, 8),
-(15, 8);
+(15, 8),
+(17, 14),
+(18, 18),
+(18, 24),
+(18, 28);
