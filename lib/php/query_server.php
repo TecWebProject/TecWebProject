@@ -13,9 +13,9 @@
 class dbConnectionData {
 	protected static $_data = array(
 		'hostname' => 'localhost',
-		'username' => 'root',
-		'password' => 'root',
-		'dbName' => 'database_artisti',
+		'username' => 'ggiuffre',
+		'password' => 'pejiewoSh4ieloof',
+		'dbName' => 'ggiuffre',
 		'port' => 3306);
 
 	public static function getData() {
