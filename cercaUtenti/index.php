@@ -128,7 +128,7 @@ else $_GET['genere'] = '_'; # hack
 
 require_once '../lib/php/query_server.php';
 $conn = dbConnectionData::getMysqli();
-$stmt = $conn->prepare("SELECT DISTINCT u.username, u.provincia
+$stmt = $conn->prepare("SELECT DISTINCT u.username, u.provincia, u.immagine
 	FROM Utenti u, GeneriUtenti g, Conoscenze c
 	WHERE $filtro_provincia
 	AND $filtro_strumento
@@ -144,9 +144,13 @@ if ($stmt) {
 	$utenti = $stmt_result->fetch_all(MYSQLI_ASSOC);
 	if ($utenti) {
 		$tot_utenti = count($utenti);
-		$risultati .= '<ul id="risultati">';
+		$risultati .= '<ul class="listaRisultati">';
 		for ($r = $primo; $r < min($primo + 10, $tot_utenti); $r++) {
-			$risultati .= '<li><a href="../profiloUtente/profiloUtente.php?username=' . $utenti[$r]['username'] . '&page=ricerca&num=' . $curr_page . '">' . $utenti[$r]['username'] . ' (' . $utenti[$r]['provincia'] . ')</a></li>';
+			$img = '../images/site/defaultUser.png';
+			if ($utenti[$r]['immagine'] != '' && file_exists('../images/users/' . $utenti[$r]['immagine'])) {
+				$img = $utenti[$r]['immagine'];
+			}
+			$risultati .= '<li class="elementResult"><a href="../profiloUtente/profiloUtente.php?username=' . $utenti[$r]['username'] . '&page=ricerca&num=' . $curr_page . '">' . '<img class="listImage" src="' . $img . '" alt="Immagine di ' . $utenti[$r]['username'] . '" />' . $utenti[$r]['username'] . ' (' . $utenti[$r]['provincia'] . ')</a></li>';
 		}
 		unset($utenti);
 		$risultati .= '</ul>';

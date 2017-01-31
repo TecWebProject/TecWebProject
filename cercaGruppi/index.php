@@ -110,7 +110,7 @@ else $_GET['genere'] = '_'; # hack
 
 require_once '../lib/php/query_server.php';
 $conn = dbConnectionData::getMysqli();
-$stmt = $conn->prepare("SELECT DISTINCT gr.idGruppo, gr.nome, gr.provincia
+$stmt = $conn->prepare("SELECT DISTINCT gr.idGruppo, gr.nome, gr.provincia, gr.immagine
 	FROM Gruppi gr, GeneriGruppi gg
 	WHERE $where_provincia
 	AND $where_genere"
@@ -124,9 +124,13 @@ if ($stmt) {
 	$gruppi = $stmt_result->fetch_all(MYSQLI_ASSOC);
 	if ($gruppi) {
 		$tot_gruppi = count($gruppi);
-		$risultati .= '<ul id="risultati">';
+		$risultati .= '<ul class="listaRisultati">';
 		for ($g = $primo; $g < min($primo + 10, $tot_gruppi); $g++) {
-			$risultati .= '<li><a href="../profiloGruppo/profiloGruppo.php?idGruppo=' . $gruppi[$g]['idGruppo'] . '&page=ricerca&num=' . $curr_page . '">' . $gruppi[$g]['nome'] . ' (' . $gruppi[$g]['provincia'] . ')</a></li>';
+			$img = '../images/site/defaultBand.png';
+			if ($gruppi[$g]['immagine'] != '' && file_exists('../images/bands/' . $gruppi[$g]['immagine'])) {
+				$img = $gruppi[$g]['immagine'];
+			}
+			$risultati .= '<li class="elementResult"><a href="../profiloGruppo/profiloGruppo.php?idGruppo=' . $gruppi[$g]['idGruppo'] . '&page=ricerca&num=' . $curr_page . '">' . '<img class="listImage" src="' . $img . '" alt="Immagine di ' . $gruppi[$g]['idGruppo'] . '" />' . $gruppi[$g]['nome'] . ' (' . $gruppi[$g]['provincia'] . ')</a></li>';
 		}
 		unset($gruppi);
 		$risultati .= '</ul>';
