@@ -3,7 +3,7 @@
 # SCHEMA DATABASE_ARTISTI
 DROP SCHEMA IF EXISTS ggiuffre;
 CREATE SCHEMA IF NOT EXISTS ggiuffre DEFAULT CHARACTER SET utf8;
-USE database_artisti;
+USE ggiuffre;
 
 
 
