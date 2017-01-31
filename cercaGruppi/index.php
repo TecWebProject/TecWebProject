@@ -91,46 +91,71 @@ $file = str_replace('<province />', $province, $file);
 
 
 # prepara parametri di paginazione dei risultati
-require_once '../lib/php/query_server.php';
-$conn = dbConnectionData::getMysqli();
-$count = $conn->query("SELECT COUNT(username) FROM Utenti");
-$tot = $count->fetch_row()[0];
 $per_page = 10; # numero risultati per pagina
-$tot_pages = ceil($tot / $per_page); # numero totale pagine
-$curr_page = (!isset($_GET['page'])) ? 1 : (int)$_GET['page']; # pag. corrente
+$curr_page = isset($_GET['num']) ? (int)$_GET['num'] : 1; # pag. corrente
 $primo = ($curr_page - 1) * $per_page; # primo gruppo della pag. corrente
-$limit = " LIMIT $primo, $per_page";
 
 
 
 # costruisci risultati query
+$where_provincia = $where_genere = "? LIKE '%' "; # hack
+
+if (isset($_GET['provincia']) && $_GET['provincia'] != '')
+	$where_provincia = " AND gr.provincia = ? ";
+else $_GET['provincia'] = '_'; # hack
+
+if (isset($_GET['genere']) && $_GET['genere'] != '')
+	$where_genere = "gr.idGruppo = gg.gruppo AND gg.genere = ? ";
+else $_GET['genere'] = '_'; # hack
+
 require_once '../lib/php/query_server.php';
 $conn = dbConnectionData::getMysqli();
-$risultati = '';
-if (isset($_GET['genere']) && isset($_GET['provincia'])) {
-	$stmt = $conn->prepare("SELECT gr.idGruppo, gr.nome, gr.provincia, gg.genere
-		FROM Gruppi gr, GeneriGruppi gg
-		WHERE gr.idGruppo = gg.gruppo
-		AND gg.genere = ?
-		AND gr.provincia = ?" . $limit);
-	$stmt->bind_param('ss', $_GET['genere'], $_GET['provincia']);
+$stmt = $conn->prepare("SELECT DISTINCT gr.idGruppo, gr.nome, gr.provincia
+	FROM Gruppi gr, GeneriGruppi gg
+	WHERE $where_provincia
+	AND $where_genere"
+);
 
-	$res = $stmt->execute();
+$risultati = '';
+if ($stmt) {
+	$stmt->bind_param('ss', $_GET['provincia'], $_GET['genere']);
+	$stmt->execute();
 	$stmt_result = $stmt->get_result();
-	$result = $stmt_result->fetch_all(MYSQLI_ASSOC);
-	if ($result) {
+	$gruppi = $stmt_result->fetch_all(MYSQLI_ASSOC);
+	if ($gruppi) {
+		$tot_gruppi = count($gruppi);
 		$risultati .= '<ul id="risultati">';
-		foreach ($result as $el) {
-			$risultati .= '<li><a href="../profilo/index.php?gruppo=' . $el['idGruppo'] . '">' . $el['nome'] . ' (' . $el['provincia'] . ') - ' . $el['genere'] . '</a></li>';
+		for ($g = $primo; $g < min($primo + 10, $tot_gruppi); $g++) {
+			$risultati .= '<li><a href="../profiloGruppo/profiloGruppo.php?idGruppo=' . $gruppi[$g]['idGruppo'] . '&page=ricerca&num=' . $curr_page . '">' . $gruppi[$g]['nome'] . ' (' . $gruppi[$g]['provincia'] . ')</a></li>';
 		}
+		unset($gruppi);
 		$risultati .= '</ul>';
 	}
 	else
 		$risultati .= '<p>La tua ricerca non ha portato risultati.</p>';
 	$stmt->close();
+} else {
+	$risultati = '<p>Errore: [' . $conn->errno  .'] ' . $conn->error . '</p>';
 }
+
 $conn->close();
 $file = str_replace('<risultati />', $risultati, $file);
+
+
+
+# costruisci link paginazione
+$tot_pages = ceil($tot_gruppi / $per_page); # numero totale pagine
+$paginazione = '';
+if ($tot_pages > 0) {
+	$precedente = '<li>precedente</li>';
+	if ($curr_page > 1)
+		$precedente = '<li><a href="index.php?num=' . ($curr_page - 1) . '">precedente</a></li>';
+	$successiva = '<li>successiva</li>';
+	if ($curr_page < $tot_pages)
+		$successiva = '<li><a href="index.php?num=' . ($curr_page + 1) . '">successiva</a></li>';
+	$paginazione = $precedente . $successiva;
+}
+$file = str_replace('<paginazione />', $paginazione, $file);
 
 
 

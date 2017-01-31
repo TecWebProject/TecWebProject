@@ -105,55 +105,76 @@ $file = str_replace('<generi />', $generi, $file);
 
 
 # prepara parametri di paginazione dei risultati
+$per_page = 10; # risultati per pagina
+$curr_page = isset($_GET['num']) ? (int)$_GET['num'] : 1; # pag. corrente
+$primo = ($curr_page - 1) * $per_page; # primo utente della pag. corrente
+
+
+
+# costruisci risultati query
+$filtro_provincia = $filtro_strumento = $filtro_genere = "? LIKE '%' "; # hack
+
+if (isset($_GET['provincia']) && $_GET['provincia'] != '')
+	$filtro_provincia = "u.provincia = ? ";
+else $_GET['provincia'] = '_'; # hack
+
+if (isset($_GET['strumento']) && $_GET['strumento'] != '')
+	$filtro_strumento = "u.username = c.utente AND c.strumento = ? ";
+else $_GET['strumento'] = '_'; # hack
+
+if (isset($_GET['genere']) && $_GET['genere'] != '')
+	$filtro_genere = "u.username = g.utente AND g.genere = ? ";
+else $_GET['genere'] = '_'; # hack
+
 require_once '../lib/php/query_server.php';
 $conn = dbConnectionData::getMysqli();
-$count = $conn->query("SELECT COUNT(username) FROM Utenti");
-$tot = $count->fetch_row()[0];
-$per_page = 10; # risultati per pagina
-$tot_pages = ceil($tot / $per_page); # numero totale pagine
-$curr_page = (!isset($_GET['page'])) ? 1 : (int)$_GET['page']; # pag. corrente
-$primo = ($curr_page - 1) * $per_page; # primo utente della pag. corrente
-$limit = " LIMIT $primo, $per_page";
+$stmt = $conn->prepare("SELECT DISTINCT u.username, u.provincia
+	FROM Utenti u, GeneriUtenti g, Conoscenze c
+	WHERE $filtro_provincia
+	AND $filtro_strumento
+	AND $filtro_genere"
+);
 
-
-
-# costruisci pagina di risultati
 $risultati = '';
-if (isset($_GET['strumento']) && isset($_GET['provincia'])) {
-	$genere = '';
-	if (isset($_GET['genere']) && $_GET['genere'] != '')
-		$genere = " AND g.genere = ?";
-	$stmt = $conn->prepare("SELECT u.username, g.genere, u.provincia
-		FROM Utenti u, GeneriUtenti g, Conoscenze c
-		WHERE u.username = g.utente
-		AND u.username = c.utente
-		AND u.provincia = ?
-		AND c.strumento = ?" . $genere . $limit);
-	if ($_GET['genere'] != '')
-		$stmt->bind_param('sss', $_GET['provincia'], $_GET['strumento'], $_GET['genere']);
-	else
-		$stmt->bind_param('ss', $_GET['provincia'], $_GET['strumento']);
-
-	if (!$stmt) {
-		$risultati .= '<p>Errore: [' . $conn->errno  .'] ' . $conn->error . '</p>';
-		exit;
-	}
+$tot_utenti = 0; # numero totale utenti
+if ($stmt) {
+	$stmt->bind_param('sss', $_GET['provincia'], $_GET['strumento'], $_GET['genere']);
 	$stmt->execute();
 	$stmt_result = $stmt->get_result();
-	$result = $stmt_result->fetch_all(MYSQLI_ASSOC);
-	if ($result) {
+	$utenti = $stmt_result->fetch_all(MYSQLI_ASSOC);
+	if ($utenti) {
+		$tot_utenti = count($utenti);
 		$risultati .= '<ul id="risultati">';
-		foreach ($result as $el) {
-			$risultati .= '<li><a href="../profilo/index.php?user=' . $el['username'] . '">' . $el['username'] . ' (' . $el['provincia'] . ") - " . $el['genere'] . '</a></li>';
+		for ($r = $primo; $r < min($primo + 10, $tot_utenti); $r++) {
+			$risultati .= '<li><a href="../profiloUtente/profiloUtente.php?username=' . $utenti[$r]['username'] . '&page=ricerca&num=' . $curr_page . '">' . $utenti[$r]['username'] . ' (' . $utenti[$r]['provincia'] . ')</a></li>';
 		}
+		unset($utenti);
 		$risultati .= '</ul>';
-	}
-	else
-		$risultati .= '<p>La tua ricerca non ha portato risultati.</p>';
+	} else
+		$risultati = '<p>La tua ricerca non ha portato risultati.</p>';
 	$stmt->close();
+} else {
+	$risultati = '<p>Errore: [' . $conn->errno  .'] ' . $conn->error . '</p>';
 }
+
 $conn->close();
 $file = str_replace('<risultati />', $risultati, $file);
+
+
+
+# costruisci link paginazione
+$tot_pages = ceil($tot_utenti / $per_page); # numero totale pagine
+$paginazione = '';
+if ($tot_pages > 0) {
+	$precedente = '<li>precedente</li>';
+	if ($curr_page > 1)
+		$precedente = '<li><a href="index.php?num=' . ($curr_page - 1) . '">precedente</a></li>';
+	$successiva = '<li>successiva</li>';
+	if ($curr_page < $tot_pages)
+		$successiva = '<li><a href="index.php?num=' . ($curr_page + 1) . '">successiva</a></li>';
+	$paginazione = $precedente . $successiva;
+}
+$file = str_replace('<paginazione />', $paginazione, $file);
 
 
 
