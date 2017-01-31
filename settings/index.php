@@ -5,7 +5,8 @@
 require_once realpath(dirname(__FILE__)) . '/../lib/php/menu.php';
 require_once realpath(dirname(__FILE__)) . '/../lib/php/start.php';
 require_once realpath(dirname(__FILE__)) . '/menuProfilo.php';
-require_once realpath(dirname(__FILE__)) . '/sessioneNonValida.php';
+require_once realpath(dirname(__FILE__)) . '/../lib/php/sessioneNonValida.php';
+require_once realpath(dirname(__FILE__)) . '/../lib/php/header.php';
 
 try {
 
@@ -28,10 +29,9 @@ try {
             "<meta http-equiv='refresh' content='20'>"))
     );
 
-
     // Inizio body
     //TODO header standard
-    $string .= "<body><div class='header'>Header standard</div><div class='breadcrump'><h1>Modifica il tuo profilo</h1></div>";
+    $string .= "<body>" . Header::getHeader() . "<div class='breadcrump'><h2>Modifica il tuo profilo</h2></div>";
 
     // Menu
     $string .= "<div class='nav'>" . Menu::getMenu(array("Home", "<a href='pagina.html'>Profilo</a>", "<a href='pagina.html'>Cerca</a>", "<a href='pagina.html'>Band</a>")) . "</div>";

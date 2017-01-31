@@ -5,8 +5,8 @@
 require_once realpath(dirname(__FILE__)) . '/../lib/php/menu.php';
 require_once realpath(dirname(__FILE__)) . '/../lib/php/start.php';
 require_once realpath(dirname(__FILE__)) . '/menuProfilo.php';
-require_once realpath(dirname(__FILE__)) . '/sessioneNonValida.php';
 require_once realpath(dirname(__FILE__)) . '/formDatiObbligatori.php';
+require_once realpath(dirname(__FILE__)) . '/../lib/php/sessioneNonValida.php';
 
 try {
 
