@@ -22,7 +22,8 @@ require_once(realpath(dirname(__FILE__))."/paths.php");
 class Start {
 	private static $contestoDefault = array(
 		'Titolo' => "BandBoard",
-		'Author' => array("Derek Toninato", "Filippo Berto", "Francesco Pezzuto", "Giorgio Giuffrè")
+		'Author' => array("Derek Toninato", "Filippo Berto", "Francesco Pezzuto", "Giorgio Giuffrè"),
+        'BookmarkIcon' => 'site/logo.png'
 	);
 
 	# fornisce il Doctype
@@ -57,7 +58,7 @@ class Start {
         $Doctype = Start::getDoctype();
 
         # OPEN html
-        $OpenHtml = "<html xmlns='http://www.w3.org/1999/xhtml'>";
+        $OpenHtml = "<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='it' lang='it'>";
 
         # OPEN HEAD
         $OpenHead = "<head>";

@@ -99,9 +99,10 @@ function checkPassword(password) {
 
     valid = true;
 
-    if (length < 8 || special == false) {
-        valid = false;
-    }
+    //TODO lunghezza password e caratteri speciali
+    // if (length < 8 || special == false) {
+    //     valid = false;
+    // }
 
     if (valid) {
         document.getElementById("errorModPassword").innerHTML = "<img src='correctEntry.png' class='modCorrectEntry'/>";
