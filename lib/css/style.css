@@ -152,19 +152,19 @@ html, body {
 	display: inline-block;
 	text-align: center;
 	font-size: 1.4em;
-	color: #000000;
-	background-color: #70c1ff;
-	padding: 0.8em 4.4em 0.8em 4.4em;
+	color: black;
+	background-color: #70C1FF;
+	padding: 0.8em 4.4em;
 	border-radius: 0.4em;
 	text-decoration-line: none;
 }
 
 #registrati:visited, #registrati:active {
-	background-color: #70c1ff;
+	background-color: #70C1FF;
 }
 
 #registrati:hover {
-	background-color: #5eadea;
+	background-color: #5EADEA;
 }
 
 
@@ -231,28 +231,25 @@ html, body {
 	display: inline-block;
 	text-align: center;
 	font-size: 1.4em;
-	color: #000000;
-	background-color: #70c1ff;
+	color: black;
+	background-color: #70C1FF;
 	margin: 0em 0.8em;
-	padding: 0.8em 4.3em 0.8em 4.3em;
+	padding: 0.8em 4.3em;
 	min-width: 6em;
 	border-radius: 0.4em;
 	text-decoration-line: none;
 }
 
 #cercaUtenti:visited, #cercaBand:visited {
-	color: #000000;
-	background-color: #70c1ff;
+	background-color: #70C1FF;
 }
 
 #cercaUtenti:hover, #cercaBand:hover {
-	color: #000000;
-	background-color: #5eadea;
+	background-color: #5EADEA;
 }
 
 #cercaUtenti:active, #cercaBand:active {
-	color: #000000;
-	background-color: #70c1ff;
+	background-color: #70C1FF;
 }
 
 
@@ -261,6 +258,10 @@ html, body {
 .suggeriti, .risultati {
 	text-align: left;
 	padding: 0 4%;
+}
+
+.risultati {
+	margin-top: 2em;
 }
 
 .suggeriti {
@@ -453,11 +454,35 @@ html, body {
 	margin-bottom: 1em;
 }
 
+#paginazione {
+	margin-top: 2em;
+}
+
+#paginazione span.notClickable, #paginazione a {
+	display: inline-block;
+	font-size: 1.4em;
+	color: black;
+	background-color: #70C1FF;
+	margin: 0em 0.8em;
+	padding: 0.8em 4.4em;
+	min-width: 6em;
+	border-radius: 0.4em;
+}
+
+#paginazione a {
+	color: black;
+	text-decoration-line: none;
+}
+
+#paginazione a:hover {
+	background-color: #5EADEA;
+}
+
 
 
 /* 404 */
 #header .notFound {
-	color: #70c1ff;
+	color: #70C1FF;
 }
 
 #content.notFound h1 {

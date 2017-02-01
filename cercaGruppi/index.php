@@ -152,12 +152,12 @@ $file = str_replace('<risultati />', $risultati, $file);
 $tot_pages = ceil($tot_gruppi / $per_page); # numero totale pagine
 $paginazione = '';
 if ($tot_pages > 0) {
-	$precedente = '<li>precedente</li>';
+	$precedente = '<span class="notClickable">precedente</span>';
 	if ($curr_page > 1)
-		$precedente = '<li><a href="index.php?num=' . ($curr_page - 1) . '">precedente</a></li>';
-	$successiva = '<li>successiva</li>';
+		$precedente = '<a href="index.php?num=' . ($curr_page - 1) . '">precedente</a>';
+	$successiva = '<span class="notClickable">successiva</span>';
 	if ($curr_page < $tot_pages)
-		$successiva = '<li><a href="index.php?num=' . ($curr_page + 1) . '">successiva</a></li>';
+		$successiva = '<a href="index.php?num=' . ($curr_page + 1) . '">successiva</a>';
 	$paginazione = $precedente . $successiva;
 }
 $file = str_replace('<paginazione />', $paginazione, $file);
