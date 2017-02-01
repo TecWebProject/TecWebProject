@@ -1,5 +1,9 @@
 <?php
 
+session_start();
+
+
+
 # leggi template
 $file = file_get_contents('template.html');
 
@@ -12,7 +16,7 @@ $start = Start::getHead(
 		'Titolo' => 'Cerca utenti - BandBoard',
 		'DescrizioneBreve' => 'Cerca utenti in BandBoard',
 		'Descrizione' => 'Cerca utenti in BandBoard, per strumenti suonati, province e genere.',
-		'Keywords' => array('cerca', 'utenti', 'musicisti'),
+		'Keywords' => array('BandBoard', 'cerca', 'utenti', 'musicisti'),
 		'Stylesheets' => array('style.css', 'mobile.css'),
 		'Extra' => array('<script type="text/javascript" src="../lib/js/province.js"></script>')
 	)
@@ -30,16 +34,41 @@ $file = str_replace('<header />', $header, $file);
 
 # costruisci menù
 require_once '../lib/php/menu.php';
-$menu = Menu::getMenu(
-	array(
-		'<a href="../index.php" xml:lang="en" lang="en">Home</a>',
-		'<a href="profilo.php">Profilo</a>',
-		'Cerca Utenti',
-		'<a href="../cercaGruppi">Cerca Gruppi</a>',
-		'<a href="imieigruppi.php">I miei Gruppi</a>'
-	)
-);
+$menu = '';
+if (isset($_SESSION['username'])) {
+	$menu = Menu::getMenu(
+		array(
+			'<a href="../index.php" xml:lang="en" lang="en">Home</a>',
+			'<a href="../profiloUtente/profiloUtente.php?username=' . $_SESSION['username'] . '">Visualizza Profilo</a>',
+			'Cerca Utenti',
+			'<a href="../cercaGruppi/index.php">Cerca Gruppi</a>',
+			'<a href="../gestioneGruppi/index.php">I miei Gruppi</a>'
+		)
+	);
+} else {
+	$menu = Menu::getMenu(
+		array(
+			'<a href="../index.php" xml:lang="en" lang="en">Home</a>',
+			'Cerca Utenti',
+			'<a href="../cercaGruppi/index.php">Cerca Gruppi</a>',
+			'<a href="../gestioneGruppi/index.php">I miei Gruppi</a>'
+		)
+	);
+}
 $file = str_replace('<menu />', $menu, $file);
+
+
+
+# costruisci pulsante logout per utente registrato
+$logout = '';
+if (isset($_SESSION['username'])) {
+	$logout = '<div class="logout">' .
+		'<form action="../lib/php/logout.php" method="post">' .
+			'<p><input type="submit" id="logout" value="Logout" /></p>' .
+		'</form>' .
+	'</div>';
+}
+$file = str_replace('<logout />', $logout, $file);
 
 
 
