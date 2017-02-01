@@ -1,5 +1,9 @@
 <?php
 
+session_start();
+
+
+
 # leggi template
 $file = file_get_contents('template.html');
 
@@ -11,8 +15,8 @@ $start = Start::getHead(
 	array(
 		'Titolo' => 'Cerca gruppi - BandBoard',
 		'DescrizioneBreve' => 'Cerca gruppi in BandBoard',
-		'Descrizione' => 'Cerca gruppi in BandBoard, per strumenti suonati, province e genere.',
-		'Keywords' => array('cerca', 'gruppi', 'musicisti'),
+		'Descrizione' => 'Cerca gruppi in BandBoard, per generi musicali, province e genere.',
+		'Keywords' => array('BandBoard', 'cerca', 'gruppi', 'musicisti'),
 		'Stylesheets' => array('style.css', 'mobile.css'),
 		'Extra' => array('<script type="text/javascript" src="../lib/js/province.js"></script>')
 	)
@@ -30,16 +34,40 @@ $file = str_replace('<header />', $header, $file);
 
 # costruisci menù
 require_once '../lib/php/menu.php';
-$menu = Menu::getMenu(
-	array(
-		'<a href="../index.php" xml:lang="en" lang="en">Home</a>',
-		'<a href="profilo.php">Profilo</a>',
-		'<a href="../cercaUtenti">Cerca Utenti</a>',
-		'Cerca Gruppi',
-		'<a href="imieigruppi.php">I miei Gruppi</a>'
-	)
-);
+if (isset($_SESSION['username'])) {
+	$menu = Menu::getMenu(
+		array(
+			'<a href="../index.php" xml:lang="en" lang="en">Home</a>',
+			'<a href="../profiloUtente/profiloUtente.php?username=' . $_SESSION['username'] . '">Visualizza Profilo</a>',
+			'<a href="../cercaUtenti/index.php">Cerca Utenti</a>',
+			'Cerca Gruppi',
+			'<a href="../gestioneGruppi/index.php">I miei Gruppi</a>'
+		)
+	);
+} else {
+	$menu = Menu::getMenu(
+		array(
+			'<a href="../index.php" xml:lang="en" lang="en">Home</a>',
+			'<a href="../cercaUtenti/index.php">Cerca Utenti</a>',
+			'Cerca Gruppi',
+			'<a href="../gestioneGruppi/index.php">I miei Gruppi</a>'
+		)
+	);
+}
 $file = str_replace('<menu />', $menu, $file);
+
+
+
+# costruisci pulsante logout per utente registrato
+$logout = '';
+if (isset($_SESSION['username'])) {
+	$logout = '<div class="logout">' .
+		'<form action="../lib/php/logout.php" method="post">' .
+			'<p><input type="submit" id="logout" value="Logout" /></p>' .
+		'</form>' .
+	'</div>';
+}
+$file = str_replace('<logout />', $logout, $file);
 
 
 

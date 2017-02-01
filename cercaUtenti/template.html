@@ -3,9 +3,13 @@
 <body>
 	<header />
 
-	<menu />
+	<div id="menu">
+		<menu />
+	</div>
 
 	<div id="content">
+		<logout />
+
 		<h1>Ricerca Utenti</h1>
 		<form action="index.php" class="filtri">
 			<fieldset>
@@ -38,9 +42,11 @@
 				<input type="submit" class="invio" value="Cerca utenti" />
 			</fieldset>
 		</form>
+
 		<div class="risultati">
 			<risultati />
 		</div>
+
 		<div id="paginazione">
 			<paginazione />
 		</div>
@@ -48,4 +54,5 @@
 
 	<footer />
 </body>
+
 </html>
