@@ -77,7 +77,7 @@ class AggiornamentoDB
 
                         break;
                     case "provincia":
-                        
+
                         $stmt = $mysqli->prepare("UPDATE `Utenti` SET `provincia` = ? WHERE `Utenti`.`username` = ?");
                         $stmt->bind_param("ss", $campo, $dati['username']);
                         $stmt->execute();
@@ -87,6 +87,19 @@ class AggiornamentoDB
                         $stmt = $mysqli->prepare("UPDATE `Utenti` SET `immagine` = ? WHERE `Utenti`.`username` = ?");
                         $stmt->bind_param("ss", $campo, $dati['username']);
                         $stmt->execute();
+
+                        break;
+                    case "generi":
+
+                        $stmt = $mysqli->prepare("DELETE FROM `GeneriUtenti` WHERE `GeneriUtenti`.`utente` = ?");
+                        $stmt->bind_param("s", $dati['username']);
+                        $stmt->execute();
+
+                        foreach ($campo as $key => $genere) {
+                            $stmt = $mysqli->prepare("INSERT INTO `GeneriUtenti` (`utente`, `genere`) VALUES (?, ?)");
+                            $stmt->bind_param("ss", $dati['username'], $genere);
+                            $stmt->execute();
+                        }
 
                         break;
                     default:

@@ -1,35 +1,67 @@
 <?php
 
-require_once realpath(dirname(__FILE__)) . "/../lib/php/datiUtente.php";
-require_once realpath(dirname(__FILE__)) . "/../lib/php/generiMusicali.php";
+/*Pagina modifica dati obbligatori*/
 
-/**
- * Classe per generare i dati obbligatori della form di modifica profilo
- */
-class FormGeneriPreferiti
-{
-    public static function getFormGeneriPreferiti()
-    {
+require_once realpath(dirname(__FILE__)) . '/../lib/php/menu.php';
+require_once realpath(dirname(__FILE__)) . "/../lib/php/header.php";
+require_once realpath(dirname(__FILE__)) . '/../lib/php/start.php';
+require_once realpath(dirname(__FILE__)) . '/menuProfilo.php';
+require_once realpath(dirname(__FILE__)) . '/formGeneriPreferiti.php';
+require_once realpath(dirname(__FILE__)) . '/../lib/php/sessioneNonValida.php';
 
-      if (session_status() == PHP_SESSION_NONE) {
-           session_start();
-      }
+try {
 
-      if(!isset($_SESSION['datiUtente'])) {
-           $_SESSION['datiUtente'] = Utenti::getDatiUtente($_SESSION['username']);
-      }
-
-        $string = "<fieldset><legend>Generi preferiti</legend><ul>";
-
-        $generi = GeneriMusicali::getGeneriMusicali();
-
-        foreach ($generi as $key => $genere) {
-            $string .= "<li><input id='modGenere".htmlentities(preg_replace("/\s|\&/","_",$genere), ENT_QUOTES, "UTF-8")."' name='genere".htmlentities(preg_replace("/\s|\&/","_",$genere), ENT_QUOTES, "UTF-8")."' type='checkbox'/><label for='modGenere".htmlentities(preg_replace("/\s|\&/","_",$genere))."'>".htmlentities($genere, ENT_QUOTES, "UTF-8")."</label></li>";
-        }
-
-        $string .= "</ul></fieldset>";
-
-        return $string;
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
     }
 
+    if (!isset($_SESSION['username'])) {
+        throw new Exception("Invalid session");
+    }
+
+    $string = "";
+
+    // Generazione head
+    $string .= Start::getHead(
+        array('Titolo' => "Impostazioni profilo - BandBoard", 'DescrizioneBreve' => "Pannello di modifica delle informazioni personali", 'Descrizione' => "Pagina per la modifica delle informazioni personali, dei contatti e della biografia del proprio profilo", 'Keywords' => array("Modifica profilo", "Impostazioni", "BandBoard", "band", "musica"), 'Stylesheets' => array("style.css"), 'Extra' => array("<script src='settings.js' type='text/javascript'></script>", /*TODO temp*/
+            "<meta http-equiv='refresh' content='20'></meta>"))
+    );
+
+
+    // Inizio body
+    $string .= "<body>" . Header::getHeader() . "<div class='breadcrump'><h1>Modifica dati obbligatori</h1></div>";
+
+    // Menu
+    $string .= "<div class='nav'>" . Menu::getMenu(array("Home", "<a href='pagina.html'>Profilo</a>", "<a href='pagina.html'>Cerca</a>", "<a href='pagina.html'>Band</a>")) . "</div>";
+
+    // Inizio contenuto pagina
+    $string .= "<div class='content'>";
+
+    $string .= MenuProfilo::getMenuProfilo();
+
+    $string .= "<div id='modContenutoPagina'>";
+
+    $string .= FormGeneriPreferiti::getFormGeneriPreferiti();
+
+    $string .= "</div>";    //Fine modContenutoPagina
+
+    $string .= "</div>";    //Fine content
+
+    $string .= "<div id='modBackButton'><a href='index.php'>Indietro</a></div>";    //Pulsante indietro
+
+    $string .= "</body></html>";    //Fine body e html
+
+    echo $string;
+
+} catch (Exception $e) {
+    switch ($e->getMessage()) {
+        case "Invalid session":
+
+            sessioneNonValida::manageSessioneNonValida();
+
+            break;
+        default:
+            echo $e->getMessage();
+            break;
+    }
 }
