@@ -1,0 +1,44 @@
+	<div id="contentPU">
+		<h2><strong>Profilo utente</strong></h2>
+		<div id="bloccoPrincipale">
+			<immagineProfilo />
+			<ul>
+				<li><nickname /></li>
+				<li><nome /></li>
+				<li><cognome /></li>
+				<li><dataNascita /></li>
+				<li><provincia /></li>
+				<li><dataIscrizione /></li>
+			</ul>
+		</div>
+		<div id="bloccoBio">
+			<h3>Presentazione</h3>
+				<p><descrizione /></p>
+		</div>
+		<div id="bloccoGeneri">
+			<h3>Generi apprezzati</h3>
+				<generiApprezzati />
+		</div>
+		<div id="bloccoStrumenti">
+			<h3>Strumenti suonati</h3>
+				<strumentiSuonati />
+		</div>
+		<div id="bloccoMembroGruppo">
+			<h3>Membro di</h3>
+				<nomeGruppi />
+		</div>
+		<div id="bloccoContatti">
+			<h3>Lista dei contatti</h3>
+			<div class="rigaContatti">
+				<ul>
+					<li><email /></li>
+					<contatti />
+				</ul>
+			</div>
+		</div>
+		<div id="top">
+			<a href="#header">Torna Su</a>
+		</div>
+		<pagPrec />
+	</div>
+	<footer />
