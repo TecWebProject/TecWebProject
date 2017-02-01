@@ -9,27 +9,27 @@
 		<h1>Ricerca Utenti</h1>
 		<form action="index.php" class="filtri">
 			<fieldset>
-				<legend>Filtri:</legend>
+				<legend>Filtri</legend>
 
-				Strumento:
+				<p>Strumento</p>
 				<select name="strumento">
 					<option value="">Seleziona strumento</option>
 					<strumenti />
 				</select>
 
-				Regione:
+				<p>Regione</p>
 				<select id="modSelectRegione" name="regione" onchange="showProvince(this.value)">
 					<option value="">Seleziona regione</option>
 					<regioni />
 				</select>
 
-				Provincia:
+				<p>Provincia</p>
 				<select id="modSelectProvincia" name="provincia">
 					<option value="">Seleziona provincia</option>
 					<province />
 				</select>
 
-				Genere:
+				<p>Genere</p>
 				<select name="genere">
 					<option value="">Seleziona genere</option>
 					<generi />
