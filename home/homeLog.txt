@@ -1,7 +1,7 @@
-		<div id="content">
+				<div id="content">
 			<div class="logout">
 				<form action="lib/php/logout.php" method="post">
-					<input type="submit" id="logout" value="Logout" />
+					<p><input type="submit" id="logout" value="Logout" /></p>
 				</form>
 			</div>
 
@@ -24,3 +24,4 @@
 
 			</div>
 		</div>
+
