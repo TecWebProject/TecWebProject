@@ -258,11 +258,12 @@ html, body {
 
 
 /* per liste utenti/gruppi suggerite dalla home o trovate dalle ricerche */
-.suggeriti {
+.suggeriti, .risultati {
 	text-align: left;
-	margin: 0;
-	padding-left: 4%;
-	padding-right: 4%;
+	padding: 0 4%;
+}
+
+.suggeriti {
 	float: left;
 }
 
@@ -274,7 +275,7 @@ html, body {
 }
 
 .elementResult {
-	margin: 0;
+	max-width: 40em;
 	padding: 0.4em;
 	border: 1px solid #ddd;
 }

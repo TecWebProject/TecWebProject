@@ -117,6 +117,7 @@ $stmt = $conn->prepare("SELECT DISTINCT gr.idGruppo, gr.nome, gr.provincia, gr.i
 );
 
 $risultati = '';
+$tot_gruppi = 0;
 if ($stmt) {
 	$stmt->bind_param('ss', $_GET['provincia'], $_GET['genere']);
 	$stmt->execute();
