@@ -150,7 +150,7 @@ if ($stmt) {
 			if ($utenti[$r]['immagine'] != '' && file_exists('../images/users/' . $utenti[$r]['immagine'])) {
 				$img = $utenti[$r]['immagine'];
 			}
-			$risultati .= '<li class="elementResult"><a href="../profiloUtente/profiloUtente.php?username=' . $utenti[$r]['username'] . '&page=ricerca&num=' . $curr_page . '">' . '<img class="listImage" src="' . $img . '" alt="Immagine di ' . $utenti[$r]['username'] . '" />' . $utenti[$r]['username'] . ' (' . $utenti[$r]['provincia'] . ')</a></li>';
+			$risultati .= '<li class="elementResult"><a href="../profiloUtente/profiloUtente.php?username=' . $utenti[$r]['username'] . '&amp;page=ricerca&amp;num=' . $curr_page . '">' . '<img class="listImage" src="' . $img . '" alt="Immagine di ' . $utenti[$r]['username'] . '" />' . $utenti[$r]['username'] . ' (' . $utenti[$r]['provincia'] . ')</a></li>';
 		}
 		unset($utenti);
 		$risultati .= '</ul>';

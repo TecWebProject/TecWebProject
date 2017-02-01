@@ -443,6 +443,10 @@ html, body {
 
 
 /* form ricerca utenti/gruppi */
+.filtri {
+	min-width: 24em;
+}
+
 .filtri select {
 	margin-top: 0.2em;
 	margin-bottom: 1em;

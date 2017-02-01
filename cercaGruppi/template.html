@@ -11,23 +11,23 @@
 			<fieldset>
 				<legend>Filtri</legend>
 
-				<p>Genere musicale</p>
+				<p>Genere musicale:
 				<select name="genere">
 					<option value="">Seleziona genere</option>
 					<generi />
-				</select>
+				</select></p>
 
-				<p>Regione</p>
+				<p>Regione:
 				<select id="modSelectRegione" name="regione" onchange="showProvince(this.value)">
 					<option value="">Seleziona regione</option>
 					<regioni />
-				</select>
+				</select></p>
 
-				<p>Provincia</p>
+				<p>Provincia:
 				<select id="modSelectProvincia" name="provincia">
 					<option value="" id="prova">Seleziona provincia</option>
 					<province />
-				</select>
+				</select></p>
 
 				<input type="submit" class="invio" value="Cerca tra i gruppi" />
 			</fieldset>
