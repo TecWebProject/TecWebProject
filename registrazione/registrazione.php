@@ -5,7 +5,7 @@
 include_once realpath(dirname(__FILE__, 2))."/lib/php/query_server.php";
 include_once realpath(dirname(__FILE__, 2))."/lib/php/start.php";	//LIBRERIA PER CREARE HEAD
 include_once realpath(dirname(__FILE__, 2))."/lib/php/header.php";	//LIBRERIA PER CREARE HEADER
-include_once realpath(dirname(__FILE__, 2))."/lib/php/menu.php";	//LIBRERIA PER CREARE MENU
+//include_once realpath(dirname(__FILE__, 2))."/lib/php/menu.php";	//LIBRERIA PER CREARE MENU
 include_once realpath(dirname(__FILE__, 2))."/lib/php/footer.php";	//LIBRERIA PER CREARE FOOTER
 
 function pulisciInput($value) {
@@ -29,15 +29,6 @@ echo Start::getHead(array(
 echo '<body>';
 echo Header::getHeader(); //CREAZIONE HEADER
 
-echo Menu::getMenu(array(
-	'<a href="../index.php" xml:lang="en">Home</a>',
-	'Registrazione',
-	'<a href="pagina.php">Profilo</a>',
-	'<a href="../cercaUtenti/index.php">Cerca Utenti</a>',
-	'<a href="../cercaGruppi/index.php">Cerca Gruppi</a>',
-	'<a href="pagina.php">I miei Gruppi</a>'
-)); // CREAZIONE MENU
-
 if (count($_REQUEST)==0) {	//APPENA ARRIVATO DA HOME
 	echo file_get_contents("registrazione_form.txt");	//CREAZIONE PAGINA DI REGISTRAZIONE
 } else {	//E' STATO PREMUTO IL SUBMIT DEL FORM DI REGISTRAZIONE
@@ -59,7 +50,7 @@ if (count($_REQUEST)==0) {	//APPENA ARRIVATO DA HOME
 				$registrazione=true;
 				print "<p class=\"okRep\">Registrazione avvenuta correttamente.</p>";
 			} else {
-				print "<p class=\"errRep\">I dati inseriti non sono corretti: ".$utente."</p>";
+				print "<p class=\"errRep\">I dati inseriti non sono corretti:</p>".$utente;
 			}
 		} else {
 			print "<p class=\"errRep\">Compilare tutti i campi.</p>";
@@ -76,7 +67,7 @@ if (count($_REQUEST)==0) {	//APPENA ARRIVATO DA HOME
 		$_SESSION['started']=1;
 		$_SESSION['username']=$utente->getUsername();
 		$_SESSION['password']=$utente->getPassword();
-		//header("Location: ../modificaProfilo/modificaProfilo.php");	//CHIAMATA A PAGINA DI MODIFICA DEL PROFILO
+		header("Location: ../settings/index.php");	//CHIAMATA A PAGINA DI MODIFICA DEL PROFILO
 	}
 }
 
@@ -85,3 +76,4 @@ echo '</body>';
 echo '</html>';
 
 ?>
+
