@@ -31,7 +31,7 @@ class MenuProfilo
         $entryMenu = array(
             array("stringa" => "Dati obbligatori", "link" => $relativePathToMenuEntry . "datiObbligatori.php"),
             array("stringa" => "Dati informativi", "link" => $relativePathToMenuEntry . "datiInformativi.php"),
-            array("stringa" => "Preferenze musicali", "link" => $relativePathToMenuEntry . "datiPreferenze.php"),
+            array("stringa" => "Preferenze musicali", "link" => $relativePathToMenuEntry . "generiPreferiti.php"),
             array("stringa" => "Contatti", "link" => $relativePathToMenuEntry . "contatti.php")
         );
 
