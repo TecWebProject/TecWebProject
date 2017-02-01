@@ -82,9 +82,9 @@ function getUtenti() {
 					while ($row=$result->fetch_array(MYSQLI_ASSOC)) {
 						if ($row['immagine']==NULL) {
 							$row['immagine']="defaultUser.png";		//DA CAMBIARE IN CASO DI MODIFICHE
-							$users=$users."<li class=\"elementResult\"><a href=\"profiloUtente/profiloUtente.php?username=".$row['username']."&page=index\"><img class=\"listImage\" src=\"images/site/".$row['immagine']."\" alt=\"Immagine di ".$row['username']."\" /> ".$row['username'];	//ATTENZIONE AL PATH! DA CAMBIARE IN CASO DI MODIFICHE
+							$users=$users."<li class=\"elementResult\"><a href=\"profiloUtente/profiloUtente.php?username=".$row['username']."&amp;page=index\"><img class=\"listImage\" src=\"images/site/".$row['immagine']."\" alt=\"Immagine di ".$row['username']."\" /> ".$row['username'];	//ATTENZIONE AL PATH! DA CAMBIARE IN CASO DI MODIFICHE
 						} else {
-							$users=$users."<li class=\"elementResult\"><a href=\"profiloUtente/profiloUtente.php?username=".$row['username']."&page=index\"><img class=\"listImage\" src=\"images/users/".$row['immagine']."\" alt=\"Immagine di ".$row['username']."\" /> ".$row['username'];	//ATTENZIONE AL PATH! DA CAMBIARE IN CASO DI MODIFICHE
+							$users=$users."<li class=\"elementResult\"><a href=\"profiloUtente/profiloUtente.php?username=".$row['username']."&amp;page=index\"><img class=\"listImage\" src=\"images/users/".$row['immagine']."\" alt=\"Immagine di ".$row['username']."\" /> ".$row['username'];	//ATTENZIONE AL PATH! DA CAMBIARE IN CASO DI MODIFICHE
 						}
 						if ($row['nome']!=NULL || $row['cognome']!=NULL) {
 							$users=$users." - ".$row['nome']." ".$row['cognome'];
@@ -113,7 +113,7 @@ function getGruppi() {
 		if ($connessione->connect_errno) {
 			throw new Exception("Connessione fallita: ".$connessione->connect_error.".");
 		} else {
-			$query="SELECT idGruppo, nome, immagine, provincia, dataIscrizione FROM Gruppi WHERE idGruppo NOT IN (SELECT g.idGruppo FROM Gruppi g JOIN Formazioni f ON g.idGruppo=f.gruppo JOIN Conoscenze c ON f.ruolo=c.idConoscenza WHERE c.utente!=\"".$_SESSION['username']."\") ORDER BY dataIscrizione DESC LIMIT 5;";	//CREAZIONE DELLA QUERY
+			$query="SELECT idGruppo, nome, immagine, provincia, dataIscrizione FROM Gruppi WHERE idGruppo NOT IN (SELECT g.idGruppo FROM Gruppi g JOIN Formazioni f ON g.idGruppo=f.gruppo JOIN Conoscenze c ON f.ruolo=c.idConoscenza WHERE c.utente=\"".$_SESSION['username']."\") ORDER BY dataIscrizione DESC LIMIT 5;";	//CREAZIONE DELLA QUERY
 			if (!$result=$connessione->query($query)) {
 				echo "Query non valida: ".$connessione->error.".";
 			} else {
@@ -121,9 +121,9 @@ function getGruppi() {
 					while ($row=$result->fetch_array(MYSQLI_ASSOC)) {
 						if ($row['immagine']==NULL) {
 							$row['immagine']="defaultBand.png";		//DA CAMBIARE IN CASO DI MODIFICHE
-							$bands=$bands."<li class=\"elementResult\"><a href=\"profiloBand/profiloBand.php?idGruppo=".$row['idGruppo']."&page=index\"><img class=\"listImage\" src=\"images/site/".$row['immagine']."\" alt=\"Immagine di ".$row['nome']."\" /> ".$row['nome'];	//ATTENZIONE AL PATH! DA CAMBIARE IN CASO DI MODIFICHE
+							$bands=$bands."<li class=\"elementResult\"><a href=\"profiloGruppo/profiloGruppo.php?idGruppo=".$row['idGruppo']."&amp;page=index\"><img class=\"listImage\" src=\"images/site/".$row['immagine']."\" alt=\"Immagine di ".$row['nome']."\" /> ".$row['nome'];	//ATTENZIONE AL PATH! DA CAMBIARE IN CASO DI MODIFICHE
 						} else {
-							$bands=$bands."<li class=\"elementResult\"><a href=\"profiloBand/profiloBand.php?idGruppo=".$row['idGruppo']."&page=index\"><img class=\"listImage\" src=\"images/bands/".$row['immagine']."\" alt=\"Immagine di ".$row['nome']."\" /> ".$row['nome'];	//ATTENZIONE AL PATH! DA CAMBIARE IN CASO DI MODIFICHE
+							$bands=$bands."<li class=\"elementResult\"><a href=\"profiloGruppo/profiloGruppo.php?idGruppo=".$row['idGruppo']."&amp;page=index\"><img class=\"listImage\" src=\"images/bands/".$row['immagine']."\" alt=\"Immagine di ".$row['nome']."\" /> ".$row['nome'];	//ATTENZIONE AL PATH! DA CAMBIARE IN CASO DI MODIFICHE
 						}
 						if ($row['provincia']!=NULL) {
 							$bands=$bands." (".$row['provincia'].")";
@@ -217,7 +217,7 @@ if (!isset($_SESSION['started'])) {	//APPENA ARRIVATO IN HOME
 			echo $page;
 		} else {	//LOGIN ANDATO A BUON FINE -> CREAZIONE DELLA PAGINA DI HOME PER UTENTE LOGGATO
 			$page="";
-			$page=$page.Menu::getMenu(array("Home", "<a href='modificaProfilo/modificaProfilo.php'>Modifica Profilo</a>", "<a href='cercaUtenti/cercaUtenti.php'>Cerca Utenti</a>", "<a href='cercaGruppi/cercaGruppi.php'>Cerca Gruppi</a>", "<a href='gestioneBand/gestioneBand.php'>I Miei Gruppi</a>"));	//CREAZIONE DEL MENU
+			$page=$page."<div class=\"nav\">".Menu::getMenu(array("Home", "<a href='settings/index.php'>Modifica Profilo</a>", "<a href='cercaUtenti/index.php'>Cerca Utenti</a>", "<a href='cercaGruppi/index.php'>Cerca Gruppi</a>", "<a href='gestioneBand/gestioneBand.php'>I Miei Gruppi</a>", "<a href='registrazioneGruppo/registrazioneGruppo.php'>Nuovo Gruppo</a>"))."</div>";//!!!!!!!!!!!!!!!!!!!!!DA TOGLIERE LINK A REGISTRAZIONE GRUPPO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!	//CREAZIONE DEL MENU
 			$page=$page.file_get_contents(realpath(dirname(__FILE__))."/home/homeLog.txt");
 			$page=str_replace('<utentiSuggeriti />', getUtenti(), $page);
 			$page=str_replace('<gruppiSuggeriti />', getGruppi(), $page);
@@ -226,7 +226,7 @@ if (!isset($_SESSION['started'])) {	//APPENA ARRIVATO IN HOME
 	} else {
 		if (isset($_SESSION['username'])) {
 			$page="";
-			$page=$page.Menu::getMenu(array("Home", "<a href='modificaProfilo/modificaProfilo.php'>Modifica Profilo</a>", "<a href='cercaUtenti/cercaUtenti.php'>Cerca Utenti</a>", "<a href='cercaGruppi/cercaGruppi.php'>Cerca Gruppi</a>", "<a href='gestioneBand/gestioneBand.php'>I Miei Gruppi</a>"));	//CREAZIONE DEL MENU
+			$page=$page."<div class=\"nav\">".Menu::getMenu(array("Home", "<a href='settings/index.php'>Modifica Profilo</a>", "<a href='cercaUtenti/index.php'>Cerca Utenti</a>", "<a href='cercaGruppi/index.php'>Cerca Gruppi</a>", "<a href='gestioneBand/gestioneBand.php'>I Miei Gruppi</a>", "<a href='registrazioneGruppo/registrazioneGruppo.php'>Nuovo Gruppo</a>"))."</div>";//!!!!!!!!!!!!!!!!!!!!!DA TOGLIERE LINK A REGISTRAZIONE GRUPPO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!	//CREAZIONE DEL MENU
 			$page=$page.file_get_contents(realpath(dirname(__FILE__))."/home/homeLog.txt");
 			$page=str_replace('<utentiSuggeriti />', getUtenti(), $page);
 			$page=str_replace('<gruppiSuggeriti />', getGruppi(), $page);
@@ -245,3 +245,4 @@ echo '</body>';
 echo '</html>';
 
 ?>
+
