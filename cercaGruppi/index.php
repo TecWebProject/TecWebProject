@@ -117,6 +117,7 @@ $stmt = $conn->prepare("SELECT DISTINCT gr.idGruppo, gr.nome, gr.provincia, gr.i
 );
 
 $risultati = '';
+$tot_gruppi = 0;
 if ($stmt) {
 	$stmt->bind_param('ss', $_GET['provincia'], $_GET['genere']);
 	$stmt->execute();
@@ -130,7 +131,7 @@ if ($stmt) {
 			if ($gruppi[$g]['immagine'] != '' && file_exists('../images/bands/' . $gruppi[$g]['immagine'])) {
 				$img = $gruppi[$g]['immagine'];
 			}
-			$risultati .= '<li class="elementResult"><a href="../profiloGruppo/profiloGruppo.php?idGruppo=' . $gruppi[$g]['idGruppo'] . '&page=ricerca&num=' . $curr_page . '">' . '<img class="listImage" src="' . $img . '" alt="Immagine di ' . $gruppi[$g]['idGruppo'] . '" />' . $gruppi[$g]['nome'] . ' (' . $gruppi[$g]['provincia'] . ')</a></li>';
+			$risultati .= '<li class="elementResult"><a href="../profiloGruppo/profiloGruppo.php?idGruppo=' . $gruppi[$g]['idGruppo'] . '&amp;page=ricerca&amp;num=' . $curr_page . '">' . '<img class="listImage" src="' . $img . '" alt="Immagine di ' . $gruppi[$g]['idGruppo'] . '" />' . $gruppi[$g]['nome'] . ' (' . $gruppi[$g]['provincia'] . ')</a></li>';
 		}
 		unset($gruppi);
 		$risultati .= '</ul>';
@@ -151,12 +152,12 @@ $file = str_replace('<risultati />', $risultati, $file);
 $tot_pages = ceil($tot_gruppi / $per_page); # numero totale pagine
 $paginazione = '';
 if ($tot_pages > 0) {
-	$precedente = '<li>precedente</li>';
+	$precedente = '<span class="notClickable">precedente</span>';
 	if ($curr_page > 1)
-		$precedente = '<li><a href="index.php?num=' . ($curr_page - 1) . '">precedente</a></li>';
-	$successiva = '<li>successiva</li>';
+		$precedente = '<a href="index.php?num=' . ($curr_page - 1) . '">precedente</a>';
+	$successiva = '<span class="notClickable">successiva</span>';
 	if ($curr_page < $tot_pages)
-		$successiva = '<li><a href="index.php?num=' . ($curr_page + 1) . '">successiva</a></li>';
+		$successiva = '<a href="index.php?num=' . ($curr_page + 1) . '">successiva</a>';
 	$paginazione = $precedente . $successiva;
 }
 $file = str_replace('<paginazione />', $paginazione, $file);

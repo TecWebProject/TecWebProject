@@ -7,41 +7,42 @@
 
 	<div id="content">
 		<h1>Ricerca Utenti</h1>
-		<form action="index.php">
-			<fieldset class="filtri">
-				<legend>Filtri:</legend>
-				Strumento:
+		<form action="index.php" class="filtri">
+			<fieldset>
+				<legend>Filtri</legend>
+
+				<p>Strumento:
 				<select name="strumento">
 					<option value="">Seleziona strumento</option>
 					<strumenti />
-				</select><br />
+				</select></p>
 
-				Regione:
+				<p>Regione:
 				<select id="modSelectRegione" name="regione" onchange="showProvince(this.value)">
 					<option value="">Seleziona regione</option>
 					<regioni />
-				</select><br />
+				</select></p>
 
-				Provincia:
+				<p>Provincia:
 				<select id="modSelectProvincia" name="provincia">
 					<option value="">Seleziona provincia</option>
 					<province />
-				</select><br />
+				</select></p>
 
-				Genere:
+				<p>Genere:
 				<select name="genere">
 					<option value="">Seleziona genere</option>
 					<generi />
-				</select><br />
+				</select></p>
 
-				<input type="submit" value="Cerca utenti" />
+				<input type="submit" class="invio" value="Cerca utenti" />
 			</fieldset>
 		</form>
-		<risultati />
+		<div class="risultati">
+			<risultati />
+		</div>
 		<div id="paginazione">
-			<ul>
-				<paginazione />
-			</ul>
+			<paginazione />
 		</div>
 	</div>
 

@@ -1,42 +1,57 @@
-/* PER TUTTE LE PAGINE */
-#html, body {
+/* per tutte le pagine */
+html, body {
 	margin: 0;
 	padding: 0;
-	font-family: Verdana, Arial, Helvetica, sans-serif; /* TWITTER USA: "Helvetica Neue",Helvetica,Arial,sans-serif; GITLAB USA: "Source Sans Pro", sans-serif; */
+	font-family: Verdana, Arial, Helvetica, sans-serif; /* Twitter usa: "Helvetica Neue", Helvetica, Arial, sans-serif; Gitlab usa: "Source Sans Pro", sans-serif; */
 	font-size: 0.9em;
 	max-width: 150em;
 }
 
-#header { /* MIO HEADER */
+
+
+/* header */
+#header {
 	background-color: #004;
 	color: white;
 	padding: 1em;
 	text-align: center;
 }
 
-#header h1 {  /* MIO HEADER */
-	/* color: ; color DA AGGIUNGERE */
+#header h1 {
 	font-size: 3.4em;
 	margin: 0.2em;
 	padding: 0;
 }
 
+
+
+/* contenuto principale */
 #content {
 	width: 100%;
 	font-size: 0.9em;
 	padding-top: 1em;
 	padding-bottom: 0.5em;
+	text-align: center;
 }
 
-/* CSS PER FOOTER */
-.footerContent {
+
+
+/* footer */
+#footer {
 	text-align: center;
 	display: inline-block;
 	width: 70%;
 	max-width: 100%;
 	padding-left: 15%;
 	padding-right: 15%;
+	margin-top: 5em;
 }
+
+#footer img {
+	margin: 1em;
+}
+
+
 
 .paginaPrec {
 	margin: 0;
@@ -45,7 +60,10 @@
 	font-size: 1.2em;
 }
 
-.report { /* PER NOTIZIE SU SCRIPT PHP */
+
+
+/* per notizie su script php */
+.report {
 	margin: 0;
 	padding: 0;
 	text-align: center;
@@ -56,33 +74,34 @@
 	padding: 0;
 }
 
-.report ul {  /* PER NOTIZIE SU SCRIPT PHP */
+.report ul {
 	list-style: none;
 	margin: 0;
 	padding-left: 0.4em;
 	color: red;
 }
 
-.errRep { /* PER NOTIZIE SU SCRIPT PHP */
+.errRep {
 	color: red;
 }
 
 
-.okRep {  /* PER NOTIZIE SU SCRIPT PHP */
+.okRep {
 	color: green;
 }
 
+
+
+/* pulsante di logout */
 .logout {
 	text-align: right;
 	padding-left: 8%;
 	padding-right: 8%;
 }
 
-/* PAGINA HOME */
-.homeReg {  /* VALIDO PER HOME E PAGINA DI REGISTRAZIONE */
-	text-align: center;
-}
 
+
+/* home e pagina di registrazione */
 #login {
 	width: 20em;
 	display: inline-block;
@@ -95,7 +114,7 @@
 	margin: 0em 0em 0em 3.2em;
 }
 
-#login fieldset, .filtri {
+#login fieldset {
 	border: none;
 }
 
@@ -107,15 +126,16 @@
 	margin-left: 0.1em;
 }
 
-#username, #password {    /* VALIDI PER TUTTI I FORM AVENTI I CAMPI USERNAME E PASSWORD */
+#username, #password { /* per tutti i form aventi i campi username e password */
 	text-align: left;
 	width: 15em;
 	font-size: 1.2em;
 }
 
-#invio {  /* VALIDO PER TUTTI I SUBMIT AVENTI id="invio" */
+.invio { /* valido per tutti i submit aventi class="invio" */
 	margin-top: 1em;
-	padding: 0.6em 5.9em 0.6em 5.9em;
+	padding: 0.6em 0;
+	width: 100%;
 	font-size: 1.2em;
 }
 
@@ -124,40 +144,33 @@
 	position: relative;
 	top: -7em;
 	left: 0.4em;
-	text-align: center;
 	margin: 1em;
 }
 
-/* LINK ALLA PAGINA DI REGISTRAZIONE */
+/* link alla pagina di registrazione */
 #registrati {
 	display: inline-block;
 	text-align: center;
 	font-size: 1.4em;
-	color: #000000;
-	background-color: #70c1ff;
-	padding: 0.8em 4.4em 0.8em 4.4em;
+	color: black;
+	background-color: #70C1FF;
+	padding: 0.8em 4.4em;
 	border-radius: 0.4em;
 	text-decoration-line: none;
 }
 
-#registrati:visited {
-	color: #000000;
-	background-color: #70c1ff;
+#registrati:visited, #registrati:active {
+	background-color: #70C1FF;
 }
 
 #registrati:hover {
-	color: #000000;
-	background-color: #5eadea;
+	background-color: #5EADEA;
 }
 
-#registrati:active {
-	color: #000000;
-	background-color: #70c1ff;
-}
+
 
 #testo {
 	font-size: 1.4em;
-	text-align: center;
 }
 
 #testo h2 {
@@ -211,68 +224,47 @@
 	font-size: 1.2em;
 }
 
-/* LINK ALLA PAGINA DI RICERCA UTENTI */
-#cercaUtenti {
+
+
+/* link dalla home alle pagine di ricerca utenti/gruppi */
+#cercaUtenti, #cercaBand {
 	display: inline-block;
 	text-align: center;
 	font-size: 1.4em;
-	color: #000000;
-	background-color: #70c1ff;
+	color: black;
+	background-color: #70C1FF;
 	margin: 0em 0.8em;
-	padding: 0.8em 4.3em 0.8em 4.3em;
+	padding: 0.8em 4.3em;
+	min-width: 6em;
 	border-radius: 0.4em;
 	text-decoration-line: none;
 }
 
-#cercaUtenti:visited {
-	color: #000000;
-	background-color: #70c1ff;
+#cercaUtenti:visited, #cercaBand:visited {
+	background-color: #70C1FF;
 }
 
-#cercaUtenti:hover {
-	color: #000000;
-	background-color: #5eadea;
+#cercaUtenti:hover, #cercaBand:hover {
+	background-color: #5EADEA;
 }
 
-#cercaUtenti:active {
-	color: #000000;
-	background-color: #70c1ff;
+#cercaUtenti:active, #cercaBand:active {
+	background-color: #70C1FF;
 }
 
-/* LINK ALLA PAGINA DI RICERCA GRUPPI */
-#cercaBand {
-	display: inline-block;
-	text-align: center;
-	font-size: 1.4em;
-	color: #000000;
-	background-color: #70c1ff;
-	margin: 0em 0.8em;
-	padding: 0.8em 4.4em 0.8em 4.4em;
-	border-radius: 0.4em;
-	text-decoration-line: none;
-}
 
-#cercaBand:visited {
-	color: #000000;
-	background-color: #70c1ff;
-}
 
-#cercaBand:hover {
-	color: #000000;
-	background-color: #5eadea;
-}
-
-#cercaBand:active {
-	color: #000000;
-	background-color: #70c1ff;
-}
-
-/* PER LISTE UTENTI E BAND SUGGERITE (PAGINA HOME DI UTENTE LOGGATO) */
-.suggeriti {
+/* per liste utenti/gruppi suggerite dalla home o trovate dalle ricerche */
+.suggeriti, .risultati {
 	text-align: left;
-	margin: 0;
-	padding-left: 4%;
-	padding-right: 4%;
+	padding: 0 4%;
+}
+
+.risultati {
+	margin-top: 2em;
+}
+
+.suggeriti {
 	float: left;
 }
 
@@ -284,7 +276,7 @@
 }
 
 .elementResult {
-	margin: 0;
+	max-width: 40em;
 	padding: 0.4em;
 	border: 1px solid #ddd;
 }
@@ -304,24 +296,26 @@
 	top: 0.1em;
 }
 
-/* PAGINA REGISTRAZIONE */
+
+
+/* pagina di registrazione e filtri per ricerche utenti/gruppi */
 #invitoReg {
 	margin: 0.2em 0em 0.8em 0em;
 }
 
-#iscrizione {
+#iscrizione, .filtri {
 	width: 20em;
 	display: inline-block;
 	text-align: left;
 	margin: 1em;
 }
 
-#iscrizione legend {
+#iscrizione legend, .filtri legend {
 	font-size: 1.2em;
 	margin: 0em 0em 0em 3.4em;
 }
 
-#iscrizione fieldset {
+#iscrizione fieldset, .filtri fieldset {
 	border: none;
 }
 
@@ -333,7 +327,7 @@
 	margin-left: 0.1em;
 }
 
-#confermaPassword, #dataNascita, #email { /* VALIDI PER TUTTI I FORM AVENTI I CAMPI CONFERMAPASSWORD, DATANASCITA E EMAIL */
+#confermaPassword, #dataNascita, #email { /* validi per tutti i form aventi i campi confermaPassword, dataDascita e email */
 	text-align: left;
 	width: 15em;
 	font-size: 1.2em;
@@ -351,12 +345,10 @@
 
 /* menù */
 #menu_check {
-==== BASE ====
   position: absolute;
   top: 0;
   right: 0;
   display: none;
-==== BASE ====
 }
 
 #menu_check:checked + div {
@@ -411,12 +403,25 @@
 	color: rgba(255, 255, 255, 0.8);
 }
 
-.content {
-	margin: 0 3em;
+
+
+/* pagina di modifica profilo */
+#modSaveButton {
+	margin: 0.5em 0.5em;
+	float: right;
 }
 
-.breadcrump {
-	margin: 0 3em;
+.modCorrectEntry {
+	height: 2em;
+	width: 2em;
+	display: inline;
+	position: relative;
+	vertical-align: middle;
+	margin: 0 1em;
+}
+
+.modErrorEntry {
+	color: red;
 }
 
 #modSaveButton {
@@ -440,15 +445,44 @@
 
 
 /* form ricerca utenti/gruppi */
-#content select {
+.filtri {
+	min-width: 24em;
+}
+
+.filtri select {
+	margin-top: 0.2em;
 	margin-bottom: 1em;
+}
+
+#paginazione {
+	margin-top: 2em;
+}
+
+#paginazione span.notClickable, #paginazione a {
+	display: inline-block;
+	font-size: 1.4em;
+	color: black;
+	background-color: #70C1FF;
+	margin: 0em 0.8em;
+	padding: 0.8em 4.4em;
+	min-width: 6em;
+	border-radius: 0.4em;
+}
+
+#paginazione a {
+	color: black;
+	text-decoration-line: none;
+}
+
+#paginazione a:hover {
+	background-color: #5EADEA;
 }
 
 
 
 /* 404 */
 #header .notFound {
-	color: #70c1ff;
+	color: #70C1FF;
 }
 
 #content.notFound h1 {
@@ -459,30 +493,4 @@
 	text-align: center;
 	width: 90%;
 	margin: auto;
-}
-
-.content {
-  margin: 0 3em;
-}
-
-.breadcrump {
-  margin: 0 3em;
-}
-
-#modSaveButton {
-  margin: 0.5em 0.5em;
-  float: right;
-}
-
-.modCorrectEntry {
-  height: 2em;
-  width: 2em;
-  display: inline;
-  position: relative;
-  vertical-align: middle;
-  margin: 0 1em;
-}
-
-.modErrorEntry {
-  color: red;
 }

@@ -12,7 +12,7 @@
 								<label for="password"><span xml:lang="en" lang="en">Password</span></label>
 								<input type="password" name="password" id="password" title="Password" maxlength="45" tabindex="2"/>
 							</div>
-							<input type="submit" id="invio" value="Accedi" tabindex="3"/>
+							<input type="submit" class="invio" value="Accedi" tabindex="3"/>
 						</fieldset>
 					</form>
 				</div>
