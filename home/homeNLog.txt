@@ -54,7 +54,7 @@
 			</div>
 
 			<div class="homeReg">
-				<a href="cercaUtenti/cercaUtenti.php" id="cercaUtenti" tabindex="5">Cerca Utenti</a>
-				<a href="cercaGruppi/cercaGruppi.php" id="cercaBand" tabindex="6">Cerca <span xml:lang="en" lang="en">Band</span></a>
+				<a href="cercaUtenti/index.php" id="cercaUtenti" tabindex="5">Cerca Utenti</a>
+				<a href="cercaGruppi/index.php" id="cercaBand" tabindex="6">Cerca <span xml:lang="en" lang="en">Band</span></a>
 			</div>
 		</div>
