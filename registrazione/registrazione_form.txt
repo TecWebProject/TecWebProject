@@ -25,7 +25,7 @@
 						<label for="dataNascita">Data di nascita (gg/mm/aaaa) *</label>
 						<input type="text" name="dataNascita" id="dataNascita" title="Data di nascita" maxlength="10" onblur="checkDataNascita();" onfocus="delErrDataNascita();" tabindex="5"/>
 					</div>
-					<input type="submit" id="invio" value="Iscriviti" tabindex="6"/>
+					<input type="submit" class="invio" value="Iscriviti" tabindex="6"/>
 				</fieldset>
 			</form>
 				<p class="legendaForm">* : Campo obbliatorio</p>
