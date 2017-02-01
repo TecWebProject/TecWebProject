@@ -8,6 +8,7 @@ html, body {
 }
 
 
+
 /* header */
 #header {
 	background-color: #004;
@@ -23,6 +24,7 @@ html, body {
 }
 
 
+
 /* contenuto principale */
 #content {
 	width: 100%;
@@ -35,13 +37,14 @@ html, body {
 
 
 /* footer */
-.footerContent {
+#footer {
 	text-align: center;
 	display: inline-block;
 	width: 70%;
 	max-width: 100%;
 	padding-left: 15%;
 	padding-right: 15%;
+	margin-top: 5em;
 }
 
 
