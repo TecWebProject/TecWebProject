@@ -101,8 +101,10 @@
 			}
 			$page=str_replace("<strumentiSuonati />", $strumenti, $page);
 			
-			//trova i gruppi ai quali appartiene l'utente
-			$query="SELECT G.nome, G.immagine FROM Conoscenze C JOIN Formazioni F ON C.idConoscenza=F.ruolo JOIN Gruppi G ON F.gruppo=G.idGruppo WHERE C.utente=\"".$_REQUEST["username"]."\";";
+			
+			
+			//trova i gruppi ai quali appartiene l'utente, e i link alle pagine profilo delle band da costruire
+			$query="SELECT G.nome, G.immagine, G.idGruppo FROM Conoscenze C JOIN Formazioni F ON C.idConoscenza=F.ruolo JOIN Gruppi G ON F.gruppo=G.idGruppo WHERE C.utente=\"".$_REQUEST["username"]."\";";
 			$gruppi="";
 			if (!$result=$connessione->query($query)) {
 					echo "Query non valida: ".$connessione->error.".";
@@ -112,20 +114,21 @@
 							while ($row=$result->fetch_array(MYSQLI_ASSOC)) {
 								if ($row['immagine']==NULL) {
 										$row['immagine']="defaultBand.png";
-										$img="<img id=\"fotoprofilo\"' src=\"../images/site/".$row['immagine']."\" alt=\"Immagine di ".$row['nome']."\" />";
+										$gruppi=$gruppi."<li class=\"elementResult\"><a href=\"profiloBand/profiloBand.php?idGruppo=".$row['idGruppo']."&page=index\"><img class=\"listImage\" src=\"images/site/".$row['immagine']."\" alt=\"Immagine di ".$row['nome']."\" /> ".$row['nome'];
 								} else {
-										$img="<img id=\"fotoprofilo\"' src=\"../images/bands/".$row['immagine']."\" alt=\"Immagine di ".$row['nome']."\" />";
+										$gruppi=$gruppi."<li class=\"elementResult\"><a href=\"profiloBand/profiloBand.php?idGruppo=".$row['idGruppo']."&page=index\"><img class=\"listImage\" src=\"images/site/".$row['immagine']."\" alt=\"Immagine di ".$row['nome']."\" /> ".$row['nome'];
 								}						
-								$gruppi=$gruppi."<li>".$row['nome']."</li>";
+								$gruppi=$gruppi."</a></li>";
 							}
 							$result->free();
 							$gruppi=$gruppi."</ul>";
-							$page=str_replace("<immaginiGruppi />", $img, $page);
 					}
 					else { //altrimenti stampa
 						$gruppi=$gruppi."<p>Non è membro di nessuna band.</p>";}
 			}
 			$page=str_replace("<nomeGruppi />", $gruppi, $page);
+			
+			
 			
 			//cerca e stampa i contatti utente (è impossibile che <ul> sia vuoto perchè il campo mail è NOT NULL)
 			$query="SELECT utente, tipoContatto, contatto FROM ContattiUtenti WHERE utente=\"".$_REQUEST["username"]."\";";
