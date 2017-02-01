@@ -1,6 +1,6 @@
 <?php
 
-require_once(realpath(dirname(__FILE__))."/paths.php");
+require_once(realpath(dirname(__FILE__)) . "/paths.php");
 
 /*
 	Ritorna l'array delle stringhe dell'head delle pagine in base
@@ -17,19 +17,21 @@ require_once(realpath(dirname(__FILE__))."/paths.php");
 */
 
 // ESEMPIO
-//var_dump(getArray(array('Titolo' => "PASS TODO Nome Sito", 'DescrizioneBreve' => "PASS TODO Descrizione breve", 'Descrizione' => "PASS TODO Descrizione pagina", 'Author' => array("Derek Toninato","Filippo Berto", "Francesco Pezzuto", "Giorgio Giuffrè"), 'Keywords' => array("PASS TODO KEYWORD 1","PASS TODO KEYWORD 2","PASS TODO KEYWORD 3"), 'BookmarkIcon' => 'icon.png', 'Stylesheets' => array("style.css"), 'Extra' => array( "<link type='text/css' rel='stylesheet' href='lib/css/styleStampa.css' />", "<link type='text/css' rel='stylesheet' href='lib/css/styleSmartphone.css' />" ))));
+//var_dump(getArray(array('Titolo' => "PASS TODO Nome Sito", 'DescrizioneBreve' => "PASS TODO Descrizione breve", 'Descrizione' => "PASS TODO Descrizione pagina", 'Author' => array("Derek Toninato","Filippo Berto", "Francesco Pezzuto", "Giorgio Giuffrè"), 'Keywords' => array("PASS TODO KEYWORD 1","PASS TODO KEYWORD 2","PASS TODO KEYWORD 3"), 'BookmarkIcon' => 'icon.png', 'Stylesheets' => array("style.css"), 'Extra' => array( "<link type='text/css' rel='stylesheet' href='lib/css/styleStampa.css'></link>", "<link type='text/css' rel='stylesheet' href='lib/css/styleSmartphone.css'></link>" ))));
 
-class Start {
-	private static $contestoDefault = array(
-		'Titolo' => "BandBoard",
-		'Author' => array("Derek Toninato", "Filippo Berto", "Francesco Pezzuto", "Giorgio Giuffrè"),
+class Start
+{
+    private static $contestoDefault = array(
+        'Titolo' => "BandBoard",
+        'Author' => array("Derek Toninato", "Filippo Berto", "Francesco Pezzuto", "Giorgio Giuffrè"),
         'BookmarkIcon' => 'site/logo.png'
-	);
+    );
 
-	# fornisce il Doctype
-	public static function getDoctype() {
-		return '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">';
-	}
+    # fornisce il Doctype
+    public static function getDoctype()
+    {
+        return '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">';
+    }
 
     # fornisce l'intestazione
     public static function getHead($contesto)
@@ -64,7 +66,7 @@ class Start {
         $OpenHead = "<head>";
 
         # CHARSET
-        $Charset = "<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />";
+        $Charset = "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>";
 
         # TITLE
         $TagTitle = Start::getTitle($contesto);
@@ -82,7 +84,7 @@ class Start {
         $MetaKeywords = Start::getMetaKeywords($contesto);
 
         # META name="viewport"
-        $MetaViewport = "<meta name='viewport' content='width=device-width, initial-scale=1.0' />";
+        $MetaViewport = "<meta name='viewport' content='width=device-width, initial-scale=1.0'></meta>";
 
         # ICONA BOOKMARK
         $BookmarkIcon = Start::getIcon($contesto);
@@ -125,7 +127,7 @@ class Start {
             return $title;
         }
 
-        return "<meta name='title' content='" . $title . "' />";
+        return "<meta name='title' content='" . $title . "'></meta>";
     }
 
     # Genera il tag <meta name="description">
@@ -139,7 +141,7 @@ class Start {
             return $description;
         }
 
-        return "<meta name='description' content='" . $description . "' />";
+        return "<meta name='description' content='" . $description . "'></meta>";
     }
 
     # Genera il tag <meta name="author">
@@ -151,10 +153,10 @@ class Start {
 
         if (!is_array($authors)) {
             # String
-            return "<meta name='author' content='" . $authors . "' />";
+            return "<meta name='author' content='" . $authors . "'></meta>";
         } elseif (count($authors) > 0) {
             # Array of strings
-            return "<meta name='author' content='" . implode(", ", $authors) . "' />";
+            return "<meta name='author' content='" . implode(", ", $authors) . "'></meta>";
         } else {
             # None
             error_log("Missing Author");
@@ -168,10 +170,10 @@ class Start {
         $keywords = isset($contesto) && isset($contesto['Keywords']) ? $contesto['Keywords'] : (isset(Start::$contestoDefault) && isset(Start::$contestoDefault['Keywords']) ? Start::$contestoDefault['Keywords'] : null);
         if (!is_array($keywords)) {
             # String
-            return "<meta name='keywords' content='" . $keywords . "' />";
+            return "<meta name='keywords' content='" . $keywords . "'></meta>";
         } elseif (count($keywords) > 0) {
             # Array of strings
-            return "<meta name='keywords' content='" . implode(", ", $keywords) . "' />";
+            return "<meta name='keywords' content='" . implode(", ", $keywords) . "'></meta>";
         } else {
             # None
             error_log("Missing Keywords");
@@ -218,7 +220,7 @@ class Start {
                 error_log("Icon $iconName missing");
                 return null;
             } else {
-                return "<link rel='icon' type='" . $iconType . "' href='" . $relativePathToImages . $iconName . "' />";
+                return "<link rel='icon' type='" . $iconType . "' href='" . $relativePathToImages . $iconName . "'></link>";
             }
         } else {
             return null;
@@ -268,7 +270,7 @@ class Start {
                 } else {
 
                     # File found
-                    array_push($results, "<link type='text/css' rel='stylesheet' href='" . $relativePathToCSS . $fileName . "' />");
+                    array_push($results, "<link type='text/css' rel='stylesheet' href='" . $relativePathToCSS . $fileName . "'></link>");
                 }
             }
         }
