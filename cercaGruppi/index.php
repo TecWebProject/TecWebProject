@@ -17,8 +17,9 @@ $start = Start::getHead(
 		'DescrizioneBreve' => 'Cerca gruppi in BandBoard',
 		'Descrizione' => 'Cerca gruppi in BandBoard, per generi musicali, province e genere.',
 		'Keywords' => array('BandBoard', 'cerca', 'gruppi', 'musicisti'),
-		'Stylesheets' => array('style.css', 'mobile.css'),
-		'Extra' => array('<script type="text/javascript" src="../lib/js/province.js"></script>')
+		'BookmarkIcon' => 'site/logo.png',
+		'Stylesheets' => array('style.css'),
+		'Extra' => array('<link rel="stylesheet" media="handheld, screen and (max-width:480px), only screen and (max-device-width:480px)" href="../lib/css/style_mobile.css" type="text/css" />', '<script type="text/javascript" src="../lib/js/province.js"></script>')
 	)
 );
 $file = str_replace('<html>', $start, $file);
@@ -34,7 +35,7 @@ $file = str_replace('<header />', $header, $file);
 
 # costruisci menù
 require_once '../lib/php/menu.php';
-if (isset($_SESSION['username'])) {
+if (isset($_SESSION['username'])) { # utente loggato
 	$menu = Menu::getMenu(
 		array(
 			'<a href="../index.php" xml:lang="en" lang="en">Home</a>',
@@ -44,13 +45,12 @@ if (isset($_SESSION['username'])) {
 			'<a href="../gestioneGruppi/index.php">I miei Gruppi</a>'
 		)
 	);
-} else {
+} else { # utente non loggato
 	$menu = Menu::getMenu(
 		array(
 			'<a href="../index.php" xml:lang="en" lang="en">Home</a>',
 			'<a href="../cercaUtenti/index.php">Cerca Utenti</a>',
-			'Cerca Gruppi',
-			'<a href="../gestioneGruppi/index.php">I miei Gruppi</a>'
+			'Cerca Gruppi'
 		)
 	);
 }
