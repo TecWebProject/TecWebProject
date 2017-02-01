@@ -47,6 +47,10 @@ html, body {
 	margin-top: 5em;
 }
 
+#footer img {
+	margin: 1em;
+}
+
 
 
 .paginaPrec {
@@ -88,6 +92,7 @@ html, body {
 
 
 
+/* pulsante di logout */
 .logout {
 	text-align: right;
 	padding-left: 8%;
@@ -97,10 +102,6 @@ html, body {
 
 
 /* home e pagina di registrazione */
-.homeReg {
-	text-align: center;
-}
-
 #login {
 	width: 20em;
 	display: inline-block;
@@ -142,7 +143,6 @@ html, body {
 	position: relative;
 	top: -7em;
 	left: 0.4em;
-	text-align: center;
 	margin: 1em;
 }
 
@@ -170,7 +170,6 @@ html, body {
 
 #testo {
 	font-size: 1.4em;
-	text-align: center;
 }
 
 #testo h2 {
