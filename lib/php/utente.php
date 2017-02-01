@@ -6,9 +6,6 @@
 
 include_once "query_server.php";
 
-$span="paperino";
-$numeroCriptazioni=100;
-
 //testCreazione();
 
 function testCreazione() {
@@ -294,7 +291,8 @@ class Utente {
 	}
 
 	public static function cript($value) {
-		global $span, $numeroCriptazioni;
+	    $span="paperino";
+        $numeroCriptazioni=100;
 		for ($i=0; $i<$numeroCriptazioni; $i++) {
 			$value=md5($value.$span);
 		}
