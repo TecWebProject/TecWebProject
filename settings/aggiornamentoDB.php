@@ -69,9 +69,30 @@ class AggiornamentoDB
                         $stmt->execute();
 
                         break;
+                    case "bio":
+
+                        $stmt = $mysqli->prepare("UPDATE `Utenti` SET `descrizione` = ? WHERE `Utenti`.`username` = ?");
+                        $stmt->bind_param("ss", $campo, $dati['username']);
+                        $stmt->execute();
+
+                        break;
+                    case "provincia":
+                        
+                        $stmt = $mysqli->prepare("UPDATE `Utenti` SET `provincia` = ? WHERE `Utenti`.`username` = ?");
+                        $stmt->bind_param("ss", $campo, $dati['username']);
+                        $stmt->execute();
+
+                        break;
+                    case "immagineProfilo":
+                        $stmt = $mysqli->prepare("UPDATE `Utenti` SET `immagine` = ? WHERE `Utenti`.`username` = ?");
+                        $stmt->bind_param("ss", $campo, $dati['username']);
+                        $stmt->execute();
+
+                        break;
                     default:
                         $mysqli->rollback();
                         throw new Exception("Invalid content");
+
                         break;
                 }
             }
