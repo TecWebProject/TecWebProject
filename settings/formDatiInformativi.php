@@ -46,14 +46,8 @@ class FormDatiInformativi
 
             $dati['username'] = $_SESSION['username'];
 
-
             // Carica immagine profilo
             try {
-
-                var_dump($_POST);
-                echo "<p>";
-                var_dump($_FILES);
-                echo "</p>";
 
                 if (empty($_FILES)) {
                     throw new Exception("No file passed");
@@ -63,54 +57,58 @@ class FormDatiInformativi
                     throw new Exception("Image empty");
                 }
 
-                if (!getimagesize($_FILES['profilePic']['tmp_name'])) {
+                $img = $_FILES['profilePic']['tmp_name'];
+
+                if (($imageInfo = getimagesize($img)) === false) {
                     throw new Exception("Not an image");
                 }
 
-                $uploadTarget = Paths::getRelativePath(
+                $uploadDirectory = realpath(dirname(__FILE__)) . "/../images/users";
+
+                $relativePathUploadDirectory = Paths::getRelativePath(
                     realpath(dirname(__FILE__)),
-                    realpath(dirname(__FILE__)) . "/../images/users"
+                    $uploadDirectory
                 );
-                $fileTarget = $uploadTarget . $dati['username'] . ".jpg";
+                $fileTarget = $relativePathUploadDirectory . $dati['username'];
 
-                $imageFormat = pathinfo($_FILES['profilePic']['name'], PATHINFO_EXTENSION);
-                $imageSize = getimagesize($_FILES['profilePic']['tmp_name']);
+                $imageWidth = $imageInfo[0];
+                $imageHeight = $imageInfo[1];
 
-                switch (strtolower($imageFormat)) {
-                    case "jpeg":
-                    case "jpg":
-                        $imageTemp = imagecreatefromjpeg($_FILES['profilePic']['tmp_name']);
+                switch ($imageInfo[2]) {
+                    case IMAGETYPE_GIF  :
+                        $src = imagecreatefromgif($img);
                         break;
-                    case "png":
-                        $imageTemp = imagecreatefrompng($_FILES['profilePic']['tmp_name']);
+                    case IMAGETYPE_JPEG :
+                        $src = imagecreatefromjpeg($img);
+                        break;
+                    case IMAGETYPE_PNG  :
+                        $src = imagecreatefrompng($img);
                         break;
                     default:
                         throw new Exception("Format not supported");
                         break;
                 }
 
-                $finalImage = null;
-
-                var_dump($imageSize);
-
-                if ($imageSize[0] > 400) {
-                    $imageTemp = imagescale($imageTemp, 400);
+                if ($imageWidth > $imageHeight) {
+                    $y = 0;
+                    $x = ($imageWidth - $imageHeight) / 2;
+                    $smallestSide = $imageHeight;
+                } else {
+                    $x = 0;
+                    $y = ($imageHeight - $imageWidth) / 2;
+                    $smallestSide = $imageWidth;
                 }
 
-                if ($imageSize[1] > 400) {
-                    $imageTemp = imagecrop($imageTemp, ['x' => 0, 'y' => 400 - $imageSize['height'] / 2, 'widh' => 400, 'height' => 400]);
-                }
+                $thumbSize = 400;
 
-                imagejpeg($imageTemp, $finalImage, 80);
-                imagedestroy($imageTemp);
-                unlink($_FILES['profilePic']['tmp_name']);
+                $tmp = imagecreatetruecolor($thumbSize, $thumbSize);
+                imagecopyresampled($tmp, $src, 0, 0, $x, $y, $thumbSize, $thumbSize, $smallestSide, $smallestSide);
+                imagejpeg($tmp, $fileTarget . ".jpg", 90);
 
-                var_dump($finalImage);
 
-                echo "<p>file target: " . $fileTarget . "</p>";
+                chmod($fileTarget . ".jpg", 0664);
 
-                file_put_contents($fileTarget, $finalImage);
-
+                $dati['immagineProfilo'] = $dati['username'] . ".jpg";
 
             } catch (Exception $e) {
                 switch ($e->getMessage()) {
@@ -127,192 +125,108 @@ class FormDatiInformativi
                 }
             }
 
+            // Bottone elimina immagine
+            try {
+                if (!isset($_POST['eliminaImmagine'])) {
+                    throw new Exception("No delete image");
+                }
 
-            /*
-                        // Nome
-                        try {
+                if ($_POST['eliminaImmagine'] == "true") {
+                    $dati['immagineProfilo'] = null;
+                }
 
-                            if (!isset($_POST['nome'])) {
-                                throw new Exception("Missing name");
-                            }
+            } catch (Exception $e) {
+                switch ($e->getMessage()) {
+                    case "No delete image":
+                        //DO NOTHING
+                        break;
+                    default:
+                        throw $e;
+                        break;
 
-                            if (!preg_match("/^[A-Za-zàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ\s]+$/u", $_POST['nome'])) {
-                                throw new Exception("Invalid name");
-                            }
+                }
+            }
 
-                            $dati["nome"] = $_POST['nome'];
+            // Regione e provincia
+            try {
+                if (!isset($_POST['selectRegione']) && !isset($_POST['selectProvincia'])) {
+                    throw new Exception("Nothing passed");
+                }
 
-                        } catch (Exception $e) {
-                            switch ($e->getMessage()) {
-                                case "Missing name":
-                                    array_push($errori, "Nome vuoto.");
-                                    break;
-                                case "Invalid name":
-                                    array_push($errori, "Nome non valido. Può contenere solo lettere e spazi.");
-                                    break;
-                                default:
-                                    throw $e;
-                                    break;
-                            }
-                        }
+                if (isset($_POST['selectRegione']) xor isset($_POST['selectProvincia'])) {
+                    throw new Exception("Only one parameter passed");
+                }
 
-                        // Cognome
-                        try {
+                $regioneDiProvinciaPassata = SelectRegione::getRegione($_POST['selectProvincia']);
 
-                            if (!isset($_POST['cognome'])) {
-                                throw new Exception("Missing surname");
-                            }
+                if ($regioneDiProvinciaPassata != $_POST['selectRegione']) {
+                    throw new Exception("Unlegal input");
+                }
 
-                            if (!preg_match("/^[A-Za-zàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ\s]+$/u", $_POST['cognome'])) {
-                                throw new Exception("Invalid surname");
-                            }
+                $dati['provincia'] = $_POST['selectProvincia'];
 
-                            $dati['cognome'] = $_POST['cognome'];
+            } catch (Exception $e) {
+                switch ($e->getMessage()) {
+                    case "Nothing passed";
+                        //DO NOTHING
+                        break;
+                    case "Only one parameter passed":
+                        array_push($errori, "Entrambi i campi regione e povincia vanno compilati.");
+                    case "Unlegal input":
+                        array_push($errori, "I campi regione e provincia non sono validi.");
+                    default:
+                        throw $e;
+                        break;
+                }
+            }
 
-                        } catch (Exception $e) {
-                            switch ($e->getMessage()) {
-                                case "Missing surname":
-                                    array_push($errori, "Cognome vuoto.");
-                                    break;
-                                case "Invalid surname":
-                                    array_push($errori, "Cognome non valido. Può contenere solo lettere e spazi.");
-                                    break;
-                                default:
-                                    throw $e;
-                                    break;
-                            }
-                        }
+            // Bio
+            try {
 
-                        // Email
-                        try {
+                if (!isset($_POST['bio'])) {
+                    throw new Exception("Nothing to do");
+                }
 
-                            if (!isset($_POST['email'])) {
-                                throw new Exception("Missing email");
-                            }
+                if ($_POST['bio'] == "") {
+                    $dati['bio'] = "";
+                }
 
-                            if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-                                throw new Exception("Invalid email");
-                            }
-
-                            $dati['email'] = $_POST['email'];
-
-                        } catch (Exception $e) {
-                            switch ($e->getMessage()) {
-                                case "Missing email":
-                                    array_push($errori, "Email vuota.");
-                                    break;
-                                case "Invalid email":
-                                    array_push($errori, "Email non valida.");
-                                    break;
-                                default:
-                                    throw $e;
-                                    break;
-                            }
-                        }
-
-                        // Password
-
-                        try {
-                            if (!isset($_POST['password']) xor !isset($_POST['passwordCheck'])) {
-                                throw new Exception("One password missing");
-                            }
-
-                            if ($_POST['password'] == null xor $_POST['passwordCheck'] == null) {
-                                throw new Exception("One password not compiled");
-                            }
-
-                            if ($_POST['password'] != $_POST['passwordCheck']) {
-                                throw new Exception("Mismatching password");
-                            }
-
-                           //  TODO lughezza password
-                           //  if (strlen($_POST['password']) < 8) {
-                           //      throw new Exception("Password too short");
-                           //  }
-
-                            if ($_POST['password'] == "") {
-                                throw new Exception("No password change");
-                            }
-                            $dati['password'] = Utente::cript($_POST['password']);
-
-                        } catch (Exception $e) {
-                            switch ($e->getMessage()) {
-                                case "One password missing":
-                                    array_push($errori, "Per cambiare la password devono essere compilate entrambi i campi password.");
-                                    break;
-                                case "One password not compiled":
-                                    array_push($errori, "Per cambiare la password devono essere compilate entrambi i campi password.");
-                                    break;
-                                case "Mismatching password":
-                                    array_push($errori, "I due campi password non combaciano.");
-                                    break;
-                                case "No password change":
-                                    //Do nothing
-                                    break;
-                                default:
-                                    throw $e;
-                                    break;
-                            }
-                        }
-
-                        // Data di nascita
-                        try {
-                            if (!isset($_POST['bDayGiorno']) || !isset($_POST['bDayMese']) || !isset($_POST['bDayAnno'])) {
-                                throw new Exception("Missing entry");
-                            }
-
-                            if ($_POST['bDayGiorno'] == "" || $_POST['bDayMese'] == "" || $_POST['bDayAnno'] == "") {
-                                throw new Exception("Missing entry");
-                            }
-
-                            $data = $_POST['bDayGiorno'] . "/" . $_POST['bDayMese'] . "/" . $_POST['bDayAnno'];
-
-                            if (!checkdate($_POST['bDayMese'], $_POST['bDayGiorno'], $_POST['bDayAnno'])) {
-                                throw new Exception("Malformed date");
-                            }
-
-                            $dati['dataNascita'] = $_POST['bDayAnno'] . "-" . $_POST['bDayMese'] . "-" . $_POST['bDayGiorno'];
-
-                        } catch (Exception $e) {
-                            switch ($e->getMessage()) {
-                                case "Missing entry":
-                                    array_push($errori, "Non tutti campi dale adata sono completati.");
-                                    break;
-                                case "Malformed date":
-                                    array_push($errori, "Data non ben formata. Usare il formato GG/MM/AAAA.");
-                                    break;
-                                default:
-                                    throw $e;
-                                    break;
-                            }
-                        }
-            */
+                $dati['bio'] = strip_tags($_POST['bio']);
 
 
-            /*
-                        // Update DB
-                        if (empty($errori)) {
-                            try {
-                                if (AggiornamentoDB::aggiornaDatiDB($dati)) {
-                                    echo "Aggiornamento riuscito";
-                                } else {
-                                    echo "Aggiornamento fallito";
-                                    throw new Exception("Failed update");
-                                }
-                            } catch (Exception $e) {
-                                switch ($e->getMessage()) {
-                                    case "Failed update":
-                                        array_push($errori, "Qualcosa non ha funzionato. Riprova più tardi");
-                                        break;
-                                    default:
-                                        throw $e;
-                                        break;
-                                }
-                            }
-                        }
+            } catch (Exception $e) {
+                switch ($e->getMessage()) {
+                    case "Nothing to do":
+                        //DO NOTHING
+                        break;
+                    default :
+                        throw $e;
+                        break;
+                }
+            }
+
+            // Update DB
+            if (empty($errori)) {
+                try {
+                    if (AggiornamentoDB::aggiornaDatiDB($dati)) {
+//                        echo "Aggiornamento riuscito";
+                    } else {
+//                        echo "Aggiornamento fallito";
+                        throw new Exception("Failed update");
+                    }
+                } catch (Exception $e) {
+                    switch ($e->getMessage()) {
+                        case "Failed update":
+                            array_push($errori, "Qualcosa non ha funzionato. Riprova più tardi");
+                            break;
+                        default:
+                            throw $e;
+                            break;
+                    }
+                }
+            }
 
 
-            */
             //Lettura dati dal DB
 
         }

@@ -10,7 +10,7 @@ if (isset($_GET)) {
         foreach ($result as $key => $value) {
             printf(
                 "<option value='%s'>%s</option>\n",
-                $value['nome'],
+                $value['sigla'],
                 $value['nome']
             );
         }
