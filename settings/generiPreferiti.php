@@ -28,13 +28,13 @@ try {
 
 
     // Inizio body
-    $string .= "<body>" . Header::getHeader() . "<div class='breadcrump'><h1>Modifica dati obbligatori</h1></div>";
+    $string .= "<body>" . Header::getHeader() . "<div class='breadcrump'><h2>Modifica dati obbligatori</h2></div>";
 
     // Menu
     $string .= "<div class='nav'>" . Menu::getMenu(array("Home", "<a href='pagina.html'>Profilo</a>", "<a href='pagina.html'>Cerca</a>", "<a href='pagina.html'>Band</a>")) . "</div>";
 
     // Inizio contenuto pagina
-    $string .= "<div class='content'>";
+    $string .= "<div id='content'>";
 
     $string .= MenuProfilo::getMenuProfilo();
 
@@ -44,9 +44,9 @@ try {
 
     $string .= "</div>";    //Fine modContenutoPagina
 
-    $string .= "</div>";    //Fine content
-
     $string .= "<div id='modBackButton'><a href='index.php'>Indietro</a></div>";    //Pulsante indietro
+
+    $string .= "</div>";    //Fine content
 
     $string .= "</body></html>";    //Fine body e html
 

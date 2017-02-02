@@ -32,9 +32,9 @@ try {
     // Menu
     $string .= "<div class='nav'>" . Menu::getMenu(array("Home", "<a href='pagina.html'>Profilo</a>", "<a href='pagina.html'>Cerca</a>", "<a href='pagina.html'>Band</a>")) . "</div>";
 
-    $string .= "<div class='content'>";
+    $string .= "<div id='content'>";
 
-    $string .= MenuProfilo::getMenuProfilo();
+    $string .= MenuProfilo::getMenuProfilo(1);
 
     $string .= "<div id='modContenutoPagina'>";
 
@@ -42,9 +42,9 @@ try {
 
     $string .= "</div>";    //Fine modContenutoPagina
 
-    $string .= "</div>";    //Fine content
-
     $string .= "<div id='modBackButton'><a href='index.php'>Indietro</a></div>";    //Pulsante indietro
+
+    $string .= "</div>";    //Fine content
 
     $string .= "</body></html>";    //Fine body e html
 

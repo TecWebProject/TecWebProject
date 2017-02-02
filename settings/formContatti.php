@@ -118,11 +118,11 @@ class FormContatti
             // Salva
             try {
 
-                if (!isset($_POST['salva'])) {
+                if (!isset($_POST['salva']) && !isset($_POST['aggiungiContatto'])) {
                     throw new Exception("Nothing to do");
                 }
 
-                if ($_POST['salva'] == "true") {
+                if ($_POST['salva'] == "true" || $_POST['aggiungiContatto'] == "true") {
 
                     $indiciContattiValidi = array_filter(
                         array_unique(
