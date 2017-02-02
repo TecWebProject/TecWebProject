@@ -154,8 +154,21 @@ class FormContatti
 
                         $contatto = (isset($_POST["contatto$indice"])) ? $_POST["contatto$indice"] : null;
 
+                        $contatto = trim($contatto);
+
                         if ($tipoContatto != "" && $contatto != "") {
-                            array_push($dati['contatti']['inserisci'], array("tipoContatto" => $tipoContatto, "contatto" => $contatto));
+                            switch ($tipoContatto) {
+                                case "email_pubblica":
+                                    if (Email::checkEmail($contatto) == 0) {
+                                        array_push($dati['contatti']['inserisci'], array("tipoContatto" => $tipoContatto, "contatto" => $contatto));
+                                    } else {
+                                        throw new Exception("Invalid mail");
+                                    }
+                                    break;
+                                default:
+                                    array_push($dati['contatti']['inserisci'], array("tipoContatto" => $tipoContatto, "contatto" => $contatto));
+                                    break;
+                            }
                         }
                     }
 
@@ -172,7 +185,10 @@ class FormContatti
                         //DO NOTHING
                         break;
                     case "Invalid input":
-                        array_push($errori, "Gli indici inseriti non sono validi");
+                        array_push($errori, "Gli indici inseriti non sono validi.");
+                        break;
+                    case "Invalid mail":
+                        array_push($errori, "Una mail inserita non è valida.");
                         break;
                     default:
                         throw $e;
