@@ -14,27 +14,24 @@
 		</div>
 		<div id="bloccoBio">
 			<h3>Descrizione</h3>
-				<p><descrizione /></p>
+			<p><descrizione /></p>
 		</div>
 		<div id="bloccoGeneri">
 			<h3>Generi apprezzati</h3>
-				<generiApprezzati />
+			<generiApprezzati />
 		</div>
 		<div id="bloccoStrumenti">
 			<h3>Strumenti suonati</h3>
-				<strumentiSuonati />
+			<strumentiSuonati />
 		</div>
 		<div id="bloccoMembroGruppo">
 			<h3>Membro di</h3>
-				<nomeGruppi />
+			<nomeGruppi />
 		</div>
 		<div id="bloccoContatti">
 			<h3>Lista dei contatti</h3>
 			<div class="rigaContatti">
-				<ul>
-					<li><email /></li>
-					<contatti />
-				</ul>
+				<contatti />
 			</div>
 		</div>
 		<div id="top">

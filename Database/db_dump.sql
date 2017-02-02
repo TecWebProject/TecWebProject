@@ -454,12 +454,18 @@ INSERT INTO Utenti (username, password, email, nome, cognome, dataNascita, immag
 ('_carlo_', '3a555c464988e33e52f96beffbe3b1ac', 'cgialli@nomiacaso.it', 'Carlo', 'Gialli', '1999-05-18', NULL, NULL, '2006-09-01', 'GO');
 
 INSERT INTO ContattiUtenti (idContatto, utente, tipoContatto, contatto) VALUES
-(NULL, 'giorgio', 'telegram', 'telegram.me/ggiuffre'),
+(NULL, 'giorgio', 'telegram', 'https://telegram.me/ggiuffre'),
 (NULL, 'McPaul42', 'youtube', 'https://www.youtube.com/user/PaulMcCartneyVEVO'),
 (NULL, 'ennesimo', 'whatsapp', '049 827 0000'),
 (NULL, 'sempronio96', 'whatsapp', '340 123 4567'),
-(NULL, 'sempronio96', 'telegram', 'telegram.me/sempronio96'),
-(NULL, 'svaughan', 'whatsapp', '3331234567');
+(NULL, 'sempronio96', 'telegram', 'https://telegram.me/sempronio96'),
+(NULL, 'svaughan', 'whatsapp', '3660123456'),
+(NULL, 'm_json_1', 'youtube', 'https://www.youtube.com/user/michaeljacksonVEVO'),
+(NULL, 'david', 'youtube', 'https://www.youtube.com/user/DavidBowieVEVO'),
+(NULL, 'david', 'facebook', 'https://www.facebook.com/davidbowie/'),
+(NULL, 'anto', 'email_pubblica', 'antonio.boscolo@example.com'),
+(NULL, 'agrigi', 'email_pubblica', 'alessia.grigi@example.com'),
+(NULL, 'maria', 'whatsapp', '0491234567');
 
 INSERT INTO GeneriMusicali (nome) VALUES
 ('Hard Rock'),
@@ -507,6 +513,7 @@ INSERT INTO GeneriUtenti (utente, genere) VALUES
 ('SuperPippo', 'Soul'),
 ('giorgio', 'Psychedelic'),
 ('giorgio', 'Progressive'),
+('giorgio', 'Techno'),
 ('giorgio', 'Pop'),
 ('millenium_bug', 'Disco'),
 ('ennesimo', 'Country'),
