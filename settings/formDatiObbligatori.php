@@ -248,7 +248,7 @@ class FormDatiObbligatori
         }
 
         //Costruzione contenuto pagina
-        $string .= "<form action='datiObbligatori.php' method='post'><fieldset><legend>Dati obbligatori</legend><ul>";
+        $string .= "<form action='datiObbligatori.php' method='post' onsubmit='return checkForm()'><fieldset><legend>Dati obbligatori</legend><ul>";
 
         // username
         $string .= "<li>Username: " . $dati['username'] . "</li>";
@@ -257,27 +257,27 @@ class FormDatiObbligatori
         //TODO placeholder='Nome'
         $string .= "<li><label for='modNome'>Nome</label><input id='modNome' name='nome' value='";
         $string .= $dati['nome'];
-        $string .= "' onblur='checkNome(this.value)' onkeypress='clearError(\"nome\")'/><span id='errorModNome' class='modErrorEntry'></span></li>";
+        $string .= "' onblur='checkNome()' onkeypress='clearError(\"nome\")'/><span id='errorModNome' class='modErrorEntry'></span></li>";
 
         // cognome
         //TODO placeholder='Cognome'
         $string .= "<li><label for='modCognome'>Cognome</label><input id='modCognome' name='cognome' value='";
         $string .= $dati['cognome'];
-        $string .= "' onblur='checkCognome(this.value)' onkeypress='clearError(\"cognome\")'/><span id='errorModCognome' class='modErrorEntry'></span></li>";
+        $string .= "' onblur='checkCognome()' onkeypress='clearError(\"cognome\")'/><span id='errorModCognome' class='modErrorEntry'></span></li>";
 
         // email
         //TODO placeholder='email'
         $string .= "<li><label for='modEmail'>Email</label><input id='modEmail' name='email' size='25' value='";
         $string .= $dati['email'];
-        $string .= "' onblur='checkEmail(this.value)' onkeypress='clearError(\"email\")'/><span id='errorModEmail' class='modErrorEntry'></span></li>";
+        $string .= "' onblur='checkEmail()' onkeypress='clearError(\"email\")'/><span id='errorModEmail' class='modErrorEntry'></span></li>";
 
         // password
         //TODO placeholder='password'
-        $string .= "<li><label for='modPassword'>Password</label><input type='password' id='modPassword' name='password' onblur='checkPassword(this.value)' onkeypress='clearError(\"password\")'/><span id='errorModPassword' class='modErrorEntry'></span></li>";
+        $string .= "<li><label for='modPassword'>Password</label><input type='password' id='modPassword' name='password' onblur='checkPassword(this.value)' onkeypress='clearError(\"password\");clearError(\"passwordCheck\")'/><span id='errorModPassword' class='modErrorEntry'></span></li>";
 
         // password check
         //TODO placeholder='password check'
-        $string .= "<li><label for='modPassword'>Reinserisci password</label><input type='password' id='modPasswordCheck' name='passwordCheck' onblur='checkPasswordCheck(this.value)' onkeypress='clearError(\"passwordCheck\")'/><span id='errorModPasswordCheck' class='modErrorEntry'></span></li>";
+        $string .= "<li><label for='modPassword'>Reinserisci password</label><input type='password' id='modPasswordCheck' name='passwordCheck' onblur='checkPasswordCheck(this.value)' onkeypress='clearError(\"password\");clearError(\"passwordCheck\")'/><span id='errorModPasswordCheck' class='modErrorEntry'></span></li>";
 
         // data di nascita
         //TODO placeholder='gg' placeholder='mm' placeholder='aaaa'
