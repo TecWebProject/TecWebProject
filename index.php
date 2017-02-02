@@ -39,7 +39,7 @@ function numUtenti() {
 	} catch (Exception $e){
 		echo "Errore: dati non recuperati (".$e->getMessage().").";
 	}
-	return $row['num'];
+	return $numero;
 }
 
 function numGruppi() {
@@ -143,7 +143,7 @@ function getGruppi() {
 }
 
 echo Start::getHead(array(
-	'Titolo' => "BandBoard",
+	'Titolo' => "Home - BandBoard",
 	'DescrizioneBreve' => "Home - BandBoard",
 	'Descrizione' => "Home page del sito BandBoard",
 	'Author' => array("Derek Toninato", "Filippo Berto", "Francesco Pezzuto", "Giorgio Giuffrè"),
