@@ -119,36 +119,56 @@ function checkEmail() {
     return true;
 }
 
-function checkPassword(password) {
-    var length = password.length;
-    var specialChar = password.match(/[!@#\$%\^\&*\)\(+=._-]*/);
+function checkPassword() {
 
-    valid = true;
+    var input = document.getElementById("modPassword");
 
-    //TODO lunghezza password e caratteri speciali
-    // if (length < 8 || special == false) {
-    //     valid = false;
-    // }
+    if (input != null) {
 
-    if (valid) {
-        document.getElementById("errorModPassword").innerHTML = "<img src='correctEntry.png' class='modCorrectEntry'/>";
-    } else {
-        document.getElementById("errorModPassword").innerHTML = "Password non sicura. Usa almeno 8 caratteri, tra cui almeno uno di .!@#$%^&*()_+-=";
+        var password = input.value;
+
+        var length = password.length;
+        var specialChar = password.match(/[!@#\$%\^\&*\)\(+=._-]*/);
+
+        valid = true;
+
+        //TODO lunghezza password e caratteri speciali
+        // if (length < 8 || special == false) {
+        //     valid = false;
+        // }
+
+        if (valid) {
+            document.getElementById("errorModPassword").innerHTML = "<img src='correctEntry.png' class='modCorrectEntry'/>";
+        } else {
+            document.getElementById("errorModPassword").innerHTML = "Password non sicura. Usa almeno 8 caratteri, tra cui almeno uno di .!@#$%^&*()_+-=";
+        }
+
+        return valid;
     }
 
-    return valid;
+    return true;
 }
 
-function checkPasswordCheck(passwordCheck) {
-    var valid = document.getElementById("modPassword").value === passwordCheck;
+function checkPasswordCheck() {
 
-    if (valid) {
-        document.getElementById("errorModPasswordCheck").innerHTML = "<img src='correctEntry.png' class='modCorrectEntry'/>";
-    } else {
-        document.getElementById("errorModPasswordCheck").innerHTML = "Le due password non corrispondono.";
+    var input = document.getElementById("modPasswordCheck");
+
+    if (input != null) {
+
+        var passwordCheck = input.value;
+
+        var valid = document.getElementById("modPassword").value === passwordCheck;
+
+        if (valid) {
+            document.getElementById("errorModPasswordCheck").innerHTML = "<img src='correctEntry.png' class='modCorrectEntry'/>";
+        } else {
+            document.getElementById("errorModPasswordCheck").innerHTML = "Le due password non corrispondono.";
+        }
+
+        return valid;
     }
 
-    return valid;
+    return true;
 
 }
 
