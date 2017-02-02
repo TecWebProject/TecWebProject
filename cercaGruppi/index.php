@@ -159,7 +159,7 @@ if ($stmt) {
 			if ($gruppi[$g]['immagine'] != '' && file_exists('../images/bands/' . $gruppi[$g]['immagine'])) {
 				$img = $gruppi[$g]['immagine'];
 			}
-			$risultati .= '<li class="elementResult"><a href="../profiloGruppo/profiloGruppo.php?idGruppo=' . $gruppi[$g]['idGruppo'] . '">' . '<img class="listImage" src="' . $img . '" alt="Immagine di ' . $gruppi[$g]['idGruppo'] . '" />' . $gruppi[$g]['nome'] . ' (' . $gruppi[$g]['provincia'] . ')</a></li>';
+			$risultati .= '<li class="elementResult"><a href="../profiloGruppo/profiloGruppo.php?idGruppo=' . $gruppi[$g]['idGruppo'] . '">' . '<img class="listImage" src="' . $img . '" alt="Immagine del gruppo ' . $gruppi[$g]['nome'] . '" />' . $gruppi[$g]['nome'] . ' (' . $gruppi[$g]['provincia'] . ')</a></li>';
 		}
 		unset($gruppi);
 		$risultati .= '</ul>';
@@ -186,7 +186,7 @@ if ($tot_pages > 0) {
 	$successiva = '<span class="notClickable">successiva</span>';
 	if ($curr_page < $tot_pages)
 		$successiva = '<a href="index.php?num=' . ($curr_page + 1) . '">successiva</a>';
-	$paginazione = $precedente . $successiva;
+	$paginazione = $precedente . ' ' . $successiva;
 }
 $file = str_replace('<paginazione />', $paginazione, $file);
 
