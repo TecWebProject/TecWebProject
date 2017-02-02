@@ -130,11 +130,11 @@ try {
 				while ($row=$result->fetch_array(MYSQLI_ASSOC)) {
 					if ($row['immagine']==NULL) {
 						$row['immagine']="defaultBand.png";
-						$gruppi=$gruppi."<li><img class=\"listImage\" src=\"../images/site/".$row['immagine']."\" alt=\"Immagine di ".$row['nome']."\" /> ".$row['nome'];
+						$gruppi=$gruppi."<li><a href=\"../profiloGruppo/profiloGruppo.php?idGruppo=" . $row['idGruppo'] . "\"><img class=\"listImage\" src=\"../images/site/".$row['immagine']."\" alt=\"Immagine di ".$row['nome']."\" /> ".$row['nome'];
 					} else {
-						$gruppi=$gruppi."<li class=\"elementResult\"><img class=\"listImage\" src=\"../images/bands/".$row['immagine']."\" alt=\"Immagine di ".$row['nome']."\" /> ".$row['nome'];
+						$gruppi=$gruppi."<li class=\"elementResult\"><a href=\"../profiloGruppo/profiloGruppo.php?idGruppo=" . $row['idGruppo'] . "\"><img class=\"listImage\" src=\"../images/bands/".$row['immagine']."\" alt=\"Immagine di ".$row['nome']."\" /> ".$row['nome'];
 					}						
-					$gruppi=$gruppi."</li>";
+					$gruppi=$gruppi."</a></li>";
 				}
 				$result->free();
 				$gruppi=$gruppi."</ul>";
@@ -146,13 +146,13 @@ try {
 		
 		
 		
-		//cerca e stampa i contatti utente (è impossibile che <ul> sia vuoto perchè il campo mail è NOT NULL)
+		//cerca e stampa i contatti utente
 		$query="SELECT utente, tipoContatto, contatto FROM ContattiUtenti WHERE utente=\"".$_REQUEST["username"]."\";";
 		if (!$result=$connessione->query($query)) {
 			$page .= "Query non valida: ".$connessione->error.".";
 		} else {
 			$contacts = '';
-			if ($result->num_rows>0) {
+			if ($result->num_rows > 0) {
 				$contacts = '<ul>';
 				while ($row=$result->fetch_array(MYSQLI_ASSOC)) {
 					switch ($row['tipoContatto']) {
