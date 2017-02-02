@@ -3,6 +3,7 @@
 require_once realpath(dirname(__FILE__)) . "/../lib/php/datiUtente.php";
 require_once realpath(dirname(__FILE__)) . "/../lib/php/utente.php";
 require_once realpath(dirname(__FILE__)) . "/aggiornamentoDB.php";
+require_once realpath(dirname(__FILE__)) . "/../lib/php/check_email.php";
 
 session_start();
 
@@ -102,7 +103,7 @@ class FormDatiObbligatori
                     throw new Exception("Missing email");
                 }
 
-                if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+                if (!Email::checkEmail($_POST['email'])) {
                     throw new Exception("Invalid email");
                 }
 
@@ -137,11 +138,10 @@ class FormDatiObbligatori
                     throw new Exception("Mismatching password");
                 }
 
-                /*TODO lughezza password
-                if (strlen($_POST['password']) < 8) {
+                if (strlen($_POST['password']) < 5) {
                     throw new Exception("Password too short");
                 }
-                */
+
                 if ($_POST['password'] == "") {
                     throw new Exception("No password change");
                 }
@@ -161,6 +161,8 @@ class FormDatiObbligatori
                     case "No password change":
                         //Do nothing
                         break;
+                    case "Password too short":
+                        array_push($errori, "La password scelta è troppo breve. Inserire una password di almeno 5 caratteri");
                     default:
                         throw $e;
                         break;
