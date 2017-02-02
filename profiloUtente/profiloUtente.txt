@@ -31,10 +31,7 @@
 		<div id="bloccoContatti">
 			<h3>Lista dei contatti</h3>
 			<div class="rigaContatti">
-				<ul>
-					<li><email /></li>
-					<contatti />
-				</ul>
+				<contatti />
 			</div>
 		</div>
 		<div id="top">

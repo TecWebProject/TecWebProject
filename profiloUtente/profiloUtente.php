@@ -151,12 +151,32 @@ try {
 		if (!$result=$connessione->query($query)) {
 			echo "Query non valida: ".$connessione->error.".";
 		} else {
-			$contacts="";
+			$contacts = '';
 			if ($result->num_rows>0) {
+				$contacts = '<ul>';
 				while ($row=$result->fetch_array(MYSQLI_ASSOC)) {
-						$contacts=$contacts."<li><a href=\"".$row['contatto']."\">".$row['tipoContatto']."</a></li>";
+					switch ($row['tipoContatto']) {
+						# email:
+						case 'email_pubblica':
+							$contacts .= '<li><a href="mailto:' . $row['contatto'] . '">' . $row['contatto'] . '</a></li>';
+							break;
+						# link esterno:
+						case 'telegram':
+						case 'youtube':
+						case 'facebook':
+							$contacts .= '<li><a href="' . $row['contatto'] . '" target="_blank">' . $row['contatto'] . '</a></li>';
+							break;
+						# numero di telefono:
+						case 'whatsapp':
+						default:
+							$contacts .= '<li>' . $row['contatto'] . '</li>';
+							break;
+					}
 				}
 				$result->free();
+				$contacts .= '</ul>';
+			} else {
+				$contacts = '<p>Nessuna informazione di contatto.</p>';
 			}
 		}
 		$page=str_replace("<contatti />", $contacts, $page);
@@ -166,7 +186,7 @@ try {
 	echo "Errore: dati non recuperati (".$e->getMessage().").";
 }
 if (!isset($_REQUEST['page']) || $_REQUEST['page']=="index") {
-	$precPage="<p class=\"paginaPrec\"><a href=\"../index.php\" id=\"torna\">Torna alla Home</a></p>";
+	$precPage="<p class=\"paginaPrec\"><a href=\"../index.php\" id=\"torna\">Torna alla <span xml:lang=\"en\" lang=\"en\">Home</span></a></p>";
 } else {
 	if ($_REQUEST['page']=="ricerca") {
 		$precPage="<p class=\"paginaPrec\"><a href=\"../cercaUtenti/index.php?num=".$_REQUEST['num']."\" id=\"torna\">Torna alla Ricerca</a></p>";
