@@ -1,0 +1,9 @@
+User-Agent: *
+Disallow: 
+Allow: /
+Disallow: /Database
+Disallow: /home
+Disallow: /images/site
+Disallow: /lib
+Disallow: /registrazioneGruppo
+Disallow: /settings
