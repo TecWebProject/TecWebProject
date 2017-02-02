@@ -138,12 +138,12 @@ class FormDatiObbligatori
                     throw new Exception("Mismatching password");
                 }
 
-                if (strlen($_POST['password']) < 5) {
-                    throw new Exception("Password too short");
-                }
-
                 if ($_POST['password'] == "") {
                     throw new Exception("No password change");
+                }
+
+                if (strlen($_POST['password']) < 5) {
+                    throw new Exception("Password too short");
                 }
 
                 $dati['password'] = Utente::cript($_POST['password']);
