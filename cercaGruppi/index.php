@@ -159,7 +159,7 @@ if ($stmt) {
 			if ($gruppi[$g]['immagine'] != '' && file_exists('../images/bands/' . $gruppi[$g]['immagine'])) {
 				$img = $gruppi[$g]['immagine'];
 			}
-			$risultati .= '<li class="elementResult"><a href="../profiloGruppo/profiloGruppo.php?idGruppo=' . $gruppi[$g]['idGruppo'] . '">' . '<img class="listImage" src="' . $img . '" alt="Immagine di ' . $gruppi[$g]['idGruppo'] . '" />' . $gruppi[$g]['nome'] . ' (' . $gruppi[$g]['provincia'] . ')</a></li>';
+			$risultati .= '<li class="elementResult"><a href="../profiloGruppo/profiloGruppo.php?idGruppo=' . $gruppi[$g]['idGruppo'] . '">' . '<img class="listImage" src="' . $img . '" alt="Immagine del gruppo ' . $gruppi[$g]['nome'] . '" />' . $gruppi[$g]['nome'] . ' (' . $gruppi[$g]['provincia'] . ')</a></li>';
 		}
 		unset($gruppi);
 		$risultati .= '</ul>';
