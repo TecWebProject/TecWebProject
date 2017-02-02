@@ -4,6 +4,7 @@ require_once realpath(dirname(__FILE__)) . "/../lib/php/datiUtente.php";
 require_once realpath(dirname(__FILE__)) . "/../lib/php/utente.php";
 require_once realpath(dirname(__FILE__)) . "/../lib/php/contattiUtente.php";
 require_once realpath(dirname(__FILE__)) . "/../lib/php/tipiContatto.php";
+require_once realpath(dirname(__FILE__)) . "/../lib/php/check_email.php";
 require_once realpath(dirname(__FILE__)) . "/aggiornamentoDB.php";
 require_once realpath(dirname(__FILE__)) . "/../lib/php/regioni.php";
 require_once realpath(dirname(__FILE__)) . "/../lib/php/province.php";
@@ -247,7 +248,7 @@ class FormContatti
         $contatti = array_merge($contatti, array_fill(count($contatti), $numeroContatti - count($contatti), array("tipoContatto" => "", "contatto" => "")));
 
         //Costruzione contenuto pagina
-        $string .= "<form action='contatti.php' method='post'><fieldset><legend>Contatti</legend><ul>";
+        $string .= "<form action='contatti.php' method='post' onsubmit='return checkForm()'><fieldset><legend>Contatti</legend><ul>";
 
         foreach ($contatti as $key => $contatto) {
 

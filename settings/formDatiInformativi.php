@@ -146,14 +146,14 @@ class FormDatiInformativi
 
                 }
             }
-
+            
             // Regione e provincia
             try {
-                if (!isset($_POST['selectRegione']) && !isset($_POST['selectProvincia'])) {
+                if (!isset($_POST['selectProvincia']) && $_POST['selectRegione'] == "") {
                     throw new Exception("Nothing passed");
                 }
 
-                if (isset($_POST['selectRegione']) xor isset($_POST['selectProvincia'])) {
+                if ($_POST['selectRegione'] != "" && isset($_POST['selectProvincia']) && $_POST['selectProvincia'] == "") {
                     throw new Exception("Only one parameter passed");
                 }
 
@@ -168,12 +168,14 @@ class FormDatiInformativi
             } catch (Exception $e) {
                 switch ($e->getMessage()) {
                     case "Nothing passed";
-                        //DO NOTHING
+                        $dati['provincia'] = null;
                         break;
                     case "Only one parameter passed":
                         array_push($errori, "Entrambi i campi regione e povincia vanno compilati.");
+                        break;
                     case "Unlegal input":
                         array_push($errori, "I campi regione e provincia non sono validi.");
+                        break;
                     default:
                         throw $e;
                         break;
@@ -260,7 +262,7 @@ class FormDatiInformativi
         $string .= "<li><label for='modLoadImage'>Elimina immagine profilo</label> <button id='modEliminaImmagine' name='eliminaImmagine' value='true'>Elimina immagine</button></li>";
 
         // regione di provenienza
-        $string .= "<li><label for='modSelectRegione'>Regione di provenienza</label> <select id='modSelectRegione' name='selectRegione' onchange='showProvince(this.value)'><option value=''>Seleziona regione</option>";
+        $string .= "<li><label for='modSelectRegione'>Regione di provenienza</label> <select id='modSelectRegione' name='selectRegione' onchange='clearError(\"provenienza\");showProvince(this.value);checkProvenienza()'><option value=''>Seleziona regione</option>";
 
         $regioni = Regioni::getRegioni();
         $regioneAppartenenza = SelectRegione::getRegione($dati['provincia']);
@@ -275,7 +277,7 @@ class FormDatiInformativi
         $string .= "</select></li>";
 
         // provincia di appartenenza
-        $string .= "<li><label for='modSelectProvincia'>Seleziona provincia</label> <select id='modSelectProvincia' name='selectProvincia'><option value=''>Seleziona provincia</option>";
+        $string .= "<li><label for='modSelectProvincia'>Seleziona provincia</label> <select id='modSelectProvincia' name='selectProvincia' onchange='clearError(\"provenienza\");checkProvenienza();'><option value=''>Seleziona provincia</option>";
 
         $province = Province::getProvince();
 
@@ -286,11 +288,11 @@ class FormDatiInformativi
                 $string .= "<option value='" . htmlentities($provincia['sigla'], ENT_QUOTES, "UTF-8") . "'>" . htmlentities($provincia['nome'], ENT_QUOTES, "UTF-8") . "</option>";
             };
         }
-        $string .= "</select></li>";
+        $string .= "</select><span id='errorModProvenienza' class='modErrorEntry'></span></li>";
 
         // bio
         //TODO placeholder "Scrivi una breve descrizione di te..."
-        $string .= "<li><label for='modTextAreaBio'>Bio</label> <textarea id='modTextAreaBio' name='bio' cols='40' rows='4' onblur='checkBio(this.value)'>" . $dati['descrizione'] . "</textarea><span id='errorModBio' class='modErrorEntry'></span></li>";
+        $string .= "<li><label for='modTextAreaBio'>Bio</label><textarea id='modTextAreaBio' name='bio' cols='40' rows='4' onblur='checkBio(this.value)'>" . $dati['descrizione'] . "</textarea><span id='errorModBio' class='modErrorEntry'></span></li>";
 
         $string .= "</ul><button type='submit'>Salva</button></fieldset></form>";
 

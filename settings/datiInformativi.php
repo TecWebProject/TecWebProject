@@ -27,7 +27,7 @@ try {
     );
 
     // Inizio body
-    $string .= "<body onload='clearProvince();'>" . Header::getHeader() . "<div class='breadcrump'><h2>Modifica dati informativi</h2></div>";
+    $string .= "<body onload='clearProvince()'>" . Header::getHeader() . "<div class='breadcrump'><h2>Modifica dati informativi</h2></div>";
 
     // Menu
     $string .= "<div class='nav'>" . Menu::getMenu(array('<a href="../index.php" xml:lang="en" lang="en">Home</a>',
