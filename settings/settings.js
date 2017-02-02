@@ -8,7 +8,7 @@ function showProvince(str) {
         // Stringa valida, eseguo query
         // IE7+, Firefox, Chrome, Opera, Safari
         xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() {
+        xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 document.getElementById("modSelectProvincia").innerHTML = '<option value="">Seleziona provincia</option>' + this.responseText;
                 document.getElementById("modSelectProvincia").disabled = false;
@@ -26,10 +26,10 @@ function clearProvince() {
         document.getElementById("modSelectProvincia").innerHTML = '<option value="">Seleziona provincia</option>';
         document.getElementById("modSelectProvincia").disabled = true;
     }
-};
-
+}
 // Controllo username
 function checkUsername(username) {
+
     // Controllo offline
     if (/^[a-zA-Z0-9]+$/.test(username) == false) {
         document.getElementById("errorModUsername").innerHTML = "Username non valido. Usare solo lettere maiuscole o minuscole o cifre.";
@@ -37,7 +37,7 @@ function checkUsername(username) {
     // Controllo online
     else {
         xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() {
+        xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 if (this.responseText == "0") {
                     document.getElementById("errorModUsername").innerHTML = "<img src='correctEntry.png' class='modCorrectEntry'/>";
@@ -53,19 +53,28 @@ function checkUsername(username) {
         xmlhttp.open("GET", "/settings/script_check_username.php?username=" + username, true);
         xmlhttp.send();
     }
-
 }
 
-function checkNome(nome) {
-    var accentedCharacters = "àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ";
-    var valid = new RegExp("^[A-Za-z" + accentedCharacters + "\s]+").test(nome);
-    if (valid) {
-        document.getElementById("errorModNome").innerHTML = "<img src='correctEntry.png' class='modCorrectEntry'/>";
-    } else {
-        document.getElementById("errorModNome").innerHTML = "Nome non valido. Usare solo lettere e spazi.";
+function checkNome() {
+
+    var input = document.getElementById("modNome");
+
+    if (input != null) {
+
+        var nome = input.value;
+
+        var accentedCharacters = "àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ";
+        var valid = new RegExp("^[A-Za-z" + accentedCharacters + "\s]+").test(nome);
+        if (valid) {
+            document.getElementById("errorModNome").innerHTML = "<img src='correctEntry.png' class='modCorrectEntry'/>";
+        } else {
+            document.getElementById("errorModNome").innerHTML = "Nome non valido. Usare solo lettere e spazi.";
+        }
+
+        return valid;
     }
 
-    return valid;
+    return true;
 }
 
 function checkCognome(cognome) {
@@ -132,7 +141,7 @@ function checkBDay(bDay) {
     var m = document.getElementById('modDataNascitaMese').value;
     var y = document.getElementById('modDataNascitaAnno').value;
     var date = new Date(y, m, d);
-    var stringDate = d + "/" + m + "/" + y
+    var stringDate = d + "/" + m + "/" + y;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     var valid;
     //  if (bDay == "") {
     //      valid = false;
@@ -145,7 +154,7 @@ function checkBDay(bDay) {
     }
 
     if (valid) {
-        var today = new Date()
+        var today = new Date();;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
         if (today >= date) {
             document.getElementById("errorModDataNascita").innerHTML = "<img src='correctEntry.png' class='modCorrectEntry'/>";
         } else {
