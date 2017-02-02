@@ -18,7 +18,7 @@ function getNome($codice) {
 		} else {
 			$query="SELECT nome FROM Gruppi WHERE idGruppo=\"".$codice."\";";	//CREAZIONE DELLA QUERY
 			if (!$result=$connessione->query($query)) {
-				echo "Query non valida: ".$connessione->error.".";
+				$page .= "Query non valida: ".$connessione->error.".";
 			} else {
 				if ($result->num_rows>0) {
 					$row=$result->fetch_array(MYSQLI_ASSOC);
@@ -29,7 +29,7 @@ function getNome($codice) {
 			$connessione->close();	//CHIUSURA CONNESSIONE
 		}
 	} catch (Exception $e){
-		echo "Errore: dati non recuperati (".$e->getMessage().").";
+		$page .= "Errore: dati non recuperati (".$e->getMessage().").";
 	}
 	return $nome;
 }
@@ -69,7 +69,7 @@ try {
 	} else {
 		$query="SELECT idGruppo, nome, immagine, descrizione, provincia, dataIscrizione FROM Gruppi WHERE idGruppo=\"".$_REQUEST["idGruppo"]."\";";	//CREAZIONE DELLA QUERY PER PRIMI DATI
 		if (!$result=$connessione->query($query)) {
-			echo "Query non valida: ".$connessione->error.".";
+			$page .= "Query non valida: ".$connessione->error.".";
 		} else {
 			if ($result->num_rows>0) {
 				while ($row=$result->fetch_array(MYSQLI_ASSOC)) {
@@ -94,7 +94,7 @@ try {
 		$query="SELECT gruppo, genere FROM GeneriGruppi WHERE gruppo=\"".$_REQUEST["idGruppo"]."\";";	//CREAZIONE DELLA QUERY PER I GENERI
 		$gen="";
 		if (!$result=$connessione->query($query)) {
-			echo "Query non valida: ".$connessione->error.".";
+			$page .= "Query non valida: ".$connessione->error.".";
 		} else {
 			if ($result->num_rows>0) {
 			    $gen="<ul>";
@@ -111,7 +111,7 @@ try {
 		$query="SELECT gruppo, utente, strumento FROM Formazioni JOIN Conoscenze ON ruolo=idConoscenza WHERE gruppo=\"".$_REQUEST["idGruppo"]."\";";	//CREAZIONE DELLA QUERY PER I MEMBRI
 		$members="";
 		if (!$result=$connessione->query($query)) {
-			echo "Query non valida: ".$connessione->error.".";
+			$page .= "Query non valida: ".$connessione->error.".";
 		} else {
 			if ($result->num_rows>0) {
 			    $members="<ul>";
@@ -126,7 +126,7 @@ try {
 		$query="SELECT gruppo, tipoContatto, contatto FROM ContattiGruppi WHERE gruppo=\"".$_REQUEST["idGruppo"]."\" ORDER BY tipoContatto;";	//CREAZIONE DELLA QUERY PER I CONTATTI
 		$contacts="";
 		if (!$result=$connessione->query($query)) {
-			echo "Query non valida: ".$connessione->error.".";
+			$page .= "Query non valida: ".$connessione->error.".";
 		} else {
 			if ($result->num_rows>0) {
 			    $contacts = '<ul>';
@@ -157,7 +157,7 @@ try {
 		$connessione->close();	//CHIUSURA CONNESSIONE
 	}
 } catch (Exception $e){
-	echo "Errore: dati non recuperati (".$e->getMessage().").";
+	$page .= "Errore: dati non recuperati (".$e->getMessage().").";
 }
 if (!isset($_REQUEST['page']) || $_REQUEST['page']=="index") {
 	$precPage="<p class=\"paginaPrec\"><a href=\"../index.php\" id=\"torna\">Torna alla <span xml:lang=\"en\" lang=\"en\">Home</a></p>";

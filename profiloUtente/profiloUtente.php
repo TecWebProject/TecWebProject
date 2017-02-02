@@ -51,7 +51,7 @@ try {
 		$query="SELECT username, nome, cognome, dataNascita, immagine, descrizione, provincia, dataIscrizione, email FROM Utenti WHERE username=\"".$_REQUEST["username"]."\";";
 		//restituisce le informazioni riguardanti l'utente
 		if (!$result=$connessione->query($query)) {
-			echo "Query non valida: ".$connessione->error.".";
+			$page .= "Query non valida: ".$connessione->error.".";
 		} else {
 			if ($result->num_rows>0) {
 				while ($row=$result->fetch_array(MYSQLI_ASSOC)) {
@@ -81,7 +81,7 @@ try {
 		$query="SELECT GM.nome FROM Utenti U JOIN GeneriUtenti GU ON U.username=GU.utente JOIN GeneriMusicali GM ON GU.genere=GM.nome WHERE U.username=\"".$_REQUEST["username"]."\";";
 		$gen="";
 		if (!$result=$connessione->query($query)) {
-			echo "Query non valida: ".$connessione->error.".";
+			$page .= "Query non valida: ".$connessione->error.".";
 		} else {
 			if ($result->num_rows>0) {
 				$gen="<ul>";
@@ -101,7 +101,7 @@ try {
 		
 		$strumenti="";
 		if (!$result=$connessione->query($query)) {
-			echo "Query non valida: ".$connessione->error.".";
+			$page .= "Query non valida: ".$connessione->error.".";
 		} else {
 			if ($result->num_rows>0) {
 
@@ -123,7 +123,7 @@ try {
 		$query="SELECT G.nome, G.immagine, G.idGruppo FROM Conoscenze C JOIN Formazioni F ON C.idConoscenza=F.ruolo JOIN Gruppi G ON F.gruppo=G.idGruppo WHERE C.utente=\"".$_REQUEST["username"]."\";";
 		$gruppi="";
 		if (!$result=$connessione->query($query)) {
-			echo "Query non valida: ".$connessione->error.".";
+			$page .= "Query non valida: ".$connessione->error.".";
 		} else {
 			if ($result->num_rows>0) { //se appartiene a 1 o + gruppi stampa immagine e gruppo
 				$gruppi="<ul>";
@@ -149,7 +149,7 @@ try {
 		//cerca e stampa i contatti utente (è impossibile che <ul> sia vuoto perchè il campo mail è NOT NULL)
 		$query="SELECT utente, tipoContatto, contatto FROM ContattiUtenti WHERE utente=\"".$_REQUEST["username"]."\";";
 		if (!$result=$connessione->query($query)) {
-			echo "Query non valida: ".$connessione->error.".";
+			$page .= "Query non valida: ".$connessione->error.".";
 		} else {
 			$contacts = '';
 			if ($result->num_rows>0) {
@@ -183,7 +183,7 @@ try {
 		$connessione->close();	//CHIUSURA CONNESSIONE
 	}
 }catch (Exception $e){
-	echo "Errore: dati non recuperati (".$e->getMessage().").";
+	$page .= "Errore: dati non recuperati (".$e->getMessage().").";
 }
 if (!isset($_REQUEST['page']) || $_REQUEST['page']=="index") {
 	$precPage="<p class=\"paginaPrec\"><a href=\"../index.php\" id=\"torna\">Torna alla <span xml:lang=\"en\" lang=\"en\">Home</span></a></p>";
