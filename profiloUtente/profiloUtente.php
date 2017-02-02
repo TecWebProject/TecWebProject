@@ -1,4 +1,6 @@
 <?php
+
+/* PAGINA PROFILO DI UN UTENTE */
 	session_start();
 	
 	include_once realpath(dirname(__FILE__, 2))."/lib/php/query_server.php";
@@ -12,8 +14,8 @@
 	'Titolo' => $_REQUEST['username']." - BandBoard",
 	'DescrizioneBreve' => "Profilo Utente - BandBoard",
 	'Descrizione' => "Pagina di visualizzazione di un utente del sito BandBoard",
-	'Author' => array("Derek Toninato", "Filippo Berto", "Francesco Pezzuto", "Giorgio Giuffre"),
-	'Keywords' => array("BandBoard", "profilo utente", "gruppo", "band", "bacheca", "musica", "musicisti", "gruppi", "chitarra", "basso", "batteria", "piano", "tastiera"),
+	'Author' => array("Derek Toninato", "Filippo Berto", "Francesco Pezzuto", "Giorgio Giuffrè"),
+	'Keywords' => array("BandBoard", "profilo", $_REQUEST['username'], "utente", "band", "bacheca", "musica", "musicisti", "gruppi"),
 	'BookmarkIcon' => 'site/logo.png',
 	'Stylesheets' => array("style.css"),
 	'Extra' => array("<link rel=\"stylesheet\" media=\"handheld, screen and (max-width:480px), only screen and (max-device-width:480px)\" href=\"lib/css/style_mobile.css\" type=\"text/css\" />")
@@ -53,18 +55,18 @@
 						} else {
 							$img="<img id=\"fotoprofilo\" src=\"../images/bands/".$row['immagine']."\" alt=\"Immagine di ".$row['nome']."\" />";
 						}
-						$page=str_replace("<email />", $row['email'], $page);
-						$page=str_replace("<nickname />", $row['username'], $page);
+						$page=str_replace("<email />", htmlentities($row['email']), $page);
+						$page=str_replace("<nickname />", htmlentities($row['username']), $page);
 						$page=str_replace("<immagineProfilo />", $img, $page);
-						$page=str_replace("<nome />", $row['nome'], $page);
-						$page=str_replace("<cognome />", $row['cognome'], $page);
+						$page=str_replace("<nome />", htmlentities($row['nome']), $page);
+						$page=str_replace("<cognome />", htmlentities($row['cognome']), $page);
 						$page=str_replace("<dataIscrizione />", substr($row['dataIscrizione'], 0, 10), $page);
 						$page=str_replace("<dataNascita />", $row['dataNascita'], $page);
 						$page=str_replace("<provincia />", $row['provincia'], $page);
-						if ($row['descrizione']==NULL) {
+						if ($row['descrizione']==NULL || $row['descrizione']=='') {
 							$row['descrizione']="Nessuna descrizione";
 						}
-						$page=str_replace("<descrizione />", $row['descrizione'], $page);
+						$page=str_replace("<descrizione />", htmlentities($row['descrizione']), $page);
 					}
 					$result->free();
 				}

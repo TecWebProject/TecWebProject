@@ -448,7 +448,7 @@ INSERT INTO Utenti (username, password, email, nome, cognome, dataNascita, immag
 ('tverdi_2', '3a555c464988e33e52f96beffbe3b1ac', 'tiziaverdi@nomifamosi.it', 'Tizia', 'Verdi', '1994-03-15', NULL, 'Chitarrista provetta - cantautrice', '2014-12-12', 'RM'),
 ('bosc', '3a555c464988e33e52f96beffbe3b1ac', 'mbosc@nomifamosi.it', 'Mario', 'Boscolo', '1994-05-07', NULL, NULL, '2015-08-30', 'VE'),
 ('anto', '3a555c464988e33e52f96beffbe3b1ac', 'anto_b@nomifamosi.it', 'Antonio', 'Boscolo', '1997-01-17', NULL, 'Bassista jazz', '2016-06-30', 'VE'),
-('agrigi', '3a555c464988e33e52f96beffbe3b1ac', 'ale_gri@nomiacaso.it', 'Alessia', 'Grigi', '1994-10-21', NULL, 'Studente al conservatiorio. Suono il basso e ascolto soprattutto jazz e reggae.', '2017-01-03', 'RN'),
+('agrigi', '3a555c464988e33e52f96beffbe3b1ac', 'ale_gri@nomiacaso.it', 'Alessia', 'Grigi', '1994-10-21', NULL, 'Studente al conservatorio. Suono il basso e ascolto soprattutto jazz e reggae.', '2017-01-03', 'RN'),
 ('maria', '3a555c464988e33e52f96beffbe3b1ac', 'mariabianchi@popolamento.db', 'Maria', 'Bianchi', '1995-11-17', NULL, 'Mi ispiro da Big Man della E-Street Band; sunono il sax da 5 anni', '2012-10-01', 'RE'),
 ('Serena_Gialli', '3a555c464988e33e52f96beffbe3b1ac', 'serena@nomiacaso.it', 'Serena', 'Gialli', '1994-02-14', NULL, NULL, '2002-09-30', 'GO'),
 ('_carlo_', '3a555c464988e33e52f96beffbe3b1ac', 'cgialli@nomiacaso.it', 'Carlo', 'Gialli', '1999-05-18', NULL, NULL, '2006-09-01', 'GO');
