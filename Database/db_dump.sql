@@ -454,11 +454,11 @@ INSERT INTO Utenti (username, password, email, nome, cognome, dataNascita, immag
 ('_carlo_', '3a555c464988e33e52f96beffbe3b1ac', 'cgialli@nomiacaso.it', 'Carlo', 'Gialli', '1999-05-18', NULL, NULL, '2006-09-01', 'GO');
 
 INSERT INTO ContattiUtenti (idContatto, utente, tipoContatto, contatto) VALUES
-(NULL, 'giorgio', 'telegram', 'telegram.me/ggiuffre'),
+(NULL, 'giorgio', 'telegram', 'https://telegram.me/ggiuffre'),
 (NULL, 'McPaul42', 'youtube', 'https://www.youtube.com/user/PaulMcCartneyVEVO'),
 (NULL, 'ennesimo', 'whatsapp', '049 827 0000'),
 (NULL, 'sempronio96', 'whatsapp', '340 123 4567'),
-(NULL, 'sempronio96', 'telegram', 'telegram.me/sempronio96'),
+(NULL, 'sempronio96', 'telegram', 'https://telegram.me/sempronio96'),
 (NULL, 'svaughan', 'whatsapp', '3331234567');
 
 INSERT INTO GeneriMusicali (nome) VALUES
