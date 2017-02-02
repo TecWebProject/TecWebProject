@@ -90,7 +90,6 @@ class AggiornamentoDB
 
                         break;
                     case "generi":
-
                         $stmt = $mysqli->prepare("DELETE FROM `GeneriUtenti` WHERE `GeneriUtenti`.`utente` = ?");
                         $stmt->bind_param("s", $dati['username']);
                         $stmt->execute();
@@ -100,6 +99,40 @@ class AggiornamentoDB
                             $stmt->bind_param("ss", $dati['username'], $genere);
                             $stmt->execute();
                         }
+
+                        break;
+                    case "contatti":
+
+                        if (isset($campo['inserisci'])) {
+
+                            $stmt = $mysqli->prepare("DELETE FROM `ContattiUtenti` WHERE `ContattiUtenti`.`utente` = ?");
+                            $stmt->bind_param("s", $dati['username']);
+                            $stmt->execute();
+
+                            foreach ($campo['inserisci'] as $contatto) {
+
+                                $stmt = $mysqli->prepare("
+                                  INSERT INTO `ContattiUtenti` 
+                                  (`utente`, `tipoContatto`, `contatto`) 
+                                  VALUES (?, ?, ?)");
+                                $stmt->bind_param("sss", $dati['username'], $contatto['tipoContatto'], $contatto['contatto']);
+                                $stmt->execute();
+                            }
+
+                        } elseif (isset($campo['rimuovi'])) {
+
+                            $stmt = $mysqli->prepare("
+                                DELETE FROM `ContattiUtenti` 
+                                WHERE `ContattiUtenti`.`utente` = ? 
+                                AND `ContattiUtenti`.`tipoContatto` = ? 
+                                AND `ContattiUtenti`.`contatto` = ?"
+                            );
+                            $stmt->bind_param("sss", $dati['username'], $campo['rimuovi']['tipoContatto'], $campo['rimuovi']['contatto']);
+                            $stmt->execute();
+
+                        } else
+                            throw new Exception("invalid content");
+
 
                         break;
                     default:
