@@ -255,12 +255,12 @@ class FormDatiInformativi
         $string .= "<form action='datiInformativi.php' method='post' enctype='multipart/form-data'><fieldset><legend>Dati informativi</legend><ul>";
 
         // Carica immagine profilo
-        $string .= "<li><label for='modLoadImage'>Carica immagine profilo</label><input id='modLoadImage' name='profilePic' type='file' title='Carica immagine'/><p id='errorModLoadImage'></p></li>";
+        $string .= "<li><label for='modLoadImage'>Carica immagine profilo</label> <input id='modLoadImage' name='profilePic' type='file' title='Carica immagine'/><p id='errorModLoadImage'></p></li>";
         // Elimina immagine profilo
-        $string .= "<li><label for='modLoadImage'>Elimina immagine profilo</label><button id='modEliminaImmagine' name='eliminaImmagine' value='true'>Elimina immagine</button></li>";
+        $string .= "<li><label for='modLoadImage'>Elimina immagine profilo</label> <button id='modEliminaImmagine' name='eliminaImmagine' value='true'>Elimina immagine</button></li>";
 
         // regione di provenienza
-        $string .= "<li><label for='modSelectRegione'>Regione di provenienza</label><select id='modSelectRegione' name='selectRegione' onchange='showProvince(this.value)'><option value=''>Seleziona regione</option>";
+        $string .= "<li><label for='modSelectRegione'>Regione di provenienza</label> <select id='modSelectRegione' name='selectRegione' onchange='showProvince(this.value)'><option value=''>Seleziona regione</option>";
 
         $regioni = Regioni::getRegioni();
         $regioneAppartenenza = SelectRegione::getRegione($dati['provincia']);
@@ -275,7 +275,7 @@ class FormDatiInformativi
         $string .= "</select></li>";
 
         // provincia di appartenenza
-        $string .= "<li><label for='modSelectProvincia'>Seleziona provincia</label><select id='modSelectProvincia' name='selectProvincia'><option value=''>Seleziona provincia</option>";
+        $string .= "<li><label for='modSelectProvincia'>Seleziona provincia</label> <select id='modSelectProvincia' name='selectProvincia'><option value=''>Seleziona provincia</option>";
 
         $province = Province::getProvince();
 
