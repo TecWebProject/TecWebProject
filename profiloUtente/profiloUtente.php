@@ -63,7 +63,7 @@
 						$page=str_replace("<dataIscrizione />", substr($row['dataIscrizione'], 0, 10), $page);
 						$page=str_replace("<dataNascita />", $row['dataNascita'], $page);
 						$page=str_replace("<provincia />", $row['provincia'], $page);
-						if ($row['descrizione']==NULL) {
+						if ($row['descrizione']==NULL || $row['descrizione']=='') {
 							$row['descrizione']="Nessuna descrizione";
 						}
 						$page=str_replace("<descrizione />", htmlentities($row['descrizione']), $page);

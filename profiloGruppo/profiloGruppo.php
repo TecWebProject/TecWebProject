@@ -54,7 +54,7 @@ function getNome($codice) {
 	                </form>
                 </div>";
 		$page=$page.$logout;
-		$page=$page."<div class=\"nav\">".Menu::getMenu(array("<a href='../index.php'>Home</a>", "<a href='../settings/index.php'>Modifica Profilo</a>", "<a href='../cercaUtenti/index.php'>Cerca Utenti</a>", "<a href='../cercaGruppi/index.php'>Cerca Gruppi</a>", "<a href='../gestioneGruppi/gestioneGruppi.php'>I Miei Gruppi</a>"))."</div>";	//CREAZIONE DEL MENU PER UTENTE LOGGATO
+		$page=$page."<div class=\"nav\">".Menu::getMenu(array("<a href='../index.php'>Home</a>", "<a href='../settings/index.php'>Modifica Profilo</a>", "<a href='../cercaUtenti/index.php'>Cerca Utenti</a>", "<a href='../cercaGruppi/index.php'>Cerca Gruppi</a>", "<a href='../gestioneGruppi/gestioneGruppi.php'>I miei Gruppi</a>"))."</div>";	//CREAZIONE DEL MENU PER UTENTE LOGGATO
 	} else {
 		session_unset();
 		session_destroy();
@@ -83,7 +83,7 @@ function getNome($codice) {
 						$page=str_replace("<nome />", htmlentities($row['nome']), $page);
 						$page=str_replace("<provincia />", htmlentities($row['provincia']), $page);
 						$page=str_replace("<dataIscrizione />", substr($row['dataIscrizione'], 0, 10), $page);
-						if ($row['descrizione']==NULL) {
+						if ($row['descrizione']==NULL || $row['descrizione']=='') {
 							$row['descrizione']="Nessuna descrizione";
 						}
 						$page=str_replace("<descrizione />", htmlentities($row['descrizione']), $page);
@@ -158,4 +158,3 @@ function getNome($codice) {
 	$page=$page."</body></html>";
 	echo $page;
 ?>
-
