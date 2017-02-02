@@ -28,7 +28,7 @@ try {
 
 
     // Inizio body
-    $string .= "<body>" . Header::getHeader() . "<div class='breadcrump'><h2>Modifica dati obbligatori</h2></div>";
+    $string .= "<body>" . Header::getHeader() . "<div class='breadcrump'><h2>Modifica preferenze musicali</h2></div>";
 
     // Menu
     $string .= "<div class='nav'>" . Menu::getMenu(array('<a href="../index.php" xml:lang="en" lang="en">Home</a>',
