@@ -8,6 +8,7 @@ require_once realpath(dirname(__FILE__)) . '/../lib/php/header.php';
 require_once realpath(dirname(__FILE__)) . '/menuProfilo.php';
 require_once realpath(dirname(__FILE__)) . '/formDatiObbligatori.php';
 require_once realpath(dirname(__FILE__)) . '/../lib/php/sessioneNonValida.php';
+require_once realpath(dirname(__FILE__)) . '/../lib/php/footer.php';
 
 try {
 
@@ -48,6 +49,8 @@ try {
     $string .= "<div id='modBackButton'><a href='index.php'>Indietro</a></div>";    //Pulsante indietro
 
     $string .= "</div>";    //Fine content
+
+    $string .= Footer::getFooter();
 
     $string .= "</body></html>";    //Fine body e html
 
