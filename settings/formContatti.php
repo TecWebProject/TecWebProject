@@ -43,19 +43,12 @@ class FormContatti
 
         if (!empty($_POST)) {
 
-            echo "<p>POST:\t";
-            var_dump($_POST);
-            echo "</p>";
-
             // Test input
             $dati = array();
 
             $dati['username'] = $_SESSION['username'];
 
-            //TODO singole azioni
-
             $contatti = ContattiUtente::getContattiUtente($_SESSION['username']);
-            $tipiContatti = TipiContatto::getTipiContatto();
 
             // Aggiungi contatto
             try {
@@ -65,10 +58,10 @@ class FormContatti
 
                 if ($_POST['aggiungiContatto'] == "true") {
 
-                    if (isset($_SESSION['numeroContati'])) {
-                        $_SESSION['numeroContati'] += 1;
+                    if (isset($_SESSION['numeroContatti'])) {
+                        $_SESSION['numeroContatti'] += 1;
                     } else {
-                        $_SESSION['numeroContati'] = count($contatti) + 1;
+                        $_SESSION['numeroContatti'] = count($contatti) + 1;
                     }
 
                 }
@@ -91,15 +84,22 @@ class FormContatti
                     throw new Exception("Nothing to do");
                 }
 
-                if ($_POST['eliminaContatto'] > $_SESSION['numeroContati'] || $_POST['eliminaContatto'] < 1) {
+                if (
+                    (isset($_SESSION['numeroContatti']) && $_POST['eliminaContatto'] > $_SESSION['numeroContatti']) ||
+                    (!isset($_SESSION['numeroContatti']) && $_POST['eliminaContatto'] > count($contatti)) ||
+                    $_POST['eliminaContatto'] < 1
+                ) {
                     throw new Exception("Invalid input");
                 }
 
                 if ($_POST['eliminaContatto'] <= count($contatti)) {
-                    $dati['contatti']['rimuovi'] = array($contatti[$_POST['eliminaContatto'] - 1]['tipoContatto'], $contatti[$_POST['eliminaContatto'] - 1]['contatto']);
+                    $dati['contatti']['rimuovi'] = $contatti[$_POST['eliminaContatto'] - 1];
+
+                    $_SESSION['numeroContatti'] = count(ContattiUtente::getContattiUtente($dati['username'])) - 1;
+                } else {
+                    $_SESSION['numeroContatti'] -= 1;
                 }
 
-                $_SESSION['numeroContati'] -= 1;
 
             } catch (Exception $e) {
                 switch ($e->getMessage()) {
@@ -124,31 +124,41 @@ class FormContatti
 
                 if ($_POST['salva'] == "true") {
 
-                    $indiciContattiInseriti = array_unique(preg_replace("/^contatto/", "", array_keys(array_filter(
-                        $_POST,
+                    $indiciContattiValidi = array_filter(
+                        array_unique(
+                            preg_replace(
+                                "/^(contatto)/",
+                                "",
+                                array_keys(
+                                    array_filter(
+                                        $_POST,
+                                        function ($var) {
+                                            return preg_match("/^(contatto)[\d]+$/", $var);
+                                        }, ARRAY_FILTER_USE_KEY)
+                                )
+                            )
+                        ),
                         function ($var) {
-                            return preg_match("/^(contatto)[\d]+$/", $var);
-                        }, ARRAY_FILTER_USE_KEY))));
-
-                    echo "<p>indici contatti inseriti:";
-                    var_dump($indiciContattiInseriti);
-                    echo "</p>";
+                            return (isset($_POST["contatto$var"]) && $_POST["contatto$var"] != "");
+                        }
+                    );
 
                     $dati['contatti']['inserisci'] = array();
 
-                    $inputInteressanti = array_filter(
-                        $_POST,
-                        function ($var) {
-                            return preg_match("/^(contatto|tipoContatto)[\d]+$/", $var);
-                        }, ARRAY_FILTER_USE_KEY);
+                    foreach ($indiciContattiValidi as $indice) {
 
-                    foreach ($indiciContattiInseriti as $indice) {
-                        if (array_filter(
-                            $_POST,
-                            function ($var) use ($indice){
-                                return preg_match("/^(contatto)".$indice."$/", $var);
-                            }, ARRAY_FILTER_USE_KEY))
+                        $tipoContatto = (isset($_POST["tipoContatto$indice"])) ? $_POST["tipoContatto$indice"] : null;
+
+                        $contatto = (isset($_POST["contatto$indice"])) ? $_POST["contatto$indice"] : null;
+
+                        if ($tipoContatto != "" && $contatto != "") {
+                            array_push($dati['contatti']['inserisci'], array("tipoContatto" => $tipoContatto, "contatto" => $contatto));
+                        }
                     }
+
+                    $dati['contatti']['inserisci'] = array_unique($dati['contatti']['inserisci'], SORT_REGULAR);
+
+                    $_SESSION['numeroContatti'] = count($dati['contatti']['inserisci']);
 
                 } else {
                     throw new Exception("Invalid input");
@@ -161,7 +171,7 @@ class FormContatti
                         //DO NOTHING
                         break;
                     case "Invalid input":
-                        array_push($errori, "Indice di elimina contatto impossibile.");
+                        array_push($errori, "Gli indici inseriti non sono validi");
                         break;
                     default:
                         throw $e;
@@ -189,10 +199,6 @@ class FormContatti
                     }
                 }
             }
-
-
-            //Lettura dati dal DB
-
         }
 
         $dati = Utenti::getDatiUtente($_SESSION['username']);
@@ -215,15 +221,15 @@ class FormContatti
             $string .= "</ul></div>";
         }
 
-//Lettura dati dal DB
+        //Lettura dati dal DB
         $contatti = ContattiUtente::getContattiUtente($_SESSION['username']);
         $tipiContatti = TipiContatto::getTipiContatto();
-        $numeroContatti = isset($_SESSION['numeroContati']) ? $_SESSION['numeroContati'] : count($contatti);
-
-        $contatti = array_merge($contatti, array_fill(count($contatti), $numeroContatti, array("tipoContatto" => "", "contatto" => "")));
+        $numeroContatti = (isset($_SESSION['numeroContatti'])) ? $_SESSION['numeroContatti'] : count($contatti);
 
 
-//Costruzione contenuto pagina
+        $contatti = array_merge($contatti, array_fill(count($contatti), $numeroContatti - count($contatti), array("tipoContatto" => "", "contatto" => "")));
+
+        //Costruzione contenuto pagina
         $string .= "<form action='contatti.php' method='post'><fieldset><legend>Contatti</legend><ul>";
 
         foreach ($contatti as $key => $contatto) {
