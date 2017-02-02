@@ -103,7 +103,7 @@ class FormDatiObbligatori
                     throw new Exception("Missing email");
                 }
 
-                if (!Email::checkEmail($_POST['email'])) {
+                if (Email::checkEmail($_POST['email']) != 0) {
                     throw new Exception("Invalid email");
                 }
 
@@ -145,6 +145,7 @@ class FormDatiObbligatori
                 if ($_POST['password'] == "") {
                     throw new Exception("No password change");
                 }
+
                 $dati['password'] = Utente::cript($_POST['password']);
 
             } catch (Exception $e) {
@@ -163,6 +164,7 @@ class FormDatiObbligatori
                         break;
                     case "Password too short":
                         array_push($errori, "La password scelta è troppo breve. Inserire una password di almeno 5 caratteri");
+                        break;
                     default:
                         throw $e;
                         break;
@@ -205,9 +207,9 @@ class FormDatiObbligatori
             if (empty($errori)) {
                 try {
                     if (AggiornamentoDB::aggiornaDatiDB($dati)) {
-                        echo "Aggiornamento riuscito";
+//                        echo "Aggiornamento riuscito";
                     } else {
-                        echo "Aggiornamento fallito";
+//                        echo "Aggiornamento fallito";
                         throw new Exception("Failed update");
                     }
                 } catch (Exception $e) {
