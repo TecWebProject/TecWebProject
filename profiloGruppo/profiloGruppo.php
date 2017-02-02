@@ -8,10 +8,35 @@
 	include_once realpath(dirname(__FILE__, 2))."/lib/php/header.php";	//LIBRERIA PER CREARE HEADER
 	include_once realpath(dirname(__FILE__, 2))."/lib/php/menu.php";	//LIBRERIA PER CREARE MENU
 	include_once realpath(dirname(__FILE__, 2))."/lib/php/footer.php";	//LIBRERIA PER CREARE FOOTER
+
+function getNome($codice) {
+	$nome="";
+	$connessione=dbConnectionData::getMysqli();	//CONNESSIONE AL DATABASE
+	try {
+		if ($connessione->connect_errno) {
+			throw new Exception("Connessione fallita: ".$connessione->connect_error.".");
+		} else {
+			$query="SELECT nome FROM Gruppi WHERE idGruppo=\"".$codice."\";";	//CREAZIONE DELLA QUERY
+			if (!$result=$connessione->query($query)) {
+				echo "Query non valida: ".$connessione->error.".";
+			} else {
+				if ($result->num_rows>0) {
+					$row=$result->fetch_array(MYSQLI_ASSOC);
+					$nome=$row['nome'];
+				}
+				$result->free();
+			}
+			$connessione->close();	//CHIUSURA CONNESSIONE
+		}
+	} catch (Exception $e){
+		echo "Errore: dati non recuperati (".$e->getMessage().").";
+	}
+	return $nome;
+}
 	
 	$page="";
 	$page=$page.Start::getHead(array(
-	'Titolo' => "BandBoard",
+	'Titolo' => getNome($_REQUEST['idGruppo'])." - BandBoard",
 	'DescrizioneBreve' => "Profilo Gruppo - BandBoard",
 	'Descrizione' => "Pagina di visualizzazione di un gruppo del sito BandBoard",
 	'Author' => array("Derek Toninato", "Filippo Berto", "Francesco Pezzuto", "Giorgio Giuffre"),
@@ -58,6 +83,9 @@
 						$page=str_replace("<nome />", $row['nome'], $page);
 						$page=str_replace("<provincia />", $row['provincia'], $page);
 						$page=str_replace("<dataIscrizione />", substr($row['dataIscrizione'], 0, 10), $page);
+						if ($row['descrizione']==NULL) {
+							$row['descrizione']="Nessuna descrizione";
+						}
 						$page=str_replace("<descrizione />", $row['descrizione'], $page);
 					}
 					$result->free();
@@ -75,6 +103,8 @@
 					}
 					$result->free();
 					$gen=$gen."</ul>";
+				} else {
+					$gen="<p>Nessun genere</p>";
 				}
 			}
 			$page=str_replace("<generi />", $gen, $page);
@@ -105,6 +135,8 @@
 					}
 					$result->free();
 					$contacts=$contacts."</ul>";
+				} else {
+					$contacts="<p>Nessun contatto</p>";
 				}
 			}
 			$page=str_replace("<contatti />", $contacts, $page);
@@ -113,11 +145,12 @@
 	} catch (Exception $e){
 		echo "Errore: dati non recuperati (".$e->getMessage().").";
 	}
-	if ($_REQUEST['page']=="index") {
+	if (!isset($_REQUEST['page']) || $_REQUEST['page']=="index") {
 		$precPage="<p class=\"paginaPrec\"><a href=\"../index.php\" id=\"torna\">Torna alla Home</a></p>";
 	} else {
+		$n=$_REQUEST['num'];
 		if ($_REQUEST['page']=="ricerca") {
-			$precPage="<p class=\"paginaPrec\"><a href=\"../cercaGruppi/index.php?num=\"".$_REQUEST['num']."\" id=\"torna\">Torna alla Ricerca</a></p>";
+			$precPage="<p class=\"paginaPrec\"><a href=\"../cercaGruppi/index.php?num=".$n."\" id=\"torna\">Torna alla Ricerca</a></p>";
 		}
 	}
 	$page=str_replace("<pagPrec />", $precPage, $page);

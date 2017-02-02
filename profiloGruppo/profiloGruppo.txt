@@ -10,9 +10,9 @@
 		</div>
 		<div id="bloccoBio">
 			<h3>Descrizione</h3>
-			<div id="cornice">
+			<p>
 				<descrizione />
-			</div>
+			</p>
 		</div>
 		<div id="bloccoGeneri">
 			<h3>Generi suonati</h3>
