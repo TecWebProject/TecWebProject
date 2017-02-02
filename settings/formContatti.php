@@ -122,7 +122,10 @@ class FormContatti
                     throw new Exception("Nothing to do");
                 }
 
-                if ($_POST['salva'] == "true" || $_POST['aggiungiContatto'] == "true") {
+                if (
+                    (isset($_POST['salva']) && $_POST['salva'] == "true") ||
+                    (isset($_POST['aggiungiContatto']) && $_POST['aggiungiContatto'] == "true")
+                ) {
 
                     $indiciContattiValidi = array_filter(
                         array_unique(
@@ -157,8 +160,6 @@ class FormContatti
                     }
 
                     $dati['contatti']['inserisci'] = array_unique($dati['contatti']['inserisci'], SORT_REGULAR);
-
-                    $_SESSION['numeroContatti'] = count($dati['contatti']['inserisci']);
 
                 } else {
                     throw new Exception("Invalid input");
