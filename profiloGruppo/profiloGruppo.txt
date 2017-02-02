@@ -1,5 +1,6 @@
+<div id="content">
 	<div id="contentProfilo">
-		<h2><strong>Profilo gruppo</strong></h2>
+		<h2>Profilo di <nome /></h2>
 		<div id="bloccoPrincipale">
 			<immagineProfilo />
 			<ul>
@@ -33,5 +34,6 @@
 		</div>
 		<pagPrec />
 	</div>
-	<footer />
+</div>
 
+<footer />
