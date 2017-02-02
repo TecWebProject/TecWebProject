@@ -31,12 +31,14 @@ try {
     $string .= "<body>" . Header::getHeader() . "<div class='breadcrump'><h2>Modifica contatti</h2></div>";
 
     // Menu
-    $string .= "<div class='nav'>" . Menu::getMenu(array("Home", "<a href='pagina.html'>Profilo</a>", "<a href='pagina.html'>Cerca</a>", "<a href='pagina.html'>Band</a>")) . "</div>";
+    $string .= "<div class='nav'>" . Menu::getMenu(array('<a href="../index.php" xml:lang="en" lang="en">Home</a>',
+            '<a href="../profiloUtente/profiloUtente.php?username=' . $_SESSION['username'] . '">Visualizza Profilo</a>',
+            '<a href="../cercaUtenti/index.php">Cerca Utenti</a>', '<a href="../cercaGruppi/index.php">Cerca Gruppi</a>', '<a href="../gestioneGruppi/index.php">I miei Gruppi</a>')) . "</div>";
 
     // Inizio contenuto pagina
     $string .= "<div id='content'>";
 
-    $string .= MenuProfilo::getMenuProfilo();
+    $string .= MenuProfilo::getMenuProfilo(3);
 
     $string .= "<div id='modContenutoPagina'>";
 
