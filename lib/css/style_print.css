@@ -1,0 +1,33 @@
+* {
+	background-color: white;
+	color: black;
+	font-family: serif;
+	font-size: 1em;
+}
+
+a, a:visited {
+	color: #004;
+}
+
+.nav, #top, .paginaPrec {
+	display: none;
+}
+
+#content {
+	text-align: justify;
+}
+
+#content h2 {
+	text-align: center;
+	font-size: 2em;
+}
+
+#content h3, #content p {
+	max-width: 30em;
+}
+
+#fotoprofilo {
+	float: right;
+	width: 16em;
+	height: auto;
+}

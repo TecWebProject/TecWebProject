@@ -18,7 +18,7 @@
 	'Keywords' => array("BandBoard", "profilo", $_REQUEST['username'], "utente", "band", "bacheca", "musica", "musicisti", "gruppi"),
 	'BookmarkIcon' => 'site/logo.png',
 	'Stylesheets' => array("style.css"),
-	'Extra' => array("<link rel=\"stylesheet\" media=\"handheld, screen and (max-width:480px), only screen and (max-device-width:480px)\" href=\"lib/css/style_mobile.css\" type=\"text/css\" />")
+	'Extra' => array("<link rel=\"stylesheet\" media=\"handheld, screen and (max-width:480px), only screen and (max-device-width:480px)\" href=\"../lib/css/style_mobile.css\" type=\"text/css\" />", '<link rel="stylesheet" type="text/css" media="print" href="../lib/css/style_print.css" />')
 ));	//CREAZIONE HEAD
 	$page=$page."<body>";
 	$page=$page.Header::getHeader();
@@ -29,11 +29,11 @@
 	                </form>
                 </div>";
 		$page=$page.$logout;
-		$page=$page."<div class=\"nav\">".Menu::getMenu(array("<a href='../index.php'>Home</a>", "<a href='modificaProfilo/modificaProfilo.php'>Modifica Profilo</a>", "<a href='cercaUtenti/cercaUtenti.php'>Cerca Utenti</a>", "<a href='cercaGruppi/cercaGruppi.php'>Cerca Gruppi</a>", "<a href='gestioneBand/gestioneBand.php'>I Miei Gruppi</a>"))."</div>";	//CREAZIONE DEL MENU PER UTENTE LOGGATO
+		$page=$page."<div class=\"nav\">".Menu::getMenu(array("<a href='../index.php'>Home</a>", "<a href='modificaProfilo/modificaProfilo.php'>Modifica Profilo</a>", "<a href='cercaUtenti/index.php'>Cerca Utenti</a>", "<a href='cercaGruppi/index.php'>Cerca Gruppi</a>", "<a href='gestioneBand/gestioneBand.php'>I Miei Gruppi</a>"))."</div>";	//CREAZIONE DEL MENU PER UTENTE LOGGATO
 	} else {
 		session_unset();
 		session_destroy();
-		$page=$page."<div class=\"nav\">".Menu::getMenu(array("<a href='../index.php'>Home</a>", "<a href='../cercaUtenti/cercaUtenti.php'>Cerca Utenti</a>", "<a href='../cercaGruppi/cercaGruppi.php'>Cerca Gruppi</a>"))."</div>";	//CREAZIONE DEL MENU PER UTENTE NON LOGGATO
+		$page=$page."<div class=\"nav\">".Menu::getMenu(array("<a href='../index.php'>Home</a>", "<a href='../cercaUtenti/index.php'>Cerca Utenti</a>", "<a href='../cercaGruppi/index.php'>Cerca Gruppi</a>"))."</div>";	//CREAZIONE DEL MENU PER UTENTE NON LOGGATO
 	}
 	$page=$page.file_get_contents(realpath(dirname(__FILE__))."/profiloUtente.txt");
 	

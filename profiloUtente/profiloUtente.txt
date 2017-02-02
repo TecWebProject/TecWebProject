@@ -1,5 +1,6 @@
+<div id="content">
 	<div id="contentPU">
-		<h2><strong>Profilo utente</strong></h2>
+		<h2>Profilo di <nickname /></h2>
 		<div id="bloccoPrincipale">
 			<immagineProfilo />
 			<ul>
@@ -41,4 +42,6 @@
 		</div>
 		<pagPrec />
 	</div>
-	<footer />
+</div>
+
+<footer />
