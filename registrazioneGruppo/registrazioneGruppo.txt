@@ -11,7 +11,7 @@
 					</div>
 					<div>
 						<label for="regione">Regione </label>
-						<select name="regione" id="regione" title="Regione" onchange="showProvince(this.value);">	<!-- MI APPOGGIO AL FILE JAVASCRIPT (provincie.js) CREATO DA GIUFFRE' GIORGIO -->
+						<select name="regione" id="regione" title="Regione" onchange="showProvince(this.value);">	<!-- MI APPOGGIO AL FILE JAVASCRIPT (provincie.js) CREATO DA FILIPPO BERTO -->
 							<option value="">Seleziona regione</option>
 							<regioni />
 						</select>
@@ -38,4 +38,3 @@
 		<p class="paginaPrec"><a href="../gestioneGruppi/gestioneGruppi.php" id="torna">Torna a Gestione Gruppi</a></p>
 	</div>
 </div>
-

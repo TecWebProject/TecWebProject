@@ -4,6 +4,9 @@
 
 session_start();
 
+if (!isset($_SESSION['username']))
+	header('Location: ../index.php');
+
 include_once realpath(dirname(__FILE__, 2))."/lib/php/query_server.php";
 include_once realpath(dirname(__FILE__, 2))."/lib/php/start.php";	//LIBRERIA PER CREARE HEAD
 include_once realpath(dirname(__FILE__, 2))."/lib/php/header.php";	//LIBRERIA PER CREARE HEADER
@@ -44,25 +47,26 @@ function getStrumenti() {
 }
 
 $page=Start::getHead(array(
-	'Titolo' => "Registrazione Gruppo BandBoard",
+	'Titolo' => "Registrazione Gruppo - BandBoard",
 	'DescrizioneBreve' => "Registrazione Gruppo - BandBoard",
-	'Descrizione' => "Pagina di registrazione di un gruppo del sito BandBoard",
+	'Descrizione' => "Pagina di registrazione di un gruppo al sito BandBoard",
 	'Author' => array("Derek Toninato", "Filippo Berto", "Francesco Pezzuto", "Giorgio Giuffrè"),
-	'Keywords' => array("BandBoard", "registrazione", "gruppo", "iscrizione", "bacheca", "musica", "musicisti", "gruppi", "chitarra", "basso", "batteria", "piano", "tastiera"),
+	'Keywords' => array("BandBoard", "registrazione", "gruppo", "iscrizione", "bacheca", "musica", "musicisti", "gruppi"),
 	'BookmarkIcon' => 'site/logo.png',
 	'Stylesheets' => array("style.css"),
-	'Extra' => array("<link rel=\"stylesheet\" media=\"handheld, screen and (max-width:480px), only screen and (max-device-width:480px)\" href=\"../lib/css/style_mobile.css\" type=\"text/css\" />", "<!-- MI APPOGGIO AL FILE JAVASCRIPT (provincie.js) CREATO DA GIUFFRE' GIORGIO -->", "<script type=\"text/javascript\" src=\"../lib/js/province.js\"></script>", "<script type=\"text/javascript\" src=\"registrazioneGruppo.js\"></script>")
+	'Extra' => array("<link rel=\"stylesheet\" media=\"handheld, screen and (max-width:480px), only screen and (max-device-width:480px)\" href=\"../lib/css/style_mobile.css\" type=\"text/css\" />", "<!-- MI APPOGGIO AL FILE JAVASCRIPT (province.js) CREATO DA FILIPPO BERTO -->", "<script type=\"text/javascript\" src=\"../lib/js/province.js\"></script>", "<script type=\"text/javascript\" src=\"registrazioneGruppo.js\"></script>")
 ));	//CREAZIONE HEAD
 
 $page=$page."<body>".Header::getHeader(); //CREAZIONE HEADER
 
 $logout="<div class=\"logout\">
-	                <form action=\"../lib/php/logout.php\" method=\"post\">
-    	                <p><input type=\"submit\" id=\"logout\" value=\"Logout\" /></p>
-	                </form>
-                </div>";
+			<form action=\"../lib/php/logout.php\" method=\"post\">
+				<p><input type=\"submit\" id=\"logout\" value=\"Logout\" /></p>
+			</form>
+		</div>";
 $page=$page.$logout;
-$page=$page."<div class=\"nav\">".Menu::getMenu(array("<a href='../index.php'>Home</a>", "<a href='../settings/index.php'>Modifica Profilo</a>", "<a href='../cercaUtenti/index.php'>Cerca Utenti</a>", "<a href='../cercaGruppi/index.php'>Cerca Gruppi</a>", "<a href='../gestioneBand/gestioneBand.php'>I Miei Gruppi</a>"))."</div>";	//CREAZIONE DEL MENU
+
+$page=$page."<div class=\"nav\">".Menu::getMenu(array('<a href="../index.php" xml:lang="en" lang="en">Home</a>', '<a href="../profiloUtente/profiloUtente.php?username=' . $_SESSION['username'] . '">Visualizza Profilo</a>', '<a href="../settings/index.php">Modifica Profilo</a>', '<a href="../cercaUtenti/index.php">Cerca Utenti</a>', '<a href="../cercaGruppi/index.php">Cerca Gruppi</a>', '<a href="../gestioneGruppi/gestioneGruppi.php">I miei Gruppi</a>')).'</div>';	//CREAZIONE DEL MENU
 
 if (count($_REQUEST)==0) {	//APPENA ARRIVATO DA GESTIONE GRUPPI
 	$page=$page.file_get_contents("registrazioneGruppo.txt");	//CREAZIONE PAGINA DI REGISTRAZIONE GRUPPO
