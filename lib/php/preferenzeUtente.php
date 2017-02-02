@@ -18,7 +18,7 @@ class PreferenzeUtente
     {
         $mysqli = dbConnectionData::getMysqli();
 
-        $stmt = $mysqli->prepare("SELECT `genere` FROM `database_artisti`.`GeneriUtenti` WHERE `utente` = ?");
+        $stmt = $mysqli->prepare("SELECT `genere` FROM `GeneriUtenti` WHERE `utente` = ?");
         $stmt->bind_param("s", $username);
         $stmt->execute();
         $stmt_result = $stmt->get_result();
