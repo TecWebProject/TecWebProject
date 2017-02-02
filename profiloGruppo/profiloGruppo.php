@@ -3,11 +3,11 @@
 /* PAGINA PROFILO DI UN GRUPPO */
 session_start();
 
-include_once realpath(dirname(__FILE__, 2))."/lib/php/query_server.php";
-include_once realpath(dirname(__FILE__, 2))."/lib/php/start.php";	//LIBRERIA PER CREARE HEAD
-include_once realpath(dirname(__FILE__, 2))."/lib/php/header.php";	//LIBRERIA PER CREARE HEADER
-include_once realpath(dirname(__FILE__, 2))."/lib/php/menu.php";	//LIBRERIA PER CREARE MENU
-include_once realpath(dirname(__FILE__, 2))."/lib/php/footer.php";	//LIBRERIA PER CREARE FOOTER
+include_once "lib/php/query_server.php";
+include_once "lib/php/start.php";	//LIBRERIA PER CREARE HEAD
+include_once "lib/php/header.php";	//LIBRERIA PER CREARE HEADER
+include_once "lib/php/menu.php";	//LIBRERIA PER CREARE MENU
+include_once "lib/php/footer.php";	//LIBRERIA PER CREARE FOOTER
 
 function getNome($codice) {
 	$nome="";
