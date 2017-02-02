@@ -17,7 +17,6 @@ $start = Start::getHead(
 		'DescrizioneBreve' => 'Cerca utenti in BandBoard',
 		'Descrizione' => 'Cerca utenti in BandBoard, per strumenti suonati, province e genere.',
 		'Keywords' => array('BandBoard', 'cerca', 'utenti', 'musicisti'),
-		'BookmarkIcon' => 'site/logo.png',
 		'Stylesheets' => array('style.css'),
 		'Extra' => array('<link rel="stylesheet" media="handheld, screen and (max-width:480px), only screen and (max-device-width:480px)" href="../lib/css/style_mobile.css" type="text/css" />', '<script type="text/javascript" src="../lib/js/province.js"></script>')
 	)

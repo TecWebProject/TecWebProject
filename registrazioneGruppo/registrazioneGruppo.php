@@ -50,9 +50,7 @@ $page=Start::getHead(array(
 	'Titolo' => "Registrazione Gruppo - BandBoard",
 	'DescrizioneBreve' => "Registrazione Gruppo - BandBoard",
 	'Descrizione' => "Pagina di registrazione di un gruppo al sito BandBoard",
-	'Author' => array("Derek Toninato", "Filippo Berto", "Francesco Pezzuto", "Giorgio Giuffrè"),
 	'Keywords' => array("BandBoard", "registrazione", "gruppo", "iscrizione", "bacheca", "musica", "musicisti", "gruppi"),
-	'BookmarkIcon' => 'site/logo.png',
 	'Stylesheets' => array("style.css"),
 	'Extra' => array("<link rel=\"stylesheet\" media=\"handheld, screen and (max-width:480px), only screen and (max-device-width:480px)\" href=\"../lib/css/style_mobile.css\" type=\"text/css\" />", "<!-- MI APPOGGIO AL FILE JAVASCRIPT (province.js) CREATO DA FILIPPO BERTO -->", "<script type=\"text/javascript\" src=\"../lib/js/province.js\"></script>", "<script type=\"text/javascript\" src=\"registrazioneGruppo.js\"></script>")
 ));	//CREAZIONE HEAD

@@ -14,9 +14,7 @@ $page=$page.Start::getHead(array(
 	'Titolo' => $_REQUEST['username']." - BandBoard",
 	'DescrizioneBreve' => "Profilo Utente - BandBoard",
 	'Descrizione' => "Pagina di visualizzazione di un utente del sito BandBoard",
-	'Author' => array("Derek Toninato", "Filippo Berto", "Francesco Pezzuto", "Giorgio Giuffrè"),
 	'Keywords' => array("BandBoard", "profilo", $_REQUEST['username'], "utente", "band", "bacheca", "musica", "musicisti", "gruppi"),
-	'BookmarkIcon' => 'site/logo.png',
 	'Stylesheets' => array("style.css"),
 	'Extra' => array("<link rel=\"stylesheet\" media=\"handheld, screen and (max-width:480px), only screen and (max-device-width:480px)\" href=\"../lib/css/style_mobile.css\" type=\"text/css\" />", '<link rel="stylesheet" type="text/css" media="print" href="../lib/css/style_print.css" />')
 	));	//CREAZIONE HEAD
