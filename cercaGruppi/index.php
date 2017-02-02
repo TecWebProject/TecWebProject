@@ -186,7 +186,7 @@ if ($tot_pages > 0) {
 	$successiva = '<span class="notClickable">successiva</span>';
 	if ($curr_page < $tot_pages)
 		$successiva = '<a href="index.php?num=' . ($curr_page + 1) . '">successiva</a>';
-	$paginazione = $precedente . $successiva;
+	$paginazione = $precedente . ' ' . $successiva;
 }
 $file = str_replace('<paginazione />', $paginazione, $file);
 
