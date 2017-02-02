@@ -1,6 +1,11 @@
 // Esegue query per le province e aggiorna il selettore
-function showProvince(str) {
-    if (str == "") {
+function showProvince() {
+
+    var regione = document.getElementById("modSelectRegione").value;
+
+    var provincia = document.getElementById("modSelectProvincia").value;
+
+    if (regione == "") {
         // Scelto "Seleziona Provincia"
         document.getElementById("modSelectProvincia").innerHTML = '<option value="">Seleziona provincia</option>';
         document.getElementById("modSelectProvincia").disabled = true;
@@ -14,9 +19,11 @@ function showProvince(str) {
                 document.getElementById("modSelectProvincia").disabled = false;
             }
         };
-        xmlhttp.open("GET", "script_select_provincia.php?regione=" + str, true);
+        xmlhttp.open("GET", "script_select_provincia.php?regione=" + regione, true);
         xmlhttp.send();
-        document.getElementById("modSelectProvincia").innerHTML = xmlhttp.response
+        document.getElementById("modSelectProvincia").innerHTML = xmlhttp.response;
+
+
     }
 }
 
@@ -63,8 +70,12 @@ function checkNome() {
 
         var nome = input.value;
 
-        var accentedCharacters = "àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ";
-        var valid = new RegExp("^[A-Za-z" + accentedCharacters + "\s]+").test(nome);
+        console.log(nome);
+
+        var valid = new RegExp("^[A-Za-zàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ\s]+$").test(nome);
+
+        console.log("Valid: " + valid);
+
         if (valid) {
             document.getElementById("errorModNome").innerHTML = "<img src='correctEntry.png' class='modCorrectEntry'/>";
         } else {
@@ -85,8 +96,7 @@ function checkCognome() {
 
         var cognome = input.value;
 
-        var accentedCharacters = "àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ";
-        var valid = new RegExp("^[A-Za-z" + accentedCharacters + "\s]+").test(cognome);
+        var valid = new RegExp("^[A-Za-zàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ\s$]+$").test(cognome);
         if (valid) {
             document.getElementById("errorModCognome").innerHTML = "<img src='correctEntry.png' class='modCorrectEntry'/>";
         } else {
@@ -173,12 +183,20 @@ function checkPasswordCheck() {
 }
 
 // Controllo età
-function checkBDay(bDay) {
+function checkBDay() {
+
+    if (
+        document.getElementById("modDataNascitaGiorno") == null ||
+        document.getElementById("modDataNascitaMese") == null ||
+        document.getElementById("modDataNascitaAnno") == null
+    )
+        return true;
+
     var d = document.getElementById('modDataNascitaGiorno').value;
     var m = document.getElementById('modDataNascitaMese').value;
     var y = document.getElementById('modDataNascitaAnno').value;
     var date = new Date(y, m, d);
-    var stringDate = d + "/" + m + "/" + y;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    var stringDate = d + "/" + m + "/" + y;
     var valid;
     //  if (bDay == "") {
     //      valid = false;
@@ -190,11 +208,14 @@ function checkBDay(bDay) {
         valid = false;
     }
 
+    console.log("valid: " + valid);
+
     if (valid) {
-        var today = new Date();;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+        var today = new Date();
         if (today >= date) {
             document.getElementById("errorModDataNascita").innerHTML = "<img src='correctEntry.png' class='modCorrectEntry'/>";
         } else {
+            valid = false;
             document.getElementById("errorModDataNascita").innerHTML = "Data di nascita nel futuro.";
         }
     } else {
@@ -204,31 +225,67 @@ function checkBDay(bDay) {
     return valid;
 }
 
-function checkBio(str) {
-    document.getElementById("errorModBio").innerHTML = "";
-    var valid = true;
-    if (/<script/.test(str)) {
-        document.getElementById("errorModBio").innerHTML += "<li>Non è possibilie inserire script JavaScript nel testo.</li>";
-        valid = false;
-    }
-    if (/<input/.test(str)) {
-        document.getElementById("errorModBio").innerHTML += "<li>Non è possibilie inserire tag HTML input nel testo.</li>";
-        valid = false;
-    }
-    if (/<form/.test(str)) {
-        document.getElementById("errorModBio").innerHTML += "<li>Non è possibilie inserire tag HTML form nel testo.</li>";
-        valid = false;
-    }
-    if (/style[\s]*\=/.test(str)) {
-        document.getElementById("errorModBio").innerHTML += "<li>Non è possibilie modificare lo stile dei tag HTML.</li>";
-        valid = false;
-    }
-    if (/\/\>/.test(str)) {
-        document.getElementById("errorModBio").innerHTML += "<li>Non è possibilie modificare la chiusura dei tag HTML del testo.</li>";
-        valid = false;
+function checkBio() {
+
+    var input = document.getElementById("modTextAreaBio")
+
+    if (input != null) {
+
+        var str = input.value;
+
+        document.getElementById("errorModBio").innerHTML = "";
+        var valid = true;
+        if (/<script/.test(str)) {
+            document.getElementById("errorModBio").innerHTML += "<li>Non è possibilie inserire script nel testo.</li>";
+            valid = false;
+        }
+        if (/<input/.test(str)) {
+            document.getElementById("errorModBio").innerHTML += "<li>Non è possibilie inserire tag HTML input nel testo.</li>";
+            valid = false;
+        }
+        if (/<form/.test(str)) {
+            document.getElementById("errorModBio").innerHTML += "<li>Non è possibilie inserire tag HTML form nel testo.</li>";
+            valid = false;
+        }
+        if (/style[\s]*\=/.test(str)) {
+            document.getElementById("errorModBio").innerHTML += "<li>Non è possibilie modificare lo stile dei tag HTML.</li>";
+            valid = false;
+        }
+        if (/\/\>/.test(str)) {
+            document.getElementById("errorModBio").innerHTML += "<li>Non è possibilie modificare la chiusura dei tag HTML del testo.</li>";
+            valid = false;
+        }
+
+        return valid;
     }
 
-    return valid;
+    return true;
+}
+
+function checkProvenienza() {
+
+    console.log("CHECK PROVENIENZA");
+
+    var regione = document.getElementById("modSelectRegione");
+    var provincia = document.getElementById("modSelectProvincia");
+
+    console.log(regione);
+    console.log(provincia);
+
+    if (regione == null && provincia == null) {
+        return true;
+    }
+
+    if (regione.value == null || provincia.value == null) {
+        console.log("mostro l'errore");
+        document.getElementById("errorModProvenienza").innerHTML = "Non è possibile selezionare solo uno dei due campi per la provenienza.";
+        return false;
+    }
+
+    if (regione.value != null && provincia.value != null) {
+        return true;
+    }
+
 }
 
 function clearError(str) {
@@ -258,6 +315,9 @@ function clearError(str) {
         case 'passwordCheck':
             document.getElementById("errorModPasswordCheck").innerHTML = "";
             break;
+        case 'provenienza':
+            document.getElementById("errorModProvenienza").innerHTML = "";
+            break;
         default:
             console.error("passato: " + str);
     }
@@ -265,7 +325,23 @@ function clearError(str) {
 
 function checkForm() {
 
-    console.log("Definire checkForm()");
+    var nome = checkNome();
+    var cognome = checkCognome();
+    var email = checkEmail();
+    var password = checkPassword();
+    var passwordCheck = checkPasswordCheck();
+    var bDay = checkBDay();
+    var bio = checkBio();
+    var provenienza = checkProvenienza();
 
-    return true;
+    console.log(nome);
+    console.log(cognome);
+    console.log(email);
+    console.log(password);
+    console.log(passwordCheck);
+    console.log(bDay);
+    console.log(bio);
+    console.log(provenienza);
+
+    return (nome && cognome && email && password && passwordCheck && bDay && bio && provenienza);
 }

@@ -1,15 +1,15 @@
 <?php
 
-   $relPath = realpath(dirname(__FILE__));
+$relPath = realpath(dirname(__FILE__));
 
-   require_once $relPath . '/query_server.php';
+require_once $relPath . '/query_server.php';
 
-   /**
-   *  Classe per la richiesta della regione di una provincia
-   *  Usare il metodo statico getRegione
-   *  INPUT: nome della provincia
-   *  OUTPUT: nome della regione
-   */
+/**
+ *  Classe per la richiesta della regione di una provincia
+ *  Usare il metodo statico getRegione
+ *  INPUT: nome della provincia
+ *  OUTPUT: nome della regione
+ */
 class SelectRegione
 {
     /*
@@ -36,17 +36,21 @@ class SelectRegione
             $stmt_result = $stmt->get_result();
             $result = $stmt_result->fetch_all(MYSQLI_ASSOC);
 
+            if ($result == null) {
+                return null;
+            }
+
             return $result[0]['regione'];
 
         } catch (Exception $e) {
             switch ($e->getMessage()) {
-            case 'Input non valido':
-                return null;
-                break;
+                case 'Input non valido':
+                    return null;
+                    break;
 
-            default:
-                throw $e;
-               break;
+                default:
+                    throw $e;
+                    break;
             }
         }
     }
