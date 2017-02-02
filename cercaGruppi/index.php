@@ -5,7 +5,7 @@ session_start();
 
 
 # leggi template
-$file = file_get_contents('template.html');
+$file = file_get_contents('template.xml');
 
 
 
