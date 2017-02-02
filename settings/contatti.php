@@ -38,7 +38,7 @@ try {
     // Inizio contenuto pagina
     $string .= "<div id='content'>";
 
-    $string .= MenuProfilo::getMenuProfilo();
+    $string .= MenuProfilo::getMenuProfilo(3);
 
     $string .= "<div id='modContenutoPagina'>";
 
