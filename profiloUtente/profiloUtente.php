@@ -9,7 +9,7 @@
 	
 	$page="";
 	$page=$page.Start::getHead(array(
-	'Titolo' => "BandBoard",
+	'Titolo' => $_REQUEST['username']." - BandBoard",
 	'DescrizioneBreve' => "Profilo Utente - BandBoard",
 	'Descrizione' => "Pagina di visualizzazione di un utente del sito BandBoard",
 	'Author' => array("Derek Toninato", "Filippo Berto", "Francesco Pezzuto", "Giorgio Giuffre"),
@@ -18,6 +18,7 @@
 	'Stylesheets' => array("style.css"),
 	'Extra' => array("<link rel=\"stylesheet\" media=\"handheld, screen and (max-width:480px), only screen and (max-device-width:480px)\" href=\"lib/css/style_mobile.css\" type=\"text/css\" />")
 ));	//CREAZIONE HEAD
+	$page=$page."<body>";
 	$page=$page.Header::getHeader();
 	if (isset($_SESSION['username'])) {	//UTENTE LOGGATO
 		$logout="<div class=\"logout\">
@@ -26,11 +27,11 @@
 	                </form>
                 </div>";
 		$page=$page.$logout;
-		$page=$page.Menu::getMenu(array("<a href='../index.php'>Home</a>", "<a href='modificaProfilo/modificaProfilo.php'>Modifica Profilo</a>", "<a href='cercaUtenti/cercaUtenti.php'>Cerca Utenti</a>", "<a href='cercaGruppi/cercaGruppi.php'>Cerca Gruppi</a>", "<a href='gestioneBand/gestioneBand.php'>I Miei Gruppi</a>"));	//CREAZIONE DEL MENU PER UTENTE LOGGATO
+		$page=$page."<div class=\"nav\">".Menu::getMenu(array("<a href='../index.php'>Home</a>", "<a href='modificaProfilo/modificaProfilo.php'>Modifica Profilo</a>", "<a href='cercaUtenti/cercaUtenti.php'>Cerca Utenti</a>", "<a href='cercaGruppi/cercaGruppi.php'>Cerca Gruppi</a>", "<a href='gestioneBand/gestioneBand.php'>I Miei Gruppi</a>"))."</div>";	//CREAZIONE DEL MENU PER UTENTE LOGGATO
 	} else {
 		session_unset();
 		session_destroy();
-		$page=$page.Menu::getMenu(array("<a href='../index.php'>Home</a>", "<a href='../cercaUtenti/cercaUtenti.php'>Cerca Utenti</a>", "<a href='../cercaGruppi/cercaGruppi.php'>Cerca Gruppi</a>"));	//CREAZIONE DEL MENU PER UTENTE NON LOGGATO
+		$page=$page."<div class=\"nav\">".Menu::getMenu(array("<a href='../index.php'>Home</a>", "<a href='../cercaUtenti/cercaUtenti.php'>Cerca Utenti</a>", "<a href='../cercaGruppi/cercaGruppi.php'>Cerca Gruppi</a>"))."</div>";	//CREAZIONE DEL MENU PER UTENTE NON LOGGATO
 	}
 	$page=$page.file_get_contents(realpath(dirname(__FILE__))."/profiloUtente.txt");
 	
@@ -47,10 +48,10 @@
 				if ($result->num_rows>0) {
 					while ($row=$result->fetch_array(MYSQLI_ASSOC)) {
 						if ($row['immagine']==NULL) {
-							$row['immagine']="defaultUtente.png";
-							$img="<img id=\"fotoprofilo\"' src=\"../images/site/".$row['immagine']."\" alt=\"Immagine di ".$row['nome']."\" />";
+							$row['immagine']="defaultUser.png";
+							$img="<img id=\"fotoprofilo\" src=\"../images/site/".$row['immagine']."\" alt=\"Immagine di ".$row['nome']."\" />";
 						} else {
-							$img="<img id=\"fotoprofilo\"' src=\"../images/bands/".$row['immagine']."\" alt=\"Immagine di ".$row['nome']."\" />";
+							$img="<img id=\"fotoprofilo\" src=\"../images/bands/".$row['immagine']."\" alt=\"Immagine di ".$row['nome']."\" />";
 						}
 						$page=str_replace("<email />", $row['email'], $page);
 						$page=str_replace("<nickname />", $row['username'], $page);
@@ -60,6 +61,9 @@
 						$page=str_replace("<dataIscrizione />", substr($row['dataIscrizione'], 0, 10), $page);
 						$page=str_replace("<dataNascita />", $row['dataNascita'], $page);
 						$page=str_replace("<provincia />", $row['provincia'], $page);
+						if ($row['descrizione']==NULL) {
+							$row['descrizione']="Nessuna descrizione";
+						}
 						$page=str_replace("<descrizione />", $row['descrizione'], $page);
 					}
 					$result->free();
@@ -78,6 +82,8 @@
 							}
 							$result->free();
 							$gen=$gen."</ul>"; //crea la lista dei generi
+					} else {
+						$gen="<p>Nessun genere</p>";
 					}
 			}
 			$page=str_replace("<generiApprezzati />", $gen, $page); //stampa la lista dei generi in $page
@@ -97,6 +103,8 @@
 						}
 						$result->free();
 						$strumenti=$strumenti."</ul>";
+					} else {
+						$strumenti="<p>Nessuno strumento</p>";
 					}
 			}
 			$page=str_replace("<strumentiSuonati />", $strumenti, $page);
@@ -114,17 +122,17 @@
 							while ($row=$result->fetch_array(MYSQLI_ASSOC)) {
 								if ($row['immagine']==NULL) {
 										$row['immagine']="defaultBand.png";
-										$gruppi=$gruppi."<li class=\"elementResult\"><a href=\"profiloBand/profiloBand.php?idGruppo=".$row['idGruppo']."&page=index\"><img class=\"listImage\" src=\"images/site/".$row['immagine']."\" alt=\"Immagine di ".$row['nome']."\" /> ".$row['nome'];
+										$gruppi=$gruppi."<li><img class=\"listImage\" src=\"../images/site/".$row['immagine']."\" alt=\"Immagine di ".$row['nome']."\" /> ".$row['nome'];
 								} else {
-										$gruppi=$gruppi."<li class=\"elementResult\"><a href=\"profiloBand/profiloBand.php?idGruppo=".$row['idGruppo']."&page=index\"><img class=\"listImage\" src=\"images/site/".$row['immagine']."\" alt=\"Immagine di ".$row['nome']."\" /> ".$row['nome'];
+										$gruppi=$gruppi."<li class=\"elementResult\"><img class=\"listImage\" src=\"../images/bands/".$row['immagine']."\" alt=\"Immagine di ".$row['nome']."\" /> ".$row['nome'];
 								}						
-								$gruppi=$gruppi."</a></li>";
+								$gruppi=$gruppi."</li>";
 							}
 							$result->free();
 							$gruppi=$gruppi."</ul>";
 					}
 					else { //altrimenti stampa
-						$gruppi=$gruppi."<p>Non è membro di nessuna band.</p>";}
+						$gruppi="<p>Nessun gruppo</p>";}
 			}
 			$page=str_replace("<nomeGruppi />", $gruppi, $page);
 			
@@ -149,14 +157,15 @@
 	}catch (Exception $e){
 			echo "Errore: dati non recuperati (".$e->getMessage().").";
 	}
-	if ($_REQUEST['page']=="index") {
+	if (!isset($_REQUEST['page']) || $_REQUEST['page']=="index") {
 			$precPage="<p class=\"paginaPrec\"><a href=\"../index.php\" id=\"torna\">Torna alla Home</a></p>";
 	} else {
 			if ($_REQUEST['page']=="ricerca") {
-					$precPage="<p class=\"paginaPrec\"><a href=\"../cercaUtenti/index.php?num=\"".$_REQUEST['num']."\" id=\"torna\">Torna alla Ricerca</a></p>";
+					$precPage="<p class=\"paginaPrec\"><a href=\"../cercaUtenti/index.php?num=".$_REQUEST['num']."\" id=\"torna\">Torna alla Ricerca</a></p>";
 			}
 	}
 	$page=str_replace("<pagPrec />", $precPage, $page);
 	$page=str_replace("<footer />", Footer::getFooter(), $page);
+	$page=$page."</body></html>";
 	echo $page;
 ?>

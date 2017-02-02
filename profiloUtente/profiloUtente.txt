@@ -12,7 +12,7 @@
 			</ul>
 		</div>
 		<div id="bloccoBio">
-			<h3>Presentazione</h3>
+			<h3>Descrizione</h3>
 				<p><descrizione /></p>
 		</div>
 		<div id="bloccoGeneri">
