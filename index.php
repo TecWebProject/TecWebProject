@@ -146,9 +146,7 @@ echo Start::getHead(array(
 	'Titolo' => "Home - BandBoard",
 	'DescrizioneBreve' => "Home - BandBoard",
 	'Descrizione' => "Home page del sito BandBoard",
-	'Author' => array("Derek Toninato", "Filippo Berto", "Francesco Pezzuto", "Giorgio Giuffrè"),
 	'Keywords' => array("BandBoard", "home", "bacheca", "musica", "musicisti", "gruppi", "chitarra", "basso", "batteria", "piano", "tastiera"),
-	'BookmarkIcon' => 'site/logo.png',
 	'Stylesheets' => array("style.css"),
 	'Extra' => array("<link rel=\"stylesheet\" media=\"handheld, screen and (max-width:480px), only screen and (max-device-width:480px)\" href=\"lib/css/style_mobile.css\" type=\"text/css\" />")
 ));	//CREAZIONE HEAD
