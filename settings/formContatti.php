@@ -248,11 +248,11 @@ class FormContatti
         $contatti = array_merge($contatti, array_fill(count($contatti), $numeroContatti - count($contatti), array("tipoContatto" => "", "contatto" => "")));
 
         //Costruzione contenuto pagina
-        $string .= "<form action='contatti.php' method='post' onsubmit='return checkForm()'><fieldset><legend>Contatti</legend><ul>";
+        $string .= "<form action='contatti.php' method='post' onsubmit='return checkForm()'><fieldset><legend>Contatti</legend><p>Lista dei contatti che gli altri utenti possono vedere</p><ul>";
 
         foreach ($contatti as $key => $contatto) {
 
-            $string .= "<li><label for='modContatto" . ($key + 1) . "'>Contatto " . ($key + 1) . ":</label><input id='modContatto" . ($key + 1) . "' name='contatto" . ($key + 1) . "' value='" . $contatto['contatto'] . "' title='Campo di testo del contatto " . ($key + 1) . "'/><label for='modTipoContatto" . ($key + 1) . "'> - tipologia:</label> <select id='modTipoContatto" . ($key + 1) . "' name='tipoContatto" . ($key + 1) . "' title='Tipo del contatto " . ($key + 1) . "'>";
+            $string .= "<li><label for='modContatto" . ($key + 1) . "'>Contatto " . ($key + 1) . ":</label><input id='modContatto" . ($key + 1) . "' name='contatto" . ($key + 1) . "' value='" . $contatto['contatto'] . "' title='Campo di testo del contatto " . ($key + 1) . "'/><label for='modTipoContatto" . ($key + 1) . "'>Tipologia:</label> <select id='modTipoContatto" . ($key + 1) . "' name='tipoContatto" . ($key + 1) . "' title='Tipo del contatto " . ($key + 1) . "'>";
 
             foreach ($tipiContatti as $keySel => $tipoContatto) {
                 $string .= "<option value='$tipoContatto'";
@@ -272,9 +272,9 @@ class FormContatti
 
         }
 
-        $string .= "<li><button id='modAggiungiContato' name='aggiungiContatto' value='true'>Aggiungi contatto</button> </li>";
+        $string .= "<li><button id='modAggiungiContato' name='aggiungiContatto' value='true' title='Aggiunge un contatto alla lista, salvando quelli già inseriti'>Aggiungi contatto</button> </li>";
 
-        $string .= "</ul><button name='salva' value='true' type='submit'>Salva</button></fieldset></form>";
+        $string .= "</ul><button name='salva' value='true' type='submit' title='Salva le modifiche'>Salva</button></fieldset></form>";
 
         return $string;
     }

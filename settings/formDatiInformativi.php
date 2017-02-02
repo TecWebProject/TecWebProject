@@ -254,7 +254,7 @@ class FormDatiInformativi
         }
 
         //Costruzione contenuto pagina
-        $string .= "<form action='datiInformativi.php' method='post' enctype='multipart/form-data'><fieldset><legend>Dati informativi</legend><ul>";
+        $string .= "<form action='datiInformativi.php' method='post' enctype='multipart/form-data'><fieldset><legend>Dati informativi</legend><p>Presentati alla <span xml:lang='en' lang='en'>comunity</span> con i campi seguenti.</p><ul>";
 
         // Carica immagine profilo
         $string .= "<li><label for='modLoadImage'>Carica immagine profilo</label> <input id='modLoadImage' name='profilePic' type='file' title='Carica immagine'/><p id='errorModLoadImage'></p></li>";
@@ -277,7 +277,7 @@ class FormDatiInformativi
         $string .= "</select></li>";
 
         // provincia di appartenenza
-        $string .= "<li><label for='modSelectProvincia'>Seleziona provincia</label> <select id='modSelectProvincia' name='selectProvincia' onchange='clearError(\"provenienza\");checkProvenienza();'><option value=''>Seleziona provincia</option>";
+        $string .= "<li><label for='modSelectProvincia'>Provincia di provenienza</label> <select id='modSelectProvincia' name='selectProvincia' onchange='clearError(\"provenienza\");checkProvenienza();'><option value=''>Seleziona provincia</option>";
 
         $province = Province::getProvince();
 
@@ -292,7 +292,7 @@ class FormDatiInformativi
 
         // bio
         //TODO placeholder "Scrivi una breve descrizione di te..."
-        $string .= "<li><label for='modTextAreaBio'>Bio</label><textarea id='modTextAreaBio' name='bio' cols='40' rows='4' onblur='checkBio(this.value)'>" . $dati['descrizione'] . "</textarea><span id='errorModBio' class='modErrorEntry'></span></li>";
+        $string .= "<li><label for='modTextAreaBio'>Descrizione</label><textarea id='modTextAreaBio' name='bio' cols='40' rows='4' onblur='checkBio(this.value)'>" . $dati['descrizione'] . "</textarea><span id='errorModBio' class='modErrorEntry'></span></li>";
 
         $string .= "</ul><button type='submit'>Salva</button></fieldset></form>";
 

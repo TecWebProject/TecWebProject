@@ -248,7 +248,7 @@ class FormDatiObbligatori
         }
 
         //Costruzione contenuto pagina
-        $string .= "<form action='datiObbligatori.php' method='post' onsubmit='return checkForm()'><fieldset><legend>Dati obbligatori</legend><ul>";
+        $string .= "<form action='datiObbligatori.php' method='post' onsubmit='return checkForm()'><fieldset><legend>Dati obbligatori</legend><p>Pannello dei dati obbligatori</p><ul>";
 
         // username
         $string .= "<li>Username: " . $dati['username'] . "</li>";
@@ -267,17 +267,17 @@ class FormDatiObbligatori
 
         // email
         //TODO placeholder='email'
-        $string .= "<li><label for='modEmail'>Email</label><input id='modEmail' name='email' size='25' value='";
+        $string .= "<li><label for='modEmail'><span xml:lang='en' lang='en'>Email</span></label><input id='modEmail' name='email' size='25' value='";
         $string .= $dati['email'];
         $string .= "' onblur='checkEmail()' onkeypress='clearError(\"email\")'/><span id='errorModEmail' class='modErrorEntry'></span></li>";
 
         // password
         //TODO placeholder='password'
-        $string .= "<li><label for='modPassword'>Password</label><input type='password' id='modPassword' name='password' onblur='checkPassword(this.value)' onkeypress='clearError(\"password\");clearError(\"passwordCheck\")'/><span id='errorModPassword' class='modErrorEntry'></span></li>";
+        $string .= "<li><label for='modPassword'>Cambia <span xml:lang='en' lang='en'>password</span></label><input type='password' id='modPassword' name='password' onblur='checkPassword(this.value)' onkeypress='clearError(\"password\");clearError(\"passwordCheck\")'/><span id='errorModPassword' class='modErrorEntry'></span></li>";
 
         // password check
         //TODO placeholder='password check'
-        $string .= "<li><label for='modPassword'>Reinserisci password</label><input type='password' id='modPasswordCheck' name='passwordCheck' onblur='checkPasswordCheck(this.value)' onkeypress='clearError(\"password\");clearError(\"passwordCheck\")'/><span id='errorModPasswordCheck' class='modErrorEntry'></span></li>";
+        $string .= "<li><label for='modPassword'>Reinserisci <span xml:lang='en' lang='en'>password</span></label><input type='password' id='modPasswordCheck' name='passwordCheck' onblur='checkPasswordCheck(this.value)' onkeypress='clearError(\"password\");clearError(\"passwordCheck\")'/><span id='errorModPasswordCheck' class='modErrorEntry'></span></li>";
 
         // data di nascita
         //TODO placeholder='gg' placeholder='mm' placeholder='aaaa'
