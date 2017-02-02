@@ -11,15 +11,15 @@ include_once realpath(dirname(__FILE__, 2))."/lib/php/footer.php";	//LIBRERIA PE
 
 $page="";
 $page=$page.Start::getHead(array(
-'Titolo' => $_REQUEST['username']." - BandBoard",
-'DescrizioneBreve' => "Profilo Utente - BandBoard",
-'Descrizione' => "Pagina di visualizzazione di un utente del sito BandBoard",
-'Author' => array("Derek Toninato", "Filippo Berto", "Francesco Pezzuto", "Giorgio Giuffrè"),
-'Keywords' => array("BandBoard", "profilo", $_REQUEST['username'], "utente", "band", "bacheca", "musica", "musicisti", "gruppi"),
-'BookmarkIcon' => 'site/logo.png',
-'Stylesheets' => array("style.css"),
-'Extra' => array("<link rel=\"stylesheet\" media=\"handheld, screen and (max-width:480px), only screen and (max-device-width:480px)\" href=\"../lib/css/style_mobile.css\" type=\"text/css\" />", '<link rel="stylesheet" type="text/css" media="print" href="../lib/css/style_print.css" />')
-));	//CREAZIONE HEAD
+	'Titolo' => $_REQUEST['username']." - BandBoard",
+	'DescrizioneBreve' => "Profilo Utente - BandBoard",
+	'Descrizione' => "Pagina di visualizzazione di un utente del sito BandBoard",
+	'Author' => array("Derek Toninato", "Filippo Berto", "Francesco Pezzuto", "Giorgio Giuffrè"),
+	'Keywords' => array("BandBoard", "profilo", $_REQUEST['username'], "utente", "band", "bacheca", "musica", "musicisti", "gruppi"),
+	'BookmarkIcon' => 'site/logo.png',
+	'Stylesheets' => array("style.css"),
+	'Extra' => array("<link rel=\"stylesheet\" media=\"handheld, screen and (max-width:480px), only screen and (max-device-width:480px)\" href=\"../lib/css/style_mobile.css\" type=\"text/css\" />", '<link rel="stylesheet" type="text/css" media="print" href="../lib/css/style_print.css" />')
+	));	//CREAZIONE HEAD
 $page=$page."<body>";
 $page=$page.Header::getHeader();
 if (isset($_SESSION['username'])) {	//UTENTE LOGGATO
@@ -29,11 +29,17 @@ if (isset($_SESSION['username'])) {	//UTENTE LOGGATO
                 </form>
             </div>";
 	$page=$page.$logout;
-	$page=$page."<div class=\"nav\">".Menu::getMenu(array("<a href='../index.php'>Home</a>", "<a href='../settings/index.php'>Modifica Profilo</a>", "<a href='cercaUtenti/index.php'>Cerca Utenti</a>", "<a href='cercaGruppi/index.php'>Cerca Gruppi</a>", "<a href='gestioneBand/gestioneBand.php'>I Miei Gruppi</a>"))."</div>";	//CREAZIONE DEL MENU PER UTENTE LOGGATO
+	$page=$page."<div class=\"nav\">".Menu::getMenu(array(
+		'<a href="../index.php" xml:lang="en" lang="en">Home</a>',
+		"<a href='../settings/index.php'>Modifica Profilo</a>",
+		"<a href='cercaUtenti/index.php'>Cerca Utenti</a>",
+		"<a href='cercaGruppi/index.php'>Cerca Gruppi</a>",
+		"<a href='gestioneBand/gestioneBand.php'>I Miei Gruppi</a>")
+		)."</div>";	//CREAZIONE DEL MENU PER UTENTE LOGGATO
 } else {
 	session_unset();
 	session_destroy();
-	$page=$page."<div class=\"nav\">".Menu::getMenu(array("<a href='../index.php'>Home</a>", "<a href='../cercaUtenti/index.php'>Cerca Utenti</a>", "<a href='../cercaGruppi/index.php'>Cerca Gruppi</a>"))."</div>";	//CREAZIONE DEL MENU PER UTENTE NON LOGGATO
+	$page=$page."<div class=\"nav\">".Menu::getMenu(array('<a href="../index.php" xml:lang="en" lang="en">Home</a>', "<a href='../cercaUtenti/index.php'>Cerca Utenti</a>", "<a href='../cercaGruppi/index.php'>Cerca Gruppi</a>"))."</div>";	//CREAZIONE DEL MENU PER UTENTE NON LOGGATO
 }
 $page=$page.file_get_contents(realpath(dirname(__FILE__))."/profiloUtente.txt");
 
@@ -157,14 +163,14 @@ try {
 		$connessione->close();	//CHIUSURA CONNESSIONE
 	}
 }catch (Exception $e){
-		echo "Errore: dati non recuperati (".$e->getMessage().").";
+	echo "Errore: dati non recuperati (".$e->getMessage().").";
 }
 if (!isset($_REQUEST['page']) || $_REQUEST['page']=="index") {
-		$precPage="<p class=\"paginaPrec\"><a href=\"../index.php\" id=\"torna\">Torna alla Home</a></p>";
+	$precPage="<p class=\"paginaPrec\"><a href=\"../index.php\" id=\"torna\">Torna alla Home</a></p>";
 } else {
-		if ($_REQUEST['page']=="ricerca") {
-			$precPage="<p class=\"paginaPrec\"><a href=\"../cercaUtenti/index.php?num=".$_REQUEST['num']."\" id=\"torna\">Torna alla Ricerca</a></p>";
-		}
+	if ($_REQUEST['page']=="ricerca") {
+		$precPage="<p class=\"paginaPrec\"><a href=\"../cercaUtenti/index.php?num=".$_REQUEST['num']."\" id=\"torna\">Torna alla Ricerca</a></p>";
+	}
 }
 $page=str_replace("<pagPrec />", $precPage, $page);
 $page=str_replace("<footer />", Footer::getFooter(), $page);
