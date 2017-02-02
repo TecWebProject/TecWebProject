@@ -129,7 +129,7 @@ $primo = ($curr_page - 1) * $per_page; # primo gruppo della pag. corrente
 $where_provincia = $where_genere = "? LIKE '%' "; # hack
 
 if (isset($_GET['provincia']) && $_GET['provincia'] != '')
-	$where_provincia = " AND gr.provincia = ? ";
+	$where_provincia = "gr.provincia = ? ";
 else $_GET['provincia'] = '_'; # hack
 
 if (isset($_GET['genere']) && $_GET['genere'] != '')
