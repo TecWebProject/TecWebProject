@@ -459,7 +459,13 @@ INSERT INTO ContattiUtenti (idContatto, utente, tipoContatto, contatto) VALUES
 (NULL, 'ennesimo', 'whatsapp', '049 827 0000'),
 (NULL, 'sempronio96', 'whatsapp', '340 123 4567'),
 (NULL, 'sempronio96', 'telegram', 'https://telegram.me/sempronio96'),
-(NULL, 'svaughan', 'whatsapp', '3331234567');
+(NULL, 'svaughan', 'whatsapp', '3660123456'),
+(NULL, 'm_json_1', 'youtube', 'https://www.youtube.com/user/michaeljacksonVEVO'),
+(NULL, 'david', 'youtube', 'https://www.youtube.com/user/DavidBowieVEVO'),
+(NULL, 'david', 'facebook', 'https://www.facebook.com/davidbowie/'),
+(NULL, 'anto', 'email_pubblica', 'antonio.boscolo@example.com'),
+(NULL, 'agrigi', 'email_pubblica', 'alessia.grigi@example.com'),
+(NULL, 'maria', 'whatsapp', '0491234567');
 
 INSERT INTO GeneriMusicali (nome) VALUES
 ('Hard Rock'),
@@ -507,6 +513,7 @@ INSERT INTO GeneriUtenti (utente, genere) VALUES
 ('SuperPippo', 'Soul'),
 ('giorgio', 'Psychedelic'),
 ('giorgio', 'Progressive'),
+('giorgio', 'Techno'),
 ('giorgio', 'Pop'),
 ('millenium_bug', 'Disco'),
 ('ennesimo', 'Country'),
