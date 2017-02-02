@@ -2,6 +2,8 @@
 
 require_once realpath(dirname(__FILE__)) . "/../lib/php/datiUtente.php";
 require_once realpath(dirname(__FILE__)) . "/../lib/php/utente.php";
+require_once realpath(dirname(__FILE__)) . "/../lib/php/contattiUtente.php";
+require_once realpath(dirname(__FILE__)) . "/../lib/php/tipiContatto.php";
 require_once realpath(dirname(__FILE__)) . "/aggiornamentoDB.php";
 require_once realpath(dirname(__FILE__)) . "/../lib/php/regioni.php";
 require_once realpath(dirname(__FILE__)) . "/../lib/php/province.php";
@@ -13,14 +15,14 @@ session_start();
 /**
  * Classe per generare i dati obbligatori della form di modifica profilo
  */
-class FormDatiInformativi
+class FormContatti
 {
 
     /**
      * @return string stringa della form
      * @throws Exception lancia un eccezione se la sessione non è valida
      */
-    public static function getFormDatiInformativi()
+    public static function getFormContatti()
     {
 
         $errori = array();
@@ -41,165 +43,127 @@ class FormDatiInformativi
 
         if (!empty($_POST)) {
 
+            echo "<p>POST:\t";
+            var_dump($_POST);
+            echo "</p>";
+
             // Test input
             $dati = array();
 
             $dati['username'] = $_SESSION['username'];
 
-            // Carica immagine profilo
+            //TODO singole azioni
+
+            $contatti = ContattiUtente::getContattiUtente($_SESSION['username']);
+            $tipiContatti = TipiContatto::getTipiContatto();
+
+            // Aggiungi contatto
             try {
-
-                if (empty($_FILES)) {
-                    throw new Exception("No file passed");
-                }
-
-                if ($_FILES['profilePic']['name'] == "") {
-                    throw new Exception("Image empty");
-                }
-
-                $img = $_FILES['profilePic']['tmp_name'];
-
-                if (($imageInfo = getimagesize($img)) === false) {
-                    throw new Exception("Not an image");
-                }
-
-                $uploadDirectory = realpath(dirname(__FILE__)) . "/../images/users";
-
-                $relativePathUploadDirectory = Paths::getRelativePath(
-                    realpath(dirname(__FILE__)),
-                    $uploadDirectory
-                );
-                $fileTarget = $relativePathUploadDirectory . $dati['username'];
-
-                $imageWidth = $imageInfo[0];
-                $imageHeight = $imageInfo[1];
-
-                switch ($imageInfo[2]) {
-                    case IMAGETYPE_GIF  :
-                        $src = imagecreatefromgif($img);
-                        break;
-                    case IMAGETYPE_JPEG :
-                        $src = imagecreatefromjpeg($img);
-                        break;
-                    case IMAGETYPE_PNG  :
-                        $src = imagecreatefrompng($img);
-                        break;
-                    default:
-                        throw new Exception("Format not supported");
-                        break;
-                }
-
-                if ($imageWidth > $imageHeight) {
-                    $y = 0;
-                    $x = ($imageWidth - $imageHeight) / 2;
-                    $smallestSide = $imageHeight;
-                } else {
-                    $x = 0;
-                    $y = ($imageHeight - $imageWidth) / 2;
-                    $smallestSide = $imageWidth;
-                }
-
-                $thumbSize = 400;
-
-                $tmp = imagecreatetruecolor($thumbSize, $thumbSize);
-                imagecopyresampled($tmp, $src, 0, 0, $x, $y, $thumbSize, $thumbSize, $smallestSide, $smallestSide);
-                imagejpeg($tmp, $fileTarget . ".jpg", 90);
-
-
-                chmod($fileTarget . ".jpg", 0664);
-
-                $dati['immagineProfilo'] = $dati['username'] . ".jpg";
-
-            } catch (Exception $e) {
-                switch ($e->getMessage()) {
-                    case "No file passed":
-                        error_log("No file passed");
-                        break;
-                    case "Image empty":
-                        break;
-                    case "Not an image":
-                        array_push($errori, htmlentities("Il file caricato non è un'immagine", ENT_QUOTES, "UTF-8"));
-                    default:
-                        throw $e;
-                        break;
-                }
-            }
-
-            // Bottone elimina immagine
-            try {
-                if (!isset($_POST['eliminaImmagine'])) {
-                    throw new Exception("No delete image");
-                }
-
-                if ($_POST['eliminaImmagine'] == "true") {
-                    $dati['immagineProfilo'] = null;
-                }
-
-            } catch (Exception $e) {
-                switch ($e->getMessage()) {
-                    case "No delete image":
-                        //DO NOTHING
-                        break;
-                    default:
-                        throw $e;
-                        break;
-
-                }
-            }
-
-            // Regione e provincia
-            try {
-                if (!isset($_POST['selectRegione']) && !isset($_POST['selectProvincia'])) {
-                    throw new Exception("Nothing passed");
-                }
-
-                if (isset($_POST['selectRegione']) xor isset($_POST['selectProvincia'])) {
-                    throw new Exception("Only one parameter passed");
-                }
-
-                $regioneDiProvinciaPassata = SelectRegione::getRegione($_POST['selectProvincia']);
-
-                if ($regioneDiProvinciaPassata != $_POST['selectRegione']) {
-                    throw new Exception("Unlegal input");
-                }
-
-                $dati['provincia'] = $_POST['selectProvincia'];
-
-            } catch (Exception $e) {
-                switch ($e->getMessage()) {
-                    case "Nothing passed";
-                        //DO NOTHING
-                        break;
-                    case "Only one parameter passed":
-                        array_push($errori, "Entrambi i campi regione e povincia vanno compilati.");
-                    case "Unlegal input":
-                        array_push($errori, "I campi regione e provincia non sono validi.");
-                    default:
-                        throw $e;
-                        break;
-                }
-            }
-
-            // Bio
-            try {
-
-                if (!isset($_POST['bio'])) {
+                if (!isset($_POST['aggiungiContatto'])) {
                     throw new Exception("Nothing to do");
                 }
 
-                if ($_POST['bio'] == "") {
-                    $dati['bio'] = "";
+                if ($_POST['aggiungiContatto'] == "true") {
+
+                    if (isset($_SESSION['numeroContati'])) {
+                        $_SESSION['numeroContati'] += 1;
+                    } else {
+                        $_SESSION['numeroContati'] = count($contatti) + 1;
+                    }
+
                 }
-
-                $dati['bio'] = strip_tags($_POST['bio']);
-
 
             } catch (Exception $e) {
                 switch ($e->getMessage()) {
                     case "Nothing to do":
                         //DO NOTHING
                         break;
-                    default :
+                    default:
+                        throw $e;
+                        break;
+                }
+            }
+
+            // Elimina contatto
+            try {
+
+                if (!isset($_POST['eliminaContatto'])) {
+                    throw new Exception("Nothing to do");
+                }
+
+                if ($_POST['eliminaContatto'] > $_SESSION['numeroContati'] || $_POST['eliminaContatto'] < 1) {
+                    throw new Exception("Invalid input");
+                }
+
+                if ($_POST['eliminaContatto'] <= count($contatti)) {
+                    $dati['contatti']['rimuovi'] = array($contatti[$_POST['eliminaContatto'] - 1]['tipoContatto'], $contatti[$_POST['eliminaContatto'] - 1]['contatto']);
+                }
+
+                $_SESSION['numeroContati'] -= 1;
+
+            } catch (Exception $e) {
+                switch ($e->getMessage()) {
+                    case "Nothing to do":
+                        //DO NOTHING
+                        break;
+                    case "Invalid input":
+                        array_push($errori, "Indice di elimina contatto impossibile.");
+                        break;
+                    default:
+                        throw $e;
+                        break;
+                }
+            }
+
+            // Salva
+            try {
+
+                if (!isset($_POST['salva'])) {
+                    throw new Exception("Nothing to do");
+                }
+
+                if ($_POST['salva'] == "true") {
+
+                    $indiciContattiInseriti = array_unique(preg_replace("/^contatto/", "", array_keys(array_filter(
+                        $_POST,
+                        function ($var) {
+                            return preg_match("/^(contatto)[\d]+$/", $var);
+                        }, ARRAY_FILTER_USE_KEY))));
+
+                    echo "<p>indici contatti inseriti:";
+                    var_dump($indiciContattiInseriti);
+                    echo "</p>";
+
+                    $dati['contatti']['inserisci'] = array();
+
+                    $inputInteressanti = array_filter(
+                        $_POST,
+                        function ($var) {
+                            return preg_match("/^(contatto|tipoContatto)[\d]+$/", $var);
+                        }, ARRAY_FILTER_USE_KEY);
+
+                    foreach ($indiciContattiInseriti as $indice) {
+                        if (array_filter(
+                            $_POST,
+                            function ($var) use ($indice){
+                                return preg_match("/^(contatto)".$indice."$/", $var);
+                            }, ARRAY_FILTER_USE_KEY))
+                    }
+
+                } else {
+                    throw new Exception("Invalid input");
+                }
+
+            } catch
+            (Exception $e) {
+                switch ($e->getMessage()) {
+                    case "Nothing to do":
+                        //DO NOTHING
+                        break;
+                    case "Invalid input":
+                        array_push($errori, "Indice di elimina contatto impossibile.");
+                        break;
+                    default:
                         throw $e;
                         break;
                 }
@@ -251,16 +215,42 @@ class FormDatiInformativi
             $string .= "</ul></div>";
         }
 
-        //Lettura dati dal DB
+//Lettura dati dal DB
         $contatti = ContattiUtente::getContattiUtente($_SESSION['username']);
+        $tipiContatti = TipiContatto::getTipiContatto();
+        $numeroContatti = isset($_SESSION['numeroContati']) ? $_SESSION['numeroContati'] : count($contatti);
 
-        var_dump($contatti);
+        $contatti = array_merge($contatti, array_fill(count($contatti), $numeroContatti, array("tipoContatto" => "", "contatto" => "")));
 
-        //Costruzione contenuto pagina
+
+//Costruzione contenuto pagina
         $string .= "<form action='contatti.php' method='post'><fieldset><legend>Contatti</legend><ul>";
 
+        foreach ($contatti as $key => $contatto) {
 
-        $string .= "</ul><button type='submit'>Salva</button></fieldset></form>";
+            $string .= "<li><label for='modContatto" . ($key + 1) . "'>Contatto " . ($key + 1) . ":</label><input id='modContatto" . ($key + 1) . "' name='contatto" . ($key + 1) . "' value='" . $contatto['contatto'] . "' title='Campo di testo del contatto " . ($key + 1) . "'/><label for='modTipoContatto" . ($key + 1) . "'>Tipo contatto " . ($key + 1) . ":</label><select id='modTipoContatto" . ($key + 1) . "' name='tipoContatto" . ($key + 1) . "' title='Tipo del contatto " . ($key + 1) . "'>";
+
+            foreach ($tipiContatti as $keySel => $tipoContatto) {
+                $string .= "<option value='$tipoContatto'";
+
+                if ($tipoContatto == $contatto['tipoContatto']) {
+                    $string .= " selected";
+                }
+
+                $string .= ">" . ucfirst(preg_replace("/_/", " ", $tipoContatto)) . "</option>";
+            }
+
+            $string .= "</select>";
+
+            $string .= "<button id='modEliminaContatto" . ($key + 1) . "' name='eliminaContatto' value='" . ($key + 1) . "' title='Elimina il contatto " . ($key + 1) . "'>Elimina contatto</button>";
+
+            $string .= "</li>";
+
+        }
+
+        $string .= "<li><button id='modAggiungiContato' name='aggiungiContatto' value='true'>Aggiungi contatto</button> </li>";
+
+        $string .= "</ul><button name='salva' value='true' type='submit'>Salva</button></fieldset></form>";
 
         return $string;
     }

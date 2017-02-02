@@ -29,7 +29,6 @@ try {
 
 
     // Inizio body
-    //TODO header standard
     $string .= "<body>" . Header::getHeader() . "<div class='breadcrump'><h1>Modifica dati obbligatori</h1></div>";
 
     // Menu
