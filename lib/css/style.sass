@@ -117,6 +117,7 @@ a.external::before
 #menu_button
    position: fixed
    left: 0
+   transition: left 0.5s ease
    margin: 1em 0 0 1em
    a
       color: $colorePulsanteMenu
@@ -130,11 +131,12 @@ a.external::before
    background: $menuColoreSfondo
    position: fixed
    top: 0
+   left: -10em
    right: 100%
    width: 10em
    height: 100%
-   -webkit-transition: position 2s /* Safari */
-    transition: position 2s
+   transition: left 0.5s ease
+   z-index: 1
 
    ul
       margin: 0
