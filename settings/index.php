@@ -26,7 +26,6 @@ try {
     );
 
     // Inizio body
-    //TODO header standard
     $string .= "<body>" . Header::getHeader() . "<div class='breadcrump'><h2>Modifica il tuo profilo</h2></div>";
 
     // Menu
