@@ -1,23 +1,288 @@
+/* per tutte le pagine
+
 html, body
    margin: 0
    padding: 0
-   height: 100%
-   width: 100%
+   font-family: Verdana, Arial, Helvetica, sans-serif
+   /* Twitter usa: "Helvetica Neue", Helvetica, Arial, sans-serif; Gitlab usa: "Source Sans Pro", sans-serif;
+   font-size: 0.9em
+   max-width: 150em
 
-// Menu
-$sfondoMenu: #333
-$coloreScritte: #fff
+a.external::before
+   content: '[link esterno] '
+   font-variant: small-caps
+
+/* header
+
+#header
+   background-color: #004
+   color: white
+   padding: 1em
+   text-align: center
+   h1
+      font-size: 3.4em
+      margin: 0.2em
+      padding: 0
+
+/* contenuto principale
+
+#content
+   width: 100%
+   font-size: 0.9em
+   padding-top: 1em
+   padding-bottom: 0.5em
+
+/* footer
+
+#footer
+   text-align: center
+   display: inline-block
+   width: 70%
+   max-width: 100%
+   padding-left: 15%
+   padding-right: 15%
+   margin-top: 5em
+   img
+      margin: 1em
+
+.paginaPrec
+   margin: 0
+   padding: 0% 20%
+   text-align: right
+   font-size: 1.2em
+
+/* per notizie su script php
+
+.report
+   margin: 0
+   padding: 0
+   text-align: center
+   p
+      margin: 0
+      padding: 0
+   ul
+      list-style: none
+      margin: 0
+      padding-left: 0.4em
+      color: red
+
+.errRep
+   color: red
+
+.okRep
+   color: green
+
+/* pulsante di logout
+
+.logout
+   text-align: right
+   padding-left: 8%
+   padding-right: 8%
+
+/* home e pagina di registrazione
+
+#login
+   width: 20em
+   display: inline-block
+   text-align: left
+   margin: 1em
+   legend
+      font-size: 1.2em
+      margin: 0em 0em 0em 3.2em
+   fieldset
+      border: none
+   div label
+      display: inline-block
+      text-align: left
+      padding-top: 0.4em
+      padding-bottom: 0.2em
+      margin-left: 0.1em
+
+#username, #password
+   /* per tutti i form aventi i campi username e password
+   text-align: left
+   width: 15em
+   font-size: 1.2em
+
+.invio
+   /* valido per tutti i submit aventi class="invio"
+   margin-top: 1em
+   padding: 0.6em 0
+   width: 100%
+   font-size: 1.2em
+
+#registrazione
+   display: inline-block
+   position: relative
+   top: -7em
+   left: 0.4em
+   margin: 1em
+
+/* link alla pagina di registrazione
+
+#registrati
+   display: inline-block
+   text-align: center
+   font-size: 1.4em
+   color: black
+   background-color: #70C1FF
+   padding: 0.8em 4.4em
+   border-radius: 0.4em
+   text-decoration-line: none
+   &:visited, &:active
+      background-color: #70C1FF
+   &:hover
+      background-color: #5EADEA
+
+#testo
+   font-size: 1.4em
+   h2
+      font-size: 2.2em
+      margin-top: 0
+   h3
+      font-size: 1.6em
+      margin-top: 0.4em
+      margin-bottom: 0.4em
+
+.slide
+   display: inline-block
+   margin: 1em
+   width: 84%
+
+.descrizione
+   display: inline-block
+   max-width: 22em
+   margin-left: 1em
+   margin-right: 1em
+   vertical-align: middle
+   text-align: center
+
+.imgSlide
+   width: 40%
+   max-width: 100%
+   vertical-align: middle
+
+.ultimaSlide
+   margin-top: 1em
+   padding: 0
+   text-align: center
+
+#ultimaDescrizione
+   margin: 0
+
+#ultimaImg
+   width: 44%
+   max-width: 100%
+
+#testo h4
+   font-size: 1.2em
+
+/* link dalla home alle pagine di ricerca utenti/gruppi
+
+#cercaUtenti, #cercaBand
+   display: inline-block
+   text-align: center
+   font-size: 1.4em
+   color: black
+   background-color: #70C1FF
+   margin: 0em 0.8em
+   padding: 0.8em 4.3em
+   min-width: 6em
+   border-radius: 0.4em
+   text-decoration-line: none
+
+#cercaUtenti:visited, #cercaBand:visited
+   background-color: #70C1FF
+
+#cercaUtenti:hover, #cercaBand:hover
+   background-color: #5EADEA
+
+#cercaUtenti:active, #cercaBand:active
+   background-color: #70C1FF
+
+/* per liste utenti/gruppi suggerite dalla home o trovate dalle ricerche
+
+.suggeriti
+   text-align: left
+   padding: 0 4%
+
+.risultati
+   text-align: left
+   padding: 0 4%
+   margin-top: 2em
+
+.suggeriti
+   float: left
+
+.listaSuggeriti, .listaRisultati
+   list-style: none
+   margin: 0
+   padding-left: 1em
+   padding-right: 1em
+
+.elementResult
+   max-width: 40em
+   padding: 0.4em
+   border: 1px solid #ddd
+   a
+      display: block
+      &:hover
+         background-color: #eee
+
+.listImage
+   width: 4em
+   max-width: 4em
+   position: relative
+   top: 0.1em
+
+/* pagina di registrazione e filtri per ricerche utenti/gruppi
+
+#invitoReg
+   margin: 0.2em 0em 0.8em 0em
+
+#iscrizione, .filtri
+   width: 20em
+   display: inline-block
+   text-align: left
+   margin: 1em
+
+#iscrizione legend, .filtri legend
+   font-size: 1.2em
+   margin: 0em 0em 0em 3.4em
+
+#iscrizione fieldset, .filtri fieldset
+   border: none
+
+#iscrizione div label
+   display: inline-block
+   text-align: left
+   padding-top: 0.4em
+   padding-bottom: 0.2em
+   margin-left: 0.1em
+
+#confermaPassword, #dataNascita, #email
+   /* validi per tutti i form aventi i campi confermaPassword, dataDascita e email
+   text-align: left
+   width: 15em
+   font-size: 1.2em
+
+.legendaForm
+   padding-left: 0.8em
+
+#iscrizione form p
+   color: red
+
+/* menù
 
 #menu_check
    position: absolute
    top: 0
    right: 0
-   //display: none
-   &:checked+div
+   display: none
+   &:checked + div
       left: 0
-   &:checked+div>label
-      left: 10em
-
+      > label
+         left: 10em
 
 #menu_button
    color: #666
@@ -28,42 +293,35 @@ $coloreScritte: #fff
       font-size: 150%
 
 .nav
-   font-family: "Ubuntu",sans-serif
-   background: $sfondoMenu
+   font-family: "Ubuntu", sans-serif
+   background: #333
    position: fixed
    top: 0
    right: 100%
    width: 10em
    height: 100%
-   -webkit-transition: left 2s, right 2s /* Safari */
+   -webkit-transition: left 2s, right 2s
    transition: left 2s, right 2s
    ul
       margin: 0
       padding: 0
       list-style: none
-
       li
          font-weight: bold
-         color: $coloreScritte
+         color: #fff
          margin: 1em
          a
-            color: transparentize($coloreScritte, 0.5)
+            color: rgba(255, 255, 255, 0.5)
             text-decoration: none
             &:hover
-               color: transparentize($coloreScritte, 0.2)
+               color: rgba(255, 255, 255, 0.8)
 
-// Generale
-.content
-   margin: 0 3em
-
-.breadcrump
-   margin: 0 3em
+/* pagina di modifica profilo
 
 #modSaveButton
    margin: 0.5em 0.5em
    float: right
 
-// Input corretto
 .modCorrectEntry
    height: 2em
    width: 2em
@@ -74,3 +332,159 @@ $coloreScritte: #fff
 
 .modErrorEntry
    color: red
+
+#modSaveButton
+   margin: 0.5em 0.5em
+   float: right
+
+.modCorrectEntry
+   height: 2em
+   width: 2em
+   display: inline
+   position: relative
+   vertical-align: middle
+   margin: 0 1em
+
+.modErrorEntry
+   color: red
+
+/* form ricerca utenti/gruppi
+
+.filtri
+   min-width: 24em
+   select
+      margin-top: 0.2em
+      margin-bottom: 1em
+
+#paginazione
+   margin-top: 2em
+   span.notClickable
+      display: inline-block
+      font-size: 1.4em
+      color: black
+      background-color: #70C1FF
+      margin: 0em 0.8em
+      padding: 0.8em 4.4em
+      min-width: 6em
+      border-radius: 0.4em
+   a
+      display: inline-block
+      font-size: 1.4em
+      color: black
+      background-color: #70C1FF
+      margin: 0em 0.8em
+      padding: 0.8em 4.4em
+      min-width: 6em
+      border-radius: 0.4em
+      color: black
+      text-decoration-line: none
+      &:hover
+         background-color: #5EADEA
+
+/* 404
+
+#header .notFound
+   color: #70C1FF
+
+#content.notFound
+   h1
+      font-size: 5em
+   text-align: center
+   width: 90%
+   margin: auto
+
+/* profilo utente
+
+.profilo
+   padding-left: 2em
+   p
+      padding-left: 3em
+   ul
+      list-style: none
+   img
+      min-width: 100px
+      max-height: 100px
+      margin-left: 3em
+      margin-top: 1em
+   h2
+      padding: 1em
+      background-color: #001744
+      color: white
+      margin-right: 65%
+      border-radius: 7px
+      min-width: 11em
+   h3
+      margin: 0 2em 0 2em
+      padding: .4em 1em .4em 1em
+      background-color: #001744
+      color: white
+      border-radius: 7px
+      margin-bottom: 1em
+
+#bloccoMembroGruppo img
+   margin: 0
+
+#bloccoContatti li
+   /*fb,tw,yt,is
+   display: inline-block
+   margin-right: 1em
+   padding: .5em
+   margin: 1em .5em .5em 0
+
+#PP, #top
+   background-color: #70C1FF
+   display: inline-block
+   float: right
+   text-align: center
+   border-radius: 20px
+   margin-bottom: 1em
+   margin-top: 1em
+
+#PP a, #top a
+   color: black
+
+#PP
+   max-width: 20em
+   margin-right: 2em
+   padding: 1em 3em 1em 0
+   min-width: 20%
+
+#top
+   margin-right: 8em
+   padding: 1em 3em 1em 3em
+   &:visited
+      background-color: #70C1FF
+
+#PP:visited
+   background-color: #70C1FF
+
+#top:hover, #PP:hover
+   background-color: #5EADEA
+
+#top:active, #PP:active
+   background-color: #70C1FF
+
+/* profilo gruppo
+
+.profilo
+   padding-left: 2em
+   p
+      padding-left: 3em
+   li
+      list-style: none
+
+#bloccoPrincipale
+   img
+      max-height: 100px
+      max-width: 100px
+      margin-left: 3em
+      margin-top: 1em
+   ul
+      list-style: none
+
+@media screen and (min-width: 480px)
+   /* FOGLIO STILE PER PICCOLI SCHERMI
+   #registrazione
+      top: -3.2em
+   #cercaUtenti
+      margin-bottom: 1em
