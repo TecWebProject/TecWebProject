@@ -5,6 +5,7 @@ html, body {
   font-family: Verdana, Arial, Helvetica, sans-serif;
   /* Twitter usa: "Helvetica Neue", Helvetica, Arial, sans-serif; Gitlab usa: "Source Sans Pro", sans-serif; */
   font-size: 100%;
+  min-width: 300px;
 }
 
 body {
@@ -247,6 +248,7 @@ a.external::before {
 
 a#top, p > a#torna {
   display: block;
+  text-align: center;
   background: #004d99;
   color: #FF7F00;
   text-transform: uppercase;
