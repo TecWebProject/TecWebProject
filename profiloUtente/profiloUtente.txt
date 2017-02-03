@@ -3,12 +3,12 @@
 	<div id="bloccoPrincipale">
 		<immagineProfilo />
 		<ul>
-			<li><nickname /></li>
-			<li><nome /></li>
-			<li><cognome /></li>
-			<li><dataNascita /></li>
-			<li><provincia /></li>
-			<li><dataIscrizione /></li>
+			<li><span xml:lang="en" lang="en">Username</span>: <nickname /></li>
+			<li>Nome: <nome /></li>
+			<li>Cognome: <cognome /></li>
+			<li>Data di nascita: <dataNascita /></li>
+			<li>Provincia: <provincia /></li>
+			<li>Data di iscrizione: <dataIscrizione /></li>
 		</ul>
 	</div>
 	<div id="bloccoBio">
