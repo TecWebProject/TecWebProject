@@ -16,7 +16,7 @@ function getNome($codice) {
 		if ($connessione->connect_errno) {
 			throw new Exception("Connessione fallita: ".$connessione->connect_error.".");
 		} else {
-			$query="SELECT nome FROM Gruppi WHERE idGruppo=\"".$codice."\";";	//CREAZIONE DELLA QUERY
+			$query="SELECT nome FROM Gruppi WHERE idGruppo=\"".$codice."\"";	//CREAZIONE DELLA QUERY
 			if (!$result=$connessione->query($query)) {
 				$page .= "Query non valida: ".$connessione->error.".";
 			} else {
