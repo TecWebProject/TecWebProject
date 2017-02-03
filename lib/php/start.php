@@ -16,8 +16,8 @@ require_once(realpath(dirname(__FILE__)) . "/paths.php");
 	Se non viene passato uno degli argomenti, il relativo risultato sarà NULL
 */
 
-// ESEMPIO
-//var_dump(getArray(array('Titolo' => "PASS TODO Nome Sito", 'DescrizioneBreve' => "PASS TODO Descrizione breve", 'Descrizione' => "PASS TODO Descrizione pagina", 'Author' => array("Derek Toninato","Filippo Berto", "Francesco Pezzuto", "Giorgio Giuffrè"), 'Keywords' => array("PASS TODO KEYWORD 1","PASS TODO KEYWORD 2","PASS TODO KEYWORD 3"), 'BookmarkIcon' => 'icon.png', 'Stylesheets' => array("style.css"), 'Extra' => array( "<link type='text/css' rel='stylesheet' href='lib/css/styleStampa.css'></link>", "<link type='text/css' rel='stylesheet' href='lib/css/styleSmartphone.css'></link>" ))));
+# ESEMPIO
+# var_dump(getArray(array('Titolo' => "Titolo pagina - BandBoard", 'DescrizioneBreve' => "Descrizione breve", 'Descrizione' => "Descrizione della pagina", 'Author' => array("Derek Toninato", "Filippo Berto", "Francesco Pezzuto", "Giorgio Giuffrè"), 'Keywords' => array("keyword 1","keyword 2","keyword 3"), 'BookmarkIcon' => 'site/icon.png', 'Stylesheets' => array("style.css"), 'Extra' => array( "<link type='text/css' rel='stylesheet' href='lib/css/styleStampa.css'></link>", "<link type='text/css' rel='stylesheet' href='lib/css/styleSmartphone.css'></link>" ))));
 
 class Start
 {
