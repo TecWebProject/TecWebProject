@@ -307,6 +307,10 @@ a.external::before {
   margin: 0.5em 0.5em;
 }
 
+.modErroritrovati li {
+  color: red;
+}
+
 @media screen and (max-width: 500px) {
   #modMenuPagine.hideOnMobile {
     display: none;
