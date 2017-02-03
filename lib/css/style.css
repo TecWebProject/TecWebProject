@@ -246,7 +246,74 @@ a.external::before {
   padding: 0;
 }
 
-a#top, p > a#torna {
+.breadcrump {
+  padding: 2em 3em;
+  background: white;
+}
+
+#modMenuPagine {
+  display: inline-block;
+  width: 15em;
+  vertical-align: top;
+  padding: 1em;
+}
+
+#modMenuPagine ul {
+  border: 0.5px solid #bfbfbf;
+  border-radius: 1em;
+  background: #bfbfbf;
+  box-shadow: 0 0 1px black;
+}
+
+#modMenuPagine ul li {
+  border: 0.5px solid #bfbfbf;
+  background: white;
+  border-radius: 1em;
+  padding: 0.5em;
+}
+
+#modContenutoPagina {
+  display: inline-block;
+  padding: 1em 1em;
+}
+
+#modContenutoPagina form fieldset {
+  border-radius: 1em;
+}
+
+#modContenutoPagina form fieldset li {
+  margin: 0.5em;
+}
+
+#modContenutoPagina form fieldset li label {
+  padding: 0 0.5em 0 0;
+}
+
+.modCorrectEntry {
+  height: 1.5em;
+  width: 1.5em;
+  display: inline;
+  position: relative;
+  vertical-align: middle;
+  margin: 0 1em;
+}
+
+.modErrorEntry {
+  color: red;
+  padding: 0 1em;
+}
+
+#modSaveButton {
+  margin: 0.5em 0.5em;
+}
+
+@media screen and (max-width: 500px) {
+  #modMenuPagine.hideOnMobile {
+    display: none;
+  }
+}
+
+a#top, p > a#torna, #modBackButton > a {
   display: block;
   text-align: center;
   background: #004d99;

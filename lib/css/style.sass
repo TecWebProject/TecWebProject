@@ -12,6 +12,8 @@ $menuColoreEntry: #00CDEB
 $menuColoreEntryHover: lighten($menuColoreEntry, 20)
 $sfondoBody: $sfondoHeader
 
+$breakMediaQuery: 500px
+
 // Pulizia iniziale
 html, body
    margin: 0
@@ -211,10 +213,61 @@ a.external::before
          div
             padding: 0
 
+// SETTINGS
+.breadcrump
+   padding: 2em 3em
+   background: white
 
+// PANNELLO MENU LATERALE
+#modMenuPagine
+   display: inline-block
+   width: 15em
+   vertical-align: top
+   padding: 1em
+
+   ul
+      border: 0.5px solid darken(white, 25)
+      border-radius: 1em
+      background: darken(white, 25)
+      box-shadow: 0 0 1px black
+      li
+         border: 0.5px solid darken(white, 25)
+         background: white
+         border-radius: 1em
+         padding: 0.5em
+
+#modContenutoPagina
+   display: inline-block
+   padding: 1em 1em
+   form
+      fieldset
+         border-radius: 1em
+         li
+            margin: 0.5em
+            label
+               padding: 0 0.5em 0 0
+
+.modCorrectEntry
+   height: 1.5em
+   width: 1.5em
+   display: inline
+   position: relative
+   vertical-align: middle
+   margin: 0 1em
+
+.modErrorEntry
+   color: red
+   padding: 0 1em
+
+#modSaveButton
+   margin: 0.5em 0.5em
+
+#modMenuPagine.hideOnMobile
+   @media screen and (max-width: $breakMediaQuery)
+      display: none
 
 // TORNA SU
-a#top, p>a#torna
+a#top, p>a#torna, #modBackButton>a
    display: block
    text-align: center
    background: $menuColoreSfondo

@@ -47,6 +47,7 @@ try {
     $string .= "</div>";    //Fine modContenutoPagina
 
     $string .= "<div id='modBackButton'><a href='index.php'>Indietro</a></div>";    //Pulsante indietro
+    $string .= '<p class="paginaPrec"><a href="../index.php" id="torna">Torna alla Home</a></p>';
 
     $string .= "</div>";    //Fine content
 

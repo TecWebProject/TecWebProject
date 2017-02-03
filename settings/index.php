@@ -39,7 +39,7 @@ try {
 
     $string .= MenuProfilo::getMenuProfilo();
 
-    $string .= "<div id='modImmagineSfondoMenu'></div>";
+    $string .= '<p class="paginaPrec"><a href="../index.php" id="torna">Torna alla Home</a></p>';
 
     $string .= "</div>";
 
