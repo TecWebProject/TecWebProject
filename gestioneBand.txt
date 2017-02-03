@@ -1,0 +1,35 @@
+		<div id="contentGB">
+			<h1><strong>Gestione Gruppi</strgon></h1>
+			<div class="riga">
+					<div id="NomeGruppo">
+						<h3>Nome gruppo</h3>
+						<div id="colonnaGruppo">
+							<!--
+							<img id="logogruppo" src="../images/site/defaultBand.png"  alt="logo gruppo"></img>
+							<a href="contattoFb"><img id="logofb" src="https://s30.postimg.org/e5kz69j9d/image.jpg" alt="logo facebook"></img></a> 
+							-->
+							
+						</div>
+					</div>
+				</div>
+				<!--
+				<div class="riga">
+					<div id="Modifica">
+						<h3>Modifica</h3>
+						<div id="colonnaModifica">
+							<a href="to do">Modifica</a>
+						</div>
+					</div>
+				</div>
+				-->
+				<div class="riga">
+					<div id="Gestisci">
+						<h3>Gestisci</h3>
+						<!-- Invia direttamente la richiesta al server tramite una form --> 
+							<lascia />
+					</div>
+				</div>
+				<precPage />
+			</div>
+		
+		<footer />
