@@ -59,18 +59,18 @@ try {
 					} else {
 						$img="<img id=\"fotoprofilo\" src=\"../images/bands/".$row['immagine']."\" alt=\"Immagine di ".$row['nome']."\" />";
 					}
-					$page=str_replace("<email />", $row['email'], $page);
-					$page=str_replace("<nickname />", $row['username'], $page);
-					$page=str_replace("<immagineProfilo />", $img, $page);
-					$page=str_replace("<nome />", $row['nome'], $page);
-					$page=str_replace("<cognome />", $row['cognome'], $page);
+					$page=str_replace("<email />", htmlentities($row['email']), $page);
+					$page=str_replace("<nickname />", htmlentities($row['username']), $page);
+					$page=str_replace("<immagineProfilo />", htmlentities($img, $)page);
+					$page=str_replace("<nome />", htmlentities($row['nome']), $page);
+					$page=str_replace("<cognome />", htmlentities($row['cognome']), $page);
 					$page=str_replace("<dataIscrizione />", substr($row['dataIscrizione'], 0, 10), $page);
 					$page=str_replace("<dataNascita />", $row['dataNascita'], $page);
-					$page=str_replace("<provincia />", $row['provincia'], $page);
+					$page=str_replace("<provincia />", htmlentities($row['provincia']), $page);
 					if ($row['descrizione']==NULL || $row['descrizione']=='') {
 						$row['descrizione']="Nessuna descrizione";
 					}
-					$page=str_replace("<descrizione />", $row['descrizione'], $page);
+					$page=str_replace("<descrizione />", htmlentities($row['descrizione']), $page);
 				}
 				$result->free();
 			}
