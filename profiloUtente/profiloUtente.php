@@ -61,7 +61,7 @@ try {
 					}
 					$page=str_replace("<email />", htmlentities($row['email']), $page);
 					$page=str_replace("<nickname />", htmlentities($row['username']), $page);
-					$page=str_replace("<immagineProfilo />", htmlentities($img, $)page);
+					$page=str_replace("<immagineProfilo />", $img, $page);
 					$page=str_replace("<nome />", htmlentities($row['nome']), $page);
 					$page=str_replace("<cognome />", htmlentities($row['cognome']), $page);
 					$page=str_replace("<dataIscrizione />", substr($row['dataIscrizione'], 0, 10), $page);
