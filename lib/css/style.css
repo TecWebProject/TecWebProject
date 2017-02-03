@@ -550,7 +550,7 @@ a.external::before {
 	margin: 1em .5em .5em 0;
 }
 
-#PP, #top {
+.paginaPrec, #top {
 	background-color: #70C1FF;
 	display: inline-block;
 	float: right;
@@ -560,11 +560,11 @@ a.external::before {
 	margin-top: 1em;
 }
 
-#PP a,#top a {
+.paginaPrec a, #top a {
 	color: black;
 }
 
-#PP {
+.paginaPrec {
 	max-width: 20em;
 	margin-right: 2em;
 	padding: 1em 3em 1em 0;
@@ -576,15 +576,15 @@ a.external::before {
 	padding: 1em 3em 1em 3em;
 }
 
-#top:visited, #PP:visited {
+#top:visited, .paginaPrec:visited {
 	background-color: #70C1FF;
 }
 
-#top:hover, #PP:hover {
+#top:hover, .paginaPrec:hover {
 	background-color: #5EADEA;
 }
 
-#top:active, #PP:active {
+#top:active, .paginaPrec:active {
 	background-color: #70C1FF;
 }
 

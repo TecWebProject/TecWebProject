@@ -28,12 +28,8 @@
 			<contatti />
 		</div>
 	</div>
-	<div id="top">
-		<a href="#header">Torna Su</a>
-	</div>
-	<div id="PP">
-		<pagPrec />
-	</div>
+	<a id="top" href="#header">Torna Su</a>
+	<pagPrec />
 </div>
 
 <footer />

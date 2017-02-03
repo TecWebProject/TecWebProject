@@ -160,14 +160,14 @@ try {
 	$page .= "Errore: dati non recuperati (".$e->getMessage().").";
 }
 if (!isset($_REQUEST['page']) || $_REQUEST['page']=="index") {
-	$precPage="<p class=\"paginaPrec\"><a href=\"../index.php\" id=\"torna\">Torna alla <span xml:lang=\"en\" lang=\"en\">Home</a></p>";
+	$pagPrec="<p class=\"paginaPrec\"><a href=\"../index.php\" id=\"torna\">Torna alla <span xml:lang=\"en\" lang=\"en\">Home</a></p>";
 } else {
 	if ($_REQUEST['page']=="ricerca") {
-		$precPage="<p class=\"paginaPrec\"><a href=\"../cercaGruppi/index.php?num=".$_REQUEST['num']."\" id=\"torna\">Torna alla Ricerca</a></p>";
+		$pagPrec="<p class=\"paginaPrec\"><a href=\"../cercaGruppi/index.php?num=".$_REQUEST['num']."\" id=\"torna\">Torna alla Ricerca</a></p>";
 	}
 }
 
-$page=str_replace("<pagPrec />", $precPage, $page);
+$page=str_replace("<pagPrec />", $pagPrec, $page);
 $page=str_replace("<footer />", Footer::getFooter(), $page);
 $page=$page."</body></html>";
 echo $page;
