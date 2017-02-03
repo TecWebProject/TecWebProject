@@ -9,7 +9,7 @@ require_once $relPath . '/query_server.php';
 */
 class Utenti {
 	/*
-	DESC: Ritorna un array con i dati dell'utente in
+	DESCR: Ritorna un array con i dati dell'utente in
 	INPUT: username dell'utente
 	OUTPUT: Array di dati associativi;
 	*/

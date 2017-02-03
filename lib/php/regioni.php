@@ -9,7 +9,7 @@ require_once($relPath . '/query_server.php');
 */
 class Regioni {
 	/*
-	DESC: Ritorna un array delle regioni.
+	DESCR: Ritorna un array delle regioni.
 	OUTPUT: Array associativo ordinato alfabeticamente;
 	*/
 	public static function getRegioni() {

@@ -10,7 +10,7 @@ require_once $relPath . '/query_server.php';
 */
 class GeneriMusicali {
 	/*
-	DESC: Ritorna un array con i nomi delle province
+	DESCR: Ritorna un array con i nomi delle province
 	OUTPUT: Array associativo ordinato alfabeticamente;
 	*/
 	public static function getGeneriMusicali() {

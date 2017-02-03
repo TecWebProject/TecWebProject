@@ -11,7 +11,7 @@ require_once $relPath . '/query_server.php';
 */
 class ContattiUtente {
 	/*
-	DESC: Ritorna un array dei contatti di un utente.
+	DESCR: Ritorna un array dei contatti di un utente.
 	INPUT: username dell'utente
 	OUTPUT: Array di contatti
 	*/

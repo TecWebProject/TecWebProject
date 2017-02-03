@@ -1,40 +1,38 @@
-<div id="content">
-	<div class="homeReg">
-		<h2 id="invitoReg">Registra un nuovo gruppo!</h2>
-		<div id="iscrizione">
-			<form action="registrazioneGruppo.php" method="post" onsubmit="return checkForm();">
-				<fieldset>
-					<legend>Campi registrazione</legend>
-					<div>
-						<label for="nome">Nome *</label>
-						<input type="text" name="nome" id="nome" title="Nome" maxlength="45" onblur="checkName();" onfocus="delErrName();" />
-					</div>
-					<div>
-						<label for="regione">Regione </label>
-						<select name="regione" id="regione" title="Regione" onchange="showProvince(this.value);">	<!-- MI APPOGGIO AL FILE JAVASCRIPT (provincie.js) CREATO DA FILIPPO BERTO -->
-							<option value="">Seleziona regione</option>
-							<regioni />
-						</select>
-					</div>
-					<div>
-						<label for="modSelectProvincia">Provincia *</label>
-						<select name="provincia" id="modSelectProvincia" title="Provincia" onblur="checkProvincia();" onfocus="delErrProvincia();">
-							<option value="">Seleziona provincia</option>
-							<province />
-						</select>
-					</div>
-					<div>
-						<label for="strumento">Strumento che suonerai: *</label>
-						<select name="strumento" id="strumento" title="Strumento che suonerai" onblur="checkStrumento();" onfocus="delErrStrumento();">
-							<option value="">Seleziona strumento</option>
-							<strumenti />
-						</select>
-					</div>
-					<input type="submit" id="invio" value="Iscriviti" />
-				</fieldset>
-			</form>
-				<p class="legendaForm">* : Campo obbliatorio</p>
-		</div>
-		<p class="paginaPrec"><a href="../gestioneGruppi/gestioneGruppi.php" id="torna">Torna a Gestione Gruppi</a></p>
+<div id="content" class="homeReg">
+	<h2 id="invitoReg">Registra un nuovo gruppo!</h2>
+	<div id="iscrizione">
+		<form action="registrazioneGruppo.php" method="post" onsubmit="return checkForm();">
+			<fieldset>
+				<legend>Campi registrazione</legend>
+				<div>
+					<label for="nome">Nome *</label>
+					<input type="text" name="nome" id="nome" title="Nome" maxlength="45" onblur="checkName();" onfocus="delErrName();" />
+				</div>
+				<div>
+					<label for="regione">Regione </label>
+					<select name="regione" id="regione" title="Regione" onchange="showProvince(this.value);">	<!-- MI APPOGGIO AL FILE JAVASCRIPT (provincie.js) CREATO DA FILIPPO BERTO -->
+						<option value="">Seleziona regione</option>
+						<regioni />
+					</select>
+				</div>
+				<div>
+					<label for="modSelectProvincia">Provincia *</label>
+					<select name="provincia" id="modSelectProvincia" title="Provincia" onblur="checkProvincia();" onfocus="delErrProvincia();">
+						<option value="">Seleziona provincia</option>
+						<province />
+					</select>
+				</div>
+				<div>
+					<label for="strumento">Strumento che suonerai: *</label>
+					<select name="strumento" id="strumento" title="Strumento che suonerai" onblur="checkStrumento();" onfocus="delErrStrumento();">
+						<option value="">Seleziona strumento</option>
+						<strumenti />
+					</select>
+				</div>
+				<input type="submit" id="invio" value="Iscriviti" />
+			</fieldset>
+		</form>
+			<p class="legendaForm">* : Campo obbliatorio</p>
 	</div>
+	<p class="paginaPrec"><a href="../gestioneGruppi/gestioneGruppi.php" id="torna">Torna a Gestione Gruppi</a></p>
 </div>
