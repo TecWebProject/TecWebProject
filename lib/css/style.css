@@ -7,6 +7,11 @@ html, body {
 	max-width: 150em;
 }
 
+a.external::before {
+	content: '[link esterno] ';
+	font-variant: small-caps;
+}
+
 
 
 /* header */
