@@ -451,7 +451,8 @@ INSERT INTO Utenti (username, password, email, nome, cognome, dataNascita, immag
 ('agrigi', '3a555c464988e33e52f96beffbe3b1ac', 'ale_gri@nomiacaso.it', 'Alessia', 'Grigi', '1994-10-21', NULL, 'Studente al conservatorio. Suono il basso e ascolto soprattutto jazz e reggae.', '2017-01-03', 'RN'),
 ('maria', '3a555c464988e33e52f96beffbe3b1ac', 'mariabianchi@popolamento.db', 'Maria', 'Bianchi', '1995-11-17', NULL, 'Mi ispiro da Big Man della E-Street Band; sunono il sax da 5 anni', '2012-10-01', 'RE'),
 ('Serena_Gialli', '3a555c464988e33e52f96beffbe3b1ac', 'serena@nomiacaso.it', 'Serena', 'Gialli', '1994-02-14', NULL, NULL, '2002-09-30', 'GO'),
-('_carlo_', '3a555c464988e33e52f96beffbe3b1ac', 'cgialli@nomiacaso.it', 'Carlo', 'Gialli', '1999-05-18', NULL, NULL, '2006-09-01', 'GO');
+('_carlo_', '3a555c464988e33e52f96beffbe3b1ac', 'cgialli@nomiacaso.it', 'Carlo', 'Gialli', '1999-05-18', NULL, NULL, '2006-09-01', 'GO'),
+('user', '3a555c464988e33e52f96beffbe3b1ac', 'user@example.com', 'User', 'Rossi', '1900-01-01', NULL, 'Antico utente di prova, a disposizione di chi volesse accedere con credenziali \'user, user\'.', '2017-02-03', 'PD');
 
 INSERT INTO ContattiUtenti (idContatto, utente, tipoContatto, contatto) VALUES
 (NULL, 'giorgio', 'telegram', 'https://telegram.me/ggiuffre'),
@@ -465,7 +466,8 @@ INSERT INTO ContattiUtenti (idContatto, utente, tipoContatto, contatto) VALUES
 (NULL, 'david', 'facebook', 'https://www.facebook.com/davidbowie/'),
 (NULL, 'anto', 'email_pubblica', 'antonio.boscolo@example.com'),
 (NULL, 'agrigi', 'email_pubblica', 'alessia.grigi@example.com'),
-(NULL, 'maria', 'whatsapp', '0491234567');
+(NULL, 'maria', 'whatsapp', '0491234567'),
+(NULL, 'user', 'whatsapp', '049 0123456');
 
 INSERT INTO GeneriMusicali (nome) VALUES
 ('Hard Rock'),
@@ -542,7 +544,10 @@ INSERT INTO GeneriUtenti (utente, genere) VALUES
 ('Serena_Gialli', 'Psychedelic'),
 ('_carlo_', 'Blues'),
 ('_carlo_', 'Hard Rock'),
-('_carlo_', 'Funk');
+('_carlo_', 'Funk'),
+('user', 'Pop Rock'),
+('user', 'Grunge'),
+('user', 'Funk');
 
 INSERT INTO Strumenti (nome) VALUES
 ('Chitarra Elettrica'),
@@ -586,7 +591,9 @@ INSERT INTO Conoscenze (idConoscenza, utente, strumento) VALUES
 (NULL, 'maria', 'Sassofono'),
 (NULL, 'Serena_Gialli', 'Computer'),
 (NULL, '_carlo_', 'Voce'),
-(NULL, '_carlo_', 'Batteria');
+(NULL, '_carlo_', 'Batteria'),
+(NULL, 'user', 'Violino'),
+(NULL, 'user', 'Tromba');
 
 # INSERT INTO Annunci (gruppo, ruoloRichiesto) VALUES
 # inutile: funzionalità non ancora implementata
@@ -614,4 +621,5 @@ INSERT INTO Formazioni (gruppo, ruolo) VALUES
 (17, 14),
 (18, 18),
 (18, 24),
-(18, 28);
+(18, 28),
+(8, 30);
