@@ -20,11 +20,12 @@ a.external::before {
   background-color: #0080FF;
   color: white;
   text-align: center;
+  box-shadow: 0px 0px 5px black;
 }
 
 #header h1 {
-  font-size: 3.4em;
-  padding: 0.2em 0.2em;
+  font-size: 2em;
+  padding: 0.1em 0.2em;
 }
 
 #footer {
@@ -33,6 +34,7 @@ a.external::before {
   text-align: center;
   max-width: 100%;
   padding: 1em;
+  box-shadow: 0 0 5px black;
 }
 
 #footer p {
@@ -82,8 +84,8 @@ a.external::before {
 }
 
 .suggeriti li.elementResult a .listImage {
-  height: 3em;
-  width: 3em;
+  height: 4em;
+  width: 4em;
 }
 
 .suggeriti li.elementResult a p {
@@ -114,8 +116,9 @@ a.external::before {
 
 #menu_button a {
   color: #FF7F00;
-  font-size: 250%;
+  font-size: 3em;
   font-weight: bold;
+  text-shadow: 0px 1px 3px black;
 }
 
 .nav {
