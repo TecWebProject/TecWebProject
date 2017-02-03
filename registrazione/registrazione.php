@@ -19,7 +19,7 @@ echo Start::getHead(array(
 	'Titolo' => "Registrazione BandBoard",
 	'DescrizioneBreve' => "Registrazione - BandBoard",
 	'Descrizione' => "Pagina di registrazione del sito BandBoard",
-	'Keywords' => array("BandBoard", "registrazione", "iscrizione", "bacheca", "musica", "musicisti", "gruppi", "chitarra", "basso", "batteria", "piano", "tastiera"),
+	'Keywords' => array("BandBoard", "registrazione", "iscrizione", "bacheca", "musica", "musicisti", "gruppi"),
 	'Stylesheets' => array("style.css"),
 	'Extra' => array("<link rel=\"stylesheet\" media=\"handheld, screen and (max-width:480px), only screen and (max-device-width:480px)\" href=\"../lib/css/style_mobile.css\" type=\"text/css\" />", "<script type=\"text/javascript\" src=\"registrazione.js\"></script>")
 ));	//CREAZIONE HEAD
