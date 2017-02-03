@@ -70,11 +70,7 @@ function checkNome() {
 
         var nome = input.value;
 
-        console.log(nome);
-
         var valid = new RegExp("^[A-Za-zàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ\s]+$").test(nome);
-
-        console.log("Valid: " + valid);
 
         if (valid) {
             document.getElementById("errorModNome").innerHTML = "<img src='correctEntry.png' class='modCorrectEntry'/>";
@@ -208,8 +204,6 @@ function checkBDay() {
         valid = false;
     }
 
-    console.log("valid: " + valid);
-
     if (valid) {
         var today = new Date();
         if (today >= date) {
@@ -264,20 +258,14 @@ function checkBio() {
 
 function checkProvenienza() {
 
-    console.log("CHECK PROVENIENZA");
-
     var regione = document.getElementById("modSelectRegione");
     var provincia = document.getElementById("modSelectProvincia");
-
-    console.log(regione);
-    console.log(provincia);
 
     if (regione == null && provincia == null) {
         return true;
     }
 
     if (regione.value == null || provincia.value == null) {
-        console.log("mostro l'errore");
         document.getElementById("errorModProvenienza").innerHTML = "Non è possibile selezionare solo uno dei due campi per la provenienza.";
         return false;
     }
@@ -289,7 +277,6 @@ function checkProvenienza() {
 }
 
 function clearError(str) {
-    console.log("cancello errore " + str);
     switch (str) {
         case 'username':
             document.getElementById("errorModUsername").innerHTML = "";
@@ -333,15 +320,6 @@ function checkForm() {
     var bDay = checkBDay();
     var bio = checkBio();
     var provenienza = checkProvenienza();
-
-    console.log(nome);
-    console.log(cognome);
-    console.log(email);
-    console.log(password);
-    console.log(passwordCheck);
-    console.log(bDay);
-    console.log(bio);
-    console.log(provenienza);
 
     return (nome && cognome && email && password && passwordCheck && bDay && bio && provenienza);
 }
