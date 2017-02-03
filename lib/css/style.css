@@ -328,3 +328,23 @@ a#top, p > a#torna, #modBackButton > a {
   padding: 1em;
   border-radius: 1em;
 }
+
+#invitoReg {
+  padding: 1em 2em;
+}
+
+#iscrizione form {
+  padding: 1em;
+}
+
+#iscrizione form fieldset {
+  border-radius: 1em;
+}
+
+#iscrizione form fieldset li {
+  margin: 0.5em;
+}
+
+#iscrizione form fieldset li label {
+  padding: 0 0.5em 0 0;
+}
