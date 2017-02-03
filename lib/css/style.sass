@@ -14,19 +14,24 @@ $sfondoBody: $sfondoHeader
 
 // Pulizia iniziale
 html, body
-   height: 100%
-   font-family: Verdana, Arial, Helvetica, sans-serif
-   font-size: 100%
-
-html,body,h1,h2,h3,p,li,ul,a,div,span
    margin: 0
    padding: 0
+   height: 100%
+   font-family: Verdana, Arial, Helvetica, sans-serif
+   /* Twitter usa: "Helvetica Neue", Helvetica, Arial, sans-serif; Gitlab usa: "Source Sans Pro", sans-serif;
+   font-size: 100%
 
 body
    background: $sfondoBody
-
 #content
    background: white
+
+h1,h2,h3,p,li,ul,a,div,span
+   margin: 0
+   padding: 0
+
+ul
+   list-style: none
 
 // Link esterni
 a.external::before
@@ -63,16 +68,8 @@ a.external::before
    padding: 0.5em
    height: 0
 
-img
-   max-width: 100%
-
-#bloccoMembroGruppo img
-   width: 4em
-   height: auto
-
 // HOME
 #content
-   padding: 2em 4em
    #testo
       padding: 1em
       font-size: 1.5em
@@ -133,6 +130,8 @@ img
    right: 100%
    width: 10em
    height: 100%
+   -webkit-transition: position 2s /* Safari */
+    transition: position 2s
 
    ul
       margin: 0
@@ -150,28 +149,76 @@ img
 
 // PROFILO UTENTE
 .profilo
+   text-align: center
    > h2
       padding: 1em
       font-size: 1.5em
       text-align: center
-   ul
-      list-style: none
 
    #bloccoPrincipale
       display: inline-block
       text-align: center
 
       vertical-align: top
+      max-width: 20em
+      width: 100%
 
       img
-         width: 80%
-         max-width: 20em
-//   #bloccoBio
-//
-//   #bloccoGeneri
-//
-//   #bloccoStrumenti
-//
-//   #bloccoMembroGruppo
-//
-//   #bloccoContatti
+         width: 100%
+   #bloccoBio
+      display: inline-block
+      max-width: 25em
+
+   div
+      padding: 0.5em
+
+      div
+         padding: 0 1em
+         width: 15em
+
+      vertical-align: top
+      #bloccoGeneri
+         display: inline-block
+      #bloccoStrumenti
+         display: inline-block
+      #bloccoMembroGruppo
+         display: inline-block
+
+         ul
+            li
+               display: inline-block
+               width: 8em
+               vertical-align: top
+               a
+                  display: block
+                  height: 100%
+                  width: 100%
+                  text-align: center
+
+                  .listImage
+                     width: 4em
+                     height: 4em
+                  p
+                     display: block
+                     text-align: center
+
+
+
+      #bloccoContatti
+         display: inline-block
+
+         div
+            padding: 0
+
+
+
+// TORNA SU
+a#top, p>a#torna
+   display: block
+   background: $menuColoreSfondo
+   color: $colorePulsanteMenu
+   text-transform: uppercase
+   font-weight: bold
+   margin: 1em
+   padding: 1em
+   border-radius: 1em
