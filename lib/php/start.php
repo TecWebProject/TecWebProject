@@ -3,8 +3,8 @@
 require_once(realpath(dirname(__FILE__)) . "/paths.php");
 
 /*
-	Ritorna l'array delle stringhe dell'head delle pagine in base
-	al contesto passato come parametro. Contesto è un array
+	Ritorna l'array delle stringhe dell'head delle pagine, in base
+	al contesto passato come parametro. $contesto è un array
 	asociativo con i seguenti parametri:
 		Titolo               -  Testo nel tag title
 		DescrizioneBreve     -  Testo nel tag meta title
@@ -19,8 +19,7 @@ require_once(realpath(dirname(__FILE__)) . "/paths.php");
 # ESEMPIO
 # var_dump(getArray(array('Titolo' => "Titolo pagina - BandBoard", 'DescrizioneBreve' => "Descrizione breve", 'Descrizione' => "Descrizione della pagina", 'Author' => array("Derek Toninato", "Filippo Berto", "Francesco Pezzuto", "Giorgio Giuffrè"), 'Keywords' => array("keyword 1","keyword 2","keyword 3"), 'BookmarkIcon' => 'site/icon.png', 'Stylesheets' => array("style.css"), 'Extra' => array( "<link type='text/css' rel='stylesheet' href='lib/css/styleStampa.css'></link>", "<link type='text/css' rel='stylesheet' href='lib/css/styleSmartphone.css'></link>" ))));
 
-class Start
-{
+class Start {
     private static $contestoDefault = array(
         'Titolo' => "BandBoard",
         'Author' => array("Derek Toninato", "Filippo Berto", "Francesco Pezzuto", "Giorgio Giuffrè"),
@@ -28,19 +27,16 @@ class Start
     );
 
     # fornisce il Doctype
-    public static function getDoctype()
-    {
+    public static function getDoctype() {
         return '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">';
     }
 
     # fornisce l'intestazione
-    public static function getHead($contesto)
-    {
+    public static function getHead($contesto) {
         return Start::printArrayRec(Start::getArray($contesto));
     }
 
-    private static function printArrayRec($array)
-    {
+    private static function printArrayRec($array) {
         $result = "";
         foreach ($array as $key => $value) {
             if (is_array($value)) {
@@ -53,8 +49,7 @@ class Start
     }
 
     # fornisce un array associativo con Doctype + head
-    public static function getArray($contesto)
-    {
+    public static function getArray($contesto) {
 
         # DOCTYPE
         $Doctype = Start::getDoctype();
@@ -104,8 +99,7 @@ class Start
     }
 
     # Genera il tag <title>
-    private static function getTitle($contesto)
-    {
+    private static function getTitle($contesto) {
         $title = isset($contesto) && isset($contesto['Titolo']) ? $contesto['Titolo'] : (isset(Start::$contestoDefault) && isset(Start::$contestoDefault['Titolo']) ? Start::$contestoDefault['Titolo'] : null);
 
         if ($title == null) {
@@ -117,8 +111,7 @@ class Start
     }
 
     # Genera il tag <meta name="title">
-    private static function getMetaTitle($contesto)
-    {
+    private static function getMetaTitle($contesto) {
 
         $title = isset($contesto) && isset($contesto['DescrizioneBreve']) ? $contesto['DescrizioneBreve'] : (isset(Start::$contestoDefault) && isset(Start::$contestoDefault['DescrizioneBreve']) ? Start::$contestoDefault['DescrizioneBreve'] : null);
 
@@ -131,8 +124,7 @@ class Start
     }
 
     # Genera il tag <meta name="description">
-    private static function getMetaDescription($contesto)
-    {
+    private static function getMetaDescription($contesto) {
 
         $description = isset($contesto) && isset($contesto['Descrizione']) ? $contesto['Descrizione'] : (isset(Start::$contestoDefault) && isset(Start::$contestoDefault['Descrizione']) ? Start::$contestoDefault['Descrizione'] : null);
 
@@ -145,8 +137,7 @@ class Start
     }
 
     # Genera il tag <meta name="author">
-    private static function getMetaAuthor($contesto)
-    {
+    private static function getMetaAuthor($contesto) {
 
         # Get authors
         $authors = isset($contesto) && isset($contesto['Author']) ? $contesto['Author'] : (isset(Start::$contestoDefault) && isset(Start::$contestoDefault['Author']) ? Start::$contestoDefault['Author'] : null);
@@ -165,8 +156,7 @@ class Start
     }
 
     # Genera il tag <meta name="keywords">
-    private static function getMetaKeywords($contesto)
-    {
+    private static function getMetaKeywords($contesto) {
         $keywords = isset($contesto) && isset($contesto['Keywords']) ? $contesto['Keywords'] : (isset(Start::$contestoDefault) && isset(Start::$contestoDefault['Keywords']) ? Start::$contestoDefault['Keywords'] : null);
         if (!is_array($keywords)) {
             # String
@@ -182,8 +172,7 @@ class Start
     }
 
     # Genera il tag link per la feedicon
-    private static function getIcon($contesto)
-    {
+    private static function getIcon($contesto) {
         # Get icon from contesto
         $iconName = isset($contesto) && isset($contesto['BookmarkIcon']) ? $contesto['BookmarkIcon'] : (isset(Start::$contestoDefault) && isset(Start::$contestoDefault['BookmarkIcon']) ? Start::$contestoDefault['BookmarkIcon'] : null);
 
@@ -228,8 +217,7 @@ class Start
     }
 
     # Genera i fogli di stile
-    private static function getStylesheets($contesto)
-    {
+    private static function getStylesheets($contesto) {
         # Get all file names
         $fileNames = isset($contesto) && isset($contesto['Stylesheets']) ? $contesto['Stylesheets'] : (isset(Start::$contestoDefault) && isset(Start::$contestoDefault['Stylesheets']) ? Start::$contestoDefault['Stylesheets'] : array());
 
@@ -280,8 +268,7 @@ class Start
     }
 
     # Genera i tag aggiuntivi passati come Extra
-    private static function getExtraTags($contesto)
-    {
+    private static function getExtraTags($contesto) {
         # Returns all extra tags found
         return isset($contesto) && isset($contesto['Extra']) ? $contesto['Extra'] : null;
     }
