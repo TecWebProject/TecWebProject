@@ -258,7 +258,7 @@ class FormContatti
                 $string .= "<option value='$tipoContatto'";
 
                 if ($tipoContatto == $contatto['tipoContatto']) {
-                    $string .= " selected";
+                    $string .= " selected='selected'";
                 }
 
                 $string .= ">" . ucfirst(preg_replace("/_/", " ", $tipoContatto)) . "</option>";
