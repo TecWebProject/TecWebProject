@@ -45,10 +45,16 @@ a.external::before {
 img {
   max-width: 100%; }
 
-#content #testo {
-  padding: 1em;
-  font-size: 1.5em;
-  text-align: center; }
+#bloccoMembroGruppo img {
+  width: 4em;
+  height: auto; }
+
+#content {
+  padding: 2em 4em; }
+  #content #testo {
+    padding: 1em;
+    font-size: 1.5em;
+    text-align: center; }
 
 .suggeriti {
   text-align: center; }
@@ -118,6 +124,8 @@ img {
   padding: 1em;
   font-size: 1.5em;
   text-align: center; }
+.profilo ul {
+  list-style: none; }
 .profilo #bloccoPrincipale {
   display: inline-block;
   text-align: center;
