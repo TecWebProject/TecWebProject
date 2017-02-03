@@ -162,7 +162,7 @@ try {
 						case 'telegram':
 						case 'youtube':
 						case 'facebook':
-							$contacts .= '<li><a href="' . $row['contatto'] . '" target="_blank">' . $row['contatto'] . '</a></li>';
+							$contacts .= '<li><a class="external" href="' . $row['contatto'] . '" target="_blank">' . $row['contatto'] . '</a></li>';
 							break;
 						# numero di telefono:
 						case 'whatsapp':
@@ -190,6 +190,7 @@ if (!isset($_REQUEST['page']) || $_REQUEST['page']=="index") {
 		$precPage="<p class=\"paginaPrec\"><a href=\"../cercaUtenti/index.php?num=".$_REQUEST['num']."\" id=\"torna\">Torna alla Ricerca</a></p>";
 	}
 }
+
 $page=str_replace("<pagPrec />", $precPage, $page);
 $page=str_replace("<footer />", Footer::getFooter(), $page);
 $page=$page."</body></html>";

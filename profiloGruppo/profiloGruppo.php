@@ -126,7 +126,7 @@ try {
 		if (!$result=$connessione->query($query)) {
 			$page .= "Query non valida: ".$connessione->error.".";
 		} else {
-			if ($result->num_rows>0) {
+			if ($result->num_rows > 0) {
 			    $contacts = '<ul>';
 				while ($row=$result->fetch_array(MYSQLI_ASSOC)) {
 					switch ($row['tipoContatto']) {
@@ -138,7 +138,7 @@ try {
 						case 'telegram':
 						case 'youtube':
 						case 'facebook':
-							$contacts .= '<li><a href="' . $row['contatto'] . '" target="_blank">' . $row['contatto'] . '</a></li>';
+							$contacts .= '<li><a class="external" href="' . $row['contatto'] . '" target="_blank">' . $row['contatto'] . '</a></li>';
 							break;
 						# numero di telefono:
 						case 'whatsapp':
@@ -147,8 +147,10 @@ try {
 							break;
 					}
 				}
+				$result->free();
+				$contacts .= '</ul>';
 			} else {
-				$contacts="<p>Nessuna informazione di contatto.</p>";
+				$contacts = '<p>Nessuna informazione di contatto.</p>';
 			}
 		}
 		$page=str_replace("<contatti />", $contacts, $page);
@@ -160,11 +162,11 @@ try {
 if (!isset($_REQUEST['page']) || $_REQUEST['page']=="index") {
 	$precPage="<p class=\"paginaPrec\"><a href=\"../index.php\" id=\"torna\">Torna alla <span xml:lang=\"en\" lang=\"en\">Home</a></p>";
 } else {
-	$n=$_REQUEST['num'];
 	if ($_REQUEST['page']=="ricerca") {
-		$precPage="<p class=\"paginaPrec\"><a href=\"../cercaGruppi/index.php?num=".$n."\" id=\"torna\">Torna alla Ricerca</a></p>";
+		$precPage="<p class=\"paginaPrec\"><a href=\"../cercaGruppi/index.php?num=".$_REQUEST['num']."\" id=\"torna\">Torna alla Ricerca</a></p>";
 	}
 }
+
 $page=str_replace("<pagPrec />", $precPage, $page);
 $page=str_replace("<footer />", Footer::getFooter(), $page);
 $page=$page."</body></html>";
