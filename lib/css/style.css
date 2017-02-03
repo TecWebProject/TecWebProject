@@ -613,3 +613,29 @@ a.external::before {
 #bloccoPrincipale ul {
 	list-style: none;
 }
+
+/*modifica profilo*/
+
+#modMenuPagine li{ /*valido per tutte le pagine di modifica*/
+	list-style: none;
+	padding: 1em 3em 1em 3em;
+	background-color: #70C1FF;
+	display: inline-block;
+	float: left;
+	text-align: center;
+	border-radius: 20px;
+	margin:1em 2em 1em 2em;
+}
+#modMenuPagine a{
+	color:black;
+}
+
+.breadcrump h2{
+	margin-left:1em;
+	padding: 1em;
+	background-color: #001744;
+	color: white;
+	margin-right: 65%;
+	border-radius: 7px;
+	min-width: 11em;
+}
