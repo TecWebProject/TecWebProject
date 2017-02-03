@@ -82,9 +82,10 @@ function getUtenti() {
 					while ($row=$result->fetch_array(MYSQLI_ASSOC)) {
 						if ($row['immagine']==NULL) {
 							$row['immagine']="defaultUser.png";		//DA CAMBIARE IN CASO DI MODIFICHE
-							$users=$users."<li class=\"elementResult\"><a href=\"profiloUtente/profiloUtente.php?username=".$row['username']."&amp;page=index\"><img class=\"listImage\" src=\"images/site/".$row['immagine']."\" alt=\"Immagine di ".$row['username']."\" /> ".$row['username'];	//ATTENZIONE AL PATH! DA CAMBIARE IN CASO DI MODIFICHE
+							$users=$users."<li class=\"elementResult\"><a href=\"profiloUtente/profiloUtente.php?username=".$row['username']."&amp;page=index\"><img class=\"listImage\" src=\"images/site/".$row['immagine']."\" alt=\"Immagine di ".$row['username']."\" /><p>".$row['username']."</p>";	//ATTENZIONE AL PATH! DA CAMBIARE IN CASO DI MODIFICHE
 						} else {
-							$users=$users."<li class=\"elementResult\"><a href=\"profiloUtente/profiloUtente.php?username=".$row['username']."&amp;page=index\"><img class=\"listImage\" src=\"images/users/".$row['immagine']."\" alt=\"Immagine di ".$row['username']."\" /> ".$row['username'];	//ATTENZIONE AL PATH! DA CAMBIARE IN CASO DI MODIFICHE
+							$users=$users."<li class=\"elementResult\"><a href=\"profiloUtente/profiloUtente.php?username=".$row['username']."&amp;page=index\"><img class=\"listImage\" src=\"images/users/".$row['immagine']."\" alt=\"Immagine di ".$row['username']."\" /> <p>
+							".$row['username'] . "</p>";	//ATTENZIONE AL PATH! DA CAMBIARE IN CASO DI MODIFICHE
 						}
 						if ($row['nome']!=NULL || $row['cognome']!=NULL) {
 							$users=$users." - ".$row['nome']." ".$row['cognome'];
@@ -243,4 +244,3 @@ echo '</body>';
 echo '</html>';
 
 ?>
-
