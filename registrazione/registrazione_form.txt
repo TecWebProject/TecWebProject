@@ -1,36 +1,33 @@
-<div id="content">
-	<div class="homeReg">
-		<h2 id="invitoReg">Entra a far parte della <span xml:lang="en" lang="en">community</span>!</h2>
-		<div id="iscrizione">
-			<form action="registrazione.php" method="post" onsubmit="return checkForm();">
-				<fieldset>
-					<legend>Campi registrazione</legend>
-					<div>
-						<label for="username"><span xml:lang="en" lang="en">Username</span> *</label>
-						<input type="text" name="username" id="username" title="Username" maxlength="25" onblur="checkUsername();" onfocus="delErrUsername();" tabindex="1"/>
-					</div>
-					<div>
-						<label for="password"><span xml:lang="en" lang="en">Password</span> *</label>
-						<input type="password" name="password" id="password" title="Password" maxlength="45" onblur="checkPassword();" onfocus="delErrPassword();" tabindex="2"/>
-					</div>
-					<div>
-						<label for="confermaPassword">Conferma <span xml:lang="en" lang="en">password</span> *</label>
-						<input type="password" name="confermaPassword" id="confermaPassword" title="Conferma password" maxlength="45" onblur="checkConfPassword();" onfocus="delErrConfPassword();" tabindex="3"/>
-					</div>
-					<div>
-						<label for="email">Indirizzo <span xml:lang="en" lang="en">e-mail</span> *</label>
-						<input type="text" name="email" id="email" title="e-mail" maxlength="45" onblur="checkEmail();" onfocus="delErrEmail();" tabindex="4"/>
-					</div>
-					<div>
-						<label for="dataNascita">Data di nascita (gg/mm/aaaa) *</label>
-						<input type="text" name="dataNascita" id="dataNascita" title="Data di nascita" maxlength="10" onblur="checkDataNascita();" onfocus="delErrDataNascita();" tabindex="5"/>
-					</div>
-					<input type="submit" class="invio" value="Iscriviti" tabindex="6"/>
-				</fieldset>
-			</form>
-				<p class="legendaForm">* : Campo obbliatorio</p>
-		</div>
-		<p class="paginaPrec"><a href="../index.php" id="torna" tabindex="7">Torna alla Home</a></p>
+<div id="content" class="homeReg">
+	<h2 id="invitoReg">Entra a far parte della <span xml:lang="en" lang="en">community</span>!</h2>
+	<div id="iscrizione">
+		<form action="registrazione.php" method="post" onsubmit="return checkForm();">
+			<fieldset>
+				<legend>Campi registrazione</legend>
+				<div>
+					<label for="username"><span xml:lang="en" lang="en">Username</span> *</label>
+					<input type="text" name="username" id="username" title="Username" maxlength="25" onblur="checkUsername();" onfocus="delErrUsername();" tabindex="1"/>
+				</div>
+				<div>
+					<label for="password"><span xml:lang="en" lang="en">Password</span> *</label>
+					<input type="password" name="password" id="password" title="Password" maxlength="45" onblur="checkPassword();" onfocus="delErrPassword();" tabindex="2"/>
+				</div>
+				<div>
+					<label for="confermaPassword">Conferma <span xml:lang="en" lang="en">password</span> *</label>
+					<input type="password" name="confermaPassword" id="confermaPassword" title="Conferma password" maxlength="45" onblur="checkConfPassword();" onfocus="delErrConfPassword();" tabindex="3"/>
+				</div>
+				<div>
+					<label for="email">Indirizzo <span xml:lang="en" lang="en">e-mail</span> *</label>
+					<input type="text" name="email" id="email" title="e-mail" maxlength="45" onblur="checkEmail();" onfocus="delErrEmail();" tabindex="4"/>
+				</div>
+				<div>
+					<label for="dataNascita">Data di nascita (gg/mm/aaaa) *</label>
+					<input type="text" name="dataNascita" id="dataNascita" title="Data di nascita" maxlength="10" onblur="checkDataNascita();" onfocus="delErrDataNascita();" tabindex="5"/>
+				</div>
+				<input type="submit" class="invio" value="Iscriviti" tabindex="6"/>
+			</fieldset>
+		</form>
+			<p class="legendaForm">* : Campo obbliatorio</p>
 	</div>
+	<p class="paginaPrec"><a href="../index.php" id="torna" tabindex="7">Torna alla Home</a></p>
 </div>
-

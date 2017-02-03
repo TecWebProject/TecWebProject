@@ -1,60 +1,58 @@
-		<div id="content">
-			<div class="homeReg">
-				<div id="login">
-					<form action="index.php" method="post">
-						<fieldset>
-							<legend>Accedi a <span xml:lang="en" lang="en">BandBoard</span></legend>
-							<div>					
-								<label for="username"><span xml:lang="en" lang="en">Username</span></label>
-								<input type="text" name="username" id="username" title="Username" maxlength="25" tabindex="1"/>
-							</div>
-							<div>
-								<label for="password"><span xml:lang="en" lang="en">Password</span></label>
-								<input type="password" name="password" id="password" title="Password" maxlength="45" tabindex="2"/>
-							</div>
-							<input type="submit" class="invio" value="Accedi" tabindex="3"/>
-						</fieldset>
-					</form>
-				</div>
-
-				<div id="registrazione">
-					<p>oppure</p>
-					<a href="registrazione/registrazione.php" id="registrati" tabindex="4">Iscriviti</a>
-				</div>
+		<div id="content" class="homeReg">
+			<div id="login">
+				<form action="index.php" method="post">
+					<fieldset>
+						<legend>Accedi a <span xml:lang="en" lang="en">BandBoard</span></legend>
+						<div>					
+							<label for="username"><span xml:lang="en" lang="en">Username</span></label>
+							<input type="text" name="username" id="username" title="Username" maxlength="25" tabindex="1"/>
+						</div>
+						<div>
+							<label for="password"><span xml:lang="en" lang="en">Password</span></label>
+							<input type="password" name="password" id="password" title="Password" maxlength="45" tabindex="2"/>
+						</div>
+						<input type="submit" class="invio" value="Accedi" tabindex="3"/>
+					</fieldset>
+				</form>
 			</div>
 
-			<div id="testo">
-				<h2>La bacheca virtuale per qualunque musicista</h2>
+			<div id="registrazione">
+				<p>oppure</p>
+				<a href="registrazione/registrazione.php" id="registrati" tabindex="4">Iscriviti</a>
+			</div>
+		</div>
 
-				<div class="slide">
-					<div class="descrizione">
-						<h3>Fatti Conoscere.</h3>
-						<p>Sei nuovo/a? Iscriviti! Mettiti in mostra e fai vedere cosa ti piace.</p>
-					</div>
-					<img class="imgSlide" src="images/site/ragazza-piano.png" alt="Ragazza che suona il piano" />
-				</div>
+		<div id="testo">
+			<h2>La bacheca virtuale per qualunque musicista</h2>
 
-				<div class="slide">
-					<div class="descrizione">
-						<h3>Conosci.</h3>
-						<p>Incontra nuovi musicisti all'interno della <span xml:lang="en" lang="en">community</span>.</p>
-					</div>
-					<img class="imgSlide" src="images/site/ragazzi-chitarra.jpg" alt="Ragazzi che suonano la chitarra" />
+			<div class="slide">
+				<div class="descrizione">
+					<h3>Fatti Conoscere.</h3>
+					<p>Sei nuovo/a? Iscriviti! Mettiti in mostra e fai vedere cosa ti piace.</p>
 				</div>
-
-				<div class="ultimaSlide">
-					<div id="ultimaDescrizione">
-						<h3>Suona.</h3>
-					</div>
-					<img id="ultimaImg" src="images/site/jam-band.jpg" alt="Jam session di una band" />
-				</div>
-				<h4>Oltre <scriptNumUtenti /> utenti iscritti</h4>
-				<h4>Più di <scriptNumGruppi /> <span xml:lang="en" lang="en">band</span> registrate</h4>
-				<h4>Prova a cercarle!</h4>
+				<img class="imgSlide" src="images/site/ragazza-piano.png" alt="Ragazza che suona il piano" />
 			</div>
 
-			<div class="homeReg">
-				<a href="cercaUtenti/index.php" id="cercaUtenti" tabindex="5">Cerca Utenti</a>
-				<a href="cercaGruppi/index.php" id="cercaBand" tabindex="6">Cerca <span xml:lang="en" lang="en">Band</span></a>
+			<div class="slide">
+				<div class="descrizione">
+					<h3>Conosci.</h3>
+					<p>Incontra nuovi musicisti all'interno della <span xml:lang="en" lang="en">community</span>.</p>
+				</div>
+				<img class="imgSlide" src="images/site/ragazzi-chitarra.jpg" alt="Ragazzi che suonano la chitarra" />
 			</div>
+
+			<div class="ultimaSlide">
+				<div id="ultimaDescrizione">
+					<h3>Suona.</h3>
+				</div>
+				<img id="ultimaImg" src="images/site/jam-band.jpg" alt="Jam session di una band" />
+			</div>
+			<h4>Oltre <scriptNumUtenti /> utenti iscritti</h4>
+			<h4>Più di <scriptNumGruppi /> <span xml:lang="en" lang="en">band</span> registrate</h4>
+			<h4>Prova a cercarle!</h4>
+		</div>
+
+		<div class="homeReg">
+			<a href="cercaUtenti/index.php" id="cercaUtenti" tabindex="5">Cerca Utenti</a>
+			<a href="cercaGruppi/index.php" id="cercaBand" tabindex="6">Cerca <span xml:lang="en" lang="en">Band</span></a>
 		</div>
