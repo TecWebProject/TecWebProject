@@ -1,19 +1,32 @@
 // per tutte le pagine
 
 //COLORI
-$sfondoHeader : #004
+$sfondoHeader : #0080FF
 $testoHeader : white
 $sfondoFooter : $sfondoHeader
 $testoFooter: $testoHeader
+$colorePulsanteMenu : #FF7F00
+$menuColoreSfondo: darken($sfondoHeader, 20)
+$menuColoreEntryAttiva: white
+$menuColoreEntry: #00CDEB
+$menuColoreEntryHover: lighten($menuColoreEntry, 20)
+$sfondoBody: $sfondoHeader
 
 // Pulizia iniziale
 html, body
+   height: 100%
    font-family: Verdana, Arial, Helvetica, sans-serif
    font-size: 100%
 
 html,body,h1,h2,h3,p,li,ul,a,div,span
    margin: 0
    padding: 0
+
+body
+   background: $sfondoBody
+
+#content
+   background: white
 
 // Link esterni
 a.external::before
@@ -25,9 +38,10 @@ a.external::before
    background-color: $sfondoHeader
    color: $testoHeader
    text-align: center
+   box-shadow: 0px 0px 5px black
    h1
-      font-size: 3.4em
-      padding: 0.2em 0.2em
+      font-size: 2em
+      padding: 0.1em 0.2em
 
 // FOOTER
 #footer
@@ -36,10 +50,12 @@ a.external::before
    text-align: center
    max-width: 100%
    padding: 1em
+
    p
       margin-bottom: 1em
-   img
-      margin: 0 1em
+   div
+      img
+         margin: 0.5em0
 
 // LOGOUT BUTTON
 .logout
@@ -55,13 +71,33 @@ img
    #testo
       padding: 1em
       font-size: 1.5em
+      text-align: center
 
+.suggeriti
+   text-align: center
+   p
+      padding: 0.5em
+      text-align: left
+   ul
+      padding: 0.5em
 
-.listImage
-   width: 3em
+   li.elementResult
+      display: inline-block
+      width: 8em
+      vertical-align: top
+      a
+         display: block
+         height: 100%
+         width: 100%
+         text-align: center
+
+         .listImage
+            height: 4em
+            width: 4em
+         p
+            text-align: center
 
 // MENU
-
 #menu_check
    position: absolute
    top: 0
@@ -72,24 +108,26 @@ img
       > label
          left: 10em
 
+// PULSANTE MENU
 #menu_button
-   color: #666
    position: fixed
    left: 0
    margin: 1em 0 0 1em
    a
-      font-size: 150%
+      color: $colorePulsanteMenu
+      font-size: 3em
+      font-weight: bold
+      text-shadow: 0px 1px 3px black
 
+// PANNELLO MENU
 .nav
    font-family: Verdana, Arial, Helvetica, sans-serif
-   background: #333
+   background: $menuColoreSfondo
    position: fixed
    top: 0
    right: 100%
    width: 10em
    height: 100%
-   -webkit-transition: left 2s, right 2s
-   transition: left 2s, right 2s
 
    ul
       margin: 0
@@ -97,10 +135,36 @@ img
       list-style: none
       li
          font-weight: bold
-         color: #fff
+         color: $menuColoreEntryAttiva
          margin: 1em
          a
-            color: rgba(255, 255, 255, 0.5)
+            color: $menuColoreEntry
             text-decoration: none
             &:hover
-               color: rgba(255, 255, 255, 0.8)
+               color: $menuColoreEntryHover
+
+// PROFILO UTENTE
+.profilo
+   > h2
+      padding: 1em
+      font-size: 1.5em
+      text-align: center
+
+   #bloccoPrincipale
+      display: inline-block
+      text-align: center
+
+      vertical-align: top
+
+      img
+         width: 80%
+         max-width: 20em
+//   #bloccoBio
+//
+//   #bloccoGeneri
+//
+//   #bloccoStrumenti
+//
+//   #bloccoMembroGruppo
+//
+//   #bloccoContatti
