@@ -76,6 +76,7 @@ require_once '../lib/php/strumenti.php';
 $strumenti = '';
 $arr_strumenti = Strumenti::getStrumenti();
 foreach ($arr_strumenti as $el) {
+	$el = htmlentities($el);
 	$strumenti .= '<option value="' . $el . '"';
 	if (isset($_GET['strumento']) && $el == $_GET['strumento'])
 		$strumenti .= ' selected="selected"';
@@ -90,6 +91,7 @@ require_once '../lib/php/regioni.php';
 $regioni = '';
 $arr_regioni = Regioni::getRegioni();
 foreach ($arr_regioni as $el) {
+	$el['nome'] = htmlentities($el['nome']);
 	$regioni .= '<option value="' . $el['nome'] . '"';
 	if (isset($_GET['regione']) && $el['nome'] == $_GET['regione'])
 		$regioni .= ' selected="selected"';
@@ -106,6 +108,8 @@ $arr_province = Province::getProvinceByRegione();
 foreach ($arr_province as $key => $reg) {
 	$province .= '<optgroup label="' . $key . '">';
 	foreach ($reg as $prov) {
+		$prov['sigla'] = htmlentities($prov['sigla']);
+		$prov['nome'] = htmlentities($prov['nome']);
 		$province .= '<option value="' . $prov['sigla'] . '"';
 		if (isset($_GET['provincia']) && $prov['sigla'] == $_GET['provincia'])
 			$province .= ' selected="selected"';

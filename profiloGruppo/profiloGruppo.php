@@ -73,18 +73,18 @@ try {
 				while ($row=$result->fetch_array(MYSQLI_ASSOC)) {
 					if ($row['immagine']==NULL) {
 						$row['immagine']="defaultBand.png";
-						$img="<img id=\"fotoprofilo\" src=\"../images/site/".$row['immagine']."\" alt=\"Immagine di ".$row['nome']."\" />";
+						$img="<img id=\"fotoprofilo\" src=\"../images/site/".htmlentities($row['immagine'])."\" alt=\"Immagine di ".htmlentities($row['nome'])."\" />";
 					} else {
-						$img="<img id=\"fotoprofilo\" src=\"../images/bands/".$row['immagine']."\" alt=\"Immagine di ".$row['nome']."\" />";
+						$img="<img id=\"fotoprofilo\" src=\"../images/bands/".htmlentities($row['immagine'])."\" alt=\"Immagine di ".htmlentities($row['nome'])."\" />";
 					}
 					$page=str_replace("<immagineProfilo />", $img, $page);
-					$page=str_replace("<nome />", $row['nome'], $page);
-					$page=str_replace("<provincia />", $row['provincia'], $page);
+					$page=str_replace("<nome />", htmlentities($row['nome']), $page);
+					$page=str_replace("<provincia />", htmlentities($row['provincia']), $page);
 					$page=str_replace("<dataIscrizione />", substr($row['dataIscrizione'], 0, 10), $page);
 					if ($row['descrizione']==NULL || $row['descrizione']=='') {
 						$row['descrizione']="Nessuna descrizione";
 					}
-					$page=str_replace("<descrizione />", $row['descrizione'], $page);
+					$page=str_replace("<descrizione />", htmlentities($row['descrizione']), $page);
 				}
 				$result->free();
 			}
