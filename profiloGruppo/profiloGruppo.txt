@@ -1,39 +1,37 @@
-<div id="content">
-	<div id="contentProfilo">
-		<h2>Profilo di <nome /></h2>
-		<div id="bloccoPrincipale">
-			<immagineProfilo />
-			<ul>
-				<li>Nome: <nome /></li>
-				<li>Provincia: <provincia /></li>
-				<li>Data Iscrizione: <dataIscrizione /></li> 
-			</ul>
-		</div>
-		<div id="bloccoBio">
-			<h3>Descrizione</h3>
-			<p>
-				<descrizione />
-			</p>
-		</div>
-		<div id="bloccoGeneri">
-			<h3>Generi suonati</h3>
-			<generi />
-		</div>
-		<div id="membriCercati">
-			<h3>Membri</h3>
-			<membri />
-		</div>
-		<div id="bloccoContatti">
-			<h3>Lista dei contatti</h3>
-			<div class="rigaContatti">
-				<contatti />
-			</div>
-		</div>
-		<div id="top">
-			<a href="#header">Torna Su</a>
-		</div>
-		<pagPrec />
+<div id="content" class="profilo">
+	<h2>Profilo di <nome /></h2>
+	<div id="bloccoPrincipale">
+		<immagineProfilo />
+		<ul>
+			<li>Nome: <nome /></li>
+			<li>Provincia: <provincia /></li>
+			<li>Data Iscrizione: <dataIscrizione /></li> 
+		</ul>
 	</div>
+	<div id="bloccoBio">
+		<h3>Descrizione</h3>
+		<p>
+			<descrizione />
+		</p>
+	</div>
+	<div id="bloccoGeneri">
+		<h3>Generi suonati</h3>
+		<generi />
+	</div>
+	<div id="membriCercati">
+		<h3>Membri</h3>
+		<membri />
+	</div>
+	<div id="bloccoContatti">
+		<h3>Lista dei contatti</h3>
+		<div class="rigaContatti">
+			<contatti />
+		</div>
+	</div>
+	<div id="top">
+		<a href="#header">Torna Su</a>
+	</div>
+	<pagPrec />
 </div>
 
 <footer />

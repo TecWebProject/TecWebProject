@@ -502,78 +502,78 @@ a.external::before {
 
 
 /* profilo utente */
-#contentP {
-	padding-left:2em;
+.profilo {
+	padding-left: 2em;
 }
 
-#contentP p {
-	padding-left:3em;
+.profilo p {
+	padding-left: 3em;
 }
 
-#contentP ul {
-	list-style:none;
+.profilo ul {
+	list-style: none;
 }
 
-#contentP img {
-	min-width:100px;
-	max-height:100px;
-	margin-left:3em;
-	margin-top:1em;
+.profilo img {
+	min-width: 100px;
+	max-height: 100px;
+	margin-left: 3em;
+	margin-top: 1em;
 }
 
-#contentP h2 {
-	padding:1em;
-	background-color:#001744;
-	color:white;
-	margin-right:65%;
-	border-radius:7px;
-	min-width:11em;
+.profilo h2 {
+	padding: 1em;
+	background-color: #001744;
+	color: white;
+	margin-right: 65%;
+	border-radius: 7px;
+	min-width: 11em;
 }
 
-#contentP h3 {
-	margin:0 2em 0 2em;
-	padding:.4em 1em .4em 1em;
-	background-color:#001744;
-	color:white;
-	border-radius:7px;
-	margin-bottom:1em;
+.profilo h3 {
+	margin: 0 2em 0 2em;
+	padding: .4em 1em .4em 1em;
+	background-color: #001744;
+	color: white;
+	border-radius: 7px;
+	margin-bottom: 1em;
 }
 
 #bloccoMembroGruppo img {
-	margin:0;
+	margin: 0;
 }
 
 #bloccoContatti li {/*fb,tw,yt,is*/
-	display:inline-block;
-	margin-right:1em;
-	padding:.5em;
-	margin:1em .5em .5em 0;
+	display: inline-block;
+	margin-right: 1em;
+	padding: .5em;
+	margin: 1em .5em .5em 0;
 }
 
 #PP, #top {
-	background-color:#70C1FF;
-	display:inline-block;
-	float:right;
-	text-align:center;
-	border-radius:20px;
-	margin-bottom:1em;
-	margin-top:1em;
+	background-color: #70C1FF;
+	display: inline-block;
+	float: right;
+	text-align: center;
+	border-radius: 20px;
+	margin-bottom: 1em;
+	margin-top: 1em;
 }
 
 #PP a,#top a {
-	color:black;
+	color: black;
 }
 
 #PP {
-	max-width:20em;
-	margin-right:2em;
-	padding:1em 3em 1em 0;
-	min-width:20%;
+	max-width: 20em;
+	margin-right: 2em;
+	padding: 1em 3em 1em 0;
+	min-width: 20%;
 }
 
 #top {
-	margin-right:8em;
-	padding:1em 3em 1em 3em;
+	margin-right: 8em;
+	padding: 1em 3em 1em 3em;
 }
 
 #top:visited, #PP:visited {
@@ -591,25 +591,25 @@ a.external::before {
 
 
 /* profilo gruppo */
-#contentP {
-	padding-left:2em;
+.profilo {
+	padding-left: 2em;
 }
 
-#contentP p {
-	padding-left:3em;
+.profilo p {
+	padding-left: 3em;
 }
 
-#contentP li {
-	list-style:none;
+.profilo li {
+	list-style: none;
 }
 
 #bloccoPrincipale img {
-	max-height:100px;
-	max-width:100px;
-	margin-left:3em;
-	margin-top:1em;
+	max-height: 100px;
+	max-width: 100px;
+	margin-left: 3em;
+	margin-top: 1em;
 }
 
 #bloccoPrincipale ul {
-	list-style:none;
+	list-style: none;
 }
