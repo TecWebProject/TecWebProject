@@ -74,7 +74,7 @@ function getUtenti() {
 		if ($connessione->connect_errno) {
 			throw new Exception("Connessione fallita: ".$connessione->connect_error.".");
 		} else {
-			$query="SELECT username, nome, cognome, immagine, provincia, dataIscrizione FROM Utenti WHERE username!=\"".$_SESSION['username']."\" ORDER BY dataIscrizione DESC LIMIT 10;";	//CREAZIONE DELLA QUERY
+			$query="SELECT username, nome, cognome, immagine, provincia, dataIscrizione FROM Utenti WHERE username!=\"".$_SESSION['username']."\" ORDER BY dataIscrizione DESC LIMIT 20;";	//CREAZIONE DELLA QUERY
 			if (!$result=$connessione->query($query)) {
 				echo "Query non valida: ".$connessione->error.".";
 			} else {
@@ -114,7 +114,7 @@ function getGruppi() {
 		if ($connessione->connect_errno) {
 			throw new Exception("Connessione fallita: ".$connessione->connect_error.".");
 		} else {
-			$query="SELECT idGruppo, nome, immagine, provincia, dataIscrizione FROM Gruppi WHERE idGruppo NOT IN (SELECT g.idGruppo FROM Gruppi g JOIN Formazioni f ON g.idGruppo=f.gruppo JOIN Conoscenze c ON f.ruolo=c.idConoscenza WHERE c.utente=\"".$_SESSION['username']."\") ORDER BY dataIscrizione DESC LIMIT 8;";	//CREAZIONE DELLA QUERY
+			$query="SELECT idGruppo, nome, immagine, provincia, dataIscrizione FROM Gruppi WHERE idGruppo NOT IN (SELECT g.idGruppo FROM Gruppi g JOIN Formazioni f ON g.idGruppo=f.gruppo JOIN Conoscenze c ON f.ruolo=c.idConoscenza WHERE c.utente=\"".$_SESSION['username']."\") ORDER BY dataIscrizione DESC LIMIT 10;";	//CREAZIONE DELLA QUERY
 			if (!$result=$connessione->query($query)) {
 				echo "Query non valida: ".$connessione->error.".";
 			} else {
