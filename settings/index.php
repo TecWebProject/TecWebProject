@@ -7,6 +7,7 @@ require_once realpath(dirname(__FILE__)) . '/../lib/php/start.php';
 require_once realpath(dirname(__FILE__)) . '/menuProfilo.php';
 require_once realpath(dirname(__FILE__)) . '/../lib/php/sessioneNonValida.php';
 require_once realpath(dirname(__FILE__)) . '/../lib/php/header.php';
+require_once realpath(dirname(__FILE__)) . '/../lib/php/footer.php';
 
 try {
 
@@ -37,9 +38,11 @@ try {
 
     $string .= MenuProfilo::getMenuProfilo();
 
-    $string .= "<div id='modImmagineSfondoMenu'></div>";
+    $string .= '<p class="paginaPrec"><a href="../index.php" id="torna">Torna alla Home</a></p>';
 
     $string .= "</div>";
+
+    $string .= Footer::getFooter();
 
     $string .= "</body></html>";
 

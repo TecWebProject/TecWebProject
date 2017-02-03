@@ -4,10 +4,10 @@
 		<immagineProfilo />
 		<ul>
 			<li><span xml:lang="en" lang="en">Username</span>: <nickname /></li>
-			<li>Nome: <nome /></li>
-			<li>Cognome: <cognome /></li>
+			<nome />
+			<cognome />
 			<li>Data di nascita: <dataNascita /></li>
-			<li>Provincia: <provincia /></li>
+			<provincia />
 			<li>Data di iscrizione: <dataIscrizione /></li>
 		</ul>
 	</div>
@@ -15,22 +15,24 @@
 		<h3>Descrizione</h3>
 		<p><descrizione /></p>
 	</div>
-	<div id="bloccoGeneri">
-		<h3>Generi apprezzati</h3>
-		<generiApprezzati />
-	</div>
-	<div id="bloccoStrumenti">
-		<h3>Strumenti suonati</h3>
-		<strumentiSuonati />
-	</div>
-	<div id="bloccoMembroGruppo">
-		<h3>Membro di</h3>
-		<nomeGruppi />
-	</div>
-	<div id="bloccoContatti">
-		<h3>Lista dei contatti</h3>
-		<div class="rigaContatti">
-			<contatti />
+	<div>
+		<div id="bloccoGeneri">
+			<h3>Generi apprezzati</h3>
+			<generiApprezzati />
+		</div>
+		<div id="bloccoStrumenti">
+			<h3>Strumenti suonati</h3>
+			<strumentiSuonati />
+		</div>
+		<div id="bloccoMembroGruppo">
+			<h3>Membro di</h3>
+			<nomeGruppi />
+		</div>
+		<div id="bloccoContatti">
+			<h3>Lista dei contatti</h3>
+			<div class="rigaContatti">
+				<contatti />
+			</div>
 		</div>
 	</div>
 	<a id="top" href="#header">Torna Su</a>

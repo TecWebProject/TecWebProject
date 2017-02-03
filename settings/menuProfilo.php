@@ -43,17 +43,27 @@ class MenuProfilo
 
         //Inizio della produzione della stringa
 
-        $string = "<div id='modMenuPagine'><ul>";
-
-        for ($i = 0; $i < count($entryMenu); ++$i) {
-            if ($i == $ind) {
-                $string .= "<li>" . $entryMenu[$i]["stringa"] . "</li>";
-            } else {
-                $string .= "<li><a href='" . $entryMenu[$i]["link"] . "'>" . $entryMenu[$i]["stringa"] . "</a></li>";
-            }
+        if($ind != -1){
+           $string = "<div id='modMenuPagine' class='hideOnMobile'><ul>";
+           for ($i = 0; $i < count($entryMenu); ++$i) {
+               if ($i == $ind) {
+                   $string .= "<li>" . $entryMenu[$i]["stringa"] . "</li>";
+               } else {
+                   $string .= "<li><a href='" . $entryMenu[$i]["link"] . "'>" . $entryMenu[$i]["stringa"] . "</a></li>";
+               }
+           }
+           $string .= "</ul></div>";
+        } else {
+           $string = "<div id='modMenuPagine'><ul>";
+           for ($i = 0; $i < count($entryMenu); ++$i) {
+               if ($i == $ind) {
+                   $string .= "<li>" . $entryMenu[$i]["stringa"] . "</li>";
+               } else {
+                   $string .= "<li><a href='" . $entryMenu[$i]["link"] . "'>" . $entryMenu[$i]["stringa"] . "</a></li>";
+               }
+           }
+           $string .= "</ul></div>";
         }
-
-        $string .= "</ul></div>";
 
         return $string;
     }

@@ -62,11 +62,11 @@ try {
 					$page=str_replace("<email />", htmlentities($row['email']), $page);
 					$page=str_replace("<nickname />", htmlentities($row['username']), $page);
 					$page=str_replace("<immagineProfilo />", $img, $page);
-					$page=str_replace("<nome />", htmlentities($row['nome']), $page);
-					$page=str_replace("<cognome />", htmlentities($row['cognome']), $page);
+					$page=str_replace("<nome />", (isset($row['nome'])) ? "<li>Nome: ".htmlentities($row['nome'])."</li>" : "", $page);
+					$page=str_replace("<cognome />", (isset($row['cognome']))?"<li>Cognome: ".htmlentities($row['cognome'])."</li>" : "", $page);
 					$page=str_replace("<dataIscrizione />", substr($row['dataIscrizione'], 0, 10), $page);
 					$page=str_replace("<dataNascita />", $row['dataNascita'], $page);
-					$page=str_replace("<provincia />", htmlentities($row['provincia']), $page);
+					$page=str_replace("<provincia />", (isset($row['provincia']))?"<li>Provincia: ".htmlentities($row['provincia'])."</li>":"", $page);
 					if ($row['descrizione']==NULL || $row['descrizione']=='') {
 						$row['descrizione']="Nessuna descrizione";
 					}
@@ -93,10 +93,10 @@ try {
 			}
 		}
 		$page=str_replace("<generiApprezzati />", $gen, $page); //stampa la lista dei generi in $page
-		
+
 		//trova gli strumenti suonati dall'utente
 		$query="SELECT C.strumento FROM Utenti U JOIN Conoscenze C ON U.username=C.utente JOIN Strumenti S ON S.nome=C.strumento WHERE U.username=\"".$_REQUEST["username"]."\";";
-		
+
 		$strumenti="";
 		if (!$result=$connessione->query($query)) {
 			$page .= "Query non valida: ".$connessione->error.".";
@@ -114,9 +114,9 @@ try {
 			}
 		}
 		$page=str_replace("<strumentiSuonati />", $strumenti, $page);
-		
-		
-		
+
+
+
 		//trova i gruppi ai quali appartiene l'utente, e i link alle pagine profilo delle band da costruire
 		$query="SELECT G.nome, G.immagine, G.idGruppo FROM Conoscenze C JOIN Formazioni F ON C.idConoscenza=F.ruolo JOIN Gruppi G ON F.gruppo=G.idGruppo WHERE C.utente=\"".$_REQUEST["username"]."\";";
 		$gruppi="";
@@ -128,10 +128,10 @@ try {
 				while ($row=$result->fetch_array(MYSQLI_ASSOC)) {
 					if ($row['immagine']==NULL) {
 						$row['immagine']="defaultBand.png";
-						$gruppi=$gruppi."<li><a href=\"../profiloGruppo/profiloGruppo.php?idGruppo=" . $row['idGruppo'] . "\"><img class=\"listImage\" src=\"../images/site/".$row['immagine']."\" alt=\"Immagine di ".$row['nome']."\" /> ".$row['nome'];
+						$gruppi=$gruppi."<li><a href=\"../profiloGruppo/profiloGruppo.php?idGruppo=" . $row['idGruppo'] . "\"><img class=\"listImage\" src=\"../images/site/".$row['immagine']."\" alt=\"Immagine di ".$row['nome']."\" /><p>".$row['nome']."</p>";
 					} else {
-						$gruppi=$gruppi."<li class=\"elementResult\"><a href=\"../profiloGruppo/profiloGruppo.php?idGruppo=" . $row['idGruppo'] . "\"><img class=\"listImage\" src=\"../images/bands/".$row['immagine']."\" alt=\"Immagine di ".$row['nome']."\" /> ".$row['nome'];
-					}						
+						$gruppi=$gruppi."<li class=\"elementResult\"><a href=\"../profiloGruppo/profiloGruppo.php?idGruppo=" . $row['idGruppo'] . "\"><img class=\"listImage\" src=\"../images/bands/".$row['immagine']."\" alt=\"Immagine di ".$row['nome']."\" /><p>".$row['nome']."</p>";
+					}
 					$gruppi=$gruppi."</a></li>";
 				}
 				$result->free();
@@ -141,9 +141,9 @@ try {
 				$gruppi="<p>Nessun gruppo</p>";}
 		}
 		$page=str_replace("<nomeGruppi />", $gruppi, $page);
-		
-		
-		
+
+
+
 		//cerca e stampa i contatti utente
 		$query="SELECT utente, tipoContatto, contatto FROM ContattiUtenti WHERE utente=\"".$_REQUEST["username"]."\";";
 		if (!$result=$connessione->query($query)) {
@@ -156,7 +156,7 @@ try {
 					switch ($row['tipoContatto']) {
 						# email:
 						case 'email_pubblica':
-							$contacts .= '<li><a href="mailto:' . $row['contatto'] . '">' . $row['contatto'] . '</a></li>';
+							$contacts .= '<li>Email: <a href="mailto:' . $row['contatto'] . '">' . $row['contatto'] . '</a></li>';
 							break;
 						# link esterno:
 						case 'telegram':
@@ -167,7 +167,7 @@ try {
 						# numero di telefono:
 						case 'whatsapp':
 						default:
-							$contacts .= '<li>' . $row['contatto'] . '</li>';
+							$contacts .= '<li>Telefono: <a href="tel:' . $row['contatto'] . '">'.$row['contatto'].'</a></li>';
 							break;
 					}
 				}

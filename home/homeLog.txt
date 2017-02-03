@@ -5,20 +5,17 @@
 				</form>
 			</div>
 
+			<div id="testo">
 				<h2>Bentornato/a!</h2>
+			</div>
 
-				<div class="suggeriti">
-					<p>Ecco dei nuovi utenti che potresti conoscere:</p>
-					
-					<utentiSuggeriti />
-					
-				</div>
+			<div class="suggeriti">
+				<p>Ecco dei nuovi utenti che potresti conoscere:</p>
+				<utentiSuggeriti />
+			</div>
 
-				<div class="suggeriti">
-					<p>Ecco dei nuovi gruppi che potrebbero interessarti:</p>
-					
-					<gruppiSuggeriti />
-					
-				</div>
-
+			<div class="suggeriti">
+				<p>Ecco dei nuovi gruppi che potrebbero interessarti:</p>
+				<gruppiSuggeriti />
+			</div>
 		</div>
