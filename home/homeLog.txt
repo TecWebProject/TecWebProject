@@ -5,7 +5,6 @@
 				</form>
 			</div>
 
-			<div id="testo">
 				<h2>Bentornato/a!</h2>
 
 				<div class="suggeriti">
@@ -22,5 +21,4 @@
 					
 				</div>
 
-			</div>
 		</div>
