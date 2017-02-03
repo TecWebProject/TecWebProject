@@ -3,7 +3,7 @@
 <body>
 	<header />
 
-	<div id="menu">
+	<div id="nav">
 		<menu />
 	</div>
 
