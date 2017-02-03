@@ -20,9 +20,7 @@
 				<p>oppure</p>
 				<a href="registrazione/registrazione.php" id="registrati" tabindex="4">Iscriviti</a>
 			</div>
-		</div>
 
-		<div id="testo">
 			<h2>La bacheca virtuale per qualunque musicista</h2>
 
 			<div class="slide">
@@ -50,9 +48,8 @@
 			<h4>Oltre <scriptNumUtenti /> utenti iscritti</h4>
 			<h4>Più di <scriptNumGruppi /> <span xml:lang="en" lang="en">band</span> registrate</h4>
 			<h4>Prova a cercarle!</h4>
-		</div>
-
-		<div class="homeReg">
-			<a href="cercaUtenti/index.php" id="cercaUtenti" tabindex="5">Cerca Utenti</a>
-			<a href="cercaGruppi/index.php" id="cercaBand" tabindex="6">Cerca <span xml:lang="en" lang="en">Band</span></a>
+			<div class="homeReg">
+				<a href="cercaUtenti/index.php" id="cercaUtenti" tabindex="5">Cerca Utenti</a>
+				<a href="cercaGruppi/index.php" id="cercaBand" tabindex="6">Cerca <span xml:lang="en" lang="en">Band</span></a>
+			</div>
 		</div>
