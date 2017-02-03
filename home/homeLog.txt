@@ -1,4 +1,4 @@
-				<div id="content">
+		<div id="content" class="homeReg">
 			<div class="logout">
 				<form action="lib/php/logout.php" method="post">
 					<p><input type="submit" id="logout" value="Logout" /></p>
