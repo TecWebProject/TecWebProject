@@ -9,7 +9,7 @@ require_once realpath(dirname(__FILE__)).'/query_server.php';
 */
 class Username {
 	/*
-	DESC: Ritorna un array con i nomi delle province
+	DESCR: Ritorna un array con i nomi delle province
 	OUTPUT: Array associativo ordinato alfabeticamente;
 	*/
 	public static function getUsernameStatus($username) {

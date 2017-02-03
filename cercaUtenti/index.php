@@ -133,7 +133,7 @@ $file = str_replace('<generi />', $generi, $file);
 
 
 # prepara parametri di paginazione dei risultati
-$per_page = 10; # risultati per pagina
+$per_page = 10; # numero utenti per pagina
 $curr_page = isset($_GET['num']) ? (int)$_GET['num'] : 1; # pag. corrente
 $primo = ($curr_page - 1) * $per_page; # primo utente della pag. corrente
 

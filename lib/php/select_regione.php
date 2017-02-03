@@ -13,7 +13,7 @@ require_once $relPath . '/query_server.php';
 class SelectRegione
 {
     /*
-    DESC: Ritorna un array con i nomi delle province legate alla regione in input.
+    DESCR: Ritorna un array con i nomi delle province legate alla regione in input.
     INPUT: Nome della regione abbreviato a 3 caratteri e in maiuscolo
     OUTPUT: Array di stringhe ordinato alfabeticamente;
     */
