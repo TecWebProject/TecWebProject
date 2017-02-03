@@ -1,9 +1,18 @@
 html, body {
   margin: 0;
   padding: 0;
+  height: 100%;
   font-family: Verdana, Arial, Helvetica, sans-serif;
   /* Twitter usa: "Helvetica Neue", Helvetica, Arial, sans-serif; Gitlab usa: "Source Sans Pro", sans-serif; */
   font-size: 100%;
+}
+
+body {
+  background: #0080FF;
+}
+
+#content {
+  background: white;
 }
 
 h1, h2, h3, p, li, ul, a, div, span {
@@ -34,7 +43,6 @@ a.external::before {
   text-align: center;
   max-width: 100%;
   padding: 1em;
-  box-shadow: 0 0 5px black;
 }
 
 #footer p {
@@ -92,7 +100,6 @@ a.external::before {
   text-align: center;
 }
 
-/* MENU */
 #menu_check {
   position: absolute;
   top: 0;
@@ -150,4 +157,21 @@ a.external::before {
 
 .nav ul li a:hover {
   color: #52e9ff;
+}
+
+.profilo > h2 {
+  padding: 1em;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.profilo #bloccoPrincipale {
+  display: inline-block;
+  text-align: center;
+  vertical-align: top;
+}
+
+.profilo #bloccoPrincipale img {
+  width: 80%;
+  max-width: 20em;
 }

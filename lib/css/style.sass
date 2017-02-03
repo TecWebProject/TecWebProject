@@ -10,14 +10,21 @@ $menuColoreSfondo: darken($sfondoHeader, 20)
 $menuColoreEntryAttiva: white
 $menuColoreEntry: #00CDEB
 $menuColoreEntryHover: lighten($menuColoreEntry, 20)
+$sfondoBody: $sfondoHeader
 
 // Pulizia iniziale
 html, body
    margin: 0
    padding: 0
+   height: 100%
    font-family: Verdana, Arial, Helvetica, sans-serif
    /* Twitter usa: "Helvetica Neue", Helvetica, Arial, sans-serif; Gitlab usa: "Source Sans Pro", sans-serif;
    font-size: 100%
+
+body
+   background: $sfondoBody
+#content
+   background: white
 
 h1,h2,h3,p,li,ul,a,div,span
    margin: 0
@@ -45,7 +52,7 @@ a.external::before
    text-align: center
    max-width: 100%
    padding: 1em
-   box-shadow: 0 0 5px black
+
    p
       margin-bottom: 1em
    div
@@ -89,8 +96,7 @@ a.external::before
          p
             text-align: center
 
-/* MENU
-
+// MENU
 #menu_check
    position: absolute
    top: 0
@@ -101,7 +107,7 @@ a.external::before
       > label
          left: 10em
 
-// Pulsante del menu
+// PULSANTE MENU
 #menu_button
    position: fixed
    left: 0
@@ -112,6 +118,7 @@ a.external::before
       font-weight: bold
       text-shadow: 0px 1px 3px black
 
+// PANNELLO MENU
 .nav
    font-family: Verdana, Arial, Helvetica, sans-serif
    background: $menuColoreSfondo
@@ -134,3 +141,29 @@ a.external::before
             text-decoration: none
             &:hover
                color: $menuColoreEntryHover
+
+// PROFILO UTENTE
+.profilo
+   > h2
+      padding: 1em
+      font-size: 1.5em
+      text-align: center
+
+   #bloccoPrincipale
+      display: inline-block
+      text-align: center
+
+      vertical-align: top
+
+      img
+         width: 80%
+         max-width: 20em
+   #bloccoBio
+
+   #bloccoGeneri
+
+   #bloccoStrumenti
+
+   #bloccoMembroGruppo
+
+   #bloccoContatti
