@@ -5,7 +5,7 @@
 		<ul>
 			<li>Nome: <nome /></li>
 			<li>Provincia: <provincia /></li>
-			<li>Data Iscrizione: <dataIscrizione /></li> 
+			<li>Data di iscrizione: <dataIscrizione /></li> 
 		</ul>
 	</div>
 	<div id="bloccoBio">
