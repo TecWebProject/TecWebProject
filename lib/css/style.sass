@@ -5,9 +5,9 @@ $sfondoHeader : #0080FF
 $testoHeader : white
 $sfondoFooter : $sfondoHeader
 $testoFooter: $testoHeader
-$colorePulsanteMenu : #EB3200
-$menuColoreSfondo: $sfondoHeader
-$menuColoreEntryAttiva: #E0EB00
+$colorePulsanteMenu : #FF7F00
+$menuColoreSfondo: darken($sfondoHeader, 20)
+$menuColoreEntryAttiva: white
 $menuColoreEntry: #00CDEB
 $menuColoreEntryHover: lighten($menuColoreEntry, 20)
 
@@ -48,7 +48,7 @@ a.external::before
       margin-bottom: 1em
    div
       img
-         margin: 0.5em
+         margin: 0.5em0
 
 // LOGOUT BUTTON
 .logout
@@ -106,7 +106,8 @@ a.external::before
    margin: 1em 0 0 1em
    a
       color: $colorePulsanteMenu
-      font-size: 200%
+      font-size: 250%
+      font-weight: bold
 
 .nav
    font-family: Verdana, Arial, Helvetica, sans-serif

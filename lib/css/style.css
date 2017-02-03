@@ -40,7 +40,7 @@ a.external::before {
 }
 
 #footer div img {
-  margin: 0.5em;
+  margin: 0.5em0;
 }
 
 .logout {
@@ -113,13 +113,14 @@ a.external::before {
 }
 
 #menu_button a {
-  color: #EB3200;
-  font-size: 200%;
+  color: #FF7F00;
+  font-size: 250%;
+  font-weight: bold;
 }
 
 .nav {
   font-family: Verdana, Arial, Helvetica, sans-serif;
-  background: #0080FF;
+  background: #004d99;
   position: fixed;
   top: 0;
   right: 100%;
@@ -135,7 +136,7 @@ a.external::before {
 
 .nav ul li {
   font-weight: bold;
-  color: #E0EB00;
+  color: white;
   margin: 1em;
 }
 
