@@ -415,7 +415,7 @@ h3 {
 	}
 }
 
-a#top, p > a#torna, #modBackButton > a {
+p > a#torna, #modBackButton > a {
 	text-align: center;
 	text-transform: uppercase;
 	font-weight: bold;
@@ -424,17 +424,15 @@ a#top, p > a#torna, #modBackButton > a {
 	border-radius: 1em;
 }
 
-.paginaPrec, #top {
+.paginaPrec {
 	background-color: #70C1FF;
 	display: inline-block;
-	float: right;
-	text-align: center;
 	border-radius: 20px;
 	margin-bottom: 1em;
 	margin-top: 1em;
 }
 
-.paginaPrec a, #top a {
+.paginaPrec a {
 	color: black;
 }
 
@@ -452,15 +450,15 @@ a#top, p > a#torna, #modBackButton > a {
 	padding: 1em;
 }
 
-#top:visited, .paginaPrec:visited {
+.paginaPrec:visited {
 	background-color: #70C1FF;
 }
 
-#top:hover, .paginaPrec:hover {
+.paginaPrec:hover {
 	background-color: #5EADEA;
 }
 
-#top:active, .paginaPrec:active {
+.paginaPrec:active {
 	background-color: #70C1FF;
 }
 
