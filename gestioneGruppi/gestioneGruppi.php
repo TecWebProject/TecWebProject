@@ -1,30 +1,41 @@
 <?php
+
 /* pagina della gestione dei gruppi */
+
 session_start();
-include_once "../lib/php/query_server.php";
-include_once "../lib/php/start.php";	//LIBRERIA PER CREARE HEAD
-include_once "../lib/php/header.php";	//LIBRERIA PER CREARE HEADER
-include_once "../lib/php/menu.php";	//LIBRERIA PER CREARE MENU
-include_once "../lib/php/footer.php";	//LIBRERIA PER CREARE FOOTER
-$page="";
-$page=$page.Start::getHead(array(
-	'Titolo' => "Gestione Gruppi - BandBoard",
-	'DescrizioneBreve' => "Gestione Gruppi - BandBoard",
-	'Descrizione' => "Pagina di visualizzazione della gestione gruppi del sito BandBoard",
-	'Keywords' => array("BandBoard", "Gestione gruppi", "gruppi","musicista", "bacheca", "musica", "musicisti"),
-	'Stylesheets' => array("style.css"),
-	'Extra' => array("<link rel=\"stylesheet\" media=\"handheld, screen and (max-width:480px), only screen and (max-device-width:480px)\" href=\"../lib/css/style_mobile.css\" type=\"text/css\" />", '<link rel="stylesheet" type="text/css" media="print" href="../lib/css/style_print.css" />')
-	));	//CREAZIONE HEAD
-$page=$page."<body>";
-$page=$page.Header::getHeader();
+
+if (!isset($_SESSION['username']))
+	header('Location: ../index.php');
+
+include_once '../lib/php/query_server.php';
+include_once '../lib/php/start.php';
+include_once '../lib/php/header.php';
+include_once '../lib/php/menu.php';
+include_once '../lib/php/footer.php';
+
+$page = '';
+$page .= Start::getHead(
+	array(
+		'Titolo' => 'Gestione Gruppi - BandBoard',
+		'DescrizioneBreve' => 'Gestione Gruppi - BandBoard',
+		'Descrizione' => 'Pagina di visualizzazione della gestione gruppi del sito BandBoard',
+		'Keywords' => array('BandBoard', 'Gestione gruppi', 'gruppi','musicista', 'bacheca', 'musica', 'musicisti'),
+		'Stylesheets' => array('style.css'),
+		'Extra' => array('<link rel="stylesheet" media="handheld, screen and (max-width:480px), only screen and (max-device-width:480px)" href="../lib/css/style_mobile.css" type="text/css" />')
+	)
+);
+
+$page .= "<body>";
+$page .= Header::getHeader();
+
 if (isset($_SESSION['username'])) {	//UTENTE LOGGATO
 	$logout="<div class=\"logout\">
                 <form action=\"../lib/php/logout.php\" method=\"post\">
 	                <p><input type=\"submit\" id=\"logout\" value=\"Logout\" /></p>
                 </form>
             </div>";
-	$page=$page.$logout;
-	$page=$page."<div class=\"nav\">".Menu::getMenu(array(
+	$page .= $logout;
+	$page .= "<div class=\"nav\">".Menu::getMenu(array(
 		'<a href="../index.php" xml:lang="en" lang="en">Home</a>',
 		"<a href='../settings/index.php'>Modifica Profilo</a>",
 		"<a href='../cercaUtenti/index.php'>Cerca Utenti</a>",
@@ -34,9 +45,9 @@ if (isset($_SESSION['username'])) {	//UTENTE LOGGATO
 } else {
 	session_unset();
 	session_destroy();
-	$page=$page."<div class=\"nav\">".Menu::getMenu(array('<a href="../index.php" xml:lang="en" lang="en">Home</a>', "<a href='../cercaUtenti/index.php'>Cerca Utenti</a>", "<a href='../cercaGruppi/index.php'>Cerca Gruppi</a>"))."</div>";	//CREAZIONE DEL MENU PER UTENTE NON LOGGATO
+	$page .= "<div class=\"nav\">".Menu::getMenu(array('<a href="../index.php" xml:lang="en" lang="en">Home</a>', "<a href='../cercaUtenti/index.php'>Cerca Utenti</a>", "<a href='../cercaGruppi/index.php'>Cerca Gruppi</a>"))."</div>";	//CREAZIONE DEL MENU PER UTENTE NON LOGGATO
 }
-$page=$page.file_get_contents(realpath(dirname(__FILE__))."/gestioneGruppi.txt");
+$page .= file_get_contents(realpath(dirname(__FILE__))."/gestioneGruppi.txt");
 
 //connessione al db
 
