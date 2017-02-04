@@ -317,13 +317,6 @@ h3 {
 	font-size: 1.5em;
 	text-align: center;
 }
-.profilo h3{
-	padding:.5em;
-	background-color:#0080FF;
-	color:white;
-	margin-bottom:.5em;
-	border-radius:5px;
-}
 
 .profilo #bloccoPrincipale {
 	display: inline-block;
@@ -331,12 +324,10 @@ h3 {
 	vertical-align: top;
 	max-width: 20em;
 	width: 100%;
-	margin-bottom:1em;
 }
 
 .profilo #bloccoPrincipale img {
 	width: 100%;
-	margin-bottom:1em;
 }
 
 .profilo #bloccoBio {
@@ -396,8 +387,6 @@ h3 {
 .profilo div #bloccoContatti div {
 	padding: 0;
 }
-*/
-
 
 
 /* settings (modifica profilo) */
