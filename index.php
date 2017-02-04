@@ -74,7 +74,7 @@ function getUtenti() {
 		if ($connessione->connect_errno) {
 			throw new Exception("Connessione fallita: ".$connessione->connect_error.".");
 		} else {
-			$query="SELECT username, nome, cognome, immagine, provincia, dataIscrizione FROM Utenti WHERE username!=\"".$_SESSION['username']."\" ORDER BY dataIscrizione DESC LIMIT 5;";	//CREAZIONE DELLA QUERY
+			$query="SELECT username, nome, cognome, immagine, provincia, dataIscrizione FROM Utenti WHERE username!=\"".$_SESSION['username']."\" ORDER BY dataIscrizione DESC LIMIT 20;";	//CREAZIONE DELLA QUERY
 			if (!$result=$connessione->query($query)) {
 				echo "Query non valida: ".$connessione->error.".";
 			} else {
@@ -82,15 +82,16 @@ function getUtenti() {
 					while ($row=$result->fetch_array(MYSQLI_ASSOC)) {
 						if ($row['immagine']==NULL) {
 							$row['immagine']="defaultUser.png";		//DA CAMBIARE IN CASO DI MODIFICHE
-							$users=$users."<li class=\"elementResult\"><a href=\"profiloUtente/profiloUtente.php?username=".$row['username']."&amp;page=index\"><img class=\"listImage\" src=\"images/site/".$row['immagine']."\" alt=\"Immagine di ".$row['username']."\" /> ".$row['username'];	//ATTENZIONE AL PATH! DA CAMBIARE IN CASO DI MODIFICHE
+							$users=$users."<li class=\"elementResult\"><a href=\"profiloUtente/profiloUtente.php?username=".$row['username']."&amp;page=index\"><img class=\"listImage\" src=\"images/site/".$row['immagine']."\" alt=\"Immagine di ".$row['username']."\" /><p>".$row['username']."</p>";	//ATTENZIONE AL PATH! DA CAMBIARE IN CASO DI MODIFICHE
 						} else {
-							$users=$users."<li class=\"elementResult\"><a href=\"profiloUtente/profiloUtente.php?username=".$row['username']."&amp;page=index\"><img class=\"listImage\" src=\"images/users/".$row['immagine']."\" alt=\"Immagine di ".$row['username']."\" /> ".$row['username'];	//ATTENZIONE AL PATH! DA CAMBIARE IN CASO DI MODIFICHE
+							$users=$users."<li class=\"elementResult\"><a href=\"profiloUtente/profiloUtente.php?username=".$row['username']."&amp;page=index\"><img class=\"listImage\" src=\"images/users/".$row['immagine']."\" alt=\"Immagine di ".$row['username']."\" /><p>
+							".$row['username'] . "</p>";	//ATTENZIONE AL PATH! DA CAMBIARE IN CASO DI MODIFICHE
 						}
 						if ($row['nome']!=NULL || $row['cognome']!=NULL) {
-							$users=$users." - ".$row['nome']." ".$row['cognome'];
+							$users=$users."<p>".$row['nome']." ".$row['cognome']."</p>";
 						}
 						if ($row['provincia']!=NULL) {
-							$users=$users." (".$row['provincia'].")";
+							$users=$users."<p>(".$row['provincia'].")</p>";
 						}
 						$users=$users."</a></li>";
 					}
@@ -113,7 +114,7 @@ function getGruppi() {
 		if ($connessione->connect_errno) {
 			throw new Exception("Connessione fallita: ".$connessione->connect_error.".");
 		} else {
-			$query="SELECT idGruppo, nome, immagine, provincia, dataIscrizione FROM Gruppi WHERE idGruppo NOT IN (SELECT g.idGruppo FROM Gruppi g JOIN Formazioni f ON g.idGruppo=f.gruppo JOIN Conoscenze c ON f.ruolo=c.idConoscenza WHERE c.utente=\"".$_SESSION['username']."\") ORDER BY dataIscrizione DESC LIMIT 5;";	//CREAZIONE DELLA QUERY
+			$query="SELECT idGruppo, nome, immagine, provincia, dataIscrizione FROM Gruppi WHERE idGruppo NOT IN (SELECT g.idGruppo FROM Gruppi g JOIN Formazioni f ON g.idGruppo=f.gruppo JOIN Conoscenze c ON f.ruolo=c.idConoscenza WHERE c.utente=\"".$_SESSION['username']."\") ORDER BY dataIscrizione DESC LIMIT 10;";	//CREAZIONE DELLA QUERY
 			if (!$result=$connessione->query($query)) {
 				echo "Query non valida: ".$connessione->error.".";
 			} else {
@@ -121,9 +122,9 @@ function getGruppi() {
 					while ($row=$result->fetch_array(MYSQLI_ASSOC)) {
 						if ($row['immagine']==NULL) {
 							$row['immagine']="defaultBand.png";		//DA CAMBIARE IN CASO DI MODIFICHE
-							$bands=$bands."<li class=\"elementResult\"><a href=\"profiloGruppo/profiloGruppo.php?idGruppo=".$row['idGruppo']."&amp;page=index\"><img class=\"listImage\" src=\"images/site/".$row['immagine']."\" alt=\"Immagine di ".$row['nome']."\" /> ".$row['nome'];	//ATTENZIONE AL PATH! DA CAMBIARE IN CASO DI MODIFICHE
+							$bands=$bands."<li class=\"elementResult\"><a href=\"profiloGruppo/profiloGruppo.php?idGruppo=".$row['idGruppo']."&amp;page=index\"><img class=\"listImage\" src=\"images/site/".$row['immagine']."\" alt=\"Immagine di ".$row['nome']."\" /><p>".$row['nome']."</p>";	//ATTENZIONE AL PATH! DA CAMBIARE IN CASO DI MODIFICHE
 						} else {
-							$bands=$bands."<li class=\"elementResult\"><a href=\"profiloGruppo/profiloGruppo.php?idGruppo=".$row['idGruppo']."&amp;page=index\"><img class=\"listImage\" src=\"images/bands/".$row['immagine']."\" alt=\"Immagine di ".$row['nome']."\" /> ".$row['nome'];	//ATTENZIONE AL PATH! DA CAMBIARE IN CASO DI MODIFICHE
+							$bands=$bands."<li class=\"elementResult\"><a href=\"profiloGruppo/profiloGruppo.php?idGruppo=".$row['idGruppo']."&amp;page=index\"><img class=\"listImage\" src=\"images/bands/".$row['immagine']."\" alt=\"Immagine di ".$row['nome']."\" /><p>".$row['nome']."</p>";	//ATTENZIONE AL PATH! DA CAMBIARE IN CASO DI MODIFICHE
 						}
 						if ($row['provincia']!=NULL) {
 							$bands=$bands." (".$row['provincia'].")";
@@ -243,4 +244,3 @@ echo '</body>';
 echo '</html>';
 
 ?>
-
