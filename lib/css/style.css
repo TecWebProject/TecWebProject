@@ -467,7 +467,7 @@ p > a#torna, #modBackButton > a {
 	border-radius: 0.4em;
 }
 
-.paginaPrec {
+.paginaPrec, .top{
 	background-color: #70C1FF;
 	display: inline-block;
 	border-radius: 10px;
@@ -475,15 +475,20 @@ p > a#torna, #modBackButton > a {
 	margin-top: 1em;
 }
 
-.paginaPrec a {
+.paginaPrec a , .top a{
 	color: black;
 }
 
 .paginaPrec {
 	max-width: 20em;
-	margin-right: 2em;
+	margin-right: 1em;
 	padding: 1em 3em 1em 0;
 	min-width: 20%;
+}
+.top{
+	margin-right:2em;
+	min-width:20%;
+	margin-top:1.5em;
 }
 
 .paginaPrec:visited {
@@ -495,6 +500,19 @@ p > a#torna, #modBackButton > a {
 }
 
 .paginaPrec:active {
+	background-color: #70C1FF;
+}
+
+
+.top:visited {
+	background-color: #70C1FF;
+}
+
+.top:hover {
+	background-color: #5EADEA;
+}
+
+.top:active {
 	background-color: #70C1FF;
 }
 
