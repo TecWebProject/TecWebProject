@@ -36,6 +36,12 @@ try {
 
     $string .= "<div id='content'>";
 
+    $string .= '<div class="logout">' .
+        '<form action="../lib/php/logout.php" method="post">' .
+            '<p><input type="submit" id="logout" value="Logout" /></p>' .
+        '</form>' .
+    '</div>';
+
     $string .= MenuProfilo::getMenuProfilo();
 
     $string .= '<p class="paginaPrec"><a href="../index.php" id="torna">Torna alla Home</a></p>';

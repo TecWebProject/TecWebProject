@@ -39,6 +39,12 @@ try {
     // Inizio contenuto pagina
     $string .= "<div id='content'>";
 
+    $string .= '<div class="logout">' .
+        '<form action="../lib/php/logout.php" method="post">' .
+            '<p><input type="submit" id="logout" value="Logout" /></p>' .
+        '</form>' .
+    '</div>';
+
     $string .= MenuProfilo::getMenuProfilo(2);
 
     $string .= "<div id='modContenutoPagina'>";
