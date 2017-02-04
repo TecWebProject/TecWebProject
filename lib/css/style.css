@@ -201,6 +201,30 @@ h3 {
 
 
 
+#paginazione {
+	margin-top: 2em;
+}
+
+#paginazione span.notClickable, #paginazione a{
+	display: inline-block;
+	text-align: center;
+	font-size: 1.4em;
+	color: black;
+	background-color: #70C1FF;
+	margin: 1em;
+	padding: 0.2em;
+	min-width: 12em;
+	border-radius: 0.4em;
+}
+
+#paginazione a {
+	text-decoration-line: none;
+}
+
+#paginazione a:hover {
+	background-color: #5EADEA;
+}
+
 .risultati img, .suggeriti img {
 	width: 4em;
 	height: auto;
@@ -532,4 +556,18 @@ p > a#torna, #modBackButton > a {
 	margin-left: 1em;
 	padding: 1em;
 	min-width: 11em;
+}
+
+
+
+/* pagina per l'errore 404 */
+#header .notFound {
+	color: #66DDFF;
+}
+
+#content.notFound {
+	text-align: center;
+}
+#content.notFound h2 {
+	font-size: 2.8em;
 }
