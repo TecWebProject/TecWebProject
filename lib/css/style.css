@@ -3,22 +3,11 @@ html, body {
 	padding: 0;
 	height: 100%;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
-	/* Twitter usa: "Helvetica Neue", Helvetica, Arial, sans-serif; Gitlab usa: "Source Sans Pro", sans-serif; */
 	font-size: 100%;
-	min-width: 300px;
 }
 
-body {
-	background: #0080FF;
-}
-
-#content {
-	background: white;
-}
-
-h1, h2, h3, p, li, ul, a, div, span {
-	margin: 0;
-	padding: 0;
+img {
+	max-width: 100%;
 }
 
 ul {
@@ -39,14 +28,17 @@ a.external::before {
 
 #header h1 {
 	font-size: 2em;
-	padding: 0.1em 0.2em;
+	padding: 1em 0.2em;
+	margin: 0;
+}
+
+#content, #footer {
+	max-width: 1024px;
+	margin: auto;
 }
 
 #footer {
-	background: #0080FF;
-	color: white;
 	text-align: center;
-	max-width: 100%;
 	padding: 1em;
 }
 
@@ -54,12 +46,11 @@ a.external::before {
 	margin-bottom: 1em;
 }
 
-#footer div img {
-	margin: 0.5em0;
+#footer img {
+	margin: 1em;
 }
 
 .logout {
-<<<<<<< HEAD
 	text-align: right;
 	padding-left: 8%;
 	padding-right: 8%;
@@ -72,11 +63,13 @@ a.external::before {
 	text-align: center;
 }
 
+#login, #registrazione {
+	margin-top: 1em;
+}
+
 #login {
-	width: 20em;
 	display: inline-block;
 	text-align: left;
-	margin: 1em;
 }
 
 #login legend {
@@ -86,14 +79,27 @@ a.external::before {
 
 #login fieldset {
 	border: none;
-=======
 	float: right;
 	padding: 0.5em;
-	height: 0;
->>>>>>> SASS
 }
 
-#content #testo {
+#login label {
+	display: inline-block;
+	text-align: left;
+	padding-top: 0.4em;
+	padding-bottom: 0.2em;
+	margin-left: 0.1em;
+}
+
+#registrazione {
+	display: inline-block;
+}
+
+#registrazione p {
+	padding: 1em;
+}
+
+#testo {
 	padding: 1em;
 	font-size: 1.5em;
 	text-align: center;
@@ -380,27 +386,6 @@ a#top, p > a#torna, #modBackButton > a {
 	padding: 0 0.5em 0 0;
 }
 
-#registrazione {
-	display: inline-block;
-}
-
-#registrazione p {
-	padding: 0.5em;
-}
-
-#login {
-	width: 20em;
-	display: inline-block;
-	text-align: left;
-	margin: 1em;
-}
-
-#login legend {
-	font-size: 1.2em;
-	margin: 0em 0em 0em 3.2em;
-}
-
-<<<<<<< HEAD
 .paginaPrec, #top {
 	background-color: #70C1FF;
 	display: inline-block;
@@ -420,31 +405,15 @@ a#top, p > a#torna, #modBackButton > a {
 	margin-right: 2em;
 	padding: 1em 3em 1em 0;
 	min-width: 20%;
-=======
-#login fieldset {
-	border: none;
-}
-
-#login div label {
-	display: inline-block;
-	text-align: left;
-	padding-top: 0.4em;
-	padding-bottom: 0.2em;
-	margin-left: 0.1em;
 }
 
 /* link alla pagina di registrazione */
-.homeReg {
-	text-align: center;
->>>>>>> SASS
-}
 
 .homeReg + #testo {
 	text-align: center;
 	padding: 1em;
 }
 
-<<<<<<< HEAD
 #top:visited, .paginaPrec:visited {
 	background-color: #70C1FF;
 }
@@ -455,7 +424,8 @@ a#top, p > a#torna, #modBackButton > a {
 
 #top:active, .paginaPrec:active {
 	background-color: #70C1FF;
-=======
+}
+
 .homeReg + #testo .slide {
 	padding: 2em;
 }
@@ -470,12 +440,11 @@ a#top, p > a#torna, #modBackButton > a {
 }
 
 #registrati:visited, #registrati:active {
-	background-color: #ffb266;
->>>>>>> SASS
+	background-color: #FFB266;
 }
 
 #registrati:hover {
-	background-color: #ffb266;
+	background-color: #FFB266;
 }
 
 #cercaUtenti, #cercaBand {
@@ -486,7 +455,6 @@ a#top, p > a#torna, #modBackButton > a {
 	background-color: #FF7F00;
 	margin: 0em 0.8em;
 	padding: 0.8em 4.3em;
-	min-width: 6em;
 	border-radius: 0.4em;
 	text-decoration-line: none;
 }
