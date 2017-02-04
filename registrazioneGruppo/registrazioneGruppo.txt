@@ -34,5 +34,5 @@
 		</form>
 			<p class="legendaForm">* : Campo obbliatorio</p>
 	</div>
-	<p class="paginaPrec"><a href="../gestioneGruppi/gestioneGruppi.php" id="torna">Torna a Gestione Gruppi</a></p>
+	<p class="paginaPrec"><a href="../gestioneGruppi/index.php" id="torna">Torna a Gestione Gruppi</a></p>
 </div>

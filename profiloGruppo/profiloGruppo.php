@@ -52,7 +52,7 @@ if (isset($_SESSION['username'])) {	//UTENTE LOGGATO
                 </form>
             </div>";
 	$page=$page.$logout;
-	$page=$page."<div class=\"nav\">".Menu::getMenu(array('<a href="../index.php" xml:lang="en" lang="en">Home</a>', "<a href='../settings/index.php'>Modifica Profilo</a>", "<a href='../cercaUtenti/index.php'>Cerca Utenti</a>", "<a href='../cercaGruppi/index.php'>Cerca Gruppi</a>", "<a href='../gestioneGruppi/gestioneGruppi.php'>I miei Gruppi</a>"))."</div>";	//CREAZIONE DEL MENU PER UTENTE LOGGATO
+	$page=$page."<div class=\"nav\">".Menu::getMenu(array('<a href="../index.php" xml:lang="en" lang="en">Home</a>', "<a href='../settings/index.php'>Modifica Profilo</a>", "<a href='../cercaUtenti/index.php'>Cerca Utenti</a>", "<a href='../cercaGruppi/index.php'>Cerca Gruppi</a>", "<a href='../gestioneGruppi/index.php'>I miei Gruppi</a>"))."</div>";	//CREAZIONE DEL MENU PER UTENTE LOGGATO
 } else {
 	session_unset();
 	session_destroy();

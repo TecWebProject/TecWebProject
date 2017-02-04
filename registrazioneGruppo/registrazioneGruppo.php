@@ -64,7 +64,7 @@ $logout="<div class=\"logout\">
 		</div>";
 $page=$page.$logout;
 
-$page=$page."<div class=\"nav\">".Menu::getMenu(array('<a href="../index.php" xml:lang="en" lang="en">Home</a>', '<a href="../profiloUtente/profiloUtente.php?username=' . $_SESSION['username'] . '">Visualizza Profilo</a>', '<a href="../settings/index.php">Modifica Profilo</a>', '<a href="../cercaUtenti/index.php">Cerca Utenti</a>', '<a href="../cercaGruppi/index.php">Cerca Gruppi</a>', '<a href="../gestioneGruppi/gestioneGruppi.php">I miei Gruppi</a>')).'</div>';	//CREAZIONE DEL MENU
+$page=$page."<div class=\"nav\">".Menu::getMenu(array('<a href="../index.php" xml:lang="en" lang="en">Home</a>', '<a href="../profiloUtente/profiloUtente.php?username=' . $_SESSION['username'] . '">Visualizza Profilo</a>', '<a href="../settings/index.php">Modifica Profilo</a>', '<a href="../cercaUtenti/index.php">Cerca Utenti</a>', '<a href="../cercaGruppi/index.php">Cerca Gruppi</a>', '<a href="../gestioneGruppi/index.php">I miei Gruppi</a>')).'</div>';	//CREAZIONE DEL MENU
 
 if (count($_REQUEST)==0) {	//APPENA ARRIVATO DA GESTIONE GRUPPI
 	$page=$page.file_get_contents("registrazioneGruppo.txt");	//CREAZIONE PAGINA DI REGISTRAZIONE GRUPPO
