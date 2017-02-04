@@ -85,9 +85,9 @@ try {
 				while ($row=$result->fetch_array(MYSQLI_ASSOC)) {
 					if ($row['immagine']==NULL) {
 						$row['immagine']="defaultBand.png";
-						$img="<img id=\"fotoprofilo\" src=\"../images/site/".htmlentities($row['immagine'])."\" alt=\"Immagine di ".htmlentities($row['nome'])."\" />";
+						$img="<img class=\"fotoprofilo\" src=\"../images/site/".htmlentities($row['immagine'])."\" alt=\"Immagine di ".htmlentities($row['nome'])."\" />";
 					} else {
-						$img="<img id=\"fotoprofilo\" src=\"../images/bands/".htmlentities($row['immagine'])."\" alt=\"Immagine di ".htmlentities($row['nome'])."\" />";
+						$img="<img class=\"fotoprofilo\" src=\"../images/bands/".htmlentities($row['immagine'])."\" alt=\"Immagine di ".htmlentities($row['nome'])."\" />";
 					}
 					$page=str_replace("<immagineProfilo />", $img, $page);
 					$page=str_replace("<nome />", htmlentities($row['nome']), $page);

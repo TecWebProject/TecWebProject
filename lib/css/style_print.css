@@ -26,7 +26,7 @@ a, a:visited {
 	max-width: 30em;
 }
 
-#fotoprofilo {
+.fotoprofilo {
 	float: right;
 	width: 16em;
 	height: auto;
