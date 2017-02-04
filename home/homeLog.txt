@@ -5,9 +5,7 @@
 				</form>
 			</div>
 
-			<div id="testo">
-				<h2>Bentornato/a!</h2>
-			</div>
+			<h1>Bentornato/a!</h1>
 
 			<div class="suggeriti">
 				<p>Ecco dei nuovi utenti che potresti conoscere:</p>

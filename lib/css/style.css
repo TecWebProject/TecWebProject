@@ -1,9 +1,9 @@
+/* tutte le pagine */
 html, body {
 	margin: 0;
 	padding: 0;
 	height: 100%;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-size: 100%;
 }
 
 img {
@@ -23,6 +23,14 @@ a.external::before {
 	text-align: right;
 	padding-left: 8%;
 	padding-right: 8%;
+}
+
+form fieldset {
+	border: none;
+}
+
+form legend {
+	padding: 1em;
 }
 
 
@@ -47,6 +55,11 @@ a.external::before {
 #content, #footer {
 	max-width: 1024px;
 	margin: auto;
+	padding: 0 1em;
+}
+
+h1 {
+	text-align: center;
 }
 
 h2 {
@@ -58,14 +71,11 @@ h3 {
 }
 
 
+
 /* footer */
 #footer {
 	text-align: center;
 	margin-top: 5em;
-}
-
-#footer p {
-	margin-bottom: 1em;
 }
 
 #footer img {
@@ -79,8 +89,11 @@ h3 {
 	text-align: center;
 }
 
+
+
+/* home (utente NON registrato) */
 #login, #registrazione {
-	margin-top: 2em;
+	margin: 2em 1em -1em 1em;
 }
 
 #login {
@@ -115,12 +128,9 @@ h3 {
 	padding: 1em;
 }
 
-#testo {
-	padding: 1em;
-	font-size: 1.5em;
-	text-align: center;
-}
 
+
+/* home (utente registrato) */
 .suggeriti {
 	text-align: center;
 }
@@ -154,6 +164,32 @@ h3 {
 
 .suggeriti li.elementResult a p {
 	text-align: center;
+}
+
+
+
+
+/* pagina di registrazione al sito */
+#invitoReg {
+	padding: 1em 2em;
+}
+
+#iscrizione, .filtri {
+	margin: auto;
+	max-width: 480px;
+	text-align: left;
+}
+
+#iscrizione form {
+	padding: 1em;
+}
+
+#iscrizione form fieldset li {
+	margin: 0.5em;
+}
+
+#iscrizione form fieldset li label {
+	padding: 0 0.5em 0 0;
 }
 
 
@@ -380,35 +416,12 @@ h3 {
 }
 
 a#top, p > a#torna, #modBackButton > a {
-	display: block;
 	text-align: center;
-	background: #004d99;
-	color: #FF7F00;
 	text-transform: uppercase;
 	font-weight: bold;
 	margin: 1em;
 	padding: 1em;
 	border-radius: 1em;
-}
-
-#invitoReg {
-	padding: 1em 2em;
-}
-
-#iscrizione form {
-	padding: 1em;
-}
-
-#iscrizione form fieldset {
-	border-radius: 1em;
-}
-
-#iscrizione form fieldset li {
-	margin: 0.5em;
-}
-
-#iscrizione form fieldset li label {
-	padding: 0 0.5em 0 0;
 }
 
 .paginaPrec, #top {
