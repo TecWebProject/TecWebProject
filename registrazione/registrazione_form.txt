@@ -29,5 +29,5 @@
 		</form>
 			<p class="legendaForm">* : Campo obbliatorio</p>
 	</div>
-	<p class="paginaPrec"><a href="../index.php" id="torna" tabindex="7">Torna alla Home</a></p>
+	<p class="paginaPrec"><a href="../index.php" id="torna" tabindex="7">Torna alla <span xml:lang="en" lang="en">Home</span></a></p>
 </div>

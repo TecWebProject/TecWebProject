@@ -4,11 +4,11 @@
 					<fieldset>
 						<legend>Accedi a <span xml:lang="en" lang="en">BandBoard</span></legend>
 						<div>					
-							<label for="username"><span xml:lang="en" lang="en">Username</span></label>
+							<label for="username" xml:lang="en" lang="en">Username</label>
 							<input type="text" name="username" id="username" title="Username" maxlength="25" tabindex="1"/>
 						</div>
 						<div>
-							<label for="password"><span xml:lang="en" lang="en">Password</span></label>
+							<label for="password" xml:lang="en" lang="en">Password</label>
 							<input type="password" name="password" id="password" title="Password" maxlength="45" tabindex="2"/>
 						</div>
 						<input type="submit" class="invio" value="Accedi" tabindex="3"/>

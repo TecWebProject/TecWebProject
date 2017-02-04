@@ -255,33 +255,33 @@ class FormDatiObbligatori
 
         // nome
         //TODO placeholder='Nome'
-        $string .= "<li><label for='modNome'>Nome</label><input id='modNome' name='nome' title='Nome dell&apos;utente' value='";
+        $string .= "<li><label for='modNome'>Nome </label><input id='modNome' name='nome' title='Nome dell&apos;utente' value='";
         $string .= $dati['nome'];
         $string .= "' onblur='checkNome()' onkeypress='clearError(\"nome\")'/><span id='errorModNome' class='modErrorEntry'></span></li>";
 
         // cognome
         //TODO placeholder='Cognome'
-        $string .= "<li><label for='modCognome'>Cognome</label><input id='modCognome' name='cognome' title='Cognome dell&apos;utente' value='";
+        $string .= "<li><label for='modCognome'>Cognome </label><input id='modCognome' name='cognome' title='Cognome dell&apos;utente' value='";
         $string .= $dati['cognome'];
         $string .= "' onblur='checkCognome()' onkeypress='clearError(\"cognome\")'/><span id='errorModCognome' class='modErrorEntry'></span></li>";
 
         // email
-        $string .= "<li><label for='modEmail'><span xml:lang='en' lang='en'>Email</span></label><input id='modEmail' name='email' title='Email dell&apos;utente' size='25' value='";
+        $string .= "<li><label for='modEmail' xml:lang='en' lang='en'>Email </label><input id='modEmail' name='email' title='Email dell&apos;utente' size='25' value='";
         $string .= $dati['email'];
         $string .= "' onblur='checkEmail()' onkeypress='clearError(\"email\")'/><span id='errorModEmail' class='modErrorEntry'></span></li>";
 
         // password
-        $string .= "<li><label for='modPassword'>Cambia <span xml:lang='en' lang='en'>password</span></label><input type='password' id='modPassword' name='password' title='Compila per cambiare la tua password' onblur='checkPassword(this.value)' onkeypress='clearError(\"password\");clearError(\"passwordCheck\")'/><span id='errorModPassword' class='modErrorEntry'></span></li>";
+        $string .= "<li><label for='modPassword'>Cambia <span xml:lang='en' lang='en'>password</span> </label><input type='password' id='modPassword' name='password' title='Compila per cambiare la tua password' onblur='checkPassword(this.value)' onkeypress='clearError(\"password\");clearError(\"passwordCheck\")'/><span id='errorModPassword' class='modErrorEntry'></span></li>";
 
         // password check
-        $string .= "<li><label for='modPassword'>Reinserisci <span xml:lang='en' lang='en'>password</span></label><input type='password' title='Conferma la password che hai inserito' id='modPasswordCheck' name='passwordCheck' onblur='checkPasswordCheck(this.value)' onkeypress='clearError(\"password\");clearError(\"passwordCheck\")'/><span id='errorModPasswordCheck' class='modErrorEntry'></span></li>";
+        $string .= "<li><label for='modPassword'>Reinserisci <span xml:lang='en' lang='en'>password</span> </label><input type='password' title='Conferma la password che hai inserito' id='modPasswordCheck' name='passwordCheck' onblur='checkPasswordCheck(this.value)' onkeypress='clearError(\"password\");clearError(\"passwordCheck\")'/><span id='errorModPasswordCheck' class='modErrorEntry'></span></li>";
 
         // data di nascita
-        $string .= "<li><div>Data di nascita:</div><label for='modDataNascitaGiorno'>Giorno</label><input id='modDataNascitaGiorno' title='Giorno in formato GG' name='bDayGiorno' type='text' size='2' maxlength='2'   value='";
+        $string .= "<li><div>Data di nascita:</div><label for='modDataNascitaGiorno'>Giorno </label><input id='modDataNascitaGiorno' title='Giorno in formato GG' name='bDayGiorno' type='text' size='2' maxlength='2'   value='";
         $string .= date("d", strtotime($dati['dataNascita']));
-        $string .= "' onkeypress='clearError(\"data\")' onblur='checkBDay()'/><label for='modDataNascitaMese'>Mese</label><input title='Mese in formato MM' id='modDataNascitaMese' name='bDayMese' type='text' size='2' maxlength='2' value='";
+        $string .= "' onkeypress='clearError(\"data\")' onblur='checkBDay()'/><label for='modDataNascitaMese'>Mese </label><input title='Mese in formato MM' id='modDataNascitaMese' name='bDayMese' type='text' size='2' maxlength='2' value='";
         $string .= date("m", strtotime($dati['dataNascita']));
-        $string .= "' onkeypress='clearError(\"data\")' onblur='checkBDay()'/><label for='modDataNascitaAnno'>Anno</label><input title='Anno in formato AAAA' id='modDataNascitaAnno' name='bDayAnno' type='text' size='4' maxlength='4' value='";
+        $string .= "' onkeypress='clearError(\"data\")' onblur='checkBDay()'/><label for='modDataNascitaAnno'>Anno </label><input title='Anno in formato AAAA' id='modDataNascitaAnno' name='bDayAnno' type='text' size='4' maxlength='4' value='";
         $string .= date("Y", strtotime($dati['dataNascita']));
         $string .= "' onkeypress='clearError(\"data\")' onblur='checkBDay()'/><span id='errorModDataNascita' class='modErrorEntry'></span></li>";
 

@@ -252,7 +252,7 @@ class FormContatti
 
         foreach ($contatti as $key => $contatto) {
 
-            $string .= "<li><label for='modContatto" . ($key + 1) . "'>Contatto " . ($key + 1) . ":</label><input id='modContatto" . ($key + 1) . "' name='contatto" . ($key + 1) . "' value='" . $contatto['contatto'] . "' title='Campo di testo del contatto " . ($key + 1) . "'/><label for='modTipoContatto" . ($key + 1) . "'>Tipologia:</label> <select id='modTipoContatto" . ($key + 1) . "' name='tipoContatto" . ($key + 1) . "' title='Tipo del contatto " . ($key + 1) . "'>";
+            $string .= "<li><label for='modContatto" . ($key + 1) . "'>Contatto " . ($key + 1) . ": </label><input id='modContatto" . ($key + 1) . "' name='contatto" . ($key + 1) . "' value='" . $contatto['contatto'] . "' title='Campo di testo del contatto " . ($key + 1) . "'/><label for='modTipoContatto" . ($key + 1) . "'>Tipologia: </label><select id='modTipoContatto" . ($key + 1) . "' name='tipoContatto" . ($key + 1) . "' title='Tipo del contatto " . ($key + 1) . "'>";
 
             foreach ($tipiContatti as $keySel => $tipoContatto) {
                 $string .= "<option value='$tipoContatto'";
