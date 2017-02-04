@@ -318,14 +318,6 @@ h3 {
 	text-align: center;
 }
 
-.profilo h3 {
-	background-color:#0080FF;
-	text-align:center;
-	border-radius:5px;
-	color:white;
-	padding:.3em .5em .3em .5em;
-}
-
 .profilo #bloccoPrincipale {
 	display: inline-block;
 	text-align: center;
