@@ -216,7 +216,15 @@ if (!isset($_SESSION['started'])) {	//APPENA ARRIVATO IN HOME
 			echo $page;
 		} else {	//LOGIN ANDATO A BUON FINE -> CREAZIONE DELLA PAGINA DI HOME PER UTENTE LOGGATO
 			$page="";
-			$page=$page."<div class=\"nav\">".Menu::getMenu(array("Home", "<a href='settings/index.php'>Modifica Profilo</a>", "<a href='cercaUtenti/index.php'>Cerca Utenti</a>", "<a href='cercaGruppi/index.php'>Cerca Gruppi</a>", "<a href='gestioneGruppi/gestioneGruppi.php'>I Miei Gruppi</a>", "<a href='registrazioneGruppo/registrazioneGruppo.php'>Nuovo Gruppo</a>"))."</div>";//!!!!!!!!!!!!!!!!!!!!!DA TOGLIERE LINK A REGISTRAZIONE GRUPPO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!	//CREAZIONE DEL MENU
+			$page=$page."<div class=\"nav\">".Menu::getMenu(array(
+				'<span xml:lang="en" lang="en">Home</span>',
+				'<a href="../profiloUtente/profiloUtente.php?username=' . $_SESSION['username'] . '">Visualizza Profilo</a>',
+				"<a href='settings/index.php'>Modifica Profilo</a>",
+				"<a href='cercaUtenti/index.php'>Cerca Utenti</a>",
+				"<a href='cercaGruppi/index.php'>Cerca Gruppi</a>",
+			#	"<a href='gestioneGruppi/gestioneGruppi.php'>I miei Gruppi</a>",
+				"<a href='registrazioneGruppo/registrazioneGruppo.php'>Nuovo Gruppo</a>")
+			)."</div>";// TODO TOGLIERE LINK A REGISTRAZIONE GRUPPO!	//CREAZIONE DEL MENU
 			$page=$page.file_get_contents(realpath(dirname(__FILE__))."/home/homeLog.txt");
 			$page=str_replace('<utentiSuggeriti />', getUtenti(), $page);
 			$page=str_replace('<gruppiSuggeriti />', getGruppi(), $page);
@@ -225,7 +233,15 @@ if (!isset($_SESSION['started'])) {	//APPENA ARRIVATO IN HOME
 	} else {
 		if (isset($_SESSION['username'])) {
 			$page="";
-			$page=$page."<div class=\"nav\">".Menu::getMenu(array("Home", "<a href='settings/index.php'>Modifica Profilo</a>", "<a href='cercaUtenti/index.php'>Cerca Utenti</a>", "<a href='cercaGruppi/index.php'>Cerca Gruppi</a>", "<a href='gestioneGruppi/gestioneGruppi.php'>I Miei Gruppi</a>", "<a href='registrazioneGruppo/registrazioneGruppo.php'>Nuovo Gruppo</a>"))."</div>";//!!!!!!!!!!!!!!!!!!!!!DA TOGLIERE LINK A REGISTRAZIONE GRUPPO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!	//CREAZIONE DEL MENU
+			$page=$page."<div class=\"nav\">".Menu::getMenu(array(
+				'<span xml:lang="en" lang="en">Home</span>',
+				'<a href="profiloUtente/profiloUtente.php?username=' . $_SESSION['username'] . '">Visualizza Profilo</a>',
+				"<a href='settings/index.php'>Modifica Profilo</a>",
+				"<a href='cercaUtenti/index.php'>Cerca Utenti</a>",
+				"<a href='cercaGruppi/index.php'>Cerca Gruppi</a>",
+			#	"<a href='gestioneGruppi/gestioneGruppi.php'>I miei Gruppi</a>",
+				"<a href='registrazioneGruppo/registrazioneGruppo.php'>Nuovo Gruppo</a>")
+			)."</div>";// TODO TOGLIERE LINK A REGISTRAZIONE GRUPPO!	//CREAZIONE DEL MENU
 			$page=$page.file_get_contents(realpath(dirname(__FILE__))."/home/homeLog.txt");
 			$page=str_replace('<utentiSuggeriti />', getUtenti(), $page);
 			$page=str_replace('<gruppiSuggeriti />', getGruppi(), $page);

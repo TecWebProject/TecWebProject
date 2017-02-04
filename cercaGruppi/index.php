@@ -40,9 +40,11 @@ if (isset($_SESSION['username'])) { # utente loggato
 		array(
 			'<a href="../index.php" xml:lang="en" lang="en">Home</a>',
 			'<a href="../profiloUtente/profiloUtente.php?username=' . $_SESSION['username'] . '">Visualizza Profilo</a>',
+			'<a href="../settings/index.php">Modifica Profilo</a>',
 			'<a href="../cercaUtenti/index.php">Cerca Utenti</a>',
 			'Cerca Gruppi',
-			'<a href="../gestioneGruppi/index.php">I miei Gruppi</a>'
+		#	'<a href="../gestioneGruppi/index.php">I miei Gruppi</a>',
+			'<a href="../registrazioneGruppo/registrazioneGruppo.php">Nuovo Gruppo</a>' # TODO sostituire nuovoGruppo con gestioneGruppi
 		)
 	);
 	$logout = '<div class="logout">' .

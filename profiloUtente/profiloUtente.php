@@ -29,15 +29,21 @@ if (isset($_SESSION['username'])) {	//UTENTE LOGGATO
 	$page=$page.$logout;
 	$page=$page."<div class=\"nav\">".Menu::getMenu(array(
 		'<a href="../index.php" xml:lang="en" lang="en">Home</a>',
+		"Visualizza Profilo",
 		"<a href='../settings/index.php'>Modifica Profilo</a>",
 		"<a href='../cercaUtenti/index.php'>Cerca Utenti</a>",
 		"<a href='../cercaGruppi/index.php'>Cerca Gruppi</a>",
-		"<a href='../gestioneBand/gestioneBand.php'>I Miei Gruppi</a>")
+	#	"<a href='../gestioneBand/gestioneBand.php'>I miei Gruppi</a>",
+		'<a href="../registrazioneGruppo/registrazioneGruppo.php">Nuovo Gruppo</a>') # TODO sostituire nuovoGruppo con gestioneGruppi
 		)."</div>";	//CREAZIONE DEL MENU PER UTENTE LOGGATO
 } else {
 	session_unset();
 	session_destroy();
-	$page=$page."<div class=\"nav\">".Menu::getMenu(array('<a href="../index.php" xml:lang="en" lang="en">Home</a>', "<a href='../cercaUtenti/index.php'>Cerca Utenti</a>", "<a href='../cercaGruppi/index.php'>Cerca Gruppi</a>"))."</div>";	//CREAZIONE DEL MENU PER UTENTE NON LOGGATO
+	$page=$page."<div class=\"nav\">".Menu::getMenu(array(
+		'<a href="../index.php" xml:lang="en" lang="en">Home</a>',
+		"<a href='../cercaUtenti/index.php'>Cerca Utenti</a>",
+		"<a href='../cercaGruppi/index.php'>Cerca Gruppi</a>")
+	)."</div>";	//CREAZIONE DEL MENU PER UTENTE NON LOGGATO
 }
 $page=$page.file_get_contents(realpath(dirname(__FILE__))."/profiloUtente.txt");
 
