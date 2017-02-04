@@ -279,10 +279,40 @@ h3 {
 	width: 10em;
 }
 
-/*
 .profilo #bloccoPrincipale ul {
 	float: right;
 	margin-left: 0;
+}
+
+.profilo {
+	text-align: center;
+}
+
+.profilo > h2 {
+	padding: 1em;
+	font-size: 1.5em;
+	text-align: center;
+}
+.profilo h3{
+	padding:.5em;
+	background-color:#0080FF;
+	color:white;
+	margin-bottom:.5em;
+	border-radius:5px;
+}
+
+.profilo #bloccoPrincipale {
+	display: inline-block;
+	text-align: center;
+	vertical-align: top;
+	max-width: 20em;
+	width: 100%;
+	margin-bottom:1em;
+}
+
+.profilo #bloccoPrincipale img {
+	width: 100%;
+	margin-bottom:1em;
 }
 
 .profilo #bloccoBio {
