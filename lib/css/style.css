@@ -7,7 +7,7 @@ html, body {
 }
 
 img {
-	max-width: 100%;
+	max-width: 90%;
 }
 
 ul {
@@ -19,6 +19,15 @@ a.external::before {
 	font-variant: small-caps;
 }
 
+.logout {
+	text-align: right;
+	padding-left: 8%;
+	padding-right: 8%;
+}
+
+
+
+/* header */
 #header {
 	background-color: #0080FF;
 	color: white;
@@ -32,14 +41,27 @@ a.external::before {
 	margin: 0;
 }
 
+
+
+/* content */
 #content, #footer {
 	max-width: 1024px;
 	margin: auto;
 }
 
+h2 {
+	margin-top: 2em;
+}
+
+h3 {
+	margin-top: 1em;
+}
+
+
+/* footer */
 #footer {
 	text-align: center;
-	padding: 1em;
+	margin-top: 5em;
 }
 
 #footer p {
@@ -50,12 +72,6 @@ a.external::before {
 	margin: 1em;
 }
 
-.logout {
-	text-align: right;
-	padding-left: 8%;
-	padding-right: 8%;
-}
-
 
 
 /* home e pagina di registrazione */
@@ -64,7 +80,7 @@ a.external::before {
 }
 
 #login, #registrazione {
-	margin-top: 1em;
+	margin-top: 2em;
 }
 
 #login {
@@ -139,6 +155,15 @@ a.external::before {
 .suggeriti li.elementResult a p {
 	text-align: center;
 }
+
+
+
+.risultati img, .suggeriti img {
+	width: 4em;
+	height: auto;
+}
+
+
 
 #menu_check {
 	position: absolute;
