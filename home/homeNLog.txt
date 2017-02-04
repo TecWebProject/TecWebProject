@@ -39,7 +39,7 @@
 				<img class="imgSlide" src="images/site/ragazzi-chitarra.jpg" alt="Ragazzi che suonano la chitarra" />
 			</div>
 
-			<div class="ultimaSlide">
+			<div class="slide">
 				<div id="ultimaDescrizione">
 					<h3>Suona.</h3>
 				</div>
