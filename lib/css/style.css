@@ -20,7 +20,7 @@ a.external::before {
 }
 
 .logout {
-	text-align: right;
+	float: right;
 	padding-left: 8%;
 	padding-right: 8%;
 }
@@ -172,12 +172,15 @@ h3 {
 
 
 
-
-/* pagina di registrazione al sito */
-#invitoReg {
+/* messaggio informale all'utente */
+#invitoReg, #bentornato {
 	padding: 1em 2em;
+	font-size: 1.8em;
 }
 
+
+
+/* pagina di registrazione al sito */
 #iscrizione, .filtri {
 	margin: auto;
 	max-width: 480px;
@@ -272,26 +275,14 @@ h3 {
 
 
 /* profilo utente o di un gruppo */
-.profilo {
-	text-align: center;
+.profilo img {
+	width: 10em;
 }
 
-.profilo > h2 {
-	padding: 1em;
-	font-size: 1.5em;
-	text-align: center;
-}
-
-.profilo #bloccoPrincipale {
-	display: inline-block;
-	text-align: center;
-	vertical-align: top;
-	max-width: 20em;
-	width: 100%;
-}
-
-.profilo #bloccoPrincipale img {
-	width: 100%;
+/*
+.profilo #bloccoPrincipale ul {
+	float: right;
+	margin-left: 0;
 }
 
 .profilo #bloccoBio {
@@ -351,11 +342,7 @@ h3 {
 .profilo div #bloccoContatti div {
 	padding: 0;
 }
-
-.breadcrump {
-	padding: 2em 3em;
-	background: white;
-}
+*/
 
 
 
@@ -431,12 +418,10 @@ h3 {
 }
 
 p > a#torna, #modBackButton > a {
-	text-align: center;
 	text-transform: uppercase;
-	font-weight: bold;
-	margin: 1em;
-	padding: 1em;
-	border-radius: 1em;
+	margin: 1em 0 0 4em;
+	padding: 0.2em;
+	border-radius: 0.4em;
 }
 
 .paginaPrec {
@@ -473,28 +458,26 @@ p > a#torna, #modBackButton > a {
 
 
 /* link alla pagina di registrazione */
-#registrati {
+#registrati, #cercaUtenti, #cercaBand {
 	display: inline-block;
 	font-size: 1.4em;
 	background-color: #FFB266;
-	padding: 0.8em 4.4em;
+	margin: 1em;
+	padding: 0.2em;
 	border-radius: 0.4em;
+	text-decoration: none;
 }
 
 #registrati:hover, #cercaUtenti:hover, #cercaBand:hover {
 	background-color: #FF7F00
 }
 
+#registrati {
+	padding: 0.8em 4.4em;
+}
+
 #cercaUtenti, #cercaBand {
-	display: inline-block;
-	font-size: 1.4em;
-	color: black;
-	background-color: #FFB266;
-	margin: 0em 0.8em;
-	padding: 0.2em;
 	min-width: 12em;
-	border-radius: 0.4em;
-	text-decoration: none;
 }
 
 
@@ -518,6 +501,5 @@ p > a#torna, #modBackButton > a {
 .breadcrump h2 {
 	margin-left: 1em;
 	padding: 1em;
-	border-radius: 7px;
 	min-width: 11em;
 }

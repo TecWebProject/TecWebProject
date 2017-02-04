@@ -10,7 +10,7 @@
 	<div id="content">
 		<logout />
 
-		<h1>Ricerca Utenti</h1>
+		<h2>Ricerca Utenti</h2>
 		<form action="index.php" class="filtri">
 			<fieldset>
 				<legend>Filtri</legend>

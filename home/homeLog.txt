@@ -5,7 +5,7 @@
 				</form>
 			</div>
 
-			<h1>Bentornato/a!</h1>
+			<h2 id="bentornato">Bentornato/a!</h2>
 
 			<div class="suggeriti">
 				<p>Ecco dei nuovi utenti che potresti conoscere:</p>

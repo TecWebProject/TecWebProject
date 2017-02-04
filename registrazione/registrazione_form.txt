@@ -1,5 +1,5 @@
 <div id="content" class="homeReg">
-	<h1 id="invitoReg">Entra a far parte della <span xml:lang="en" lang="en">community</span>!</h1>
+	<h2 id="invitoReg">Entra a far parte della <span xml:lang="en" lang="en">community</span>!</h2>
 	<div id="iscrizione">
 		<form action="registrazione.php" method="post" onsubmit="return checkForm();">
 			<fieldset>
