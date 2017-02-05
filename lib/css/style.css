@@ -74,6 +74,8 @@ h3 {
 	text-align: center;
 	margin: auto;
 	margin-top: 5em;
+	padding: 1em;
+	font-style: italic;
 }
 
 #footer img {
@@ -327,8 +329,15 @@ h3 {
 .profilo #bloccoGeneri, .profilo #bloccoStrumenti,
 .profilo #bloccoMembroGruppo, .profilo #bloccoContatti  {
 	display: inline-block;
-	margin: 1em 2em;
+	margin: 1em 6em 0 0;
+	min-width: 10em;
 }
+
+.profilo #bloccoMembroGruppo img {
+	width: 4em;
+	height: auto;
+}
+
 
 
 /* settings (modifica profilo) */

@@ -9,7 +9,7 @@ a, a:visited {
 	color: #004;
 }
 
-.nav, #top, .paginaPrec {
+.nav, .paginaPrec {
 	display: none;
 }
 
@@ -26,6 +26,7 @@ a, a:visited {
 	max-width: 30em;
 }
 
-.fotoprofilo {
-	float: right;
+.profilo ul {
+	padding: 1em;
+	list-style-type: circle;
 }
