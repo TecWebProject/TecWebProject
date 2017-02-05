@@ -134,9 +134,9 @@ try {
 				while ($row=$result->fetch_array(MYSQLI_ASSOC)) {
 					if ($row['immagine']==NULL) {
 						$row['immagine']="defaultBand.png";
-						$gruppi=$gruppi."<li><a href=\"../profiloGruppo/profiloGruppo.php?idGruppo=" . $row['idGruppo'] . "\"><img class=\"listImage\" src=\"../images/site/".$row['immagine']."\" alt=\"Immagine di ".$row['nome']."\" /><p>".$row['nome']."</p>";
+						$gruppi=$gruppi."<li><a href=\"../profiloGruppo/profiloGruppo.php?idGruppo=" . $row['idGruppo'] . "\"><img class=\"listImage\" src=\"../images/site/".$row['immagine']."\" alt=\"Immagine di ".$row['nome']."\" /> ".$row['nome'];
 					} else {
-						$gruppi=$gruppi."<li class=\"elementResult\"><a href=\"../profiloGruppo/profiloGruppo.php?idGruppo=" . $row['idGruppo'] . "\"><img class=\"listImage\" src=\"../images/bands/".$row['immagine']."\" alt=\"Immagine di ".$row['nome']."\" /><p>".$row['nome']."</p>";
+						$gruppi=$gruppi."<li class=\"elementResult\"><a href=\"../profiloGruppo/profiloGruppo.php?idGruppo=" . $row['idGruppo'] . "\"><img class=\"listImage\" src=\"../images/bands/".$row['immagine']."\" alt=\"Immagine di ".$row['nome']."\" /> ".$row['nome'];
 					}
 					$gruppi=$gruppi."</a></li>";
 				}
