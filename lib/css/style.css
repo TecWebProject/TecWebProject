@@ -91,7 +91,7 @@ h3 {
 
 /* home (utente NON registrato) */
 #login, #registrazione {
-	margin: 2em 1em -1em 1em;
+	margin: 2em 0 -1em 0;
 }
 
 #login {
@@ -111,10 +111,7 @@ h3 {
 
 #login label {
 	display: inline-block;
-	text-align: left;
-	padding-top: 0.4em;
-	padding-bottom: 0.2em;
-	margin-left: 0.1em;
+	padding: 0.4em 0;
 }
 
 #registrazione {
@@ -297,27 +294,21 @@ h3 {
 
 /* profilo utente o di un gruppo */
 .profilo .fotoprofilo {
-	width: 16em;
+	width: 15em;
 	height: auto;
 }
 
-.profilo #bloccoPrincipale ul {
-	float: right;
-	margin-left: 0;
-}
-
-.profilo {
-	text-align: center;
-}
-
 .profilo h2 {
-	padding: 1em;
-	font-size: 1.5em;
 	text-align: center;
+}
+
+.profilo ul {
+	padding: 0;
 }
 
 .profilo #bloccoPrincipale {
-	display: inline-block;
+	float: left;
+	margin-left: 0;
 	text-align: left;
 	vertical-align: top;
 	max-width: 20em;
@@ -330,56 +321,13 @@ h3 {
 }
 
 .profilo div {
-	padding: 0.5em;
 	vertical-align: top;
 }
 
-.profilo div div {
-	padding: 0 1em;
-	width: 15em;
-}
-
-.profilo div #bloccoGeneri {
+.profilo #bloccoGeneri, .profilo #bloccoStrumenti,
+.profilo #bloccoMembroGruppo, .profilo #bloccoContatti  {
 	display: inline-block;
-}
-
-.profilo div #bloccoStrumenti {
-	display: inline-block;
-}
-
-.profilo div #bloccoMembroGruppo {
-	display: inline-block;
-}
-
-.profilo div #bloccoMembroGruppo ul li {
-	display: inline-block;
-	width: 8em;
-	vertical-align: top;
-}
-
-.profilo div #bloccoMembroGruppo ul li a {
-	display: block;
-	height: 100%;
-	width: 100%;
-	text-align: center;
-}
-
-.profilo div #bloccoMembroGruppo ul li a .listImage {
-	width: 4em;
-	height: 4em;
-}
-
-.profilo div #bloccoMembroGruppo ul li a p {
-	display: block;
-	text-align: center;
-}
-
-.profilo div #bloccoContatti {
-	display: inline-block;
-}
-
-.profilo div #bloccoContatti div {
-	padding: 0;
+	margin: 1em 2em;
 }
 
 
@@ -501,7 +449,6 @@ p > a#torna, #modBackButton {
 	display: inline-block;
 	font-size: 1.4em;
 	background-color: #FFB266;
-	margin: 1em;
 	padding: 0.2em;
 	border-radius: 0.4em;
 	text-decoration: none;
