@@ -293,14 +293,15 @@ h3 {
 }
 
 .nav ul li a:hover {
-	color: #52e9ff;
+	color: #52E9FF;
 }
 
 
 
 /* profilo utente o di un gruppo */
-#fotoprofilo {
-	width: 10em;
+.profilo .fotoprofilo {
+	width: 16em;
+	height: auto;
 }
 
 .profilo #bloccoPrincipale ul {
@@ -312,7 +313,7 @@ h3 {
 	text-align: center;
 }
 
-.profilo > h2 {
+.profilo h2 {
 	padding: 1em;
 	font-size: 1.5em;
 	text-align: center;
@@ -328,13 +329,9 @@ h3 {
 
 .profilo #bloccoPrincipale {
 	display: inline-block;
-	text-align: center;
+	text-align: left;
 	vertical-align: top;
 	max-width: 20em;
-	width: 100%;
-}
-
-.profilo #bloccoPrincipale img {
 	width: 100%;
 }
 
@@ -406,14 +403,14 @@ h3 {
 }
 
 #modMenuPagine ul {
-	border: 0.5px solid #bfbfbf;
+	border: 0.5px solid #BFBFBF;
 	border-radius: 1em;
-	background: #bfbfbf;
+	background: #BFBFBF;
 	box-shadow: 0 0 1px black;
 }
 
 #modMenuPagine ul li {
-	border: 0.5px solid #bfbfbf;
+	border: 0.5px solid #BFBFBF;
 	background: white;
 	border-radius: 1em;
 	padding: 0.5em;
@@ -565,6 +562,7 @@ p > a#torna, #modBackButton > a {
 #content.notFound {
 	text-align: center;
 }
+
 #content.notFound h2 {
 	font-size: 2.8em;
 }
