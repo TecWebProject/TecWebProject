@@ -52,14 +52,10 @@ form legend {
 
 
 /* content */
-#content, #footer {
+#content {
 	max-width: 1024px;
 	margin: auto;
 	padding: 0 1em;
-}
-
-h1 {
-	text-align: center;
 }
 
 h2 {
@@ -74,7 +70,9 @@ h3 {
 
 /* footer */
 #footer {
+	max-width: 50em;
 	text-align: center;
+	margin: auto;
 	margin-top: 5em;
 }
 
@@ -107,7 +105,6 @@ h3 {
 }
 
 #login fieldset {
-	border: none;
 	float: right;
 	padding: 0.5em;
 }
@@ -213,7 +210,7 @@ h3 {
 	background-color: #70C1FF;
 	margin: 1em;
 	padding: 0.2em;
-	min-width: 12em;
+	min-width: 10em;
 	border-radius: 0.4em;
 }
 
@@ -410,19 +407,20 @@ h3 {
 
 #modContenutoPagina {
 	display: inline-block;
-	padding: 1em 1em;
+	padding: 1em 0;
 }
 
 #modContenutoPagina form fieldset {
+	border: 1px solid #BFBFBF;
 	border-radius: 1em;
 }
 
 #modContenutoPagina form fieldset li {
-	margin: 0.5em;
+	margin: 0.5em 0;
 }
 
 #modContenutoPagina form fieldset li label {
-	padding: 0 0.5em 0 0;
+	padding: 0;
 }
 
 .modCorrectEntry {
@@ -434,7 +432,7 @@ h3 {
 	margin: 0 1em;
 }
 
-.modErrorEntry {
+.modErrorEntry, .errRep {
 	color: red;
 	padding: 0 1em;
 }
@@ -457,9 +455,15 @@ h3 {
 	}
 }
 
-p > a#torna, #modBackButton > a {
+@media screen and (max-width: 320px) {
+	#modContenutoPagina {
+		max-width: 320px;
+	}
+}
+
+p > a#torna, #modBackButton {
 	text-transform: uppercase;
-	margin: 1em 0 0 4em;
+	margin: 1em;
 	padding: 0.2em;
 	border-radius: 0.4em;
 }
@@ -468,19 +472,14 @@ p > a#torna, #modBackButton > a {
 	background-color: #70C1FF;
 	display: inline-block;
 	border-radius: 10px;
-	margin-bottom: 1em;
-	margin-top: 1em;
+	margin: 0;
+	padding: 1em;
+	max-width: 20em;
+	text-align: center;
 }
 
 .paginaPrec a {
-	color: black;
-}
-
-.paginaPrec {
-	max-width: 20em;
-	margin-right: 2em;
-	padding: 1em 3em 1em 0;
-	min-width: 20%;
+	text-decoration: none;
 }
 
 .paginaPrec:visited {
@@ -517,7 +516,7 @@ p > a#torna, #modBackButton > a {
 }
 
 #cercaUtenti, #cercaBand {
-	min-width: 12em;
+	min-width: 10em;
 }
 
 

@@ -18,6 +18,7 @@
 			var node=document.createElement("P");
 			var textnode=document.createTextNode("Inserisci il campo Username");
 			node.appendChild(textnode);
+			node.className="errRep";
 			document.getElementById("username").parentNode.appendChild(node);
 			return false;
 		}
@@ -29,6 +30,7 @@
 			var node=document.createElement("P");
 			var textnode=document.createTextNode("Inserisci il campo Password");
 			node.appendChild(textnode);
+			node.className="errRep";
 			document.getElementById("password").parentNode.appendChild(node);
 			return false;
 		}
@@ -40,6 +42,7 @@
 			var node=document.createElement("P");
 			var textnode=document.createTextNode("Inserisci il campo Conferma password");
 			node.appendChild(textnode);
+			node.className="errRep";
 			document.getElementById("confermaPassword").parentNode.appendChild(node);
 			return false;
 		} else {
@@ -47,6 +50,7 @@
 				var node=document.createElement("P");
 				var textnode=document.createTextNode("Campo Password diverso da Conferma password");
 				node.appendChild(textnode);
+				node.className="errRep";
 				document.getElementById("confermaPassword").parentNode.appendChild(node);
 				return false;
 			}
@@ -59,6 +63,7 @@
 			var node=document.createElement("P");
 			var textnode=document.createTextNode("Inserisci il campo e-mail");
 			node.appendChild(textnode);
+			node.className="errRep";
 			document.getElementById("email").parentNode.appendChild(node);
 			return false;
 		} else {
@@ -68,6 +73,7 @@
 				var node=document.createElement("P");
 				var textnode=document.createTextNode("Campo e-mail non inserito correttamente.");
 				node.appendChild(textnode);
+				node.className="errRep";
 				document.getElementById("email").parentNode.appendChild(node);
 				return false;
 			}
@@ -80,6 +86,7 @@
 			var node=document.createElement("P");
 			var textnode=document.createTextNode("Inserisci il campo Data di nascita");
 			node.appendChild(textnode);
+			node.className="errRep";
 			document.getElementById("dataNascita").parentNode.appendChild(node);
 			return false;
 		} else {
@@ -102,6 +109,7 @@
 				var node=document.createElement("P");
 				var textnode=document.createTextNode("Campo Data di nascita non inserito correttamente.");
 				node.appendChild(textnode);
+				node.className="errRep";
 				document.getElementById("dataNascita").parentNode.appendChild(node);
 				return false;
 			}
