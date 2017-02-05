@@ -279,11 +279,11 @@ class FormDatiObbligatori
         // data di nascita
         $string .= "<li><div>Data di nascita:</div><label for='modDataNascitaGiorno'>Giorno </label><input id='modDataNascitaGiorno' title='Giorno in formato GG' name='bDayGiorno' type='text' size='2' maxlength='2'   value='";
         $string .= date("d", strtotime($dati['dataNascita']));
-        $string .= "' onkeypress='clearError(\"data\")' onblur='checkBDay()'/><label for='modDataNascitaMese'>Mese </label><input title='Mese in formato MM' id='modDataNascitaMese' name='bDayMese' type='text' size='2' maxlength='2' value='";
+        $string .= "' onkeypress='clearError(\"data\")' onblur='checkBDay()'/> <label for='modDataNascitaMese'>Mese </label><input title='Mese in formato MM' id='modDataNascitaMese' name='bDayMese' type='text' size='2' maxlength='2' value='";
         $string .= date("m", strtotime($dati['dataNascita']));
-        $string .= "' onkeypress='clearError(\"data\")' onblur='checkBDay()'/><label for='modDataNascitaAnno'>Anno </label><input title='Anno in formato AAAA' id='modDataNascitaAnno' name='bDayAnno' type='text' size='4' maxlength='4' value='";
+        $string .= "' onkeypress='clearError(\"data\")' onblur='checkBDay()'/> <label for='modDataNascitaAnno'>Anno </label><input title='Anno in formato AAAA' id='modDataNascitaAnno' name='bDayAnno' type='text' size='4' maxlength='4' value='";
         $string .= date("Y", strtotime($dati['dataNascita']));
-        $string .= "' onkeypress='clearError(\"data\")' onblur='checkBDay()'/><span id='errorModDataNascita' class='modErrorEntry'></span></li>";
+        $string .= "' onkeypress='clearError(\"data\")' onblur='checkBDay()'/> <span id='errorModDataNascita' class='modErrorEntry'></span></li>";
 
         $string .= "</ul><button type='submit'>Salva</button></fieldset></form>";
 
