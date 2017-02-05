@@ -86,12 +86,6 @@ function getUtenti() {
 						} else {
 							$users=$users."<li class=\"elementResult\"><a href=\"profiloUtente/profiloUtente.php?username=".$row['username']."&amp;page=index\"><img class=\"listImage\" src=\"images/users/".$row['immagine']."\" alt=\"Immagine di ".$row['username']."\" /> ".$row['username'];
 						}
-						/*if ($row['nome']!=NULL || $row['cognome']!=NULL) {
-							$users=$users."<p>".$row['nome']." ".$row['cognome']."</p>";
-						}
-						if ($row['provincia']!=NULL) {
-							$users=$users."<p>(".$row['provincia'].")</p>";
-						}*/
 						$users=$users."</a></li>";
 					}
 					$result->free();
@@ -125,9 +119,6 @@ function getGruppi() {
 						} else {
 							$bands=$bands."<li class=\"elementResult\"><a href=\"profiloGruppo/profiloGruppo.php?idGruppo=".$row['idGruppo']."&amp;page=index\"><img class=\"listImage\" src=\"images/bands/".$row['immagine']."\" alt=\"Immagine di ".$row['nome']."\" /> ".$row['nome'];	//ATTENZIONE AL PATH! DA CAMBIARE IN CASO DI MODIFICHE
 						}
-						/*if ($row['provincia']!=NULL) {
-							$bands=$bands." (".$row['provincia'].")";
-						}*/
 						$bands=$bands."</a></li>";
 					}
 					$result->free();
