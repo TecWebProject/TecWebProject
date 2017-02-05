@@ -94,11 +94,11 @@ h3 {
 /* home (utente NON registrato) */
 #login, #registrazione {
 	margin: 2em 0 -1em 0;
+	text-align: center;
 }
 
 #login {
 	display: inline-block;
-	text-align: left;
 }
 
 #login legend {
@@ -108,12 +108,10 @@ h3 {
 
 #login fieldset {
 	float: right;
-	padding: 0.5em;
 }
 
-#login label {
-	display: inline-block;
-	padding: 0.4em 0;
+#login label, #login input {
+	margin: 1em 0 0 0;
 }
 
 #registrazione {
@@ -146,8 +144,9 @@ h3 {
 
 .suggeriti li.elementResult {
 	display: inline-block;
-	width: 8em;
+	width: 6em;
 	vertical-align: top;
+	margin: 0 1em;
 }
 
 .suggeriti li.elementResult a {
@@ -158,12 +157,9 @@ h3 {
 }
 
 .suggeriti li.elementResult a .listImage {
-	height: 4em;
 	width: 4em;
-}
-
-.suggeriti li.elementResult a p {
-	text-align: center;
+	margin: 0 1em;
+	height: auto;
 }
 
 

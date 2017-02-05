@@ -82,17 +82,16 @@ function getUtenti() {
 					while ($row=$result->fetch_array(MYSQLI_ASSOC)) {
 						if ($row['immagine']==NULL) {
 							$row['immagine']="defaultUser.png";		//DA CAMBIARE IN CASO DI MODIFICHE
-							$users=$users."<li class=\"elementResult\"><a href=\"profiloUtente/profiloUtente.php?username=".$row['username']."&amp;page=index\"><img class=\"listImage\" src=\"images/site/".$row['immagine']."\" alt=\"Immagine di ".$row['username']."\" /><p>".$row['username']."</p>";	//ATTENZIONE AL PATH! DA CAMBIARE IN CASO DI MODIFICHE
+							$users=$users."<li class=\"elementResult\"><a href=\"profiloUtente/profiloUtente.php?username=".$row['username']."&amp;page=index\"><img class=\"listImage\" src=\"images/site/".$row['immagine']."\" alt=\"Immagine di ".$row['username']."\" /> ".$row['username'];
 						} else {
-							$users=$users."<li class=\"elementResult\"><a href=\"profiloUtente/profiloUtente.php?username=".$row['username']."&amp;page=index\"><img class=\"listImage\" src=\"images/users/".$row['immagine']."\" alt=\"Immagine di ".$row['username']."\" /><p>
-							".$row['username'] . "</p>";	//ATTENZIONE AL PATH! DA CAMBIARE IN CASO DI MODIFICHE
+							$users=$users."<li class=\"elementResult\"><a href=\"profiloUtente/profiloUtente.php?username=".$row['username']."&amp;page=index\"><img class=\"listImage\" src=\"images/users/".$row['immagine']."\" alt=\"Immagine di ".$row['username']."\" /> ".$row['username'];
 						}
-						if ($row['nome']!=NULL || $row['cognome']!=NULL) {
+						/*if ($row['nome']!=NULL || $row['cognome']!=NULL) {
 							$users=$users."<p>".$row['nome']." ".$row['cognome']."</p>";
 						}
 						if ($row['provincia']!=NULL) {
 							$users=$users."<p>(".$row['provincia'].")</p>";
-						}
+						}*/
 						$users=$users."</a></li>";
 					}
 					$result->free();
@@ -122,13 +121,13 @@ function getGruppi() {
 					while ($row=$result->fetch_array(MYSQLI_ASSOC)) {
 						if ($row['immagine']==NULL) {
 							$row['immagine']="defaultBand.png";		//DA CAMBIARE IN CASO DI MODIFICHE
-							$bands=$bands."<li class=\"elementResult\"><a href=\"profiloGruppo/profiloGruppo.php?idGruppo=".$row['idGruppo']."&amp;page=index\"><img class=\"listImage\" src=\"images/site/".$row['immagine']."\" alt=\"Immagine di ".$row['nome']."\" /><p>".$row['nome']."</p>";	//ATTENZIONE AL PATH! DA CAMBIARE IN CASO DI MODIFICHE
+							$bands=$bands."<li class=\"elementResult\"><a href=\"profiloGruppo/profiloGruppo.php?idGruppo=".$row['idGruppo']."&amp;page=index\"><img class=\"listImage\" src=\"images/site/".$row['immagine']."\" alt=\"Immagine di ".$row['nome']."\" /> ".$row['nome'];	//ATTENZIONE AL PATH! DA CAMBIARE IN CASO DI MODIFICHE
 						} else {
-							$bands=$bands."<li class=\"elementResult\"><a href=\"profiloGruppo/profiloGruppo.php?idGruppo=".$row['idGruppo']."&amp;page=index\"><img class=\"listImage\" src=\"images/bands/".$row['immagine']."\" alt=\"Immagine di ".$row['nome']."\" /><p>".$row['nome']."</p>";	//ATTENZIONE AL PATH! DA CAMBIARE IN CASO DI MODIFICHE
+							$bands=$bands."<li class=\"elementResult\"><a href=\"profiloGruppo/profiloGruppo.php?idGruppo=".$row['idGruppo']."&amp;page=index\"><img class=\"listImage\" src=\"images/bands/".$row['immagine']."\" alt=\"Immagine di ".$row['nome']."\" /> ".$row['nome'];	//ATTENZIONE AL PATH! DA CAMBIARE IN CASO DI MODIFICHE
 						}
-						if ($row['provincia']!=NULL) {
+						/*if ($row['provincia']!=NULL) {
 							$bands=$bands." (".$row['provincia'].")";
-						}
+						}*/
 						$bands=$bands."</a></li>";
 					}
 					$result->free();
