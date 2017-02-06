@@ -126,7 +126,7 @@ try {
 			if ($result->num_rows>0) {
 			    $members="<ul>";
 				while ($row=$result->fetch_array(MYSQLI_ASSOC)) {
-					$members=$members."<li>".$row['utente']." - ".$row['strumento']."</li>";
+					$members=$members."<li><a href='../profiloUtente/profiloUtente.php?username=".$row['utente']."''>".$row['utente']."</a> - ".$row['strumento']."</li>";
 				}
 				$result->free();
 				$members=$members."</ul>";
