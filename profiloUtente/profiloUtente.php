@@ -15,7 +15,7 @@ $page=$page.Start::getHead(array(
 	'DescrizioneBreve' => "Profilo Utente - BandBoard",
 	'Descrizione' => "Pagina di visualizzazione di un utente del sito BandBoard",
 	'Keywords' => array("BandBoard", "profilo", $_REQUEST['username'], "utente", "musicista", "bacheca", "musica", "musicisti", "gruppi"),
-	'Stylesheets' => array("style.css"),
+	'Stylesheets' => array("style.min.css"),
 	'Extra' => array("<link rel=\"stylesheet\" media=\"handheld, screen and (max-width:480px), only screen and (max-device-width:480px)\" href=\"../lib/css/style_mobile.css\" type=\"text/css\" />", '<link rel="stylesheet" type="text/css" media="print" href="../lib/css/style_print.css" />')
 	));	//CREAZIONE HEAD
 $page=$page."<body>";

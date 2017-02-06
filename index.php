@@ -138,7 +138,7 @@ echo Start::getHead(array(
 	'DescrizioneBreve' => "Home - BandBoard",
 	'Descrizione' => "Home page del sito BandBoard",
 	'Keywords' => array("BandBoard", "home", "bacheca", "musica", "musicisti", "gruppi"),
-	'Stylesheets' => array("style.css"),
+	'Stylesheets' => array("style.min.css"),
 	'Extra' => array("<link rel=\"stylesheet\" media=\"handheld, screen and (max-width:480px), only screen and (max-device-width:480px)\" href=\"lib/css/style_mobile.css\" type=\"text/css\" />")
 ));	//CREAZIONE HEAD
 

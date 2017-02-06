@@ -17,7 +17,7 @@ require_once(realpath(dirname(__FILE__)) . "/paths.php");
 */
 
 # ESEMPIO
-# var_dump(getArray(array('Titolo' => "Titolo pagina - BandBoard", 'DescrizioneBreve' => "Descrizione breve", 'Descrizione' => "Descrizione della pagina", 'Author' => array("Derek Toninato", "Filippo Berto", "Francesco Pezzuto", "Giorgio Giuffrè"), 'Keywords' => array("keyword 1","keyword 2","keyword 3"), 'BookmarkIcon' => 'site/icon.png', 'Stylesheets' => array("style.css"), 'Extra' => array( "<link type='text/css' rel='stylesheet' href='lib/css/styleStampa.css'></link>", "<link type='text/css' rel='stylesheet' href='lib/css/styleSmartphone.css'></link>" ))));
+# var_dump(getArray(array('Titolo' => "Titolo pagina - BandBoard", 'DescrizioneBreve' => "Descrizione breve", 'Descrizione' => "Descrizione della pagina", 'Author' => array("Derek Toninato", "Filippo Berto", "Francesco Pezzuto", "Giorgio Giuffrè"), 'Keywords' => array("keyword 1","keyword 2","keyword 3"), 'BookmarkIcon' => 'site/icon.png', 'Stylesheets' => array("style.min.css"), 'Extra' => array( "<link type='text/css' rel='stylesheet' href='lib/css/styleStampa.css'></link>", "<link type='text/css' rel='stylesheet' href='lib/css/styleSmartphone.css'></link>" ))));
 
 class Start {
 	private static $contestoDefault = array(

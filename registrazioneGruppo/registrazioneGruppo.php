@@ -51,7 +51,7 @@ $page=Start::getHead(array(
 	'DescrizioneBreve' => "Registrazione Gruppo - BandBoard",
 	'Descrizione' => "Pagina di registrazione di un gruppo al sito BandBoard",
 	'Keywords' => array("BandBoard", "registrazione", "gruppo", "iscrizione", "bacheca", "musica", "musicisti", "gruppi"),
-	'Stylesheets' => array("style.css"),
+	'Stylesheets' => array("style.min.css"),
 	'Extra' => array("<link rel=\"stylesheet\" media=\"handheld, screen and (max-width:480px), only screen and (max-device-width:480px)\" href=\"../lib/css/style_mobile.css\" type=\"text/css\" />", "<!-- MI APPOGGIO AL FILE JAVASCRIPT (province.js) CREATO DA FILIPPO BERTO -->", "<script type=\"text/javascript\" src=\"../lib/js/province.js\"></script>", "<script type=\"text/javascript\" src=\"registrazioneGruppo.js\"></script>")
 ));	//CREAZIONE HEAD
 
