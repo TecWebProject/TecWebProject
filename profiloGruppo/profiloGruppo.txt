@@ -28,7 +28,9 @@
 			<contatti />
 		</div>
 	</div>
-	<pagPrec />
+	<div>
+	    <pagPrec />
+	</div>
 </div>
 
 <footer />
