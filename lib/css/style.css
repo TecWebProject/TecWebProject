@@ -21,8 +21,8 @@ a.external::before {
 
 .logout {
 	float: right;
-	padding-left: 8%;
-	padding-right: 8%;
+	padding-left: 1em;
+	padding-right: 1em;
 }
 
 form fieldset {
