@@ -33,7 +33,7 @@
 					<province />
 				</select></p>
 
-				<input type="submit" class="invio" value="Cerca tra i gruppi" />
+				<input type="submit" value="Cerca tra i gruppi" />
 			</fieldset>
 		</form>
 

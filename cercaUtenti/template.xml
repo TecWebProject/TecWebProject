@@ -39,7 +39,7 @@
 					<generi />
 				</select></p>
 
-				<input type="submit" class="invio" value="Cerca utenti" />
+				<input type="submit" value="Cerca utenti" />
 			</fieldset>
 		</form>
 
